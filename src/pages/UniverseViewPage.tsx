@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { ArrowLeft, Music, Gamepad2, BookOpen, Theater, Heart, Brain, Code, Film, Trophy } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowLeft, Music, Gamepad2, BookOpen, Theater, Heart, Brain, Code, Film, Trophy, Loader2 } from 'lucide-react';
 import { Video } from '../types';
 import VideoCard from '../components/VideoCard';
-import { trendingVideos } from '../data/mockData';
+import { videoService } from '../services/videoService';
+import { convertSupabaseVideosToTypeVideos } from '../utils/videoConverters';
 
 interface UniverseViewPageProps {
   universeId: string;
@@ -85,9 +86,25 @@ const universeConfig: Record<string, {
 export default function UniverseViewPage({ universeId, onBack, onVideoClick }: UniverseViewPageProps) {
   const config = universeConfig[universeId];
   const [selectedSubUniverse, setSelectedSubUniverse] = useState<string | null>(null);
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [loading, setLoading] = useState(true);
   const Icon = config.icon;
 
-  const filteredVideos = trendingVideos;
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    videoService.getVideos(40, universeId).then((raw) => {
+      if (!cancelled) {
+        setVideos(convertSupabaseVideosToTypeVideos(raw));
+        setLoading(false);
+      }
+    });
+    return () => { cancelled = true; };
+  }, [universeId]);
+
+  const filteredVideos = selectedSubUniverse
+    ? videos.filter((v) => v.subUniverseId === selectedSubUniverse)
+    : videos;
 
   return (
     <div className="min-h-screen">
@@ -108,7 +125,10 @@ export default function UniverseViewPage({ universeId, onBack, onVideoClick }: U
           </div>
           <div>
             <h1 className="text-5xl font-black tracking-tight">{config.name}</h1>
-            <p className="text-gray-400 mt-1">Univers {config.name} · {filteredVideos.length} vidéos</p>
+            <p className="text-gray-400 mt-1">
+              Univers {config.name}
+              {!loading && ` · ${filteredVideos.length} vidéo${filteredVideos.length !== 1 ? 's' : ''}`}
+            </p>
           </div>
         </div>
 
@@ -138,25 +158,44 @@ export default function UniverseViewPage({ universeId, onBack, onVideoClick }: U
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredVideos.map((video) => (
-            <VideoCard
-              key={video.id}
-              video={video}
-              onClick={onVideoClick}
-              universeColor={config.color}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-32 gap-4">
+            <Loader2 className="w-10 h-10 text-gray-500 animate-spin" />
+            <p className="text-gray-500">Chargement des vidéos...</p>
+          </div>
+        ) : filteredVideos.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-32 gap-4 text-center">
+            <div className={`w-20 h-20 rounded-full bg-${config.color}-900/30 flex items-center justify-center`}>
+              <Icon className={`w-10 h-10 text-${config.color}-500`} />
+            </div>
+            <h3 className="text-xl font-bold text-white">Aucune vidéo pour le moment</h3>
+            <p className="text-gray-400 max-w-sm">
+              Les créateurs de l'univers {config.name} n'ont pas encore publié de vidéos. Revenez bientôt !
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredVideos.map((video) => (
+              <VideoCard
+                key={video.id}
+                video={video}
+                onClick={onVideoClick}
+                universeColor={config.color}
+              />
+            ))}
+          </div>
+        )}
 
-        <div className="mt-16 flex flex-col items-center gap-4">
-          <button className={`px-8 py-4 bg-${config.color}-600 hover:bg-${config.color}-700 rounded-xl font-bold text-lg transition-colors`}>
-            Continuer dans {config.name}
-          </button>
-          <p className="text-sm text-gray-500">
-            Ou retourne aux univers pour changer de contenu
-          </p>
-        </div>
+        {!loading && filteredVideos.length > 0 && (
+          <div className="mt-16 flex flex-col items-center gap-4">
+            <button className={`px-8 py-4 bg-${config.color}-600 hover:bg-${config.color}-700 rounded-xl font-bold text-lg transition-colors`}>
+              Continuer dans {config.name}
+            </button>
+            <p className="text-sm text-gray-500">
+              Ou retourne aux univers pour changer de contenu
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

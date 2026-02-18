@@ -12,6 +12,7 @@ import MonetizationDashboard from '../components/studio/MonetizationDashboard';
 import ContentGuidePanel from '../components/studio/ContentGuidePanel';
 import { liveStreamService, LiveStream } from '../services/liveStreamService';
 import { musicSalesService, MusicSaleRelease } from '../services/musicSalesService';
+import { videoService, VideoWithCreator } from '../services/videoService';
 
 type StudioSection =
   | 'dashboard' | 'content' | 'live' | 'community' | 'monetization'
@@ -298,19 +299,44 @@ function Badge({ label, variant = 'gray' }: { label: string; variant?: 'red' | '
 
 function DashboardSection({ onNavigate }: { onNavigate: (p: string) => void }) {
   const { user } = useAuth();
+  const [lastVideo, setLastVideo] = useState<VideoWithCreator | null>(null);
+  const [totalViews, setTotalViews] = useState(0);
+  const [videoCount, setVideoCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!user) { setLoading(false); return; }
+    videoService.getVideosByCreator(user.id, 50).then((vids) => {
+      setVideoCount(vids.length);
+      if (vids.length > 0) {
+        setLastVideo(vids[0]);
+        setTotalViews(vids.reduce((sum, v) => sum + (v.view_count || 0), 0));
+      }
+      setLoading(false);
+    });
+  }, [user]);
+
+  const fmtViews = (n: number) => {
+    if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
+    if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K`;
+    return n.toString();
+  };
+
+  const fmtDuration = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+
   return (
     <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
       <PageHeader
-        title={`Bonjour ${user?.user_metadata?.username || 'Créateur'}`}
+        title={`Bonjour ${user?.user_metadata?.username || user?.email?.split('@')[0] || 'Créateur'}`}
         subtitle="Voici un aperçu de votre chaîne aujourd'hui"
       />
 
       {/* KPIs */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
-        <StatCard icon={DollarSign} label="Revenus du mois" value="€1 247" sub="+12% vs mois dernier" color="text-emerald-400" />
-        <StatCard icon={Eye} label="Vues totales" value="127.4K" sub="+8.3%" color="text-blue-400" />
-        <StatCard icon={UserPlus} label="Nouveaux abonnés" value="+342" sub="+15%" color="text-amber-400" />
-        <StatCard icon={TrendingUp} label="Engagement" value="8.7%" sub="+2.1%" color="text-red-400" />
+        <StatCard icon={Eye} label="Vues totales" value={loading ? '—' : fmtViews(totalViews)} color="text-blue-400" />
+        <StatCard icon={Video} label="Vidéos publiées" value={loading ? '—' : videoCount.toString()} color="text-red-400" />
+        <StatCard icon={TrendingUp} label="Engagement moyen" value={loading || !lastVideo ? '—' : `${((lastVideo.like_count / Math.max(lastVideo.view_count, 1)) * 100).toFixed(1)}%`} color="text-amber-400" />
+        <StatCard icon={Award} label="Score qualité" value={loading || !lastVideo ? '—' : `${Math.round((lastVideo.quality_score || 0) * 100)}/100`} color="text-emerald-400" />
       </div>
 
       {/* Last video + alerts */}
@@ -318,56 +344,84 @@ function DashboardSection({ onNavigate }: { onNavigate: (p: string) => void }) {
         <Card className="lg:col-span-3 overflow-hidden">
           <CardHeader>
             <p className="font-bold text-white text-sm">Dernière vidéo</p>
-            <button onClick={() => onNavigate('creator-dashboard')} className="text-xs text-red-400 hover:text-red-300 transition-colors flex items-center gap-1">
+            <button onClick={() => onNavigate('content')} className="text-xs text-red-400 hover:text-red-300 transition-colors flex items-center gap-1">
               Voir tout <ChevronRight className="w-3 h-3" />
             </button>
           </CardHeader>
-          <div className="p-5 flex gap-4">
-            <img
-              src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=320&h=180&fit=crop"
-              alt="Dernière vidéo"
-              className="w-40 h-24 object-cover rounded-xl flex-shrink-0"
-            />
-            <div className="flex-1 min-w-0">
-              <p className="text-white font-semibold mb-3 text-sm line-clamp-2">Comment créer du contenu authentique</p>
-              <div className="grid grid-cols-3 gap-2 text-xs">
-                {[
-                  { l: 'Vues', v: '12 450' },
-                  { l: "J'aime", v: '1 230' },
-                  { l: 'Durée moy.', v: '8:34' },
-                ].map(s => (
-                  <div key={s.l} className="bg-white/5 rounded-xl p-2">
-                    <p className="text-gray-500">{s.l}</p>
-                    <p className="text-white font-bold mt-0.5">{s.v}</p>
-                  </div>
-                ))}
+          {loading ? (
+            <div className="p-8 flex items-center justify-center">
+              <Clock className="w-5 h-5 text-gray-600 animate-pulse" />
+            </div>
+          ) : lastVideo ? (
+            <div className="p-5 flex gap-4">
+              {lastVideo.thumbnail_url ? (
+                <img
+                  src={lastVideo.thumbnail_url}
+                  alt={lastVideo.title}
+                  className="w-40 h-24 object-cover rounded-xl flex-shrink-0 bg-gray-800"
+                />
+              ) : (
+                <div className="w-40 h-24 rounded-xl flex-shrink-0 bg-gray-800 flex items-center justify-center">
+                  <Video className="w-8 h-8 text-gray-600" />
+                </div>
+              )}
+              <div className="flex-1 min-w-0">
+                <p className="text-white font-semibold mb-3 text-sm line-clamp-2">{lastVideo.title}</p>
+                <div className="grid grid-cols-3 gap-2 text-xs">
+                  {[
+                    { l: 'Vues', v: fmtViews(lastVideo.view_count || 0) },
+                    { l: "J'aime", v: (lastVideo.like_count || 0).toLocaleString('fr-FR') },
+                    { l: 'Durée', v: fmtDuration(lastVideo.duration || 0) },
+                  ].map(s => (
+                    <div key={s.l} className="bg-white/5 rounded-xl p-2">
+                      <p className="text-gray-500">{s.l}</p>
+                      <p className="text-white font-bold mt-0.5">{s.v}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="p-8 flex flex-col items-center gap-2 text-center">
+              <Video className="w-8 h-8 text-gray-600" />
+              <p className="text-gray-500 text-sm">Aucune vidéo publiée</p>
+              <button
+                onClick={() => onNavigate('upload')}
+                className="mt-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg text-xs font-semibold transition-colors"
+              >
+                Uploader ma première vidéo
+              </button>
+            </div>
+          )}
         </Card>
 
         <Card className="lg:col-span-2">
           <CardHeader>
             <div className="flex items-center gap-2">
               <Bell className="w-4 h-4 text-amber-400" />
-              <p className="font-bold text-white text-sm">Alertes</p>
+              <p className="font-bold text-white text-sm">Actions recommandées</p>
             </div>
           </CardHeader>
           <div className="p-4 space-y-2">
-            {[
-              { type: 'green' as const, msg: '10K vues en 24h sur votre dernière vidéo' },
-              { type: 'blue' as const, msg: '3 commentaires en attente de modération' },
-              { type: 'amber' as const, msg: 'Vérification requise pour activer les paiements' },
-            ].map((a, i) => (
-              <div key={i} className={`flex items-start gap-3 p-3 rounded-xl text-xs ${
-                a.type === 'green' ? 'bg-emerald-950/30 border border-emerald-900/40 text-emerald-300' :
-                a.type === 'blue' ? 'bg-blue-950/30 border border-blue-900/40 text-blue-300' :
-                'bg-amber-950/30 border border-amber-900/40 text-amber-300'
-              }`}>
+            {videoCount === 0 ? (
+              <div className="flex items-start gap-3 p-3 rounded-xl text-xs bg-red-950/30 border border-red-900/40 text-red-300">
                 <AlertCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
-                {a.msg}
+                Publiez votre première vidéo pour commencer
               </div>
-            ))}
+            ) : (
+              <div className="flex items-start gap-3 p-3 rounded-xl text-xs bg-emerald-950/30 border border-emerald-900/40 text-emerald-300">
+                <CheckCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
+                {videoCount} vidéo{videoCount > 1 ? 's' : ''} publiée{videoCount > 1 ? 's' : ''} sur votre chaîne
+              </div>
+            )}
+            <div className="flex items-start gap-3 p-3 rounded-xl text-xs bg-blue-950/30 border border-blue-900/40 text-blue-300">
+              <AlertCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
+              Complétez votre profil légal pour activer les paiements
+            </div>
+            <div className="flex items-start gap-3 p-3 rounded-xl text-xs bg-amber-950/30 border border-amber-900/40 text-amber-300">
+              <AlertCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
+              Rejoignez une communauté pour augmenter votre visibilité
+            </div>
           </div>
         </Card>
       </div>
@@ -400,6 +454,29 @@ function DashboardSection({ onNavigate }: { onNavigate: (p: string) => void }) {
 /* ─────────────────── CONTENT SECTION ─────────────────── */
 
 function ContentSection({ onNavigate }: { onNavigate: (p: string) => void }) {
+  const { user } = useAuth();
+  const [videos, setVideos] = useState<VideoWithCreator[]>([]);
+  const [loadingVideos, setLoadingVideos] = useState(true);
+
+  useEffect(() => {
+    if (!user) { setLoadingVideos(false); return; }
+    videoService.getVideosByCreator(user.id, 30).then((data) => {
+      setVideos(data);
+      setLoadingVideos(false);
+    });
+  }, [user]);
+
+  const fmtDate = (iso: string) => {
+    const diff = Date.now() - new Date(iso).getTime();
+    const d = Math.floor(diff / 86400000);
+    if (d === 0) return "Aujourd'hui";
+    if (d === 1) return 'Il y a 1 jour';
+    if (d < 30) return `Il y a ${d} jours`;
+    const w = Math.floor(d / 7);
+    if (w < 5) return `Il y a ${w} semaine${w > 1 ? 's' : ''}`;
+    return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+  };
+
   return (
     <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
       <PageHeader
@@ -421,46 +498,63 @@ function ContentSection({ onNavigate }: { onNavigate: (p: string) => void }) {
 
       <Card>
         <CardHeader>
-          <p className="font-bold text-white text-sm">Mes vidéos</p>
+          <p className="font-bold text-white text-sm">
+            Mes vidéos {!loadingVideos && `(${videos.length})`}
+          </p>
           <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
             <Filter className="w-4 h-4" />
           </button>
         </CardHeader>
-        <div className="divide-y divide-white/5">
-          {[
-            { title: 'Comment créer du contenu authentique', views: 12450, status: 'publié', date: 'Il y a 2 jours' },
-            { title: 'Les secrets d\'une bonne miniature', views: 8230, status: 'publié', date: 'Il y a 5 jours' },
-            { title: 'Live Q&A avec mes abonnés', views: 0, status: 'programmé', date: 'Dans 3 jours' },
-            { title: 'Tutoriel production avancée', views: 5120, status: 'publié', date: 'Il y a 2 semaines' },
-          ].map((v, i) => (
-            <div key={i} className="p-4 flex items-center gap-4 hover:bg-white/2 transition-colors group cursor-pointer">
-              <img
-                src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160&h=90&fit=crop"
-                alt={v.title}
-                className="w-28 h-16 object-cover rounded-xl flex-shrink-0"
-              />
-              <div className="flex-1 min-w-0">
-                <p className="text-white font-medium text-sm truncate group-hover:text-red-400 transition-colors">{v.title}</p>
-                <div className="flex items-center gap-3 mt-1 flex-wrap">
-                  <span className="text-gray-500 text-xs">{v.views.toLocaleString()} vues</span>
-                  <Badge
-                    label={v.status}
-                    variant={v.status === 'publié' ? 'green' : v.status === 'programmé' ? 'blue' : 'amber'}
+
+        {loadingVideos ? (
+          <div className="flex items-center justify-center py-16 gap-3 text-gray-500">
+            <Clock className="w-5 h-5 animate-pulse" />
+            <span className="text-sm">Chargement des vidéos...</span>
+          </div>
+        ) : videos.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-16 gap-3 text-center">
+            <Video className="w-10 h-10 text-gray-600" />
+            <p className="text-gray-400 text-sm font-medium">Aucune vidéo publiée</p>
+            <p className="text-gray-600 text-xs max-w-xs">Uploadez votre première vidéo pour commencer à construire votre audience.</p>
+          </div>
+        ) : (
+          <div className="divide-y divide-white/5">
+            {videos.map((v) => (
+              <div key={v.id} className="p-4 flex items-center gap-4 hover:bg-white/[0.02] transition-colors group cursor-pointer">
+                {v.thumbnail_url ? (
+                  <img
+                    src={v.thumbnail_url}
+                    alt={v.title}
+                    className="w-28 h-16 object-cover rounded-xl flex-shrink-0 bg-gray-800"
                   />
-                  <span className="text-gray-600 text-xs">{v.date}</span>
+                ) : (
+                  <div className="w-28 h-16 rounded-xl flex-shrink-0 bg-gray-800 flex items-center justify-center">
+                    <Video className="w-6 h-6 text-gray-600" />
+                  </div>
+                )}
+                <div className="flex-1 min-w-0">
+                  <p className="text-white font-medium text-sm truncate group-hover:text-red-400 transition-colors">{v.title}</p>
+                  <div className="flex items-center gap-3 mt-1 flex-wrap">
+                    <span className="text-gray-500 text-xs">{(v.view_count || 0).toLocaleString('fr-FR')} vues</span>
+                    <Badge label="publié" variant="green" />
+                    <span className="text-gray-600 text-xs">{fmtDate(v.created_at)}</span>
+                    {v.is_short && <Badge label="Short" variant="blue" />}
+                    {v.is_premium && <Badge label="Premium" variant="amber" />}
+                  </div>
+                </div>
+                <div className="hidden sm:flex items-center gap-2">
+                  <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+                    <Eye className="w-3.5 h-3.5" />
+                  </button>
+                  <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+                    <Settings className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
-              <div className="hidden sm:flex items-center gap-2">
-                <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
-                  <Eye className="w-3.5 h-3.5" />
-                </button>
-                <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
-                  <Settings className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
+
         <div className="p-4 border-t border-white/5">
           <button
             onClick={() => onNavigate('upload')}
