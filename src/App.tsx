@@ -56,8 +56,9 @@ import MyChannelsPage from './pages/MyChannelsPage';
 import ChannelEditPage from './pages/ChannelEditPage';
 import RevenueModelPage from './pages/RevenueModelPage';
 import ShortsSystemPage from './pages/ShortsSystemPage';
+import NativeSponsoringPage from './pages/NativeSponsoringPage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'revenue-model' | 'shorts-system';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'revenue-model' | 'shorts-system' | 'native-sponsoring';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -198,6 +199,7 @@ function AppContent() {
         'my-channels': 'my-channels',
         'revenue-model': 'revenue-model',
         'shorts-system': 'shorts-system',
+        'native-sponsoring': 'native-sponsoring',
       };
 
       if (hash in pageMap) {
@@ -527,6 +529,10 @@ function AppContent() {
 
         {currentPage === 'shorts-system' && (
           <ShortsSystemPage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'native-sponsoring' && (
+          <NativeSponsoringPage onNavigate={(page) => setCurrentPage(page as Page)} />
         )}
 
         {/* Global MiniPlayer */}
