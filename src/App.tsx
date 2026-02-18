@@ -48,8 +48,11 @@ import CommunityPremiumPricingPage from './pages/CommunityPremiumPricingPage';
 import AppearanceSettingsPage from './pages/AppearanceSettingsPage';
 import SecurityDashboardPage from './pages/SecurityDashboardPage';
 import LiveStreamingPage from './pages/LiveStreamingPage';
+import AlbumSalePage from './pages/AlbumSalePage';
+import MusicMarketplacePage from './pages/MusicMarketplacePage';
+import CreateReleasePage from './pages/CreateReleasePage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -157,6 +160,10 @@ function AppContent() {
         'community-premium-pricing': 'community-premium-pricing',
         'appearance-settings': 'appearance-settings',
         'security-dashboard': 'security-dashboard',
+        'album-sale': 'album-sale',
+        'marketplace': 'marketplace',
+        'create-release': 'create-release',
+        'live-streaming': 'live-streaming',
         'terms': 'terms',
         'privacy': 'privacy',
         'support': 'support',
@@ -450,6 +457,18 @@ function AppContent() {
 
         {currentPage === 'security-dashboard' && (
           <SecurityDashboardPage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'album-sale' && (
+          <AlbumSalePage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'marketplace' && (
+          <MusicMarketplacePage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'create-release' && (
+          <CreateReleasePage onNavigate={(page) => setCurrentPage(page as Page)} />
         )}
 
         {/* Global MiniPlayer */}
