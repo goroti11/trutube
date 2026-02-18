@@ -55,8 +55,9 @@ import LegalProfilePage from './pages/LegalProfilePage';
 import MyChannelsPage from './pages/MyChannelsPage';
 import ChannelEditPage from './pages/ChannelEditPage';
 import RevenueModelPage from './pages/RevenueModelPage';
+import ShortsSystemPage from './pages/ShortsSystemPage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'revenue-model';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'revenue-model' | 'shorts-system';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -196,6 +197,7 @@ function AppContent() {
         'legal-profile': 'legal-profile',
         'my-channels': 'my-channels',
         'revenue-model': 'revenue-model',
+        'shorts-system': 'shorts-system',
       };
 
       if (hash in pageMap) {
@@ -521,6 +523,10 @@ function AppContent() {
 
         {currentPage === 'revenue-model' && (
           <RevenueModelPage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'shorts-system' && (
+          <ShortsSystemPage onNavigate={(page) => setCurrentPage(page as Page)} />
         )}
 
         {/* Global MiniPlayer */}
