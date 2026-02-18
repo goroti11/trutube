@@ -51,8 +51,11 @@ import LiveStreamingPage from './pages/LiveStreamingPage';
 import AlbumSalePage from './pages/AlbumSalePage';
 import MusicMarketplacePage from './pages/MusicMarketplacePage';
 import CreateReleasePage from './pages/CreateReleasePage';
+import LegalProfilePage from './pages/LegalProfilePage';
+import MyChannelsPage from './pages/MyChannelsPage';
+import ChannelEditPage from './pages/ChannelEditPage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -69,6 +72,7 @@ function AppContent() {
   const [communitySlug, setCommunitySlug] = useState<string | null>(null);
   const [postCommunitySlug, setPostCommunitySlug] = useState<string | null>(null);
   const [settingsCommunitySlug, setSettingsCommunitySlug] = useState<string | null>(null);
+  const [channelEditId, setChannelEditId] = useState<string | null>(null);
 
   const { setIsMiniPlayer, currentVideo } = usePlayerStore();
 
@@ -143,6 +147,16 @@ function AppContent() {
         return;
       }
 
+      if (hash.startsWith('channel-edit/')) {
+        const channelId = hash.split('/')[1];
+        if (channelId) {
+          setChannelEditId(channelId);
+          setCurrentPage('channel-edit');
+          setShowSplash(false);
+        }
+        return;
+      }
+
       // Handle generic page routes
       const pageMap: Record<string, Page> = {
         'premium': 'premium',
@@ -178,6 +192,8 @@ function AppContent() {
         'enhanced-profile': 'enhanced-profile',
         'watch-history': 'watch-history',
         'subscribers': 'subscribers',
+        'legal-profile': 'legal-profile',
+        'my-channels': 'my-channels',
       };
 
       if (hash in pageMap) {
@@ -469,6 +485,36 @@ function AppContent() {
 
         {currentPage === 'create-release' && (
           <CreateReleasePage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'legal-profile' && (
+          <LegalProfilePage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'my-channels' && (
+          <MyChannelsPage onNavigate={(page) => {
+            if (page.startsWith('channel-edit/')) {
+              const id = page.split('/')[1];
+              setChannelEditId(id);
+              setCurrentPage('channel-edit');
+            } else {
+              setCurrentPage(page as Page);
+            }
+          }} />
+        )}
+
+        {currentPage === 'channel-edit' && channelEditId && (
+          <ChannelEditPage
+            channelId={channelEditId}
+            onNavigate={(page) => {
+              if (page.startsWith('channel-edit/')) {
+                const id = page.split('/')[1];
+                setChannelEditId(id);
+              } else {
+                setCurrentPage(page as Page);
+              }
+            }}
+          />
         )}
 
         {/* Global MiniPlayer */}
