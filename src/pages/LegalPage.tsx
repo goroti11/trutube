@@ -1,179 +1,380 @@
-import React from 'react';
-import { ArrowLeft, Building2, Scale, Shield, FileText } from 'lucide-react';
+import { useState } from 'react';
+import {
+  Building2, Shield, FileText, Scale, Globe, Phone, Mail, MapPin,
+  ChevronDown, ChevronRight, ExternalLink, ArrowLeft, Server, Copyright, AlertTriangle
+} from 'lucide-react';
 
 interface LegalPageProps {
   onNavigate: (page: string) => void;
 }
 
+const LAST_UPDATED = '18 février 2026';
+
+function Section({
+  icon: Icon,
+  title,
+  children,
+  accent = 'text-sky-400',
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  children: React.ReactNode;
+  accent?: string;
+}) {
+  const [open, setOpen] = useState(true);
+  return (
+    <div className="border border-white/8 rounded-2xl overflow-hidden bg-[#111116]">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-6 py-5 hover:bg-white/[0.03] transition-colors text-left"
+      >
+        <div className="flex items-center gap-3">
+          <div className={`w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center ${accent}`}>
+            <Icon className="w-4 h-4" />
+          </div>
+          <h2 className="text-white font-bold text-lg">{title}</h2>
+        </div>
+        {open
+          ? <ChevronDown className="w-4 h-4 text-gray-500 flex-shrink-0" />
+          : <ChevronRight className="w-4 h-4 text-gray-500 flex-shrink-0" />}
+      </button>
+      {open && (
+        <div className="px-6 pb-6 space-y-4 text-gray-300 text-sm leading-relaxed border-t border-white/5">
+          <div className="pt-4">{children}</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function InfoRow({ label, value, href }: { label: string; value: string; href?: string }) {
+  return (
+    <div className="flex items-start gap-3 py-2.5 border-b border-white/5 last:border-0">
+      <span className="text-gray-500 w-48 flex-shrink-0 text-xs pt-0.5">{label}</span>
+      {href ? (
+        <a href={href} className="text-sky-400 hover:text-sky-300 text-sm font-medium">{value}</a>
+      ) : (
+        <span className="text-white text-sm font-medium">{value}</span>
+      )}
+    </div>
+  );
+}
+
 export function LegalPage({ onNavigate }: LegalPageProps) {
   return (
-    <div className="min-h-screen bg-[#0B0B0D] text-white">
-      <header className="bg-[#1A1A1A] border-b border-gray-800 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => onNavigate('home')}
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-            >
-              <ArrowLeft size={24} />
-            </button>
-            <h1 className="text-2xl font-bold">Mentions légales</h1>
+    <div className="min-h-screen bg-[#0a0a0f] text-white">
+      <header className="sticky top-0 z-30 bg-[#0a0a0f]/95 backdrop-blur-sm border-b border-white/6">
+        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center gap-4">
+          <button
+            onClick={() => onNavigate('home')}
+            className="p-2 rounded-xl hover:bg-white/5 transition-colors text-gray-400 hover:text-white"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <div className="flex-1 min-w-0">
+            <h1 className="text-white font-bold truncate">Mentions légales</h1>
           </div>
+          <span className="hidden sm:block text-xs text-gray-500">{LAST_UPDATED}</span>
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="prose prose-invert max-w-none">
-          <section className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <Building2 className="text-[#D8A0B6]" size={32} />
-              <h2 className="text-3xl font-bold">Informations sur l'éditeur</h2>
+      <div className="max-w-5xl mx-auto px-6 py-12">
+        <div className="mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-400 text-xs font-semibold mb-6">
+            <Scale className="w-3.5 h-3.5" />
+            Conformes à la LCEN — Mise à jour le {LAST_UPDATED}
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-black text-white mb-4 leading-tight">
+            Mentions<br />Légales
+          </h1>
+          <p className="text-gray-400 text-lg max-w-2xl">
+            Informations légales obligatoires relatives à l'éditeur de la plateforme TruTube,
+            conformément à la loi n° 2004-575 du 21 juin 2004 (LCEN).
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <Section icon={Building2} title="1. Éditeur de la plateforme" accent="text-sky-400">
+            <div className="rounded-xl bg-white/[0.03] border border-white/6 overflow-hidden">
+              <InfoRow label="Raison sociale" value="TruTube SAS" />
+              <InfoRow label="Forme juridique" value="Société par Actions Simplifiée (SAS)" />
+              <InfoRow label="Capital social" value="100 000 €" />
+              <InfoRow label="Siège social" value="123 Avenue des Champs-Élysées, 75008 Paris, France" />
+              <InfoRow label="N° RCS" value="Paris B 123 456 789" />
+              <InfoRow label="N° SIRET" value="123 456 789 00012" />
+              <InfoRow label="Code APE/NAF" value="6312Z — Portails Internet" />
+              <InfoRow label="N° TVA intracommunautaire" value="FR12 123456789" />
+              <InfoRow label="Directeur de la publication" value="Jean Dupont" />
             </div>
-            <div className="bg-[#1A1A1A] rounded-xl p-6 border border-gray-800">
-              <div className="space-y-3 text-gray-300">
-                <p><strong className="text-white">Raison sociale :</strong> TruTube SAS</p>
-                <p><strong className="text-white">Forme juridique :</strong> Société par Actions Simplifiée</p>
-                <p><strong className="text-white">Capital social :</strong> 100 000 €</p>
-                <p><strong className="text-white">Siège social :</strong> 123 Avenue des Champs-Élysées, 75008 Paris, France</p>
-                <p><strong className="text-white">RCS :</strong> Paris B 123 456 789</p>
-                <p><strong className="text-white">SIRET :</strong> 123 456 789 00012</p>
-                <p><strong className="text-white">TVA intracommunautaire :</strong> FR12 123456789</p>
-                <p><strong className="text-white">Directeur de la publication :</strong> Jean Dupont</p>
-                <p><strong className="text-white">Email :</strong> legal@trutube.com</p>
-                <p><strong className="text-white">Téléphone :</strong> +33 1 23 45 67 89</p>
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/6">
+                <Mail className="w-4 h-4 text-sky-400 flex-shrink-0" />
+                <div>
+                  <p className="text-gray-500 text-xs">Contact général</p>
+                  <a href="mailto:contact@trutube.com" className="text-white text-sm font-medium hover:text-sky-400 transition-colors">contact@trutube.com</a>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/6">
+                <Mail className="w-4 h-4 text-sky-400 flex-shrink-0" />
+                <div>
+                  <p className="text-gray-500 text-xs">Service juridique</p>
+                  <a href="mailto:legal@trutube.com" className="text-white text-sm font-medium hover:text-sky-400 transition-colors">legal@trutube.com</a>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/6">
+                <Phone className="w-4 h-4 text-sky-400 flex-shrink-0" />
+                <div>
+                  <p className="text-gray-500 text-xs">Téléphone</p>
+                  <a href="tel:+33123456789" className="text-white text-sm font-medium hover:text-sky-400 transition-colors">+33 1 23 45 67 89</a>
+                </div>
               </div>
             </div>
-          </section>
+          </Section>
 
-          <section className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <Shield className="text-[#D8A0B6]" size={32} />
-              <h2 className="text-3xl font-bold">Hébergement</h2>
+          <Section icon={Server} title="2. Hébergement" accent="text-blue-400">
+            <p className="text-gray-400 mb-4">
+              La plateforme TruTube est hébergée par les prestataires suivants :
+            </p>
+            <div className="space-y-3">
+              {[
+                {
+                  name: 'Supabase Inc.',
+                  role: 'Base de données et API',
+                  address: '970 Toa Payoh North, #07-04, Singapore 318992',
+                  datacenter: 'Serveurs UE — Frankfurt (aws-eu-central-1)',
+                  url: 'https://supabase.com',
+                },
+                {
+                  name: 'Cloudflare Inc.',
+                  role: 'CDN, DNS et protection DDoS',
+                  address: '101 Townsend St, San Francisco, CA 94107, États-Unis',
+                  datacenter: 'Réseau mondial — Points de présence UE',
+                  url: 'https://cloudflare.com',
+                },
+              ].map(({ name, role, address, datacenter, url }) => (
+                <div key={name} className="p-5 rounded-xl bg-white/[0.03] border border-white/6 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <p className="text-white font-semibold">{name}</p>
+                    <span className="text-xs text-gray-500 bg-white/5 px-3 py-1 rounded-full">{role}</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-xs text-gray-500">
+                    <MapPin className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
+                    <span>{address}</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-xs text-gray-500">
+                    <Server className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
+                    <span>{datacenter}</span>
+                  </div>
+                  <a href={url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-sky-400 hover:text-sky-300 transition-colors">
+                    {url} <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              ))}
             </div>
-            <div className="bg-[#1A1A1A] rounded-xl p-6 border border-gray-800">
-              <div className="space-y-3 text-gray-300">
-                <p><strong className="text-white">Hébergeur :</strong> Supabase Inc.</p>
-                <p><strong className="text-white">Adresse :</strong> 970 Toa Payoh North, #07-04, Singapore 318992</p>
-                <p><strong className="text-white">Site web :</strong> <a href="https://supabase.com" className="text-[#D8A0B6] hover:underline">supabase.com</a></p>
+          </Section>
+
+          <Section icon={Copyright} title="3. Propriété intellectuelle" accent="text-amber-400">
+            <div className="space-y-4">
+              <p>
+                L'ensemble des éléments constituant la plateforme TruTube (structure, design, textes, logos,
+                icônes, images, sons, vidéos institutionnelles, logiciels et code source) est la propriété
+                exclusive de TruTube SAS ou de ses partenaires, et est protégé par le Code de la Propriété
+                Intellectuelle ainsi que par les conventions internationales.
+              </p>
+
+              <div className="p-4 rounded-xl bg-amber-950/20 border border-amber-800/30 space-y-2">
+                <p className="text-amber-400 font-semibold text-sm">Droits réservés de TruTube</p>
+                <p className="text-gray-400 text-sm">
+                  Toute reproduction, représentation, modification, publication, adaptation, transmission ou
+                  distribution de tout ou partie du contenu de la plateforme, par quelque procédé que ce soit,
+                  est strictement interdite sans l'autorisation écrite préalable de TruTube SAS.
+                </p>
               </div>
-            </div>
-          </section>
 
-          <section className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <Scale className="text-[#D8A0B6]" size={32} />
-              <h2 className="text-3xl font-bold">Propriété intellectuelle</h2>
-            </div>
-            <div className="bg-[#1A1A1A] rounded-xl p-6 border border-gray-800 space-y-4 text-gray-300">
               <p>
-                L'ensemble du contenu présent sur le site TruTube (textes, images, vidéos, logos, icônes, sons, logiciels) est la propriété exclusive de TruTube SAS ou de ses partenaires et est protégé par les lois françaises et internationales relatives à la propriété intellectuelle.
+                Les marques «  TruTube », les logos associés et les noms des univers (MusicVerse, GameVerse, etc.)
+                sont des marques déposées ou en cours de dépôt auprès de l'INPI. Toute utilisation non autorisée
+                constitue une contrefaçon passible de poursuites civiles et pénales.
               </p>
-              <p>
-                Toute reproduction, représentation, modification, publication, transmission, dénaturation, totale ou partielle du site ou de son contenu, par quelque procédé que ce soit, et sur quelque support que ce soit est interdite sans l'autorisation écrite préalable de TruTube SAS.
-              </p>
-              <p>
-                Les marques et logos TruTube sont des marques déposées. Toute reproduction totale ou partielle de ces marques ou de ces logos sans l'autorisation préalable et écrite de TruTube SAS est prohibée.
-              </p>
-              <p>
-                Les utilisateurs conservent l'intégralité de leurs droits de propriété intellectuelle sur le contenu qu'ils publient sur TruTube. En publiant du contenu, ils accordent à TruTube une licence mondiale, non exclusive, libre de redevances pour héberger, afficher et distribuer ce contenu.
-              </p>
-            </div>
-          </section>
 
-          <section className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <FileText className="text-[#D8A0B6]" size={32} />
-              <h2 className="text-3xl font-bold">Données personnelles</h2>
-            </div>
-            <div className="bg-[#1A1A1A] rounded-xl p-6 border border-gray-800 space-y-4 text-gray-300">
-              <p>
-                Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, de suppression et d'opposition aux données personnelles vous concernant.
-              </p>
-              <p>
-                Pour exercer ces droits, vous pouvez nous contacter à l'adresse : privacy@trutube.com ou par courrier à l'adresse du siège social.
-              </p>
-              <p>
-                Les données collectées sont destinées à l'usage exclusif de TruTube et ne seront en aucun cas cédées ou vendues à des tiers. Pour plus d'informations, consultez notre <button onClick={() => onNavigate('privacy')} className="text-[#D8A0B6] hover:underline">Politique de confidentialité</button>.
-              </p>
-            </div>
-          </section>
+              <div className="p-4 rounded-xl bg-sky-950/20 border border-sky-800/30 space-y-2">
+                <p className="text-sky-400 font-semibold text-sm">Droits des créateurs</p>
+                <p className="text-gray-400 text-sm">
+                  Les utilisateurs conservent l'intégralité de leurs droits de propriété intellectuelle sur les
+                  contenus qu'ils publient. La publication sur TruTube n'entraîne pas de transfert de propriété.
+                  Une licence d'utilisation limitée est accordée à TruTube pour les seuls besoins du service
+                  (voir les CGU pour les détails).
+                </p>
+              </div>
 
-          <section className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <Scale className="text-[#D8A0B6]" size={32} />
-              <h2 className="text-3xl font-bold">Conditions d'utilisation</h2>
-            </div>
-            <div className="bg-[#1A1A1A] rounded-xl p-6 border border-gray-800 space-y-4 text-gray-300">
               <p>
-                L'utilisation du site TruTube implique l'acceptation pleine et entière des conditions générales d'utilisation décrites dans nos <button onClick={() => onNavigate('terms')} className="text-[#D8A0B6] hover:underline">Conditions d'utilisation</button>.
-              </p>
-              <p>
-                TruTube se réserve le droit de modifier à tout moment ces mentions légales. Les utilisateurs sont donc invités à les consulter régulièrement.
+                Les créateurs certifient, en publiant leur contenu, détenir tous les droits nécessaires
+                (droits d'auteur, droits voisins, droits musicaux, droits à l'image) sur les éléments
+                composant leur contenu. Toute réclamation de tiers relative à un contenu publié engage
+                exclusivement la responsabilité du créateur.
               </p>
             </div>
-          </section>
+          </Section>
 
-          <section className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <Shield className="text-[#D8A0B6]" size={32} />
-              <h2 className="text-3xl font-bold">Limitation de responsabilité</h2>
+          <Section icon={Shield} title="4. Données personnelles et RGPD" accent="text-emerald-400">
+            <p>
+              TruTube SAS traite des données personnelles en qualité de responsable du traitement,
+              conformément au Règlement Général sur la Protection des Données (RGPD – Règlement UE 2016/679)
+              et à la loi n° 78-17 du 6 janvier 1978 modifiée (loi Informatique et Libertés).
+            </p>
+            <div className="mt-3 p-4 rounded-xl bg-white/[0.03] border border-white/6 space-y-1.5 text-sm">
+              <InfoRow label="DPO (Délégué à la Protection des Données)" value="privacy@trutube.com" href="mailto:privacy@trutube.com" />
+              <InfoRow label="Finalité principale" value="Fourniture et amélioration du service de plateforme vidéo" />
+              <InfoRow label="Base légale principale" value="Exécution du contrat d'utilisation" />
             </div>
-            <div className="bg-[#1A1A1A] rounded-xl p-6 border border-gray-800 space-y-4 text-gray-300">
-              <p>
-                TruTube s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées sur ce site. Toutefois, TruTube ne peut garantir l'exactitude, la précision ou l'exhaustivité des informations mises à disposition sur ce site.
-              </p>
-              <p>
-                TruTube ne pourra être tenue responsable des dommages directs et indirects causés au matériel de l'utilisateur, lors de l'accès au site TruTube, et résultant soit de l'utilisation d'un matériel ne répondant pas aux spécifications indiquées, soit de l'apparition d'un bug ou d'une incompatibilité.
-              </p>
-              <p>
-                TruTube ne pourra également être tenue responsable des dommages indirects consécutifs à l'utilisation du site. Des espaces interactifs (possibilité de poser des questions, commentaires) sont à la disposition des utilisateurs. TruTube se réserve le droit de supprimer, sans mise en demeure préalable, tout contenu déposé dans cet espace qui contreviendrait à la législation applicable en France.
-              </p>
-            </div>
-          </section>
+            <p className="mt-3">
+              Vous disposez de droits d'accès, de rectification, d'effacement, de portabilité, d'opposition
+              et de limitation. Pour plus d'informations et pour exercer ces droits, consultez notre{' '}
+              <button onClick={() => onNavigate('privacy')} className="text-sky-400 hover:text-sky-300 underline">
+                Politique de Confidentialité
+              </button>
+              .
+            </p>
+            <p className="mt-2">
+              Vous pouvez également déposer une réclamation auprès de la CNIL :{' '}
+              <a href="https://www.cnil.fr" className="text-sky-400 hover:text-sky-300">www.cnil.fr</a>
+            </p>
+          </Section>
 
-          <section className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <FileText className="text-[#D8A0B6]" size={32} />
-              <h2 className="text-3xl font-bold">Cookies</h2>
+          <Section icon={Globe} title="5. Cookies">
+            <p>
+              La plateforme TruTube utilise des cookies et technologies similaires pour assurer son
+              fonctionnement, mémoriser vos préférences et réaliser des statistiques d'utilisation anonymes.
+            </p>
+            <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {[
+                { type: 'Essentiels', color: 'emerald', desc: 'Authentification, sécurité, session' },
+                { type: 'Analytiques', color: 'blue', desc: 'Statistiques anonymisées de navigation' },
+                { type: 'Fonctionnels', color: 'amber', desc: 'Préférences utilisateur, qualité vidéo' },
+              ].map(({ type, color, desc }) => (
+                <div key={type} className={`p-4 rounded-xl bg-${color}-950/20 border border-${color}-800/30`}>
+                  <p className={`text-${color}-400 font-semibold text-sm`}>{type}</p>
+                  <p className="text-gray-500 text-xs mt-1">{desc}</p>
+                </div>
+              ))}
             </div>
-            <div className="bg-[#1A1A1A] rounded-xl p-6 border border-gray-800 space-y-4 text-gray-300">
+            <p className="mt-3 text-gray-400">
+              Conformément aux recommandations de la CNIL, les cookies non essentiels nécessitent votre
+              consentement. Vous pouvez gérer vos préférences à tout moment via le gestionnaire de cookies
+              accessible en bas de page ou dans les paramètres de votre compte.
+            </p>
+          </Section>
+
+          <Section icon={AlertTriangle} title="6. Limitation de responsabilité" accent="text-rose-400">
+            <div className="space-y-3">
               <p>
-                Le site TruTube utilise des cookies pour améliorer l'expérience utilisateur et réaliser des statistiques de visites. Les cookies sont de petits fichiers texte stockés sur votre appareil lors de la visite d'un site web.
+                TruTube SAS agit en qualité d'hébergeur au sens de l'article 6-I-2 de la loi pour la Confiance
+                dans l'Économie Numérique (LCEN) pour les contenus publiés par ses utilisateurs. À ce titre,
+                TruTube ne peut voir sa responsabilité civile ou pénale engagée en raison des informations
+                stockées par des utilisateurs, à condition d'avoir procédé promptement au retrait desdites
+                informations dès qu'elles ont été signalées.
               </p>
               <p>
-                Vous pouvez désactiver les cookies dans les paramètres de votre navigateur. Cependant, certaines fonctionnalités du site pourraient ne pas fonctionner correctement.
+                TruTube s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées.
+                Toutefois, la plateforme ne peut garantir l'exhaustivité, la précision ou la pertinence
+                des informations mises à disposition, et décline toute responsabilité pour les erreurs
+                ou omissions éventuelles.
               </p>
               <p>
-                Types de cookies utilisés :
+                TruTube ne saurait être tenue responsable des dommages directs ou indirects résultant :
               </p>
-              <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Cookies strictement nécessaires au fonctionnement du site</li>
-                <li>Cookies de performance et d'analyse</li>
-                <li>Cookies de préférences utilisateur</li>
+              <ul className="space-y-1.5 ml-2">
+                {[
+                  'D\'une indisponibilité temporaire ou définitive du service',
+                  'D\'une perte ou d\'une corruption de données',
+                  'D\'une intrusion frauduleuse par un tiers',
+                  'De l\'utilisation de liens hypertextes pointant vers des sites tiers',
+                  'Du comportement ou des contenus publiés par des tiers utilisateurs',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2 text-gray-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500 flex-shrink-0 mt-1.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
             </div>
-          </section>
+          </Section>
 
-          <section className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <Scale className="text-[#D8A0B6]" size={32} />
-              <h2 className="text-3xl font-bold">Droit applicable et juridiction</h2>
-            </div>
-            <div className="bg-[#1A1A1A] rounded-xl p-6 border border-gray-800 space-y-4 text-gray-300">
-              <p>
-                Les présentes mentions légales sont régies par le droit français. En cas de litige et à défaut d'accord amiable, le litige sera porté devant les tribunaux français conformément aux règles de compétence en vigueur.
-              </p>
-            </div>
-          </section>
+          <Section icon={FileText} title="7. Liens hypertextes" accent="text-gray-400">
+            <p>
+              La création de liens hypertextes pointant vers la plateforme TruTube est soumise à autorisation
+              préalable de TruTube SAS. Pour toute demande, contactez : <a href="mailto:contact@trutube.com" className="text-sky-400 hover:text-sky-300">contact@trutube.com</a>
+            </p>
+            <p className="mt-2">
+              TruTube décline toute responsabilité concernant le contenu des sites tiers vers lesquels
+              des liens peuvent être présents sur la plateforme. Ces liens n'impliquent aucune approbation
+              de notre part quant au contenu de ces sites.
+            </p>
+          </Section>
 
-          <div className="bg-gradient-to-r from-[#D8A0B6]/20 to-purple-500/20 rounded-xl p-6 border border-[#D8A0B6]/30">
-            <p className="text-center text-gray-300">
-              Dernière mise à jour : 14 février 2026
+          <Section icon={Scale} title="8. Droit applicable et juridiction">
+            <p>
+              Les présentes mentions légales sont soumises au droit français.
+              En cas de litige relatif à leur interprétation ou à leur application,
+              les parties s'engagent à rechercher une solution amiable avant tout recours judiciaire.
             </p>
-            <p className="text-center text-gray-400 mt-2 text-sm">
-              Pour toute question concernant ces mentions légales, contactez-nous à <a href="mailto:legal@trutube.com" className="text-[#D8A0B6] hover:underline">legal@trutube.com</a>
+            <p className="mt-2">
+              À défaut d'accord amiable, tout litige sera soumis à la compétence exclusive
+              du Tribunal de Commerce de Paris, ou du Tribunal judiciaire de Paris pour les
+              litiges relevant de la compétence des juridictions civiles, sauf disposition
+              légale contraire applicable aux consommateurs.
             </p>
+            <div className="mt-4 p-4 rounded-xl bg-white/[0.03] border border-white/6">
+              <p className="text-white text-sm font-semibold mb-2">Textes législatifs applicables</p>
+              <ul className="space-y-1 text-xs text-gray-500">
+                {[
+                  'Loi n° 2004-575 du 21 juin 2004 pour la Confiance dans l\'Économie Numérique (LCEN)',
+                  'Règlement Général sur la Protection des Données (RGPD – UE 2016/679)',
+                  'Loi n° 78-17 du 6 janvier 1978 modifiée (Informatique et Libertés)',
+                  'Règlement UE sur les Services Numériques (DSA – Digital Services Act)',
+                  'Code de la Propriété Intellectuelle',
+                  'Code de la Consommation',
+                ].map((law, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="w-1 h-1 rounded-full bg-gray-600 flex-shrink-0 mt-1.5" />
+                    {law}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Section>
+        </div>
+
+        <div className="mt-12 p-6 rounded-2xl bg-white/[0.03] border border-white/8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
+            <div>
+              <p className="text-white font-semibold">Contactez notre service juridique</p>
+              <p className="text-gray-400 text-sm mt-1">Pour toute demande légale, signalement ou réclamation.</p>
+            </div>
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <a
+                href="mailto:legal@trutube.com"
+                className="flex items-center gap-1.5 px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl text-sm font-medium transition-colors border border-white/10"
+              >
+                <Mail className="w-4 h-4" />
+                legal@trutube.com
+              </a>
+              <button
+                onClick={() => onNavigate('support')}
+                className="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-sm font-semibold transition-colors"
+              >
+                Support
+              </button>
+            </div>
           </div>
+        </div>
+
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-sm text-gray-500">
+          <div className="flex items-center gap-6">
+            <button onClick={() => onNavigate('terms')} className="hover:text-gray-300 transition-colors">CGU</button>
+            <button onClick={() => onNavigate('privacy')} className="hover:text-gray-300 transition-colors">Confidentialité</button>
+          </div>
+          <span>© 2026 TruTube SAS — {LAST_UPDATED}</span>
         </div>
       </div>
     </div>
