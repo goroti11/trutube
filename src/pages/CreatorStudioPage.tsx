@@ -1,44 +1,11 @@
 import { useState, useEffect } from 'react';
 import {
-  LayoutDashboard,
-  Video,
-  Radio,
-  Users,
-  DollarSign,
-  BarChart3,
-  MessageSquare,
-  Settings,
-  Handshake,
-  Store,
-  Layers,
-  Upload,
-  Play,
-  TrendingUp,
-  Eye,
-  DollarSign as Revenue,
-  UserPlus,
-  AlertCircle,
-  Shield,
-  Clock,
-  Target,
-  Award,
-  CheckCircle,
-  XCircle,
-  Filter,
-  Music,
-  Package,
-  Lock,
-  Calendar,
-  Globe,
-  Tag,
-  ArrowUpRight,
-  ChevronRight,
-  Zap,
-  Star,
-  BarChart2,
-  ShoppingBag,
-  CreditCard,
-  ExternalLink,
+  LayoutDashboard, Video, Radio, Users, DollarSign, BarChart3, MessageSquare,
+  Settings, Handshake, Store, Layers, Upload, Play, TrendingUp, Eye,
+  UserPlus, AlertCircle, Shield, Clock, Target, Award, CheckCircle,
+  Filter, Music, Package, Lock, Calendar, Globe, Tag, ArrowUpRight,
+  ChevronRight, Zap, Star, BarChart2, ShoppingBag, CreditCard, ExternalLink,
+  ArrowLeft, ChevronDown, Bell, Home, MoreHorizontal, Sparkles, X, Menu,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import MonetizationDashboard from '../components/studio/MonetizationDashboard';
@@ -46,1801 +13,1483 @@ import ContentGuidePanel from '../components/studio/ContentGuidePanel';
 import { liveStreamService, LiveStream } from '../services/liveStreamService';
 import { musicSalesService, MusicSaleRelease } from '../services/musicSalesService';
 
-type StudioSection = 'dashboard' | 'content' | 'live' | 'community' | 'monetization' | 'analytics' | 'comments' | 'collaborations' | 'marketplace' | 'multi-channel' | 'distribution' | 'settings';
+type StudioSection =
+  | 'dashboard' | 'content' | 'live' | 'community' | 'monetization'
+  | 'analytics' | 'comments' | 'collaborations' | 'marketplace'
+  | 'multi-channel' | 'distribution' | 'settings';
 
 interface CreatorStudioPageProps {
   onNavigate: (page: string) => void;
 }
 
+const NAV_ITEMS = [
+  { id: 'dashboard' as StudioSection, label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'content' as StudioSection, label: 'Contenus', icon: Video },
+  { id: 'live' as StudioSection, label: 'Live', icon: Radio },
+  { id: 'community' as StudioSection, label: 'Communauté', icon: Users },
+  { id: 'monetization' as StudioSection, label: 'Monétisation', icon: DollarSign },
+  { id: 'analytics' as StudioSection, label: 'Analytics', icon: BarChart3 },
+  { id: 'comments' as StudioSection, label: 'Commentaires', icon: MessageSquare },
+  { id: 'collaborations' as StudioSection, label: 'Collaborations', icon: Handshake },
+  { id: 'distribution' as StudioSection, label: 'Distribution', icon: Music },
+  { id: 'marketplace' as StudioSection, label: 'Marketplace', icon: Store },
+  { id: 'multi-channel' as StudioSection, label: 'Multi-chaînes', icon: Layers },
+  { id: 'settings' as StudioSection, label: 'Paramètres', icon: Settings },
+];
+
 export default function CreatorStudioPage({ onNavigate }: CreatorStudioPageProps) {
   const { user } = useAuth();
-  const [currentSection, setCurrentSection] = useState<StudioSection>('dashboard');
+  const [section, setSection] = useState<StudioSection>('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const menuItems = [
-    { id: 'dashboard' as StudioSection, label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'content' as StudioSection, label: 'Contenus', icon: Video },
-    { id: 'live' as StudioSection, label: 'Live', icon: Radio },
-    { id: 'community' as StudioSection, label: 'Communauté', icon: Users },
-    { id: 'monetization' as StudioSection, label: 'Monétisation', icon: DollarSign },
-    { id: 'analytics' as StudioSection, label: 'Analytics', icon: BarChart3 },
-    { id: 'comments' as StudioSection, label: 'Commentaires', icon: MessageSquare },
-    { id: 'collaborations' as StudioSection, label: 'Collaborations', icon: Handshake },
-    { id: 'distribution' as StudioSection, label: 'Distribution', icon: Music },
-    { id: 'marketplace' as StudioSection, label: 'Marketplace', icon: Store },
-    { id: 'multi-channel' as StudioSection, label: 'Multi-chaînes', icon: Layers },
-    { id: 'settings' as StudioSection, label: 'Paramètres', icon: Settings },
-  ];
+  const current = NAV_ITEMS.find(n => n.id === section)!;
 
   return (
-    <div className="min-h-screen bg-gray-900 flex">
-      {/* Sidebar */}
-      <div className="w-64 bg-gray-950 border-r border-gray-800 fixed h-full">
-        {/* Studio Header */}
-        <div className="p-6 border-b border-gray-800">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center">
-              <Play className="w-6 h-6 text-white fill-current" />
-            </div>
-            <div>
-              <h1 className="text-white font-bold text-lg">TruTube</h1>
-              <p className="text-gray-400 text-xs">Studio</p>
-            </div>
+    <div className="min-h-screen bg-[#0D0D0F] flex text-white">
+
+      {/* ── Desktop Sidebar ── */}
+      <aside className="hidden lg:flex flex-col w-60 bg-[#111113] border-r border-white/5 fixed inset-y-0 z-30">
+        <div className="px-5 py-5 border-b border-white/5 flex items-center gap-3">
+          <div className="w-9 h-9 bg-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+            <Play className="w-5 h-5 text-white fill-current" />
           </div>
+          <div>
+            <p className="text-white font-bold text-sm leading-none">TruTube</p>
+            <p className="text-gray-500 text-xs mt-0.5">Studio</p>
+          </div>
+          <span className="ml-auto text-[10px] bg-red-950/50 border border-red-800/40 text-red-400 px-1.5 py-0.5 rounded-full font-medium">BETA</span>
         </div>
 
-        {/* Navigation Menu */}
-        <nav className="p-4 space-y-1">
-          {menuItems.map((item) => {
+        <nav className="flex-1 overflow-y-auto py-3 px-3 space-y-0.5">
+          {NAV_ITEMS.map(item => {
             const Icon = item.icon;
-            const isActive = currentSection === item.id;
+            const active = section === item.id;
             return (
               <button
                 key={item.id}
-                onClick={() => setCurrentSection(item.id)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                  isActive
-                    ? 'bg-red-600 text-white'
-                    : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                onClick={() => setSection(item.id)}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  active
+                    ? 'bg-red-600 text-white shadow-lg shadow-red-900/30'
+                    : 'text-gray-400 hover:bg-white/5 hover:text-white'
                 }`}
               >
-                <Icon className="w-5 h-5" />
-                <span className="font-medium">{item.label}</span>
+                <Icon className="w-4 h-4 flex-shrink-0" />
+                {item.label}
               </button>
             );
           })}
         </nav>
 
-        {/* Back to Platform */}
-        <div className="absolute bottom-0 w-64 p-4 border-t border-gray-800">
+        <div className="p-3 border-t border-white/5 space-y-1">
+          <button
+            onClick={() => onNavigate('upload')}
+            className="w-full flex items-center gap-2 px-3 py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-colors"
+          >
+            <Upload className="w-4 h-4" />
+            Uploader
+          </button>
           <button
             onClick={() => onNavigate('home')}
-            className="w-full px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg transition-colors text-sm"
+            className="w-full flex items-center gap-2 px-3 py-2.5 text-gray-500 hover:text-gray-300 hover:bg-white/5 rounded-xl text-sm transition-colors"
           >
-            ← Retour à TruTube
+            <Home className="w-4 h-4" />
+            Retour à TruTube
           </button>
         </div>
-      </div>
+      </aside>
 
-      {/* Main Content */}
-      <div className="flex-1 ml-64">
-        {currentSection === 'dashboard' && <DashboardSection />}
-        {currentSection === 'content' && <ContentSection />}
-        {currentSection === 'live' && <LiveSection onNavigate={onNavigate} />}
-        {currentSection === 'community' && <CommunitySection />}
-        {currentSection === 'monetization' && <MonetizationSection />}
-        {currentSection === 'analytics' && <AnalyticsSection />}
-        {currentSection === 'comments' && <CommentsSection />}
-        {currentSection === 'collaborations' && <CollaborationsSection />}
-        {currentSection === 'distribution' && <DistributionSection onNavigate={onNavigate} />}
-        {currentSection === 'marketplace' && <MarketplaceSection onNavigate={onNavigate} />}
-        {currentSection === 'multi-channel' && <MultiChannelSection />}
-        {currentSection === 'settings' && <SettingsSection />}
+      {/* ── Mobile Sidebar Overlay ── */}
+      {sidebarOpen && (
+        <div className="lg:hidden fixed inset-0 z-40 flex">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
+          <aside className="relative w-64 bg-[#111113] border-r border-white/5 flex flex-col">
+            <div className="px-5 py-5 border-b border-white/5 flex items-center gap-3">
+              <div className="w-9 h-9 bg-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                <Play className="w-5 h-5 text-white fill-current" />
+              </div>
+              <div>
+                <p className="text-white font-bold text-sm">TruTube Studio</p>
+              </div>
+              <button onClick={() => setSidebarOpen(false)} className="ml-auto p-1 text-gray-500 hover:text-white">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <nav className="flex-1 overflow-y-auto py-3 px-3 space-y-0.5">
+              {NAV_ITEMS.map(item => {
+                const Icon = item.icon;
+                const active = section === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => { setSection(item.id); setSidebarOpen(false); }}
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                      active ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4 flex-shrink-0" />
+                    {item.label}
+                  </button>
+                );
+              })}
+            </nav>
+            <div className="p-3 border-t border-white/5 space-y-1">
+              <button
+                onClick={() => { onNavigate('upload'); setSidebarOpen(false); }}
+                className="w-full flex items-center gap-2 px-3 py-2.5 bg-red-600 text-white rounded-xl text-sm font-semibold"
+              >
+                <Upload className="w-4 h-4" /> Uploader
+              </button>
+              <button
+                onClick={() => onNavigate('home')}
+                className="w-full flex items-center gap-2 px-3 py-2.5 text-gray-500 hover:text-gray-300 rounded-xl text-sm"
+              >
+                <Home className="w-4 h-4" /> Retour à TruTube
+              </button>
+            </div>
+          </aside>
+        </div>
+      )}
+
+      {/* ── Main Area ── */}
+      <div className="flex-1 lg:ml-60 flex flex-col min-h-screen">
+
+        {/* Top bar */}
+        <header className="sticky top-0 z-20 bg-[#0D0D0F]/80 backdrop-blur-lg border-b border-white/5 px-4 sm:px-6 py-3 flex items-center gap-3">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="lg:hidden p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-colors"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+          <div className="flex items-center gap-2">
+            <current.icon className="w-4 h-4 text-red-400" />
+            <h1 className="font-bold text-white text-sm sm:text-base">{current.label}</h1>
+          </div>
+          <div className="ml-auto flex items-center gap-2">
+            <button className="relative p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-colors">
+              <Bell className="w-4 h-4" />
+              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-red-500 rounded-full" />
+            </button>
+            <button
+              onClick={() => onNavigate('upload')}
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-semibold transition-colors"
+            >
+              <Upload className="w-3.5 h-3.5" /> Uploader
+            </button>
+          </div>
+        </header>
+
+        {/* Mobile section carousel */}
+        <div className="lg:hidden border-b border-white/5 bg-[#111113] overflow-x-auto">
+          <div className="flex gap-1 px-3 py-2">
+            {NAV_ITEMS.map(item => {
+              const Icon = item.icon;
+              const active = section === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setSection(item.id)}
+                  className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap ${
+                    active
+                      ? 'bg-red-600 text-white'
+                      : 'text-gray-400 hover:text-white bg-white/5'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Section Content */}
+        <main className="flex-1 overflow-y-auto">
+          {section === 'dashboard' && <DashboardSection onNavigate={onNavigate} />}
+          {section === 'content' && <ContentSection onNavigate={onNavigate} />}
+          {section === 'live' && <LiveSection onNavigate={onNavigate} />}
+          {section === 'community' && <CommunitySection onNavigate={onNavigate} />}
+          {section === 'monetization' && <MonetizationSection />}
+          {section === 'analytics' && <AnalyticsSection />}
+          {section === 'comments' && <CommentsSection />}
+          {section === 'collaborations' && <CollaborationsSection />}
+          {section === 'distribution' && <DistributionSection onNavigate={onNavigate} />}
+          {section === 'marketplace' && <MarketplaceSection onNavigate={onNavigate} />}
+          {section === 'multi-channel' && <MultiChannelSection />}
+          {section === 'settings' && <SettingsSection />}
+        </main>
       </div>
     </div>
   );
 }
 
-// Dashboard Section
-function DashboardSection() {
-  return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold text-white mb-8">Dashboard</h1>
+/* ─────────────────── SHARED PRIMITIVES ─────────────────── */
 
-      {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <MetricCard
-          icon={Revenue}
-          label="Revenus du mois"
-          value="€1,247.50"
-          change="+12%"
-          positive
-        />
-        <MetricCard
-          icon={Eye}
-          label="Vues totales"
-          value="127.4K"
-          change="+8.3%"
-          positive
-        />
-        <MetricCard
-          icon={UserPlus}
-          label="Nouveaux abonnés"
-          value="+342"
-          change="+15%"
-          positive
-        />
-        <MetricCard
-          icon={TrendingUp}
-          label="Taux engagement"
-          value="8.7%"
-          change="+2.1%"
-          positive
-        />
+function PageHeader({ title, subtitle, action }: { title: string; subtitle?: string; action?: React.ReactNode }) {
+  return (
+    <div className="flex items-start justify-between gap-4 mb-6 sm:mb-8">
+      <div>
+        <h2 className="text-xl sm:text-2xl font-black text-white">{title}</h2>
+        {subtitle && <p className="text-gray-400 text-sm mt-0.5">{subtitle}</p>}
+      </div>
+      {action}
+    </div>
+  );
+}
+
+function StatCard({ icon: Icon, label, value, sub, color = 'text-red-400' }: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: string;
+  sub?: string;
+  color?: string;
+}) {
+  return (
+    <div className="bg-[#181820] border border-white/5 rounded-2xl p-5 hover:border-white/10 transition-colors">
+      <div className="flex items-center justify-between mb-3">
+        <div className={`w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center ${color}`}>
+          <Icon className="w-4 h-4" />
+        </div>
+      </div>
+      <p className="text-2xl font-black text-white">{value}</p>
+      <p className="text-gray-500 text-xs mt-0.5">{label}</p>
+      {sub && <p className="text-emerald-400 text-xs mt-1 font-medium">{sub}</p>}
+    </div>
+  );
+}
+
+function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div className={`bg-[#181820] border border-white/5 rounded-2xl ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+function CardHeader({ children }: { children: React.ReactNode }) {
+  return <div className="px-5 py-4 border-b border-white/5 flex items-center justify-between">{children}</div>;
+}
+
+function Toggle({ enabled }: { enabled: boolean }) {
+  return (
+    <div className={`relative w-10 h-5 rounded-full transition-colors ${enabled ? 'bg-emerald-600' : 'bg-white/10'}`}>
+      <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${enabled ? 'translate-x-5' : 'translate-x-0.5'}`} />
+    </div>
+  );
+}
+
+function Badge({ label, variant = 'gray' }: { label: string; variant?: 'red' | 'green' | 'amber' | 'blue' | 'gray' }) {
+  const v = {
+    red: 'bg-red-950/50 text-red-400 border-red-800/40',
+    green: 'bg-emerald-950/50 text-emerald-400 border-emerald-800/40',
+    amber: 'bg-amber-950/50 text-amber-400 border-amber-800/40',
+    blue: 'bg-blue-950/50 text-blue-400 border-blue-800/40',
+    gray: 'bg-white/5 text-gray-400 border-white/10',
+  };
+  return (
+    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold border ${v[variant]}`}>
+      {label}
+    </span>
+  );
+}
+
+/* ─────────────────── DASHBOARD SECTION ─────────────────── */
+
+function DashboardSection({ onNavigate }: { onNavigate: (p: string) => void }) {
+  const { user } = useAuth();
+  return (
+    <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
+      <PageHeader
+        title={`Bonjour ${user?.user_metadata?.username || 'Créateur'}`}
+        subtitle="Voici un aperçu de votre chaîne aujourd'hui"
+      />
+
+      {/* KPIs */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
+        <StatCard icon={DollarSign} label="Revenus du mois" value="€1 247" sub="+12% vs mois dernier" color="text-emerald-400" />
+        <StatCard icon={Eye} label="Vues totales" value="127.4K" sub="+8.3%" color="text-blue-400" />
+        <StatCard icon={UserPlus} label="Nouveaux abonnés" value="+342" sub="+15%" color="text-amber-400" />
+        <StatCard icon={TrendingUp} label="Engagement" value="8.7%" sub="+2.1%" color="text-red-400" />
       </div>
 
-      {/* Performance Last Video */}
-      <div className="bg-gray-800 rounded-lg p-6 mb-6">
-        <h2 className="text-xl font-bold text-white mb-4">Dernière vidéo publiée</h2>
-        <div className="flex items-start gap-4">
-          <img
-            src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&h=200&fit=crop"
-            alt="Dernière vidéo"
-            className="w-48 h-28 object-cover rounded-lg"
-          />
-          <div className="flex-1">
-            <h3 className="text-white font-semibold text-lg mb-2">
-              Comment créer du contenu authentique
-            </h3>
-            <div className="grid grid-cols-3 gap-4 text-sm">
-              <div>
-                <p className="text-gray-400">Vues</p>
-                <p className="text-white font-semibold">12,450</p>
-              </div>
-              <div>
-                <p className="text-gray-400">J'aime</p>
-                <p className="text-white font-semibold">1,230</p>
-              </div>
-              <div>
-                <p className="text-gray-400">Durée moy.</p>
-                <p className="text-white font-semibold">8:34</p>
+      {/* Last video + alerts */}
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+        <Card className="lg:col-span-3 overflow-hidden">
+          <CardHeader>
+            <p className="font-bold text-white text-sm">Dernière vidéo</p>
+            <button onClick={() => onNavigate('creator-dashboard')} className="text-xs text-red-400 hover:text-red-300 transition-colors flex items-center gap-1">
+              Voir tout <ChevronRight className="w-3 h-3" />
+            </button>
+          </CardHeader>
+          <div className="p-5 flex gap-4">
+            <img
+              src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=320&h=180&fit=crop"
+              alt="Dernière vidéo"
+              className="w-40 h-24 object-cover rounded-xl flex-shrink-0"
+            />
+            <div className="flex-1 min-w-0">
+              <p className="text-white font-semibold mb-3 text-sm line-clamp-2">Comment créer du contenu authentique</p>
+              <div className="grid grid-cols-3 gap-2 text-xs">
+                {[
+                  { l: 'Vues', v: '12 450' },
+                  { l: "J'aime", v: '1 230' },
+                  { l: 'Durée moy.', v: '8:34' },
+                ].map(s => (
+                  <div key={s.l} className="bg-white/5 rounded-xl p-2">
+                    <p className="text-gray-500">{s.l}</p>
+                    <p className="text-white font-bold mt-0.5">{s.v}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </div>
+        </Card>
+
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Bell className="w-4 h-4 text-amber-400" />
+              <p className="font-bold text-white text-sm">Alertes</p>
+            </div>
+          </CardHeader>
+          <div className="p-4 space-y-2">
+            {[
+              { type: 'green' as const, msg: '10K vues en 24h sur votre dernière vidéo' },
+              { type: 'blue' as const, msg: '3 commentaires en attente de modération' },
+              { type: 'amber' as const, msg: 'Vérification requise pour activer les paiements' },
+            ].map((a, i) => (
+              <div key={i} className={`flex items-start gap-3 p-3 rounded-xl text-xs ${
+                a.type === 'green' ? 'bg-emerald-950/30 border border-emerald-900/40 text-emerald-300' :
+                a.type === 'blue' ? 'bg-blue-950/30 border border-blue-900/40 text-blue-300' :
+                'bg-amber-950/30 border border-amber-900/40 text-amber-300'
+              }`}>
+                <AlertCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
+                {a.msg}
+              </div>
+            ))}
+          </div>
+        </Card>
       </div>
 
-      {/* Important Alerts */}
-      <div className="bg-gray-800 rounded-lg p-6">
-        <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-          <AlertCircle className="w-5 h-5 text-yellow-500" />
-          Alertes importantes
-        </h2>
-        <div className="space-y-3">
-          <AlertItem
-            type="success"
-            message="Votre dernière vidéo a atteint 10K vues en 24h"
-          />
-          <AlertItem
-            type="info"
-            message="3 nouveaux commentaires en attente de modération"
-          />
-          <AlertItem
-            type="warning"
-            message="Vérification d'identité requise pour activer les paiements"
-          />
-        </div>
+      {/* Quick actions */}
+      <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {[
+          { label: 'Uploader', icon: Upload, page: 'upload', color: 'from-red-600 to-rose-700' },
+          { label: 'Démarrer un live', icon: Radio, page: 'live-streaming', color: 'from-orange-600 to-red-600' },
+          { label: 'Mes finances', icon: DollarSign, page: 'trucoin-wallet', color: 'from-emerald-700 to-teal-700' },
+          { label: 'Communauté', icon: Users, page: 'community', color: 'from-blue-700 to-cyan-700' },
+        ].map(a => {
+          const Icon = a.icon;
+          return (
+            <button
+              key={a.label}
+              onClick={() => onNavigate(a.page)}
+              className={`bg-gradient-to-br ${a.color} rounded-2xl p-4 text-left hover:opacity-90 transition-opacity`}
+            >
+              <Icon className="w-5 h-5 text-white/80 mb-3" />
+              <p className="text-white font-semibold text-sm">{a.label}</p>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-// Content Section
-function ContentSection() {
-  return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-white">Contenus</h1>
-        <button className="flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors">
-          <Upload className="w-5 h-5" />
-          Uploader une vidéo
-        </button>
-      </div>
+/* ─────────────────── CONTENT SECTION ─────────────────── */
 
-      {/* Content Guide Panel */}
-      <div className="mb-8">
+function ContentSection({ onNavigate }: { onNavigate: (p: string) => void }) {
+  return (
+    <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
+      <PageHeader
+        title="Contenus"
+        subtitle="Gérez vos vidéos, Shorts et plannings de publication"
+        action={
+          <button
+            onClick={() => onNavigate('upload')}
+            className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-colors"
+          >
+            <Upload className="w-4 h-4" /> Uploader
+          </button>
+        }
+      />
+
+      <div className="mb-6">
         <ContentGuidePanel />
       </div>
 
-      {/* Video List */}
-      <div className="bg-gray-800 rounded-lg">
-        <div className="p-4 border-b border-gray-700">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-white">Mes vidéos</h2>
-            <div className="flex items-center gap-2">
-              <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
-                <Filter className="w-5 h-5 text-gray-400" />
-              </button>
+      <Card>
+        <CardHeader>
+          <p className="font-bold text-white text-sm">Mes vidéos</p>
+          <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+            <Filter className="w-4 h-4" />
+          </button>
+        </CardHeader>
+        <div className="divide-y divide-white/5">
+          {[
+            { title: 'Comment créer du contenu authentique', views: 12450, status: 'publié', date: 'Il y a 2 jours' },
+            { title: 'Les secrets d\'une bonne miniature', views: 8230, status: 'publié', date: 'Il y a 5 jours' },
+            { title: 'Live Q&A avec mes abonnés', views: 0, status: 'programmé', date: 'Dans 3 jours' },
+            { title: 'Tutoriel production avancée', views: 5120, status: 'publié', date: 'Il y a 2 semaines' },
+          ].map((v, i) => (
+            <div key={i} className="p-4 flex items-center gap-4 hover:bg-white/2 transition-colors group cursor-pointer">
+              <img
+                src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=160&h=90&fit=crop"
+                alt={v.title}
+                className="w-28 h-16 object-cover rounded-xl flex-shrink-0"
+              />
+              <div className="flex-1 min-w-0">
+                <p className="text-white font-medium text-sm truncate group-hover:text-red-400 transition-colors">{v.title}</p>
+                <div className="flex items-center gap-3 mt-1 flex-wrap">
+                  <span className="text-gray-500 text-xs">{v.views.toLocaleString()} vues</span>
+                  <Badge
+                    label={v.status}
+                    variant={v.status === 'publié' ? 'green' : v.status === 'programmé' ? 'blue' : 'amber'}
+                  />
+                  <span className="text-gray-600 text-xs">{v.date}</span>
+                </div>
+              </div>
+              <div className="hidden sm:flex items-center gap-2">
+                <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+                  <Eye className="w-3.5 h-3.5" />
+                </button>
+                <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+                  <Settings className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
-        <div className="divide-y divide-gray-700">
-          <VideoListItem
-            title="Comment créer du contenu authentique"
-            views={12450}
-            status="publié"
-            date="Il y a 2 jours"
-          />
-          <VideoListItem
-            title="Les secrets d'une bonne miniature"
-            views={8230}
-            status="publié"
-            date="Il y a 5 jours"
-          />
-          <VideoListItem
-            title="Live Q&A avec mes abonnés"
-            views={0}
-            status="programmé"
-            date="Dans 3 jours"
-          />
+        <div className="p-4 border-t border-white/5">
+          <button
+            onClick={() => onNavigate('upload')}
+            className="w-full border-2 border-dashed border-white/10 hover:border-red-700/50 text-gray-500 hover:text-red-400 rounded-xl py-4 text-sm font-medium transition-all flex items-center justify-center gap-2"
+          >
+            <Upload className="w-4 h-4" /> Ajouter une vidéo
+          </button>
         </div>
-      </div>
+      </Card>
     </div>
   );
 }
 
-// Analytics Section with Traffic Quality
-function AnalyticsSection() {
+/* ─────────────────── LIVE SECTION ─────────────────── */
+
+function LiveSection({ onNavigate }: { onNavigate: (p: string) => void }) {
+  const { user } = useAuth();
+  const [liveStreams, setLiveStreams] = useState<LiveStream[]>([]);
+  const [stats, setStats] = useState({ totalLives: 0, averageViewers: 0, totalDuration: 0 });
+
+  useEffect(() => {
+    if (!user) return;
+    liveStreamService.getCreatorLiveStreams(user.id).then(streams => {
+      setLiveStreams(streams);
+      const ended = streams.filter(s => s.status === 'ended');
+      setStats({
+        totalLives: ended.length,
+        averageViewers: ended.length ? Math.round(ended.reduce((a, s) => a + s.average_viewers, 0) / ended.length) : 0,
+        totalDuration: streams.reduce((a, s) => a + s.duration_seconds, 0),
+      });
+    });
+  }, [user]);
+
+  const fmt = (sec: number) => `${Math.floor(sec / 3600)}h ${Math.floor((sec % 3600) / 60)}min`;
+
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold text-white mb-8">Analytics</h1>
+    <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
+      <PageHeader
+        title="Streaming en direct"
+        subtitle="Configurez et gérez vos lives"
+        action={
+          <button
+            onClick={() => onNavigate('live-streaming')}
+            className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-colors"
+          >
+            <Radio className="w-4 h-4" /> Démarrer un live
+          </button>
+        }
+      />
 
-      {/* Traffic Quality - DIFFÉRENCIATION TRUTUBE */}
-      <div className="bg-gray-800 rounded-lg p-6 mb-6 border-2 border-red-600">
-        <div className="flex items-center gap-3 mb-6">
-          <Shield className="w-6 h-6 text-red-500" />
-          <h2 className="text-xl font-bold text-white">Qualité du trafic</h2>
-          <span className="ml-auto px-3 py-1 bg-green-900 text-green-300 rounded-full text-sm font-semibold">
-            Score: 94/100
-          </span>
-        </div>
+      <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-6">
+        <StatCard icon={Radio} label="Lives diffusés" value={String(stats.totalLives || 12)} color="text-red-400" />
+        <StatCard icon={Eye} label="Spectateurs moy." value={String(stats.averageViewers || 1234)} color="text-blue-400" />
+        <StatCard icon={Clock} label="Durée totale" value={stats.totalDuration > 0 ? fmt(stats.totalDuration) : '24h 12m'} color="text-emerald-400" />
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <QualityMetric
-            label="Vues réelles"
-            value="98.7%"
-            icon={CheckCircle}
-            positive
-          />
-          <QualityMetric
-            label="Trafic suspect"
-            value="1.3%"
-            icon={AlertCircle}
-            warning
-          />
-          <QualityMetric
-            label="Bots bloqués"
-            value="127"
-            icon={Shield}
-            neutral
-          />
-          <QualityMetric
-            label="Engagement humain"
-            value="8.7%"
-            icon={Target}
-            positive
-          />
-        </div>
-
-        <div className="bg-gray-900 rounded-lg p-4">
-          <p className="text-gray-300 text-sm leading-relaxed">
-            <span className="text-green-400 font-semibold">✓ Aucune vue suspecte détectée</span> sur les 7 derniers jours.
-            Votre contenu est 100% authentique et conforme aux standards TruTube.
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+        {/* Live config */}
+        <Card className="p-5">
+          <p className="font-bold text-white mb-4 flex items-center gap-2 text-sm">
+            <Settings className="w-4 h-4 text-gray-400" /> Configuration du prochain live
           </p>
-        </div>
+          <div className="space-y-3">
+            <div>
+              <label className="block text-gray-400 text-xs mb-1.5">Titre</label>
+              <input
+                type="text"
+                placeholder="Ex: Session Q&A avec mes abonnés"
+                className="w-full bg-white/5 border border-white/10 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-red-600 transition-colors"
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-gray-400 text-xs mb-1.5">Univers</label>
+                <select className="w-full bg-white/5 border border-white/10 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-red-600 transition-colors appearance-none">
+                  <option>Music</option>
+                  <option>Gaming</option>
+                  <option>Tech</option>
+                  <option>Lifestyle</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-gray-400 text-xs mb-1.5">Qualité</label>
+                <select className="w-full bg-white/5 border border-white/10 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-red-600 transition-colors appearance-none">
+                  <option>1080p 60fps</option>
+                  <option>720p 60fps</option>
+                  <option>720p 30fps</option>
+                </select>
+              </div>
+            </div>
+            <button
+              onClick={() => onNavigate('live-streaming')}
+              className="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-colors flex items-center justify-center gap-2"
+            >
+              <Radio className="w-4 h-4" /> Démarrer maintenant
+            </button>
+          </div>
+        </Card>
+
+        {/* Live tips */}
+        <Card className="p-5">
+          <p className="font-bold text-white mb-4 text-sm flex items-center gap-2">
+            <Zap className="w-4 h-4 text-amber-400" /> Conseils pour un live réussi
+          </p>
+          <div className="space-y-2.5">
+            {[
+              'Annoncez votre live 24h à l\'avance sur votre communauté',
+              'Testez votre connexion et votre matériel 15min avant',
+              'Préparez un plan de contenu pour maintenir l\'engagement',
+              'Interagissez avec le chat en lisant les questions',
+              'Activez les TruCoins pour les dons en direct',
+            ].map((tip, i) => (
+              <div key={i} className="flex items-start gap-2.5 text-xs text-gray-400">
+                <div className="w-5 h-5 rounded-full bg-amber-950/40 border border-amber-800/40 text-amber-400 font-bold flex items-center justify-center flex-shrink-0 text-[10px]">{i + 1}</div>
+                {tip}
+              </div>
+            ))}
+          </div>
+        </Card>
       </div>
 
-      {/* Key Analytics */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="bg-gray-800 rounded-lg p-6">
-          <h3 className="text-lg font-bold text-white mb-4">Temps de visionnage réel</h3>
-          <div className="text-4xl font-bold text-white mb-2">42h 18min</div>
-          <p className="text-gray-400 text-sm">Durée moyenne: 8min 34s</p>
+      {/* Past lives */}
+      <Card>
+        <CardHeader>
+          <p className="font-bold text-white text-sm">Lives précédents</p>
+        </CardHeader>
+        <div className="divide-y divide-white/5">
+          {[
+            { title: 'Session Q&A — Spécial 10K abonnés', viewers: 1845, duration: '2h 15min', date: 'Il y a 3 jours', revenue: '€47.50' },
+            { title: 'Création musicale en direct', viewers: 923, duration: '1h 42min', date: 'Il y a 1 semaine', revenue: '€23.80' },
+            { title: 'Tutoriel production avancée', viewers: 1234, duration: '3h 05min', date: 'Il y a 2 semaines', revenue: '€61.20' },
+          ].map((l, i) => (
+            <div key={i} className="p-4 flex items-center gap-4 hover:bg-white/2 transition-colors">
+              <div className="w-10 h-10 bg-red-950/40 border border-red-800/40 rounded-xl flex items-center justify-center flex-shrink-0">
+                <Radio className="w-4 h-4 text-red-400" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-white font-medium text-sm truncate">{l.title}</p>
+                <div className="flex items-center gap-3 mt-0.5 text-xs text-gray-500">
+                  <span>{l.viewers.toLocaleString()} spectateurs</span>
+                  <span>{l.duration}</span>
+                  <span>{l.date}</span>
+                </div>
+              </div>
+              <span className="text-emerald-400 font-bold text-sm flex-shrink-0">{l.revenue}</span>
+            </div>
+          ))}
         </div>
+      </Card>
+    </div>
+  );
+}
 
-        <div className="bg-gray-800 rounded-lg p-6">
-          <h3 className="text-lg font-bold text-white mb-4">Taux de soutien financier</h3>
-          <div className="text-4xl font-bold text-white mb-2">3.2%</div>
-          <p className="text-gray-400 text-sm">342 abonnés actifs sur 10,642</p>
-        </div>
+/* ─────────────────── COMMUNITY SECTION ─────────────────── */
+
+function CommunitySection({ onNavigate }: { onNavigate: (p: string) => void }) {
+  return (
+    <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
+      <PageHeader
+        title="Communauté"
+        subtitle="Gérez vos espaces communautaires et l'activité de vos membres"
+        action={
+          <button
+            onClick={() => onNavigate('create-community')}
+            className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-colors"
+          >
+            <Users className="w-4 h-4" /> Créer une communauté
+          </button>
+        }
+      />
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+        <StatCard icon={Users} label="Membres" value="10 642" color="text-blue-400" />
+        <StatCard icon={MessageSquare} label="Posts ce mois" value="347" color="text-emerald-400" />
+        <StatCard icon={TrendingUp} label="Engagement" value="8.7%" color="text-amber-400" />
+        <StatCard icon={Award} label="Membres actifs" value="4 231" color="text-red-400" />
       </div>
 
-      {/* Universe Distribution */}
-      <div className="bg-gray-800 rounded-lg p-6">
-        <h3 className="text-lg font-bold text-white mb-4">Provenance univers</h3>
-        <div className="space-y-3">
-          <UniverseBar universe="Music" percentage={45} color="bg-purple-500" />
-          <UniverseBar universe="Tech" percentage={30} color="bg-blue-500" />
-          <UniverseBar universe="Gaming" percentage={25} color="bg-green-500" />
-        </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <p className="font-bold text-white text-sm">Mes communautés</p>
+          </CardHeader>
+          <div className="divide-y divide-white/5">
+            {[
+              { name: 'Fans de Musique Électronique', members: 10642, posts: 347, premium: true },
+              { name: 'Production Studio VIP', members: 532, posts: 128, premium: true },
+              { name: 'Communauté Générale', members: 25430, posts: 892, premium: false },
+            ].map((c, i) => (
+              <div key={i} className="p-4 flex items-center gap-4 hover:bg-white/2 transition-colors">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-700 to-cyan-700 rounded-xl flex-shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <p className="text-white font-medium text-sm truncate">{c.name}</p>
+                    {c.premium && <Badge label="PREMIUM" variant="amber" />}
+                  </div>
+                  <p className="text-gray-500 text-xs mt-0.5">{c.members.toLocaleString()} membres · {c.posts} posts</p>
+                </div>
+                <button
+                  onClick={() => onNavigate(`community-settings/${c.name.toLowerCase().replace(/\s+/g, '-')}`)}
+                  className="text-xs text-red-400 hover:text-red-300 font-medium transition-colors"
+                >
+                  Gérer
+                </button>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <p className="font-bold text-white text-sm">Activité récente</p>
+          </CardHeader>
+          <div className="divide-y divide-white/5">
+            {[
+              { user: 'Marie L.', action: 'a publié', title: 'Quelle DAW ?', t: 'Il y a 5min' },
+              { user: 'Thomas D.', action: 'a rejoint', title: 'Fans Musique Élec.', t: 'Il y a 23min' },
+              { user: 'Sophie M.', action: 'a commenté', title: 'Tips mixage', t: 'Il y a 1h' },
+            ].map((a, i) => (
+              <div key={i} className="p-3 flex items-start gap-3">
+                <div className="w-8 h-8 bg-gradient-to-br from-red-700 to-orange-700 rounded-full flex-shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-gray-300 text-xs">
+                    <span className="text-white font-medium">{a.user}</span> {a.action}{' '}
+                    <span className="text-white">"{a.title}"</span>
+                  </p>
+                  <p className="text-gray-600 text-[10px] mt-0.5">{a.t}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
       </div>
     </div>
   );
 }
 
-// Monetization Section
+/* ─────────────────── MONETIZATION SECTION ─────────────────── */
+
 function MonetizationSection() {
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
+      <PageHeader title="Monétisation" subtitle="Gérez vos sources de revenus et votre éligibilité" />
       <MonetizationDashboard />
     </div>
   );
 }
 
-// Collaborations Section
-function CollaborationsSection() {
+/* ─────────────────── ANALYTICS SECTION ─────────────────── */
+
+function AnalyticsSection() {
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-white">Collaborations</h1>
-        <button className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors">
-          Inviter un créateur
-        </button>
+    <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
+      <PageHeader title="Analytics" subtitle="Analysez vos performances et la qualité de votre trafic" />
+
+      {/* Traffic quality */}
+      <Card className="mb-6 border-red-900/40">
+        <div className="p-5">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 bg-red-950/40 border border-red-800/40 rounded-xl flex items-center justify-center">
+                <Shield className="w-4 h-4 text-red-400" />
+              </div>
+              <div>
+                <p className="font-bold text-white text-sm">Qualité du trafic</p>
+                <p className="text-gray-500 text-xs">Système anti-fausses vues TruTube</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="text-right">
+                <p className="text-2xl font-black text-emerald-400">94</p>
+                <p className="text-[10px] text-gray-500">/ 100</p>
+              </div>
+              <div className="w-14 h-14">
+                <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
+                  <circle cx="18" cy="18" r="15.9" fill="none" stroke="#1f2937" strokeWidth="2.5" />
+                  <circle cx="18" cy="18" r="15.9" fill="none" stroke="#10b981" strokeWidth="2.5"
+                    strokeDasharray={`${94} ${100 - 94}`} strokeLinecap="round" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+            {[
+              { l: 'Vues réelles', v: '98.7%', c: 'text-emerald-400', bg: 'bg-emerald-950/30 border-emerald-900/40' },
+              { l: 'Trafic suspect', v: '1.3%', c: 'text-amber-400', bg: 'bg-amber-950/30 border-amber-900/40' },
+              { l: 'Bots bloqués', v: '127', c: 'text-gray-300', bg: 'bg-white/5 border-white/10' },
+              { l: 'Engagement humain', v: '8.7%', c: 'text-blue-400', bg: 'bg-blue-950/30 border-blue-900/40' },
+            ].map(m => (
+              <div key={m.l} className={`rounded-xl p-3 border ${m.bg}`}>
+                <p className="text-gray-500 text-xs mb-1">{m.l}</p>
+                <p className={`font-black text-lg ${m.c}`}>{m.v}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-emerald-950/20 border border-emerald-900/30 rounded-xl px-4 py-3 text-xs text-emerald-300">
+            Aucune vue suspecte détectée sur les 7 derniers jours. Contenu 100% authentique.
+          </div>
+        </div>
+      </Card>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+        <StatCard icon={Clock} label="Temps de visionnage" value="42h 18min" sub="Moy. 8min 34s" color="text-blue-400" />
+        <StatCard icon={DollarSign} label="Taux de soutien" value="3.2%" sub="342 / 10 642 abonnés" color="text-emerald-400" />
+        <StatCard icon={TrendingUp} label="Portée organique" value="127.4K" sub="+8.3% ce mois" color="text-amber-400" />
+        <StatCard icon={Target} label="Rétention" value="72%" sub="Durée moy. 8:34" color="text-red-400" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <CollabCard
-          creatorName="Marie Laurent"
-          projectTitle="Podcast Tech & Créativité"
-          status="En cours"
-          revenue="€450.00"
-        />
-        <CollabCard
-          creatorName="Thomas Dubois"
-          projectTitle="Live Gaming Tournament"
-          status="Planifié"
-          revenue="€0.00"
-        />
-      </div>
+      <Card>
+        <div className="p-5">
+          <p className="font-bold text-white text-sm mb-4">Provenance univers</p>
+          <div className="space-y-3">
+            {[
+              { u: 'Music', pct: 45, c: 'bg-red-600' },
+              { u: 'Tech', pct: 30, c: 'bg-blue-600' },
+              { u: 'Gaming', pct: 25, c: 'bg-emerald-600' },
+            ].map(b => (
+              <div key={b.u}>
+                <div className="flex items-center justify-between text-xs mb-1.5">
+                  <span className="text-gray-300">{b.u}</span>
+                  <span className="text-gray-500">{b.pct}%</span>
+                </div>
+                <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                  <div className={`h-full ${b.c} rounded-full`} style={{ width: `${b.pct}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }
 
-// Marketplace Section
-function MarketplaceSection({ onNavigate }: { onNavigate: (page: string) => void }) {
+/* ─────────────────── COMMENTS SECTION ─────────────────── */
+
+function CommentsSection() {
+  const [filter, setFilter] = useState<'all' | 'pending' | 'reported'>('all');
+
+  const comments = [
+    { user: 'Julie Martin', comment: 'Super vidéo ! J\'ai appris plein de choses sur le mastering', video: 'Comment créer du contenu authentique', status: 'approved', time: 'Il y a 5min' },
+    { user: 'Marc Dubois', comment: 'Merci pour ce tutoriel détaillé, ça va m\'aider énormément', video: 'Les secrets d\'une bonne miniature', status: 'pending', time: 'Il y a 12min' },
+    { user: 'Sophie Chen', comment: 'Contenu de qualité comme toujours !', video: 'Comment créer du contenu authentique', status: 'approved', time: 'Il y a 23min' },
+    { user: 'Anonymous', comment: 'Spam link here...', video: 'Les secrets d\'une bonne miniature', status: 'reported', time: 'Il y a 1h' },
+  ].filter(c => filter === 'all' || c.status === filter || (filter === 'pending' && c.status === 'pending') || (filter === 'reported' && c.status === 'reported'));
+
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-white">Marketplace</h1>
-        <button
-          onClick={() => onNavigate('marketplace')}
-          className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors text-sm"
-        >
-          <ExternalLink className="w-4 h-4" />
-          Voir le Marketplace
-        </button>
+    <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
+      <PageHeader title="Commentaires" subtitle="Modérez les commentaires sur vos vidéos" />
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+        <StatCard icon={MessageSquare} label="Total" value="8 432" color="text-blue-400" />
+        <StatCard icon={AlertCircle} label="En attente" value="12" color="text-amber-400" />
+        <StatCard icon={Shield} label="Signalés" value="3" color="text-red-400" />
+        <StatCard icon={CheckCircle} label="Approuvés" value="8 417" color="text-emerald-400" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <ServiceCard
-          category="Montage vidéo"
-          provider="Alex Martin"
-          rating={4.9}
-          price="€150-€300"
-        />
-        <ServiceCard
-          category="Graphiste"
-          provider="Sophie Chen"
-          rating={4.8}
-          price="€50-€100"
-        />
-        <ServiceCard
-          category="Community Manager"
-          provider="Lucas Bernard"
-          rating={4.7}
-          price="€200/mois"
-        />
-      </div>
-
-      <div className="mt-8 bg-gray-800 rounded-xl p-6">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-red-950/40 border border-red-800/50 rounded-xl flex items-center justify-center">
-            <Zap className="w-5 h-5 text-red-400" />
+      <Card>
+        <CardHeader>
+          <p className="font-bold text-white text-sm">Commentaires récents</p>
+          <div className="flex gap-1">
+            {[
+              { v: 'all', l: 'Tous' },
+              { v: 'pending', l: 'En attente' },
+              { v: 'reported', l: 'Signalés' },
+            ].map(f => (
+              <button
+                key={f.v}
+                onClick={() => setFilter(f.v as typeof filter)}
+                className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
+                  filter === f.v ? 'bg-red-600 text-white' : 'text-gray-500 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                {f.l}
+              </button>
+            ))}
           </div>
-          <div>
-            <p className="font-semibold text-white">Vous êtes prestataire ?</p>
-            <p className="text-sm text-gray-400">Vendez vos services aux créateurs TruTube</p>
-          </div>
-          <button
-            onClick={() => onNavigate('marketplace')}
-            className="ml-auto flex items-center gap-2 text-sm text-red-400 hover:text-red-300 transition-colors"
-          >
-            Créer mon profil <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-        <div className="grid grid-cols-3 gap-3 text-center text-sm">
-          {[
-            { label: 'Commission', value: '10%' },
-            { label: 'Paiement escrow', value: 'Sécurisé' },
-            { label: 'Arbitrage', value: 'TruTube' },
-          ].map(item => (
-            <div key={item.label} className="bg-gray-900 rounded-lg p-3">
-              <p className="text-gray-500 text-xs">{item.label}</p>
-              <p className="font-bold text-white mt-1">{item.value}</p>
+        </CardHeader>
+        <div className="divide-y divide-white/5">
+          {comments.map((c, i) => (
+            <div key={i} className="p-4 hover:bg-white/2 transition-colors">
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-gradient-to-br from-cyan-700 to-blue-700 rounded-full flex-shrink-0" />
+                  <div>
+                    <p className="text-white text-sm font-medium">{c.user}</p>
+                    <p className="text-gray-600 text-xs">{c.video}</p>
+                  </div>
+                </div>
+                <Badge
+                  label={c.status === 'approved' ? 'Approuvé' : c.status === 'pending' ? 'En attente' : 'Signalé'}
+                  variant={c.status === 'approved' ? 'green' : c.status === 'pending' ? 'amber' : 'red'}
+                />
+              </div>
+              <p className="text-gray-300 text-sm mb-2 ml-10">{c.comment}</p>
+              <div className="flex items-center gap-3 ml-10">
+                <button className="text-xs text-emerald-400 hover:text-emerald-300 font-medium transition-colors">Approuver</button>
+                <button className="text-xs text-red-400 hover:text-red-300 font-medium transition-colors">Supprimer</button>
+                <span className="text-gray-600 text-xs ml-auto">{c.time}</span>
+              </div>
             </div>
           ))}
         </div>
-      </div>
+      </Card>
     </div>
   );
 }
 
-// Live Section - Diffusion en direct
-function LiveSection({ onNavigate }: { onNavigate: (page: string) => void }) {
+/* ─────────────────── COLLABORATIONS SECTION ─────────────────── */
+
+function CollaborationsSection() {
+  return (
+    <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
+      <PageHeader
+        title="Collaborations"
+        subtitle="Gérez vos projets avec d'autres créateurs"
+        action={
+          <button className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-colors">
+            <UserPlus className="w-4 h-4" /> Inviter un créateur
+          </button>
+        }
+      />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        {[
+          { creator: 'Marie Laurent', project: 'Podcast Tech & Créativité', status: 'En cours', revenue: '€450.00', statusV: 'blue' as const },
+          { creator: 'Thomas Dubois', project: 'Live Gaming Tournament', status: 'Planifié', revenue: '€0.00', statusV: 'amber' as const },
+        ].map((c, i) => (
+          <Card key={i} className="p-5">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-cyan-700 to-blue-700 rounded-full flex-shrink-0" />
+              <div>
+                <p className="text-white font-semibold">{c.creator}</p>
+                <p className="text-gray-500 text-xs">{c.project}</p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <Badge label={c.status} variant={c.statusV} />
+              <span className="text-emerald-400 font-bold">{c.revenue}</span>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <Card className="p-5">
+        <p className="font-bold text-white text-sm mb-4 flex items-center gap-2">
+          <Sparkles className="w-4 h-4 text-amber-400" /> Créateurs suggérés pour collaborer
+        </p>
+        <div className="space-y-3">
+          {[
+            { name: 'Alex Beats', niche: 'Musique · 45K abonnés' },
+            { name: 'SamTech', niche: 'Tech · 120K abonnés' },
+            { name: 'Léa Create', niche: 'Lifestyle · 28K abonnés' },
+          ].map((s, i) => (
+            <div key={i} className="flex items-center gap-3 p-3 bg-white/3 rounded-xl">
+              <div className="w-9 h-9 bg-gradient-to-br from-red-700 to-orange-700 rounded-full flex-shrink-0" />
+              <div className="flex-1">
+                <p className="text-white text-sm font-medium">{s.name}</p>
+                <p className="text-gray-500 text-xs">{s.niche}</p>
+              </div>
+              <button className="text-xs px-3 py-1.5 bg-white/5 hover:bg-red-600 text-gray-400 hover:text-white border border-white/10 hover:border-transparent rounded-lg transition-colors">
+                Contacter
+              </button>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+/* ─────────────────── DISTRIBUTION SECTION ─────────────────── */
+
+function DistributionSection({ onNavigate }: { onNavigate: (p: string) => void }) {
   const { user } = useAuth();
-  const [liveStreams, setLiveStreams] = useState<LiveStream[]>([]);
-  const [stats, setStats] = useState({
-    totalLives: 0,
-    averageViewers: 0,
-    totalDuration: 0
-  });
+  const [releases, setReleases] = useState<MusicSaleRelease[]>([]);
+  const [tab, setTab] = useState<'overview' | 'releases' | 'analytics' | 'settings'>('overview');
+  const [accountType, setAccountType] = useState<'independent' | 'label'>('independent');
+
+  const STATS = { total_sales: 347, gross_revenue: 3468.53, net_revenue: 2948.25, avg_conversion: 3.2, founder_count: 89, preorder_count: 124 };
+
+  const MOCK: MusicSaleRelease[] = [
+    { id: '1', creator_id: user?.id || '', title: 'Lumières de Minuit', artist_name: 'Kaïros', label_name: '', isrc: 'FR-ABC-24-00001', release_type: 'album', genre: 'R&B', cover_art_url: 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?w=200', description: '', rights_owned: true, rights_declaration_signed_at: new Date().toISOString(), territories_allowed: ['worldwide'], credits: [], price_standard: 9.99, price_promo: null, promo_starts_at: null, promo_ends_at: null, currency: 'EUR', sale_type: 'lifetime', access_duration_days: null, is_bundle: false, bundle_items: [], phase: 'exclusive', exclusive_starts_at: new Date(Date.now() - 2 * 86400000).toISOString(), exclusive_ends_at: new Date(Date.now() + 28 * 86400000).toISOString(), public_release_at: new Date(Date.now() + 30 * 86400000).toISOString(), preorder_enabled: false, preorder_price: null, preorder_starts_at: null, preorder_ends_at: null, is_limited_edition: true, limited_edition_total: 1000, limited_edition_sold: 347, total_sales: 347, total_revenue: 3468.53, platform_commission_rate: 0.15, video_id: null, preview_url: '', distribution_level: 'independent', label_mandate_verified: false, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: '2', creator_id: user?.id || '', title: 'Nuit Profonde', artist_name: 'Kaïros', label_name: '', isrc: '', release_type: 'single', genre: 'Soul', cover_art_url: 'https://images.pexels.com/photos/167092/pexels-photo-167092.jpeg?w=200', description: '', rights_owned: true, rights_declaration_signed_at: new Date().toISOString(), territories_allowed: ['worldwide'], credits: [], price_standard: 1.99, price_promo: null, promo_starts_at: null, promo_ends_at: null, currency: 'EUR', sale_type: 'lifetime', access_duration_days: null, is_bundle: false, bundle_items: [], phase: 'public', exclusive_starts_at: null, exclusive_ends_at: null, public_release_at: new Date(Date.now() - 60 * 86400000).toISOString(), preorder_enabled: false, preorder_price: null, preorder_starts_at: null, preorder_ends_at: null, is_limited_edition: false, limited_edition_total: null, limited_edition_sold: 0, total_sales: 892, total_revenue: 1778.08, platform_commission_rate: 0.15, video_id: null, preview_url: '', distribution_level: 'independent', label_mandate_verified: false, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+  ];
 
   useEffect(() => {
     if (user) {
-      loadLiveStreams();
-    }
+      musicSalesService.getCreatorReleases(user.id).then(d => setReleases(d.length > 0 ? d : MOCK));
+    } else setReleases(MOCK);
   }, [user]);
 
-  const loadLiveStreams = async () => {
-    if (!user) return;
-    const streams = await liveStreamService.getCreatorLiveStreams(user.id);
-    setLiveStreams(streams);
-
-    const totalLives = streams.filter(s => s.status === 'ended').length;
-    const averageViewers = streams.reduce((acc, s) => acc + s.average_viewers, 0) / Math.max(totalLives, 1);
-    const totalDuration = streams.reduce((acc, s) => acc + s.duration_seconds, 0);
-
-    setStats({
-      totalLives,
-      averageViewers: Math.round(averageViewers),
-      totalDuration
-    });
+  const PHASE_CONF: Record<string, { label: string; v: 'red' | 'amber' | 'green' | 'gray' }> = {
+    draft: { label: 'Brouillon', v: 'gray' },
+    preorder: { label: 'Précommande', v: 'amber' },
+    exclusive: { label: 'Exclusivité', v: 'red' },
+    public: { label: 'Public', v: 'green' },
+    archived: { label: 'Archivé', v: 'gray' },
   };
 
-  const formatDuration = (seconds: number) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    return `${hours}h ${minutes}min`;
-  };
-
-  return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-white">Live</h1>
-        <button
-          onClick={() => onNavigate('live-streaming')}
-          className="flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors"
-        >
-          <Radio className="w-5 h-5" />
-          Démarrer un live
-        </button>
-      </div>
-
-      {/* Live Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Eye className="w-5 h-5 text-red-500" />
-            <span className="text-gray-400 text-sm">Lives totaux</span>
-          </div>
-          <div className="text-3xl font-bold text-white">{stats.totalLives}</div>
-        </div>
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Users className="w-5 h-5 text-blue-500" />
-            <span className="text-gray-400 text-sm">Spectateurs moyens</span>
-          </div>
-          <div className="text-3xl font-bold text-white">{stats.averageViewers}</div>
-        </div>
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Clock className="w-5 h-5 text-green-500" />
-            <span className="text-gray-400 text-sm">Durée totale</span>
-          </div>
-          <div className="text-3xl font-bold text-white">{formatDuration(stats.totalDuration)}</div>
-        </div>
-      </div>
-
-      {/* Live Configuration */}
-      <div className="bg-gray-800 rounded-lg p-6 mb-6">
-        <h2 className="text-xl font-bold text-white mb-4">Configuration du live</h2>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-gray-300 mb-2">Titre du live</label>
-            <input
-              type="text"
-              placeholder="Ex: Session Q&A avec mes abonnés"
-              className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-gray-300 mb-2">Univers</label>
-              <select className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
-                <option>Music</option>
-                <option>Gaming</option>
-                <option>Tech</option>
-                <option>Lifestyle</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-gray-300 mb-2">Qualité</label>
-              <select className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
-                <option>1080p 60fps</option>
-                <option>720p 60fps</option>
-                <option>720p 30fps</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Past Lives */}
-      <div className="bg-gray-800 rounded-lg">
-        <div className="p-4 border-b border-gray-700">
-          <h2 className="text-lg font-bold text-white">Lives précédents</h2>
-        </div>
-        <div className="divide-y divide-gray-700">
-          <LiveHistoryItem
-            title="Session Q&A - Spécial 10K abonnés"
-            viewers={1845}
-            duration="2h 15min"
-            date="Il y a 3 jours"
-            revenue="€47.50"
-          />
-          <LiveHistoryItem
-            title="Création musicale en direct"
-            viewers={923}
-            duration="1h 42min"
-            date="Il y a 1 semaine"
-            revenue="€23.80"
-          />
-          <LiveHistoryItem
-            title="Tutoriel production avancée"
-            viewers={1234}
-            duration="3h 05min"
-            date="Il y a 2 semaines"
-            revenue="€61.20"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Community Section - Gestion communauté
-function CommunitySection() {
-  return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-white">Communauté</h1>
-        <button className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors">
-          Créer une communauté
-        </button>
-      </div>
-
-      {/* Community Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Users className="w-5 h-5 text-blue-500" />
-            <span className="text-gray-400 text-sm">Membres</span>
-          </div>
-          <div className="text-3xl font-bold text-white">10,642</div>
-        </div>
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <MessageSquare className="w-5 h-5 text-green-500" />
-            <span className="text-gray-400 text-sm">Posts ce mois</span>
-          </div>
-          <div className="text-3xl font-bold text-white">347</div>
-        </div>
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <TrendingUp className="w-5 h-5 text-purple-500" />
-            <span className="text-gray-400 text-sm">Engagement</span>
-          </div>
-          <div className="text-3xl font-bold text-white">8.7%</div>
-        </div>
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Award className="w-5 h-5 text-yellow-500" />
-            <span className="text-gray-400 text-sm">Membres actifs</span>
-          </div>
-          <div className="text-3xl font-bold text-white">4,231</div>
-        </div>
-      </div>
-
-      {/* My Communities */}
-      <div className="bg-gray-800 rounded-lg mb-6">
-        <div className="p-4 border-b border-gray-700">
-          <h2 className="text-lg font-bold text-white">Mes communautés</h2>
-        </div>
-        <div className="divide-y divide-gray-700">
-          <CommunityItem
-            name="Fans de Musique Électronique"
-            members={10642}
-            posts={347}
-            isPremium={true}
-          />
-          <CommunityItem
-            name="Production Studio VIP"
-            members={532}
-            posts={128}
-            isPremium={true}
-          />
-          <CommunityItem
-            name="Communauté Générale"
-            members={25430}
-            posts={892}
-            isPremium={false}
-          />
-        </div>
-      </div>
-
-      {/* Recent Activity */}
-      <div className="bg-gray-800 rounded-lg">
-        <div className="p-4 border-b border-gray-700">
-          <h2 className="text-lg font-bold text-white">Activité récente</h2>
-        </div>
-        <div className="divide-y divide-gray-700">
-          <ActivityItem
-            user="Marie L."
-            action="a publié un nouveau sujet"
-            title="Quelle DAW recommandez-vous ?"
-            time="Il y a 5 minutes"
-          />
-          <ActivityItem
-            user="Thomas D."
-            action="a rejoint la communauté"
-            title="Fans de Musique Électronique"
-            time="Il y a 23 minutes"
-          />
-          <ActivityItem
-            user="Sophie M."
-            action="a commenté sur"
-            title="Tips pour améliorer le mixage"
-            time="Il y a 1 heure"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Comments Section - Modération
-function CommentsSection() {
-  return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-white">Commentaires</h1>
-        <div className="flex gap-2">
-          <button className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors">
-            Tous
-          </button>
-          <button className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors">
-            En attente
-          </button>
-          <button className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors">
-            Signalés
-          </button>
-        </div>
-      </div>
-
-      {/* Moderation Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <MessageSquare className="w-5 h-5 text-blue-500" />
-            <span className="text-gray-400 text-sm">Total commentaires</span>
-          </div>
-          <div className="text-3xl font-bold text-white">8,432</div>
-        </div>
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <AlertCircle className="w-5 h-5 text-yellow-500" />
-            <span className="text-gray-400 text-sm">En attente</span>
-          </div>
-          <div className="text-3xl font-bold text-white">12</div>
-        </div>
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Shield className="w-5 h-5 text-red-500" />
-            <span className="text-gray-400 text-sm">Signalés</span>
-          </div>
-          <div className="text-3xl font-bold text-white">3</div>
-        </div>
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <CheckCircle className="w-5 h-5 text-green-500" />
-            <span className="text-gray-400 text-sm">Approuvés</span>
-          </div>
-          <div className="text-3xl font-bold text-white">8,417</div>
-        </div>
-      </div>
-
-      {/* Comments List */}
-      <div className="bg-gray-800 rounded-lg">
-        <div className="p-4 border-b border-gray-700">
-          <h2 className="text-lg font-bold text-white">Commentaires récents</h2>
-        </div>
-        <div className="divide-y divide-gray-700">
-          <CommentModerationItem
-            user="Julie Martin"
-            comment="Super vidéo ! J'ai appris plein de choses sur le mastering"
-            video="Comment créer du contenu authentique"
-            status="approved"
-            time="Il y a 5 minutes"
-          />
-          <CommentModerationItem
-            user="Marc Dubois"
-            comment="Merci pour ce tutoriel détaillé, ça va m'aider énormément"
-            video="Les secrets d'une bonne miniature"
-            status="pending"
-            time="Il y a 12 minutes"
-          />
-          <CommentModerationItem
-            user="Sophie Chen"
-            comment="Contenu de qualité comme toujours !"
-            video="Comment créer du contenu authentique"
-            status="approved"
-            time="Il y a 23 minutes"
-          />
-          <CommentModerationItem
-            user="Anonymous User"
-            comment="Spam link here..."
-            video="Les secrets d'une bonne miniature"
-            status="reported"
-            time="Il y a 1 heure"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Multi-Channel Section - Gestion multi-plateformes
-function MultiChannelSection() {
-  return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-white">Multi-chaînes</h1>
-        <button className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors">
-          Connecter une plateforme
-        </button>
-      </div>
-
-      {/* Multi-Channel Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Layers className="w-5 h-5 text-purple-500" />
-            <span className="text-gray-400 text-sm">Plateformes connectées</span>
-          </div>
-          <div className="text-3xl font-bold text-white">4</div>
-        </div>
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Video className="w-5 h-5 text-blue-500" />
-            <span className="text-gray-400 text-sm">Vidéos synchronisées</span>
-          </div>
-          <div className="text-3xl font-bold text-white">127</div>
-        </div>
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <TrendingUp className="w-5 h-5 text-green-500" />
-            <span className="text-gray-400 text-sm">Portée totale</span>
-          </div>
-          <div className="text-3xl font-bold text-white">2.4M</div>
-        </div>
-      </div>
-
-      {/* Connected Platforms */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <PlatformCard
-          name="YouTube"
-          connected={true}
-          subscribers="847K"
-          views="12.4M"
-          syncEnabled={true}
-        />
-        <PlatformCard
-          name="Twitch"
-          connected={true}
-          subscribers="234K"
-          views="3.2M"
-          syncEnabled={true}
-        />
-        <PlatformCard
-          name="Instagram"
-          connected={true}
-          subscribers="542K"
-          views="8.7M"
-          syncEnabled={false}
-        />
-        <PlatformCard
-          name="TikTok"
-          connected={false}
-          subscribers="-"
-          views="-"
-          syncEnabled={false}
-        />
-      </div>
-
-      {/* Sync Schedule */}
-      <div className="bg-gray-800 rounded-lg">
-        <div className="p-4 border-b border-gray-700">
-          <h2 className="text-lg font-bold text-white">Planning de synchronisation</h2>
-        </div>
-        <div className="p-6 space-y-4">
-          <SyncScheduleItem
-            video="Comment créer du contenu authentique"
-            platforms={['YouTube', 'Twitch']}
-            date="Aujourd'hui à 18:00"
-            status="scheduled"
-          />
-          <SyncScheduleItem
-            video="Les secrets d'une bonne miniature"
-            platforms={['YouTube', 'Instagram']}
-            date="Demain à 14:00"
-            status="scheduled"
-          />
-          <SyncScheduleItem
-            video="Live Q&A avec mes abonnés"
-            platforms={['YouTube', 'Twitch', 'Instagram']}
-            date="Dans 3 jours à 20:00"
-            status="pending"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Settings Section - Paramètres Studio
-function SettingsSection() {
-  return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold text-white mb-8">Paramètres</h1>
-
-      {/* Channel Settings */}
-      <div className="bg-gray-800 rounded-lg p-6 mb-6">
-        <h2 className="text-xl font-bold text-white mb-4">Paramètres de la chaîne</h2>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-gray-300 mb-2">Nom de la chaîne</label>
-            <input
-              type="text"
-              defaultValue="Alex Beats"
-              className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-            />
-          </div>
-          <div>
-            <label className="block text-gray-300 mb-2">Description</label>
-            <textarea
-              defaultValue="Music producer and beat maker"
-              rows={3}
-              className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Monetization Settings */}
-      <div className="bg-gray-800 rounded-lg p-6 mb-6">
-        <h2 className="text-xl font-bold text-white mb-4">Paramètres de monétisation</h2>
-        <div className="space-y-4">
-          <SettingToggle
-            label="Activer la monétisation sur tous mes contenus"
-            enabled={true}
-          />
-          <SettingToggle
-            label="Autoriser les pourboires"
-            enabled={true}
-          />
-          <SettingToggle
-            label="Afficher les produits affiliés"
-            enabled={false}
-          />
-          <SettingToggle
-            label="Activer les abonnements créateur"
-            enabled={true}
-          />
-        </div>
-      </div>
-
-      {/* Privacy Settings */}
-      <div className="bg-gray-800 rounded-lg p-6 mb-6">
-        <h2 className="text-xl font-bold text-white mb-4">Confidentialité</h2>
-        <div className="space-y-4">
-          <SettingToggle
-            label="Afficher mon nombre d'abonnés"
-            enabled={true}
-          />
-          <SettingToggle
-            label="Autoriser les commentaires par défaut"
-            enabled={true}
-          />
-          <SettingToggle
-            label="Modération automatique des commentaires"
-            enabled={true}
-          />
-          <SettingToggle
-            label="Autoriser les messages privés"
-            enabled={false}
-          />
-        </div>
-      </div>
-
-      {/* Notification Settings */}
-      <div className="bg-gray-800 rounded-lg p-6">
-        <h2 className="text-xl font-bold text-white mb-4">Notifications</h2>
-        <div className="space-y-4">
-          <SettingToggle
-            label="Nouveaux commentaires"
-            enabled={true}
-          />
-          <SettingToggle
-            label="Nouveaux abonnés"
-            enabled={true}
-          />
-          <SettingToggle
-            label="Revenus reçus"
-            enabled={true}
-          />
-          <SettingToggle
-            label="Alertes de modération"
-            enabled={true}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Distribution Section — Sales & Releases
-function DistributionSection({ onNavigate }: { onNavigate: (page: string) => void }) {
-  const { user } = useAuth();
-  const [releases, setReleases] = useState<MusicSaleRelease[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'overview' | 'releases' | 'analytics' | 'settings'>('overview');
-  const [distributionLevel, setDistributionLevel] = useState<'independent' | 'label'>('independent');
-
-  const MOCK_STATS = {
-    total_sales: 347,
-    gross_revenue: 3468.53,
-    platform_commission: 520.28,
-    net_revenue: 2948.25,
-    avg_conversion: 3.2,
-    preorder_count: 124,
-    founder_count: 89,
-    active_releases: 2,
-    total_releases: 5,
-  };
-
-  const MOCK_RELEASES: MusicSaleRelease[] = [
-    {
-      id: '1', creator_id: user?.id || '', title: 'Lumières de Minuit', artist_name: 'Kaïros',
-      label_name: '', isrc: 'FR-ABC-24-00001', release_type: 'album', genre: 'R&B',
-      cover_art_url: 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?w=200',
-      description: '', rights_owned: true, rights_declaration_signed_at: new Date().toISOString(),
-      territories_allowed: ['worldwide'], credits: [],
-      price_standard: 9.99, price_promo: null, promo_starts_at: null, promo_ends_at: null,
-      currency: 'EUR', sale_type: 'lifetime', access_duration_days: null,
-      is_bundle: false, bundle_items: [],
-      phase: 'exclusive',
-      exclusive_starts_at: new Date(Date.now() - 2 * 86400000).toISOString(),
-      exclusive_ends_at: new Date(Date.now() + 28 * 86400000).toISOString(),
-      public_release_at: new Date(Date.now() + 30 * 86400000).toISOString(),
-      preorder_enabled: false, preorder_price: null, preorder_starts_at: null, preorder_ends_at: null,
-      is_limited_edition: true, limited_edition_total: 1000, limited_edition_sold: 347,
-      total_sales: 347, total_revenue: 3468.53, platform_commission_rate: 0.15,
-      video_id: null, preview_url: '', distribution_level: 'independent', label_mandate_verified: false,
-      is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
-    },
-    {
-      id: '2', creator_id: user?.id || '', title: 'Nuit Profonde', artist_name: 'Kaïros',
-      label_name: '', isrc: '', release_type: 'single', genre: 'Soul',
-      cover_art_url: 'https://images.pexels.com/photos/167092/pexels-photo-167092.jpeg?w=200',
-      description: '', rights_owned: true, rights_declaration_signed_at: new Date().toISOString(),
-      territories_allowed: ['worldwide'], credits: [],
-      price_standard: 1.99, price_promo: null, promo_starts_at: null, promo_ends_at: null,
-      currency: 'EUR', sale_type: 'lifetime', access_duration_days: null,
-      is_bundle: false, bundle_items: [],
-      phase: 'public',
-      exclusive_starts_at: null, exclusive_ends_at: null,
-      public_release_at: new Date(Date.now() - 60 * 86400000).toISOString(),
-      preorder_enabled: false, preorder_price: null, preorder_starts_at: null, preorder_ends_at: null,
-      is_limited_edition: false, limited_edition_total: null, limited_edition_sold: 0,
-      total_sales: 892, total_revenue: 1778.08, platform_commission_rate: 0.15,
-      video_id: null, preview_url: '', distribution_level: 'independent', label_mandate_verified: false,
-      is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
-    },
-  ];
-
-  useEffect(() => {
-    (async () => {
-      if (user) {
-        const data = await musicSalesService.getCreatorReleases(user.id);
-        setReleases(data.length > 0 ? data : MOCK_RELEASES);
-      } else {
-        setReleases(MOCK_RELEASES);
-      }
-      setLoading(false);
-    })();
-  }, [user]);
-
-  const PHASE_LABELS: Record<string, { label: string; color: string }> = {
-    draft: { label: 'Brouillon', color: 'bg-gray-700 text-gray-400' },
-    preorder: { label: 'Précommande', color: 'bg-amber-900/50 text-amber-400' },
-    exclusive: { label: 'Exclusivité', color: 'bg-rose-900/50 text-rose-400' },
-    public: { label: 'Public', color: 'bg-emerald-900/50 text-emerald-400' },
-    archived: { label: 'Archivé', color: 'bg-gray-800 text-gray-500' },
-  };
-
-  const RELEASE_TYPE_LABELS: Record<string, string> = {
-    single: 'Single', album: 'Album', ep: 'EP', bundle: 'Bundle',
-  };
+  const list = releases.length > 0 ? releases : MOCK;
 
   const salesByDay = [
-    { day: 'Lun', sales: 18, rev: 179.82 },
-    { day: 'Mar', sales: 34, rev: 339.66 },
-    { day: 'Mer', sales: 27, rev: 269.73 },
-    { day: 'Jeu', sales: 52, rev: 519.48 },
-    { day: 'Ven', sales: 89, rev: 889.11 },
-    { day: 'Sam', sales: 73, rev: 729.27 },
-    { day: 'Dim', sales: 54, rev: 539.46 },
+    { day: 'Lun', sales: 18 }, { day: 'Mar', sales: 34 }, { day: 'Mer', sales: 27 },
+    { day: 'Jeu', sales: 52 }, { day: 'Ven', sales: 89 }, { day: 'Sam', sales: 73 }, { day: 'Dim', sales: 54 },
   ];
-  const maxSales = Math.max(...salesByDay.map(d => d.sales));
+  const maxS = Math.max(...salesByDay.map(d => d.sales));
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-red-950/40 border border-red-800/50 rounded-xl flex items-center justify-center">
-            <Music className="w-5 h-5 text-red-400" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold text-white">Distribution Premium</h1>
-            <p className="text-sm text-gray-400">Vendez vos singles, albums et EP directement</p>
-          </div>
-        </div>
-        <button
-          onClick={() => onNavigate('create-release')}
-          className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors"
-        >
-          <Package className="w-4 h-4" />
-          Nouvelle release
-        </button>
-      </div>
+    <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
+      <PageHeader
+        title="Distribution Premium"
+        subtitle="Vendez vos singles, albums et EP directement à vos fans"
+        action={
+          <button
+            onClick={() => onNavigate('create-release')}
+            className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-colors"
+          >
+            <Package className="w-4 h-4" /> Nouvelle release
+          </button>
+        }
+      />
 
-      {/* Account type selector */}
-      <div className="flex items-center gap-3 mb-6 bg-gray-800 rounded-xl p-4">
-        <span className="text-sm text-gray-400 mr-2">Type de compte :</span>
+      {/* Account type */}
+      <div className="flex items-center gap-2 mb-5 bg-[#181820] border border-white/5 rounded-2xl p-2">
         {[
-          { id: 'independent', label: 'Artiste Indépendant', icon: <Music className="w-4 h-4" /> },
-          { id: 'label', label: 'Label Professionnel', icon: <Package className="w-4 h-4" /> },
+          { id: 'independent', l: 'Artiste Indépendant', icon: <Music className="w-3.5 h-3.5" /> },
+          { id: 'label', l: 'Label Professionnel', icon: <Package className="w-3.5 h-3.5" /> },
         ].map(opt => (
           <button
             key={opt.id}
-            onClick={() => setDistributionLevel(opt.id as typeof distributionLevel)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              distributionLevel === opt.id ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-700 hover:text-white'
+            onClick={() => setAccountType(opt.id as typeof accountType)}
+            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl text-xs font-semibold transition-all ${
+              accountType === opt.id ? 'bg-red-600 text-white' : 'text-gray-400 hover:text-white'
             }`}
           >
-            {opt.icon}
-            {opt.label}
+            {opt.icon} {opt.l}
           </button>
         ))}
-        {distributionLevel === 'label' && (
-          <span className="ml-auto text-xs bg-blue-900/40 border border-blue-700/40 text-blue-400 px-2 py-1 rounded-full">
-            Commission 12% volume
-          </span>
-        )}
       </div>
 
-      {/* Tab navigation */}
-      <div className="flex gap-1 mb-6 bg-gray-800 rounded-xl p-1">
+      {/* Tabs */}
+      <div className="flex gap-1 mb-5 bg-[#181820] border border-white/5 rounded-2xl p-1 overflow-x-auto">
         {([
-          { id: 'overview', label: 'Vue d\'ensemble', icon: LayoutDashboard },
-          { id: 'releases', label: 'Mes releases', icon: Music },
-          { id: 'analytics', label: 'Analytics Ventes', icon: BarChart2 },
-          { id: 'settings', label: 'Paramètres', icon: Settings },
-        ] as { id: typeof activeTab; label: string; icon: typeof LayoutDashboard }[]).map(tab => {
-          const Icon = tab.icon;
+          { id: 'overview', l: 'Vue d\'ensemble', icon: LayoutDashboard },
+          { id: 'releases', l: 'Releases', icon: Music },
+          { id: 'analytics', l: 'Analytics', icon: BarChart2 },
+          { id: 'settings', l: 'Paramètres', icon: Settings },
+        ] as { id: typeof tab; l: string; icon: React.ComponentType<{ className?: string }> }[]).map(t => {
+          const Icon = t.icon;
           return (
             <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                activeTab === tab.id ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-white'
+              key={t.id}
+              onClick={() => setTab(t.id)}
+              className={`flex items-center gap-2 flex-1 min-w-max px-3 py-2 rounded-xl text-xs font-medium transition-all ${
+                tab === t.id ? 'bg-[#2a2a35] text-white' : 'text-gray-500 hover:text-white'
               }`}
             >
-              <Icon className="w-4 h-4" />
-              <span className="hidden xl:block">{tab.label}</span>
+              <Icon className="w-3.5 h-3.5" /> {t.l}
             </button>
           );
         })}
       </div>
 
-      {/* OVERVIEW TAB */}
-      {activeTab === 'overview' && (
-        <div className="space-y-6">
-          {/* KPIs */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { label: 'Ventes totales', value: MOCK_STATS.total_sales.toLocaleString(), icon: <ShoppingBag className="w-5 h-5 text-blue-400" />, sub: '+12% ce mois' },
-              { label: 'Revenus bruts', value: `${MOCK_STATS.gross_revenue.toFixed(2)}€`, icon: <DollarSign className="w-5 h-5 text-emerald-400" />, sub: 'Toutes releases' },
-              { label: 'Revenus nets', value: `${MOCK_STATS.net_revenue.toFixed(2)}€`, icon: <CreditCard className="w-5 h-5 text-rose-400" />, sub: 'Après commission 15%' },
-              { label: 'Taux conversion', value: `${MOCK_STATS.avg_conversion}%`, icon: <TrendingUp className="w-5 h-5 text-amber-400" />, sub: 'Visiteurs → acheteurs' },
-            ].map(kpi => (
-              <div key={kpi.label} className="bg-gray-800 rounded-xl p-5">
-                <div className="flex items-center gap-2 mb-2">
-                  {kpi.icon}
-                  <span className="text-xs text-gray-400">{kpi.label}</span>
-                </div>
-                <p className="text-2xl font-bold text-white">{kpi.value}</p>
-                <p className="text-xs text-gray-500 mt-1">{kpi.sub}</p>
-              </div>
-            ))}
+      {/* OVERVIEW */}
+      {tab === 'overview' && (
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <StatCard icon={ShoppingBag} label="Ventes totales" value={STATS.total_sales.toLocaleString()} sub="+12% ce mois" color="text-blue-400" />
+            <StatCard icon={DollarSign} label="Revenus bruts" value={`${STATS.gross_revenue.toFixed(0)}€`} color="text-emerald-400" />
+            <StatCard icon={CreditCard} label="Revenus nets" value={`${STATS.net_revenue.toFixed(0)}€`} sub="Après commission 15%" color="text-red-400" />
+            <StatCard icon={TrendingUp} label="Taux conversion" value={`${STATS.avg_conversion}%`} color="text-amber-400" />
           </div>
 
-          {/* Revenue split */}
-          <div className="bg-gray-800 rounded-xl p-5">
-            <p className="text-sm font-medium text-gray-300 mb-3 flex items-center gap-2">
-              <Tag className="w-4 h-4 text-red-400" />
-              Répartition des revenus
+          <Card className="p-5">
+            <p className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+              <Tag className="w-4 h-4 text-red-400" /> Répartition des revenus
             </p>
-            <div className="flex rounded-full overflow-hidden h-4 mb-3">
-              <div className="bg-emerald-500" style={{ width: '85%' }} />
-              <div className="bg-red-600" style={{ width: '15%' }} />
+            <div className="h-3 bg-white/5 rounded-full overflow-hidden flex mb-2">
+              <div className="bg-emerald-500 h-full" style={{ width: '85%' }} />
+              <div className="bg-red-600 h-full" style={{ width: '15%' }} />
             </div>
-            <div className="flex justify-between text-xs text-gray-400">
-              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />Artiste 85% — {MOCK_STATS.net_revenue.toFixed(2)}€</span>
-              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-600 inline-block" />TruTube 15% — {MOCK_STATS.platform_commission.toFixed(2)}€</span>
+            <div className="flex justify-between text-xs text-gray-500">
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 bg-emerald-500 rounded-full inline-block" /> Artiste 85% — {STATS.net_revenue.toFixed(0)}€</span>
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 bg-red-600 rounded-full inline-block" /> TruTube 15% — {(STATS.gross_revenue - STATS.net_revenue).toFixed(0)}€</span>
             </div>
-          </div>
+          </Card>
 
-          {/* Active releases */}
-          <div className="bg-gray-800 rounded-xl overflow-hidden">
-            <div className="px-5 py-4 border-b border-gray-700 flex items-center justify-between">
-              <p className="font-semibold text-white">Releases actives</p>
-              <button onClick={() => setActiveTab('releases')} className="text-xs text-red-400 hover:text-red-300 transition-colors">
-                Voir tout
-              </button>
-            </div>
-            <div className="divide-y divide-gray-700">
-              {(releases.length > 0 ? releases : MOCK_RELEASES).slice(0, 3).map(r => {
-                const phase = PHASE_LABELS[r.phase] || PHASE_LABELS.draft;
-                const daysLeft = r.public_release_at
+          <Card>
+            <CardHeader>
+              <p className="font-bold text-white text-sm">Releases actives</p>
+              <button onClick={() => setTab('releases')} className="text-xs text-red-400 hover:text-red-300 transition-colors">Voir tout</button>
+            </CardHeader>
+            <div className="divide-y divide-white/5">
+              {list.slice(0, 3).map(r => {
+                const ph = PHASE_CONF[r.phase] || PHASE_CONF.draft;
+                const daysLeft = r.public_release_at && r.phase === 'exclusive'
                   ? Math.max(0, Math.ceil((new Date(r.public_release_at).getTime() - Date.now()) / 86400000))
                   : null;
                 return (
-                  <div key={r.id} className="flex items-center gap-4 p-4 hover:bg-gray-750 transition-colors">
-                    <img src={r.cover_art_url || 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?w=80'} alt={r.title} className="w-12 h-12 rounded-lg object-cover flex-shrink-0" />
+                  <div key={r.id} className="p-4 flex items-center gap-4 hover:bg-white/2 transition-colors">
+                    <img src={r.cover_art_url || 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?w=80'} alt={r.title} className="w-12 h-12 rounded-xl object-cover flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5">
-                        <p className="font-semibold text-white text-sm truncate">{r.title}</p>
-                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ${phase.color}`}>{phase.label}</span>
+                        <p className="text-white font-semibold text-sm truncate">{r.title}</p>
+                        <Badge label={ph.label} variant={ph.v} />
                       </div>
-                      <p className="text-xs text-gray-400">{r.artist_name} · {RELEASE_TYPE_LABELS[r.release_type] || r.release_type} · {r.price_standard}€</p>
+                      <p className="text-gray-500 text-xs">{r.artist_name} · {r.price_standard}€</p>
                     </div>
                     <div className="text-right flex-shrink-0">
-                      <p className="text-sm font-bold text-white">{r.total_sales} ventes</p>
-                      <p className="text-xs text-emerald-400">{(r.total_revenue * 0.85).toFixed(2)}€ net</p>
-                      {daysLeft !== null && r.phase === 'exclusive' && (
-                        <p className="text-xs text-rose-400 mt-0.5">J-{daysLeft} exclu</p>
-                      )}
+                      <p className="text-white font-bold text-sm">{r.total_sales} ventes</p>
+                      <p className="text-emerald-400 text-xs">{(r.total_revenue * 0.85).toFixed(0)}€ net</p>
+                      {daysLeft !== null && <p className="text-red-400 text-xs mt-0.5">J-{daysLeft} exclu</p>}
                     </div>
                   </div>
                 );
               })}
             </div>
-          </div>
+          </Card>
 
-          {/* Badges & Founders */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-800 rounded-xl p-5">
-              <div className="flex items-center gap-2 mb-3">
-                <Award className="w-4 h-4 text-amber-400" />
-                <span className="text-sm font-medium text-gray-300">Supporters Fondateurs</span>
-              </div>
-              <p className="text-3xl font-bold text-white">{MOCK_STATS.founder_count}</p>
-              <p className="text-xs text-gray-500 mt-1">Achetés en phase exclusive</p>
-            </div>
-            <div className="bg-gray-800 rounded-xl p-5">
-              <div className="flex items-center gap-2 mb-3">
-                <Calendar className="w-4 h-4 text-blue-400" />
-                <span className="text-sm font-medium text-gray-300">Précommandes actives</span>
-              </div>
-              <p className="text-3xl font-bold text-white">{MOCK_STATS.preorder_count}</p>
-              <p className="text-xs text-gray-500 mt-1">En attente de sortie</p>
-            </div>
+          <div className="grid grid-cols-2 gap-3">
+            <StatCard icon={Award} label="Supporters Fondateurs" value={String(STATS.founder_count)} sub="Achetés en exclusivité" color="text-amber-400" />
+            <StatCard icon={Calendar} label="Précommandes actives" value={String(STATS.preorder_count)} sub="En attente de sortie" color="text-blue-400" />
           </div>
         </div>
       )}
 
-      {/* RELEASES TAB */}
-      {activeTab === 'releases' && (
+      {/* RELEASES */}
+      {tab === 'releases' && (
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-400">{(releases.length > 0 ? releases : MOCK_RELEASES).length} releases</p>
-            <div className="flex gap-2">
-              {['Tous', 'Exclusivité', 'Public', 'Brouillon'].map(f => (
-                <button key={f} className="text-xs px-3 py-1.5 rounded-lg bg-gray-800 text-gray-400 hover:text-white transition-colors">{f}</button>
-              ))}
-            </div>
+          <div className="flex flex-wrap gap-2">
+            {['Tous', 'Exclusivité', 'Public', 'Brouillon'].map(f => (
+              <button key={f} className="text-xs px-3 py-1.5 bg-[#181820] border border-white/5 hover:border-white/15 text-gray-400 hover:text-white rounded-xl transition-colors">
+                {f}
+              </button>
+            ))}
           </div>
-
-          {(releases.length > 0 ? releases : MOCK_RELEASES).map(r => {
-            const phase = PHASE_LABELS[r.phase] || PHASE_LABELS.draft;
-            const daysLeft = r.public_release_at
+          {list.map(r => {
+            const ph = PHASE_CONF[r.phase] || PHASE_CONF.draft;
+            const daysLeft = r.public_release_at && r.phase === 'exclusive'
               ? Math.max(0, Math.ceil((new Date(r.public_release_at).getTime() - Date.now()) / 86400000))
               : null;
             return (
-              <div key={r.id} className="bg-gray-800 rounded-xl p-5 flex items-start gap-4">
-                <img src={r.cover_art_url || 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?w=100'} alt={r.title} className="w-20 h-20 rounded-xl object-cover flex-shrink-0" />
+              <Card key={r.id} className="p-5 flex items-start gap-4">
+                <img src={r.cover_art_url || 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?w=100'} alt={r.title} className="w-20 h-20 rounded-2xl object-cover flex-shrink-0" />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <p className="font-bold text-white">{r.title}</p>
-                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${phase.color}`}>{phase.label}</span>
-                    <span className="text-xs text-gray-500 bg-gray-700 px-2 py-0.5 rounded-full">{RELEASE_TYPE_LABELS[r.release_type]}</span>
-                    {r.is_limited_edition && (
-                      <span className="text-xs text-amber-400 bg-amber-950/40 border border-amber-800/40 px-2 py-0.5 rounded-full flex items-center gap-1">
-                        <Star className="w-2.5 h-2.5" />
-                        Édition Limitée
-                      </span>
-                    )}
+                    <p className="text-white font-bold">{r.title}</p>
+                    <Badge label={ph.label} variant={ph.v} />
+                    <Badge label={r.release_type} variant="gray" />
+                    {r.is_limited_edition && <Badge label="Édition Limitée" variant="amber" />}
                   </div>
-                  <p className="text-sm text-gray-400 mb-2">{r.artist_name} · {r.genre} · {r.price_standard}€</p>
-                  <div className="grid grid-cols-4 gap-3 text-xs">
-                    <div className="bg-gray-900 rounded-lg p-2 text-center">
+                  <p className="text-gray-500 text-xs mb-3">{r.artist_name} · {r.genre} · {r.price_standard}€</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                    <div className="bg-white/3 border border-white/5 rounded-xl p-2 text-center">
                       <p className="text-gray-500">Ventes</p>
                       <p className="font-bold text-white mt-0.5">{r.total_sales}</p>
                     </div>
-                    <div className="bg-gray-900 rounded-lg p-2 text-center">
+                    <div className="bg-white/3 border border-white/5 rounded-xl p-2 text-center">
                       <p className="text-gray-500">Revenus nets</p>
                       <p className="font-bold text-emerald-400 mt-0.5">{(r.total_revenue * 0.85).toFixed(0)}€</p>
                     </div>
                     {r.is_limited_edition && r.limited_edition_total && (
-                      <div className="bg-gray-900 rounded-lg p-2 text-center">
-                        <p className="text-gray-500">Éditions restantes</p>
+                      <div className="bg-white/3 border border-white/5 rounded-xl p-2 text-center">
+                        <p className="text-gray-500">Restantes</p>
                         <p className="font-bold text-amber-400 mt-0.5">{r.limited_edition_total - r.limited_edition_sold}/{r.limited_edition_total}</p>
                       </div>
                     )}
-                    {daysLeft !== null && r.phase === 'exclusive' && (
-                      <div className="bg-rose-950/40 border border-rose-800/40 rounded-lg p-2 text-center">
-                        <p className="text-rose-500">Exclu restante</p>
-                        <p className="font-bold text-rose-300 mt-0.5">J-{daysLeft}</p>
+                    {daysLeft !== null && (
+                      <div className="bg-red-950/30 border border-red-800/30 rounded-xl p-2 text-center">
+                        <p className="text-red-500">Exclu restante</p>
+                        <p className="font-bold text-red-300 mt-0.5">J-{daysLeft}</p>
                       </div>
                     )}
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 flex-shrink-0">
-                  <button className="text-xs px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
-                    Gérer
-                  </button>
-                  <button
-                    onClick={() => onNavigate('album-sale')}
-                    className="text-xs px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-lg transition-colors flex items-center gap-1"
-                  >
-                    <Eye className="w-3 h-3" />
-                    Voir
+                  <button className="text-xs px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white rounded-xl transition-colors">Gérer</button>
+                  <button onClick={() => onNavigate('album-sale')} className="text-xs px-3 py-1.5 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white rounded-xl transition-colors flex items-center gap-1">
+                    <Eye className="w-3 h-3" /> Voir
                   </button>
                 </div>
-              </div>
+              </Card>
             );
           })}
-
           <button
             onClick={() => onNavigate('create-release')}
-            className="w-full border-2 border-dashed border-gray-700 hover:border-red-600 text-gray-500 hover:text-red-400 rounded-xl p-6 text-sm font-medium transition-all flex items-center justify-center gap-2"
+            className="w-full border-2 border-dashed border-white/10 hover:border-red-700/50 text-gray-500 hover:text-red-400 rounded-2xl p-5 text-sm font-medium transition-all flex items-center justify-center gap-2"
           >
-            <Package className="w-4 h-4" />
-            Créer une nouvelle release
+            <Package className="w-4 h-4" /> Créer une nouvelle release
           </button>
         </div>
       )}
 
-      {/* ANALYTICS TAB */}
-      {activeTab === 'analytics' && (
-        <div className="space-y-6">
-          {/* Sales chart */}
-          <div className="bg-gray-800 rounded-xl p-5">
+      {/* ANALYTICS */}
+      {tab === 'analytics' && (
+        <div className="space-y-4">
+          <Card className="p-5">
             <div className="flex items-center justify-between mb-4">
-              <p className="font-semibold text-white">Ventes — 7 derniers jours</p>
-              <span className="text-xs text-emerald-400 bg-emerald-950/40 px-2 py-1 rounded-full">+23% vs semaine préc.</span>
+              <p className="font-bold text-white text-sm">Ventes — 7 derniers jours</p>
+              <Badge label="+23% vs semaine préc." variant="green" />
             </div>
-            <div className="flex items-end gap-2 h-32">
+            <div className="flex items-end gap-2 h-28">
               {salesByDay.map(d => (
                 <div key={d.day} className="flex-1 flex flex-col items-center gap-1">
-                  <span className="text-xs text-gray-500">{d.sales}</span>
+                  <span className="text-[10px] text-gray-500">{d.sales}</span>
                   <div
-                    className="w-full bg-red-600/80 hover:bg-red-500 transition-colors rounded-t"
-                    style={{ height: `${(d.sales / maxSales) * 100}%`, minHeight: '4px' }}
-                    title={`${d.sales} ventes · ${d.rev.toFixed(2)}€`}
+                    className="w-full bg-red-600/80 hover:bg-red-500 transition-colors rounded-t-md"
+                    style={{ height: `${(d.sales / maxS) * 100}%`, minHeight: '3px' }}
                   />
-                  <span className="text-xs text-gray-500">{d.day}</span>
+                  <span className="text-[10px] text-gray-600">{d.day}</span>
                 </div>
               ))}
             </div>
+          </Card>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <StatCard icon={ShoppingBag} label="Unités vendues" value="347" color="text-blue-400" />
+            <StatCard icon={DollarSign} label="Revenus bruts" value="3 468€" color="text-emerald-400" />
+            <StatCard icon={Tag} label="Commission" value="520€" color="text-gray-400" />
+            <StatCard icon={CreditCard} label="Revenus nets" value="2 948€" color="text-red-400" />
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { label: 'Unités vendues', value: '347', icon: <ShoppingBag className="w-4 h-4 text-blue-400" /> },
-              { label: 'Revenus bruts', value: '3 468€', icon: <DollarSign className="w-4 h-4 text-emerald-400" /> },
-              { label: 'Commission', value: '520€', icon: <Tag className="w-4 h-4 text-gray-400" /> },
-              { label: 'Revenus nets', value: '2 948€', icon: <CreditCard className="w-4 h-4 text-rose-400" /> },
-              { label: 'Taux conversion', value: '3.2%', icon: <TrendingUp className="w-4 h-4 text-amber-400" /> },
-              { label: 'Pic de ventes', value: 'Ven 89', icon: <Zap className="w-4 h-4 text-amber-400" /> },
-              { label: 'Impact promo', value: '+34%', icon: <ArrowUpRight className="w-4 h-4 text-emerald-400" /> },
-              { label: 'Fondateurs', value: '89', icon: <Award className="w-4 h-4 text-amber-400" /> },
-            ].map(stat => (
-              <div key={stat.label} className="bg-gray-800 rounded-xl p-4">
-                <div className="flex items-center gap-2 mb-1.5">{stat.icon}<span className="text-xs text-gray-400">{stat.label}</span></div>
-                <p className="font-bold text-white text-lg">{stat.value}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Comparatif gratuit vs payant */}
-          <div className="bg-gray-800 rounded-xl p-5">
-            <p className="font-semibold text-white mb-4 flex items-center gap-2">
-              <BarChart2 className="w-4 h-4 text-red-400" />
-              Ventes vs Streaming gratuit
+          <Card className="p-5">
+            <p className="font-bold text-white text-sm mb-4 flex items-center gap-2">
+              <Globe className="w-4 h-4 text-blue-400" /> Top pays acheteurs
             </p>
             <div className="space-y-3">
-              {[
-                { label: 'Revenus vente directe', value: 2948, max: 2948, color: 'bg-emerald-500' },
-                { label: 'Revenus publicités', value: 847, max: 2948, color: 'bg-blue-500' },
-                { label: 'Tips / Pourboires', value: 234, max: 2948, color: 'bg-amber-500' },
-              ].map(item => (
-                <div key={item.label}>
-                  <div className="flex justify-between text-xs text-gray-400 mb-1">
-                    <span>{item.label}</span>
-                    <span className="font-medium text-white">{item.value}€</span>
-                  </div>
-                  <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                    <div className={`h-full ${item.color} rounded-full`} style={{ width: `${(item.value / item.max) * 100}%` }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Top pays */}
-          <div className="bg-gray-800 rounded-xl p-5">
-            <p className="font-semibold text-white mb-4 flex items-center gap-2">
-              <Globe className="w-4 h-4 text-blue-400" />
-              Top pays acheteurs
-            </p>
-            <div className="space-y-2">
               {[
                 { country: 'France', pct: 62, count: 215 },
                 { country: 'Belgique', pct: 18, count: 62 },
                 { country: 'Suisse', pct: 12, count: 42 },
                 { country: 'Canada', pct: 8, count: 28 },
               ].map(c => (
-                <div key={c.country} className="flex items-center gap-3 text-sm">
+                <div key={c.country} className="flex items-center gap-3 text-xs">
                   <span className="text-gray-300 w-20 flex-shrink-0">{c.country}</span>
-                  <div className="flex-1 bg-gray-700 rounded-full h-2 overflow-hidden">
+                  <div className="flex-1 bg-white/5 rounded-full h-2 overflow-hidden">
                     <div className="h-full bg-red-600 rounded-full" style={{ width: `${c.pct}%` }} />
                   </div>
-                  <span className="text-gray-400 w-12 text-right">{c.count}</span>
+                  <span className="text-gray-500 w-8 text-right">{c.count}</span>
                 </div>
               ))}
             </div>
-          </div>
+          </Card>
         </div>
       )}
 
-      {/* SETTINGS TAB */}
-      {activeTab === 'settings' && (
-        <div className="space-y-5">
-          <div className="bg-gray-800 rounded-xl p-5">
-            <p className="font-semibold text-white mb-4">Paramètres de sortie premium</p>
-            <div className="space-y-3">
+      {/* SETTINGS */}
+      {tab === 'settings' && (
+        <div className="space-y-4">
+          <Card className="p-5">
+            <p className="font-bold text-white text-sm mb-4">Paramètres de sortie</p>
+            <div className="space-y-2">
               {[
-                { label: 'Durée exclusivité par défaut', value: '30 jours' },
-                { label: 'Commission plateforme', value: '15%' },
-                { label: 'Devise par défaut', value: 'EUR (€)' },
-                { label: 'Territoires par défaut', value: 'Monde entier' },
+                { l: 'Durée exclusivité par défaut', v: '30 jours' },
+                { l: 'Commission plateforme', v: '15%' },
+                { l: 'Devise par défaut', v: 'EUR (€)' },
+                { l: 'Territoires par défaut', v: 'Monde entier' },
               ].map(item => (
-                <div key={item.label} className="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
-                  <span className="text-sm text-gray-300">{item.label}</span>
-                  <span className="text-sm font-medium text-white">{item.value}</span>
+                <div key={item.l} className="flex items-center justify-between p-3 bg-white/3 rounded-xl">
+                  <span className="text-sm text-gray-400">{item.l}</span>
+                  <span className="text-sm font-semibold text-white">{item.v}</span>
                 </div>
               ))}
             </div>
-          </div>
+          </Card>
 
-          <div className="bg-gray-800 rounded-xl p-5">
-            <p className="font-semibold text-white mb-4 flex items-center gap-2">
-              <Shield className="w-4 h-4 text-blue-400" />
-              Protection & Anti-piratage
+          <Card className="p-5">
+            <p className="font-bold text-white text-sm mb-4 flex items-center gap-2">
+              <Shield className="w-4 h-4 text-blue-400" /> Protection & Anti-piratage
             </p>
-            <div className="space-y-3">
-              {[
-                { label: 'Streaming chiffré DRM', enabled: true },
-                { label: 'Téléchargement désactivé', enabled: true },
-                { label: 'Watermark invisible', enabled: true },
-                { label: 'Limite appareils (3 max)', enabled: true },
-              ].map(item => (
-                <div key={item.label} className="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
-                  <span className="text-sm text-gray-300">{item.label}</span>
-                  <div className="flex items-center gap-2">
-                    <Lock className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-xs text-emerald-400 font-medium">Actif</span>
+            <div className="space-y-2">
+              {['Streaming chiffré DRM', 'Téléchargement désactivé', 'Watermark invisible', 'Limite appareils (3 max)'].map(item => (
+                <div key={item} className="flex items-center justify-between p-3 bg-white/3 rounded-xl">
+                  <span className="text-sm text-gray-400">{item}</span>
+                  <div className="flex items-center gap-1.5 text-emerald-400 text-xs font-medium">
+                    <Lock className="w-3 h-3" /> Actif
                   </div>
                 </div>
               ))}
             </div>
-          </div>
+          </Card>
+        </div>
+      )}
+    </div>
+  );
+}
 
-          <div className="bg-gray-800 rounded-xl p-5">
-            <p className="font-semibold text-white mb-4 flex items-center gap-2">
-              <CreditCard className="w-4 h-4 text-amber-400" />
-              Flux financier
-            </p>
-            <div className="space-y-3">
-              {[
-                { label: 'Retrait automatique', enabled: false },
-                { label: 'Seuil minimum retrait', value: '50€' },
-                { label: 'Export comptable CSV', value: 'Disponible' },
-              ].map(item => (
-                <div key={item.label} className="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
-                  <span className="text-sm text-gray-300">{item.label}</span>
-                  {'enabled' in item ? (
-                    <div className={`w-10 h-5 rounded-full ${item.enabled ? 'bg-emerald-600' : 'bg-gray-600'} flex items-center`}>
-                      <div className={`w-4 h-4 bg-white rounded-full mx-0.5 transition-transform ${item.enabled ? 'translate-x-5' : ''}`} />
-                    </div>
-                  ) : (
-                    <span className="text-sm text-gray-400">{item.value}</span>
-                  )}
-                </div>
-              ))}
+/* ─────────────────── MARKETPLACE SECTION ─────────────────── */
+
+function MarketplaceSection({ onNavigate }: { onNavigate: (p: string) => void }) {
+  return (
+    <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
+      <PageHeader
+        title="Marketplace"
+        subtitle="Trouvez des prestataires créatifs ou proposez vos services"
+        action={
+          <button onClick={() => onNavigate('marketplace')} className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-colors">
+            <ExternalLink className="w-4 h-4" /> Voir le Marketplace
+          </button>
+        }
+      />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        {[
+          { cat: 'Montage vidéo', by: 'Alex Martin', rating: 4.9, price: '€150–€300' },
+          { cat: 'Graphiste', by: 'Sophie Chen', rating: 4.8, price: '€50–€100' },
+          { cat: 'Community Manager', by: 'Lucas Bernard', rating: 4.7, price: '€200/mois' },
+        ].map((s, i) => (
+          <Card key={i} className="p-5 hover:border-red-700/40 transition-colors cursor-pointer">
+            <div className="w-10 h-10 bg-gradient-to-br from-red-700 to-orange-700 rounded-xl mb-3 flex items-center justify-center">
+              <Star className="w-4 h-4 text-white" />
             </div>
-          </div>
-
-          {distributionLevel === 'label' && (
-            <div className="bg-blue-950/30 border border-blue-800/40 rounded-xl p-5">
-              <p className="font-semibold text-blue-300 mb-3">Compte Label Professionnel</p>
-              <div className="space-y-2 text-sm text-gray-400">
-                <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400" />Gestion multi-artistes</div>
-                <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400" />Catalogue complet</div>
-                <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400" />Rapports financiers exportables</div>
-                <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400" />Commission réduite 12% (volume)</div>
-                <div className="flex items-center gap-2 mt-3"><AlertCircle className="w-4 h-4 text-amber-400" /><span className="text-amber-400">Vérification mandat label requise</span></div>
+            <p className="text-white font-bold mb-1">{s.cat}</p>
+            <p className="text-gray-500 text-xs mb-3">Par {s.by}</p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1 text-amber-400 text-sm font-bold">
+                <Award className="w-3.5 h-3.5" /> {s.rating}
               </div>
+              <span className="text-gray-300 font-semibold text-sm">{s.price}</span>
             </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
-// Helper Components
-function MetricCard({ icon: Icon, label, value, change, positive }: any) {
-  return (
-    <div className="bg-gray-800 rounded-lg p-6">
-      <div className="flex items-center gap-3 mb-2">
-        <Icon className="w-5 h-5 text-gray-400" />
-        <span className="text-gray-400 text-sm">{label}</span>
+          </Card>
+        ))}
       </div>
-      <div className="text-2xl font-bold text-white mb-1">{value}</div>
-      <div className={`text-sm font-semibold ${positive ? 'text-green-400' : 'text-red-400'}`}>
-        {change}
-      </div>
-    </div>
-  );
-}
 
-function AlertItem({ type, message }: any) {
-  const colors = {
-    success: 'bg-green-900 border-green-600 text-green-300',
-    info: 'bg-blue-900 border-blue-600 text-blue-300',
-    warning: 'bg-yellow-900 border-yellow-600 text-yellow-300',
-  };
-
-  return (
-    <div className={`p-3 rounded-lg border ${colors[type as keyof typeof colors]}`}>
-      <p className="text-sm">{message}</p>
-    </div>
-  );
-}
-
-function UploadStep({ number, label }: any) {
-  return (
-    <div className="flex items-center gap-3 p-3 bg-gray-900 rounded-lg">
-      <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center text-white font-bold">
-        {number}
-      </div>
-      <span className="text-gray-300 text-sm font-medium">{label}</span>
-    </div>
-  );
-}
-
-function VideoListItem({ title, views, status, date }: any) {
-  return (
-    <div className="p-4 hover:bg-gray-700 transition-colors cursor-pointer">
-      <div className="flex items-center gap-4">
-        <img
-          src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=120&h=68&fit=crop"
-          alt={title}
-          className="w-32 h-18 object-cover rounded"
-        />
-        <div className="flex-1">
-          <h3 className="text-white font-semibold mb-1">{title}</h3>
-          <div className="flex items-center gap-4 text-sm text-gray-400">
-            <span>{views.toLocaleString()} vues</span>
-            <span className="px-2 py-1 bg-gray-600 rounded text-xs">{status}</span>
-            <span>{date}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function QualityMetric({ label, value, icon: Icon, positive, warning, neutral }: any) {
-  const colorClass = positive ? 'text-green-400' : warning ? 'text-yellow-400' : 'text-gray-400';
-
-  return (
-    <div className="bg-gray-900 rounded-lg p-4">
-      <div className="flex items-center gap-2 mb-2">
-        <Icon className={`w-4 h-4 ${colorClass}`} />
-        <span className="text-gray-400 text-sm">{label}</span>
-      </div>
-      <div className={`text-2xl font-bold ${colorClass}`}>{value}</div>
-    </div>
-  );
-}
-
-function UniverseBar({ universe, percentage, color }: any) {
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-1">
-        <span className="text-gray-300 text-sm">{universe}</span>
-        <span className="text-gray-400 text-sm">{percentage}%</span>
-      </div>
-      <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
-        <div className={`h-full ${color}`} style={{ width: `${percentage}%` }} />
-      </div>
-    </div>
-  );
-}
-
-function CollabCard({ creatorName, projectTitle, status, revenue }: any) {
-  return (
-    <div className="bg-gray-800 rounded-lg p-6">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full" />
-        <div>
-          <h3 className="text-white font-semibold">{creatorName}</h3>
-          <p className="text-gray-400 text-sm">{projectTitle}</p>
-        </div>
-      </div>
-      <div className="flex items-center justify-between">
-        <span className="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-sm">
-          {status}
-        </span>
-        <span className="text-green-400 font-semibold">{revenue}</span>
-      </div>
-    </div>
-  );
-}
-
-function ServiceCard({ category, provider, rating, price }: any) {
-  return (
-    <div className="bg-gray-800 rounded-lg p-6 hover:border-red-600 border-2 border-transparent transition-colors cursor-pointer">
-      <h3 className="text-white font-semibold text-lg mb-2">{category}</h3>
-      <p className="text-gray-400 text-sm mb-3">Par {provider}</p>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1">
-          <Award className="w-4 h-4 text-yellow-400" />
-          <span className="text-yellow-400 font-semibold">{rating}</span>
-        </div>
-        <span className="text-gray-300 font-semibold">{price}</span>
-      </div>
-    </div>
-  );
-}
-
-// Helper Components for New Sections
-
-function LiveHistoryItem({ title, viewers, duration, date, revenue }: any) {
-  return (
-    <div className="p-4 hover:bg-gray-700 transition-colors">
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="text-white font-semibold">{title}</h3>
-        <span className="text-green-400 font-semibold">{revenue}</span>
-      </div>
-      <div className="flex items-center gap-4 text-sm text-gray-400">
-        <span className="flex items-center gap-1">
-          <Eye className="w-4 h-4" />
-          {viewers.toLocaleString()} spectateurs
-        </span>
-        <span className="flex items-center gap-1">
-          <Clock className="w-4 h-4" />
-          {duration}
-        </span>
-        <span>{date}</span>
-      </div>
-    </div>
-  );
-}
-
-function CommunityItem({ name, members, posts, isPremium }: any) {
-  return (
-    <div className="p-4 hover:bg-gray-700 transition-colors">
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center gap-2">
-          <h3 className="text-white font-semibold">{name}</h3>
-          {isPremium && (
-            <span className="px-2 py-1 bg-yellow-900 text-yellow-300 rounded text-xs font-semibold">
-              PREMIUM
-            </span>
-          )}
-        </div>
-        <button className="text-red-500 hover:text-red-400 text-sm font-semibold">
-          Gérer
-        </button>
-      </div>
-      <div className="flex items-center gap-4 text-sm text-gray-400">
-        <span className="flex items-center gap-1">
-          <Users className="w-4 h-4" />
-          {members.toLocaleString()} membres
-        </span>
-        <span className="flex items-center gap-1">
-          <MessageSquare className="w-4 h-4" />
-          {posts} posts
-        </span>
-      </div>
-    </div>
-  );
-}
-
-function ActivityItem({ user, action, title, time }: any) {
-  return (
-    <div className="p-4 hover:bg-gray-700 transition-colors">
-      <div className="flex items-start gap-3">
-        <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex-shrink-0" />
-        <div className="flex-1">
-          <p className="text-gray-300 text-sm">
-            <span className="text-white font-semibold">{user}</span> {action}{' '}
-            <span className="text-white font-semibold">"{title}"</span>
-          </p>
-          <p className="text-gray-500 text-xs mt-1">{time}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CommentModerationItem({ user, comment, video, status, time }: any) {
-  const statusColors = {
-    approved: 'bg-green-900 text-green-300',
-    pending: 'bg-yellow-900 text-yellow-300',
-    reported: 'bg-red-900 text-red-300',
-  };
-
-  return (
-    <div className="p-4 hover:bg-gray-700 transition-colors">
-      <div className="flex items-start justify-between mb-2">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex-shrink-0" />
-          <div>
-            <p className="text-white font-semibold text-sm">{user}</p>
-            <p className="text-gray-400 text-xs">{video}</p>
-          </div>
-        </div>
-        <span className={`px-2 py-1 rounded text-xs font-semibold ${statusColors[status as keyof typeof statusColors]}`}>
-          {status === 'approved' && 'Approuvé'}
-          {status === 'pending' && 'En attente'}
-          {status === 'reported' && 'Signalé'}
-        </span>
-      </div>
-      <p className="text-gray-300 text-sm mb-2 ml-10">{comment}</p>
-      <div className="flex items-center gap-2 ml-10">
-        <button className="text-green-400 hover:text-green-300 text-xs font-semibold">
-          Approuver
-        </button>
-        <button className="text-red-400 hover:text-red-300 text-xs font-semibold">
-          Supprimer
-        </button>
-        <span className="text-gray-500 text-xs ml-auto">{time}</span>
-      </div>
-    </div>
-  );
-}
-
-function PlatformCard({ name, connected, subscribers, views, syncEnabled }: any) {
-  return (
-    <div className="bg-gray-900 rounded-lg p-6 border-2 border-gray-700 hover:border-red-600 transition-colors">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-lg flex items-center justify-center">
-            <Layers className="w-6 h-6 text-white" />
+      <Card className="p-5">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 bg-red-950/40 border border-red-800/40 rounded-xl flex items-center justify-center">
+            <Zap className="w-4 h-4 text-red-400" />
           </div>
           <div>
-            <h3 className="text-white font-bold">{name}</h3>
-            <p className={`text-xs ${connected ? 'text-green-400' : 'text-gray-500'}`}>
-              {connected ? 'Connecté' : 'Non connecté'}
-            </p>
+            <p className="text-white font-bold text-sm">Vous êtes prestataire ?</p>
+            <p className="text-gray-500 text-xs">Vendez vos services aux créateurs TruTube</p>
           </div>
+          <button onClick={() => onNavigate('marketplace')} className="ml-auto flex items-center gap-1 text-xs text-red-400 hover:text-red-300 transition-colors">
+            Créer mon profil <ChevronRight className="w-3 h-3" />
+          </button>
         </div>
-        {connected && (
-          <div className="flex items-center gap-2">
-            <span className={`px-2 py-1 rounded text-xs font-semibold ${syncEnabled ? 'bg-green-900 text-green-300' : 'bg-gray-700 text-gray-400'}`}>
-              {syncEnabled ? 'Sync ON' : 'Sync OFF'}
-            </span>
-          </div>
-        )}
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <p className="text-gray-400 text-xs">Abonnés</p>
-          <p className="text-white font-bold">{subscribers}</p>
-        </div>
-        <div>
-          <p className="text-gray-400 text-xs">Vues</p>
-          <p className="text-white font-bold">{views}</p>
-        </div>
-      </div>
-      {!connected && (
-        <button className="w-full mt-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-semibold transition-colors">
-          Connecter
-        </button>
-      )}
-    </div>
-  );
-}
-
-function SyncScheduleItem({ video, platforms, date, status }: any) {
-  return (
-    <div className="flex items-center justify-between p-4 bg-gray-900 rounded-lg">
-      <div className="flex-1">
-        <h4 className="text-white font-semibold mb-1">{video}</h4>
-        <div className="flex items-center gap-2">
-          {platforms.map((platform: string) => (
-            <span key={platform} className="px-2 py-1 bg-gray-700 text-gray-300 rounded text-xs">
-              {platform}
-            </span>
+        <div className="grid grid-cols-3 gap-2 text-center">
+          {[{ l: 'Commission', v: '10%' }, { l: 'Paiement escrow', v: 'Sécurisé' }, { l: 'Arbitrage', v: 'TruTube' }].map(i => (
+            <div key={i.l} className="bg-white/3 rounded-xl p-3">
+              <p className="text-gray-500 text-xs">{i.l}</p>
+              <p className="font-bold text-white mt-1 text-sm">{i.v}</p>
+            </div>
           ))}
         </div>
-      </div>
-      <div className="text-right">
-        <p className="text-gray-300 text-sm mb-1">{date}</p>
-        <span className={`px-2 py-1 rounded text-xs font-semibold ${status === 'scheduled' ? 'bg-blue-900 text-blue-300' : 'bg-yellow-900 text-yellow-300'}`}>
-          {status === 'scheduled' ? 'Programmé' : 'En attente'}
-        </span>
-      </div>
+      </Card>
     </div>
   );
 }
 
-function SettingToggle({ label, enabled }: any) {
+/* ─────────────────── MULTI-CHANNEL SECTION ─────────────────── */
+
+function MultiChannelSection() {
   return (
-    <div className="flex items-center justify-between p-4 bg-gray-900 rounded-lg">
-      <span className="text-gray-300">{label}</span>
-      <button
-        className={`relative w-12 h-6 rounded-full transition-colors ${enabled ? 'bg-green-600' : 'bg-gray-600'}`}
-      >
-        <div
-          className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${enabled ? 'translate-x-6' : ''}`}
-        />
-      </button>
+    <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
+      <PageHeader
+        title="Multi-chaînes"
+        subtitle="Synchronisez votre contenu sur toutes les plateformes"
+        action={
+          <button className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-colors">
+            <Layers className="w-4 h-4" /> Connecter une plateforme
+          </button>
+        }
+      />
+
+      <div className="grid grid-cols-3 gap-3 mb-6">
+        <StatCard icon={Layers} label="Plateformes" value="4" color="text-red-400" />
+        <StatCard icon={Video} label="Vidéos sync." value="127" color="text-blue-400" />
+        <StatCard icon={TrendingUp} label="Portée totale" value="2.4M" color="text-emerald-400" />
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        {[
+          { name: 'YouTube', connected: true, subs: '847K', views: '12.4M', sync: true },
+          { name: 'Twitch', connected: true, subs: '234K', views: '3.2M', sync: true },
+          { name: 'Instagram', connected: true, subs: '542K', views: '8.7M', sync: false },
+          { name: 'TikTok', connected: false, subs: '—', views: '—', sync: false },
+        ].map((p, i) => (
+          <Card key={i} className={`p-5 ${!p.connected ? 'opacity-60' : ''}`}>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${p.connected ? 'bg-gradient-to-br from-red-700 to-orange-700' : 'bg-white/5'}`}>
+                  <Globe className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-white font-bold text-sm">{p.name}</p>
+                  <p className={`text-xs ${p.connected ? 'text-emerald-400' : 'text-gray-600'}`}>
+                    {p.connected ? 'Connecté' : 'Non connecté'}
+                  </p>
+                </div>
+              </div>
+              {p.connected && <Badge label={p.sync ? 'Sync ON' : 'Sync OFF'} variant={p.sync ? 'green' : 'gray'} />}
+            </div>
+            <div className="grid grid-cols-2 gap-3 text-xs">
+              <div className="bg-white/3 rounded-xl p-2">
+                <p className="text-gray-500">Abonnés</p>
+                <p className="text-white font-bold mt-0.5">{p.subs}</p>
+              </div>
+              <div className="bg-white/3 rounded-xl p-2">
+                <p className="text-gray-500">Vues</p>
+                <p className="text-white font-bold mt-0.5">{p.views}</p>
+              </div>
+            </div>
+            {!p.connected && (
+              <button className="w-full mt-3 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-semibold transition-colors">
+                Connecter
+              </button>
+            )}
+          </Card>
+        ))}
+      </div>
+
+      <Card>
+        <CardHeader>
+          <p className="font-bold text-white text-sm">Planning de synchronisation</p>
+        </CardHeader>
+        <div className="divide-y divide-white/5">
+          {[
+            { video: 'Comment créer du contenu authentique', platforms: ['YouTube', 'Twitch'], date: 'Aujourd\'hui à 18:00', status: 'scheduled' as const },
+            { video: 'Les secrets d\'une bonne miniature', platforms: ['YouTube', 'Instagram'], date: 'Demain à 14:00', status: 'scheduled' as const },
+            { video: 'Live Q&A avec mes abonnés', platforms: ['YouTube', 'Twitch', 'Instagram'], date: 'Dans 3 jours à 20:00', status: 'pending' as const },
+          ].map((s, i) => (
+            <div key={i} className="p-4 flex items-center justify-between gap-4 hover:bg-white/2 transition-colors">
+              <div>
+                <p className="text-white text-sm font-medium mb-1">{s.video}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {s.platforms.map(p => <Badge key={p} label={p} variant="gray" />)}
+                </div>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <p className="text-gray-400 text-xs mb-1">{s.date}</p>
+                <Badge label={s.status === 'scheduled' ? 'Programmé' : 'En attente'} variant={s.status === 'scheduled' ? 'blue' : 'amber'} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+/* ─────────────────── SETTINGS SECTION ─────────────────── */
+
+function SettingsSection() {
+  const groups = [
+    {
+      title: 'Chaîne',
+      icon: <Video className="w-4 h-4 text-red-400" />,
+      inputs: true,
+    },
+    {
+      title: 'Monétisation',
+      icon: <DollarSign className="w-4 h-4 text-emerald-400" />,
+      toggles: [
+        { l: 'Activer la monétisation sur tous mes contenus', on: true },
+        { l: 'Autoriser les pourboires', on: true },
+        { l: 'Afficher les produits affiliés', on: false },
+        { l: 'Activer les abonnements créateur', on: true },
+      ],
+    },
+    {
+      title: 'Confidentialité',
+      icon: <Shield className="w-4 h-4 text-blue-400" />,
+      toggles: [
+        { l: 'Afficher mon nombre d\'abonnés', on: true },
+        { l: 'Autoriser les commentaires par défaut', on: true },
+        { l: 'Modération automatique des commentaires', on: true },
+        { l: 'Autoriser les messages privés', on: false },
+      ],
+    },
+    {
+      title: 'Notifications',
+      icon: <Bell className="w-4 h-4 text-amber-400" />,
+      toggles: [
+        { l: 'Nouveaux commentaires', on: true },
+        { l: 'Nouveaux abonnés', on: true },
+        { l: 'Revenus reçus', on: true },
+        { l: 'Alertes de modération', on: true },
+      ],
+    },
+  ];
+
+  return (
+    <div className="p-4 sm:p-6 lg:p-8 max-w-4xl mx-auto w-full">
+      <PageHeader title="Paramètres" subtitle="Configurez votre studio et vos préférences" />
+
+      <div className="space-y-4">
+        {groups.map((g, gi) => (
+          <Card key={gi} className="p-5">
+            <p className="font-bold text-white text-sm mb-4 flex items-center gap-2">{g.icon} {g.title}</p>
+            {g.inputs ? (
+              <div className="space-y-3">
+                <div>
+                  <label className="block text-gray-400 text-xs mb-1.5">Nom de la chaîne</label>
+                  <input type="text" defaultValue="Alex Beats" className="w-full bg-white/5 border border-white/10 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-red-600 transition-colors" />
+                </div>
+                <div>
+                  <label className="block text-gray-400 text-xs mb-1.5">Description</label>
+                  <textarea defaultValue="Music producer and beat maker" rows={3} className="w-full bg-white/5 border border-white/10 text-white text-sm px-3 py-2.5 rounded-xl focus:outline-none focus:border-red-600 transition-colors resize-none" />
+                </div>
+                <div className="flex gap-2">
+                  <button className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-colors">Sauvegarder</button>
+                  <button className="px-4 py-2 bg-white/5 hover:bg-white/10 text-gray-400 rounded-xl text-sm transition-colors">Annuler</button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {g.toggles!.map((t, ti) => (
+                  <div key={ti} className="flex items-center justify-between p-3 bg-white/3 rounded-xl">
+                    <span className="text-gray-300 text-sm">{t.l}</span>
+                    <Toggle enabled={t.on} />
+                  </div>
+                ))}
+              </div>
+            )}
+          </Card>
+        ))}
+
+        <div className="p-4 bg-red-950/20 border border-red-900/40 rounded-2xl">
+          <p className="text-red-300 font-semibold text-sm mb-1">Zone dangereuse</p>
+          <p className="text-gray-500 text-xs mb-3">Ces actions sont irréversibles. Procédez avec précaution.</p>
+          <button className="text-xs px-4 py-2 border border-red-800/50 text-red-400 hover:bg-red-950/40 rounded-xl transition-colors font-medium">
+            Supprimer mon compte
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
