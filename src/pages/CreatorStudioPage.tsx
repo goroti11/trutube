@@ -24,14 +24,29 @@ import {
   Award,
   CheckCircle,
   XCircle,
-  Filter
+  Filter,
+  Music,
+  Package,
+  Lock,
+  Calendar,
+  Globe,
+  Tag,
+  ArrowUpRight,
+  ChevronRight,
+  Zap,
+  Star,
+  BarChart2,
+  ShoppingBag,
+  CreditCard,
+  ExternalLink,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import MonetizationDashboard from '../components/studio/MonetizationDashboard';
 import ContentGuidePanel from '../components/studio/ContentGuidePanel';
 import { liveStreamService, LiveStream } from '../services/liveStreamService';
+import { musicSalesService, MusicSaleRelease } from '../services/musicSalesService';
 
-type StudioSection = 'dashboard' | 'content' | 'live' | 'community' | 'monetization' | 'analytics' | 'comments' | 'collaborations' | 'marketplace' | 'multi-channel' | 'settings';
+type StudioSection = 'dashboard' | 'content' | 'live' | 'community' | 'monetization' | 'analytics' | 'comments' | 'collaborations' | 'marketplace' | 'multi-channel' | 'distribution' | 'settings';
 
 interface CreatorStudioPageProps {
   onNavigate: (page: string) => void;
@@ -50,6 +65,7 @@ export default function CreatorStudioPage({ onNavigate }: CreatorStudioPageProps
     { id: 'analytics' as StudioSection, label: 'Analytics', icon: BarChart3 },
     { id: 'comments' as StudioSection, label: 'Commentaires', icon: MessageSquare },
     { id: 'collaborations' as StudioSection, label: 'Collaborations', icon: Handshake },
+    { id: 'distribution' as StudioSection, label: 'Distribution', icon: Music },
     { id: 'marketplace' as StudioSection, label: 'Marketplace', icon: Store },
     { id: 'multi-channel' as StudioSection, label: 'Multi-chaînes', icon: Layers },
     { id: 'settings' as StudioSection, label: 'Paramètres', icon: Settings },
@@ -115,7 +131,8 @@ export default function CreatorStudioPage({ onNavigate }: CreatorStudioPageProps
         {currentSection === 'analytics' && <AnalyticsSection />}
         {currentSection === 'comments' && <CommentsSection />}
         {currentSection === 'collaborations' && <CollaborationsSection />}
-        {currentSection === 'marketplace' && <MarketplaceSection />}
+        {currentSection === 'distribution' && <DistributionSection onNavigate={onNavigate} />}
+        {currentSection === 'marketplace' && <MarketplaceSection onNavigate={onNavigate} />}
         {currentSection === 'multi-channel' && <MultiChannelSection />}
         {currentSection === 'settings' && <SettingsSection />}
       </div>
@@ -389,10 +406,19 @@ function CollaborationsSection() {
 }
 
 // Marketplace Section
-function MarketplaceSection() {
+function MarketplaceSection({ onNavigate }: { onNavigate: (page: string) => void }) {
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold text-white mb-8">Marketplace</h1>
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-3xl font-bold text-white">Marketplace</h1>
+        <button
+          onClick={() => onNavigate('marketplace')}
+          className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors text-sm"
+        >
+          <ExternalLink className="w-4 h-4" />
+          Voir le Marketplace
+        </button>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <ServiceCard
@@ -413,6 +439,36 @@ function MarketplaceSection() {
           rating={4.7}
           price="€200/mois"
         />
+      </div>
+
+      <div className="mt-8 bg-gray-800 rounded-xl p-6">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 bg-red-950/40 border border-red-800/50 rounded-xl flex items-center justify-center">
+            <Zap className="w-5 h-5 text-red-400" />
+          </div>
+          <div>
+            <p className="font-semibold text-white">Vous êtes prestataire ?</p>
+            <p className="text-sm text-gray-400">Vendez vos services aux créateurs TruTube</p>
+          </div>
+          <button
+            onClick={() => onNavigate('marketplace')}
+            className="ml-auto flex items-center gap-2 text-sm text-red-400 hover:text-red-300 transition-colors"
+          >
+            Créer mon profil <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+        <div className="grid grid-cols-3 gap-3 text-center text-sm">
+          {[
+            { label: 'Commission', value: '10%' },
+            { label: 'Paiement escrow', value: 'Sécurisé' },
+            { label: 'Arbitrage', value: 'TruTube' },
+          ].map(item => (
+            <div key={item.label} className="bg-gray-900 rounded-lg p-3">
+              <p className="text-gray-500 text-xs">{item.label}</p>
+              <p className="font-bold text-white mt-1">{item.value}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -947,6 +1003,529 @@ function SettingsSection() {
           />
         </div>
       </div>
+    </div>
+  );
+}
+
+// Distribution Section — Sales & Releases
+function DistributionSection({ onNavigate }: { onNavigate: (page: string) => void }) {
+  const { user } = useAuth();
+  const [releases, setReleases] = useState<MusicSaleRelease[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<'overview' | 'releases' | 'analytics' | 'settings'>('overview');
+  const [distributionLevel, setDistributionLevel] = useState<'independent' | 'label'>('independent');
+
+  const MOCK_STATS = {
+    total_sales: 347,
+    gross_revenue: 3468.53,
+    platform_commission: 520.28,
+    net_revenue: 2948.25,
+    avg_conversion: 3.2,
+    preorder_count: 124,
+    founder_count: 89,
+    active_releases: 2,
+    total_releases: 5,
+  };
+
+  const MOCK_RELEASES: MusicSaleRelease[] = [
+    {
+      id: '1', creator_id: user?.id || '', title: 'Lumières de Minuit', artist_name: 'Kaïros',
+      label_name: '', isrc: 'FR-ABC-24-00001', release_type: 'album', genre: 'R&B',
+      cover_art_url: 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?w=200',
+      description: '', rights_owned: true, rights_declaration_signed_at: new Date().toISOString(),
+      territories_allowed: ['worldwide'], credits: [],
+      price_standard: 9.99, price_promo: null, promo_starts_at: null, promo_ends_at: null,
+      currency: 'EUR', sale_type: 'lifetime', access_duration_days: null,
+      is_bundle: false, bundle_items: [],
+      phase: 'exclusive',
+      exclusive_starts_at: new Date(Date.now() - 2 * 86400000).toISOString(),
+      exclusive_ends_at: new Date(Date.now() + 28 * 86400000).toISOString(),
+      public_release_at: new Date(Date.now() + 30 * 86400000).toISOString(),
+      preorder_enabled: false, preorder_price: null, preorder_starts_at: null, preorder_ends_at: null,
+      is_limited_edition: true, limited_edition_total: 1000, limited_edition_sold: 347,
+      total_sales: 347, total_revenue: 3468.53, platform_commission_rate: 0.15,
+      video_id: null, preview_url: '', distribution_level: 'independent', label_mandate_verified: false,
+      is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+    },
+    {
+      id: '2', creator_id: user?.id || '', title: 'Nuit Profonde', artist_name: 'Kaïros',
+      label_name: '', isrc: '', release_type: 'single', genre: 'Soul',
+      cover_art_url: 'https://images.pexels.com/photos/167092/pexels-photo-167092.jpeg?w=200',
+      description: '', rights_owned: true, rights_declaration_signed_at: new Date().toISOString(),
+      territories_allowed: ['worldwide'], credits: [],
+      price_standard: 1.99, price_promo: null, promo_starts_at: null, promo_ends_at: null,
+      currency: 'EUR', sale_type: 'lifetime', access_duration_days: null,
+      is_bundle: false, bundle_items: [],
+      phase: 'public',
+      exclusive_starts_at: null, exclusive_ends_at: null,
+      public_release_at: new Date(Date.now() - 60 * 86400000).toISOString(),
+      preorder_enabled: false, preorder_price: null, preorder_starts_at: null, preorder_ends_at: null,
+      is_limited_edition: false, limited_edition_total: null, limited_edition_sold: 0,
+      total_sales: 892, total_revenue: 1778.08, platform_commission_rate: 0.15,
+      video_id: null, preview_url: '', distribution_level: 'independent', label_mandate_verified: false,
+      is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+    },
+  ];
+
+  useEffect(() => {
+    (async () => {
+      if (user) {
+        const data = await musicSalesService.getCreatorReleases(user.id);
+        setReleases(data.length > 0 ? data : MOCK_RELEASES);
+      } else {
+        setReleases(MOCK_RELEASES);
+      }
+      setLoading(false);
+    })();
+  }, [user]);
+
+  const PHASE_LABELS: Record<string, { label: string; color: string }> = {
+    draft: { label: 'Brouillon', color: 'bg-gray-700 text-gray-400' },
+    preorder: { label: 'Précommande', color: 'bg-amber-900/50 text-amber-400' },
+    exclusive: { label: 'Exclusivité', color: 'bg-rose-900/50 text-rose-400' },
+    public: { label: 'Public', color: 'bg-emerald-900/50 text-emerald-400' },
+    archived: { label: 'Archivé', color: 'bg-gray-800 text-gray-500' },
+  };
+
+  const RELEASE_TYPE_LABELS: Record<string, string> = {
+    single: 'Single', album: 'Album', ep: 'EP', bundle: 'Bundle',
+  };
+
+  const salesByDay = [
+    { day: 'Lun', sales: 18, rev: 179.82 },
+    { day: 'Mar', sales: 34, rev: 339.66 },
+    { day: 'Mer', sales: 27, rev: 269.73 },
+    { day: 'Jeu', sales: 52, rev: 519.48 },
+    { day: 'Ven', sales: 89, rev: 889.11 },
+    { day: 'Sam', sales: 73, rev: 729.27 },
+    { day: 'Dim', sales: 54, rev: 539.46 },
+  ];
+  const maxSales = Math.max(...salesByDay.map(d => d.sales));
+
+  return (
+    <div className="p-8">
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-red-950/40 border border-red-800/50 rounded-xl flex items-center justify-center">
+            <Music className="w-5 h-5 text-red-400" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-white">Distribution Premium</h1>
+            <p className="text-sm text-gray-400">Vendez vos singles, albums et EP directement</p>
+          </div>
+        </div>
+        <button
+          onClick={() => onNavigate('create-release')}
+          className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors"
+        >
+          <Package className="w-4 h-4" />
+          Nouvelle release
+        </button>
+      </div>
+
+      {/* Account type selector */}
+      <div className="flex items-center gap-3 mb-6 bg-gray-800 rounded-xl p-4">
+        <span className="text-sm text-gray-400 mr-2">Type de compte :</span>
+        {[
+          { id: 'independent', label: 'Artiste Indépendant', icon: <Music className="w-4 h-4" /> },
+          { id: 'label', label: 'Label Professionnel', icon: <Package className="w-4 h-4" /> },
+        ].map(opt => (
+          <button
+            key={opt.id}
+            onClick={() => setDistributionLevel(opt.id as typeof distributionLevel)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              distributionLevel === opt.id ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-700 hover:text-white'
+            }`}
+          >
+            {opt.icon}
+            {opt.label}
+          </button>
+        ))}
+        {distributionLevel === 'label' && (
+          <span className="ml-auto text-xs bg-blue-900/40 border border-blue-700/40 text-blue-400 px-2 py-1 rounded-full">
+            Commission 12% volume
+          </span>
+        )}
+      </div>
+
+      {/* Tab navigation */}
+      <div className="flex gap-1 mb-6 bg-gray-800 rounded-xl p-1">
+        {([
+          { id: 'overview', label: 'Vue d\'ensemble', icon: LayoutDashboard },
+          { id: 'releases', label: 'Mes releases', icon: Music },
+          { id: 'analytics', label: 'Analytics Ventes', icon: BarChart2 },
+          { id: 'settings', label: 'Paramètres', icon: Settings },
+        ] as { id: typeof activeTab; label: string; icon: typeof LayoutDashboard }[]).map(tab => {
+          const Icon = tab.icon;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                activeTab === tab.id ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              <Icon className="w-4 h-4" />
+              <span className="hidden xl:block">{tab.label}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* OVERVIEW TAB */}
+      {activeTab === 'overview' && (
+        <div className="space-y-6">
+          {/* KPIs */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { label: 'Ventes totales', value: MOCK_STATS.total_sales.toLocaleString(), icon: <ShoppingBag className="w-5 h-5 text-blue-400" />, sub: '+12% ce mois' },
+              { label: 'Revenus bruts', value: `${MOCK_STATS.gross_revenue.toFixed(2)}€`, icon: <DollarSign className="w-5 h-5 text-emerald-400" />, sub: 'Toutes releases' },
+              { label: 'Revenus nets', value: `${MOCK_STATS.net_revenue.toFixed(2)}€`, icon: <CreditCard className="w-5 h-5 text-rose-400" />, sub: 'Après commission 15%' },
+              { label: 'Taux conversion', value: `${MOCK_STATS.avg_conversion}%`, icon: <TrendingUp className="w-5 h-5 text-amber-400" />, sub: 'Visiteurs → acheteurs' },
+            ].map(kpi => (
+              <div key={kpi.label} className="bg-gray-800 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  {kpi.icon}
+                  <span className="text-xs text-gray-400">{kpi.label}</span>
+                </div>
+                <p className="text-2xl font-bold text-white">{kpi.value}</p>
+                <p className="text-xs text-gray-500 mt-1">{kpi.sub}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Revenue split */}
+          <div className="bg-gray-800 rounded-xl p-5">
+            <p className="text-sm font-medium text-gray-300 mb-3 flex items-center gap-2">
+              <Tag className="w-4 h-4 text-red-400" />
+              Répartition des revenus
+            </p>
+            <div className="flex rounded-full overflow-hidden h-4 mb-3">
+              <div className="bg-emerald-500" style={{ width: '85%' }} />
+              <div className="bg-red-600" style={{ width: '15%' }} />
+            </div>
+            <div className="flex justify-between text-xs text-gray-400">
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />Artiste 85% — {MOCK_STATS.net_revenue.toFixed(2)}€</span>
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-600 inline-block" />TruTube 15% — {MOCK_STATS.platform_commission.toFixed(2)}€</span>
+            </div>
+          </div>
+
+          {/* Active releases */}
+          <div className="bg-gray-800 rounded-xl overflow-hidden">
+            <div className="px-5 py-4 border-b border-gray-700 flex items-center justify-between">
+              <p className="font-semibold text-white">Releases actives</p>
+              <button onClick={() => setActiveTab('releases')} className="text-xs text-red-400 hover:text-red-300 transition-colors">
+                Voir tout
+              </button>
+            </div>
+            <div className="divide-y divide-gray-700">
+              {(releases.length > 0 ? releases : MOCK_RELEASES).slice(0, 3).map(r => {
+                const phase = PHASE_LABELS[r.phase] || PHASE_LABELS.draft;
+                const daysLeft = r.public_release_at
+                  ? Math.max(0, Math.ceil((new Date(r.public_release_at).getTime() - Date.now()) / 86400000))
+                  : null;
+                return (
+                  <div key={r.id} className="flex items-center gap-4 p-4 hover:bg-gray-750 transition-colors">
+                    <img src={r.cover_art_url || 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?w=80'} alt={r.title} className="w-12 h-12 rounded-lg object-cover flex-shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-0.5">
+                        <p className="font-semibold text-white text-sm truncate">{r.title}</p>
+                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ${phase.color}`}>{phase.label}</span>
+                      </div>
+                      <p className="text-xs text-gray-400">{r.artist_name} · {RELEASE_TYPE_LABELS[r.release_type] || r.release_type} · {r.price_standard}€</p>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <p className="text-sm font-bold text-white">{r.total_sales} ventes</p>
+                      <p className="text-xs text-emerald-400">{(r.total_revenue * 0.85).toFixed(2)}€ net</p>
+                      {daysLeft !== null && r.phase === 'exclusive' && (
+                        <p className="text-xs text-rose-400 mt-0.5">J-{daysLeft} exclu</p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Badges & Founders */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-gray-800 rounded-xl p-5">
+              <div className="flex items-center gap-2 mb-3">
+                <Award className="w-4 h-4 text-amber-400" />
+                <span className="text-sm font-medium text-gray-300">Supporters Fondateurs</span>
+              </div>
+              <p className="text-3xl font-bold text-white">{MOCK_STATS.founder_count}</p>
+              <p className="text-xs text-gray-500 mt-1">Achetés en phase exclusive</p>
+            </div>
+            <div className="bg-gray-800 rounded-xl p-5">
+              <div className="flex items-center gap-2 mb-3">
+                <Calendar className="w-4 h-4 text-blue-400" />
+                <span className="text-sm font-medium text-gray-300">Précommandes actives</span>
+              </div>
+              <p className="text-3xl font-bold text-white">{MOCK_STATS.preorder_count}</p>
+              <p className="text-xs text-gray-500 mt-1">En attente de sortie</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* RELEASES TAB */}
+      {activeTab === 'releases' && (
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-gray-400">{(releases.length > 0 ? releases : MOCK_RELEASES).length} releases</p>
+            <div className="flex gap-2">
+              {['Tous', 'Exclusivité', 'Public', 'Brouillon'].map(f => (
+                <button key={f} className="text-xs px-3 py-1.5 rounded-lg bg-gray-800 text-gray-400 hover:text-white transition-colors">{f}</button>
+              ))}
+            </div>
+          </div>
+
+          {(releases.length > 0 ? releases : MOCK_RELEASES).map(r => {
+            const phase = PHASE_LABELS[r.phase] || PHASE_LABELS.draft;
+            const daysLeft = r.public_release_at
+              ? Math.max(0, Math.ceil((new Date(r.public_release_at).getTime() - Date.now()) / 86400000))
+              : null;
+            return (
+              <div key={r.id} className="bg-gray-800 rounded-xl p-5 flex items-start gap-4">
+                <img src={r.cover_art_url || 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?w=100'} alt={r.title} className="w-20 h-20 rounded-xl object-cover flex-shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <p className="font-bold text-white">{r.title}</p>
+                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${phase.color}`}>{phase.label}</span>
+                    <span className="text-xs text-gray-500 bg-gray-700 px-2 py-0.5 rounded-full">{RELEASE_TYPE_LABELS[r.release_type]}</span>
+                    {r.is_limited_edition && (
+                      <span className="text-xs text-amber-400 bg-amber-950/40 border border-amber-800/40 px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <Star className="w-2.5 h-2.5" />
+                        Édition Limitée
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-gray-400 mb-2">{r.artist_name} · {r.genre} · {r.price_standard}€</p>
+                  <div className="grid grid-cols-4 gap-3 text-xs">
+                    <div className="bg-gray-900 rounded-lg p-2 text-center">
+                      <p className="text-gray-500">Ventes</p>
+                      <p className="font-bold text-white mt-0.5">{r.total_sales}</p>
+                    </div>
+                    <div className="bg-gray-900 rounded-lg p-2 text-center">
+                      <p className="text-gray-500">Revenus nets</p>
+                      <p className="font-bold text-emerald-400 mt-0.5">{(r.total_revenue * 0.85).toFixed(0)}€</p>
+                    </div>
+                    {r.is_limited_edition && r.limited_edition_total && (
+                      <div className="bg-gray-900 rounded-lg p-2 text-center">
+                        <p className="text-gray-500">Éditions restantes</p>
+                        <p className="font-bold text-amber-400 mt-0.5">{r.limited_edition_total - r.limited_edition_sold}/{r.limited_edition_total}</p>
+                      </div>
+                    )}
+                    {daysLeft !== null && r.phase === 'exclusive' && (
+                      <div className="bg-rose-950/40 border border-rose-800/40 rounded-lg p-2 text-center">
+                        <p className="text-rose-500">Exclu restante</p>
+                        <p className="font-bold text-rose-300 mt-0.5">J-{daysLeft}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2 flex-shrink-0">
+                  <button className="text-xs px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
+                    Gérer
+                  </button>
+                  <button
+                    onClick={() => onNavigate('album-sale')}
+                    className="text-xs px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-lg transition-colors flex items-center gap-1"
+                  >
+                    <Eye className="w-3 h-3" />
+                    Voir
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+
+          <button
+            onClick={() => onNavigate('create-release')}
+            className="w-full border-2 border-dashed border-gray-700 hover:border-red-600 text-gray-500 hover:text-red-400 rounded-xl p-6 text-sm font-medium transition-all flex items-center justify-center gap-2"
+          >
+            <Package className="w-4 h-4" />
+            Créer une nouvelle release
+          </button>
+        </div>
+      )}
+
+      {/* ANALYTICS TAB */}
+      {activeTab === 'analytics' && (
+        <div className="space-y-6">
+          {/* Sales chart */}
+          <div className="bg-gray-800 rounded-xl p-5">
+            <div className="flex items-center justify-between mb-4">
+              <p className="font-semibold text-white">Ventes — 7 derniers jours</p>
+              <span className="text-xs text-emerald-400 bg-emerald-950/40 px-2 py-1 rounded-full">+23% vs semaine préc.</span>
+            </div>
+            <div className="flex items-end gap-2 h-32">
+              {salesByDay.map(d => (
+                <div key={d.day} className="flex-1 flex flex-col items-center gap-1">
+                  <span className="text-xs text-gray-500">{d.sales}</span>
+                  <div
+                    className="w-full bg-red-600/80 hover:bg-red-500 transition-colors rounded-t"
+                    style={{ height: `${(d.sales / maxSales) * 100}%`, minHeight: '4px' }}
+                    title={`${d.sales} ventes · ${d.rev.toFixed(2)}€`}
+                  />
+                  <span className="text-xs text-gray-500">{d.day}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { label: 'Unités vendues', value: '347', icon: <ShoppingBag className="w-4 h-4 text-blue-400" /> },
+              { label: 'Revenus bruts', value: '3 468€', icon: <DollarSign className="w-4 h-4 text-emerald-400" /> },
+              { label: 'Commission', value: '520€', icon: <Tag className="w-4 h-4 text-gray-400" /> },
+              { label: 'Revenus nets', value: '2 948€', icon: <CreditCard className="w-4 h-4 text-rose-400" /> },
+              { label: 'Taux conversion', value: '3.2%', icon: <TrendingUp className="w-4 h-4 text-amber-400" /> },
+              { label: 'Pic de ventes', value: 'Ven 89', icon: <Zap className="w-4 h-4 text-amber-400" /> },
+              { label: 'Impact promo', value: '+34%', icon: <ArrowUpRight className="w-4 h-4 text-emerald-400" /> },
+              { label: 'Fondateurs', value: '89', icon: <Award className="w-4 h-4 text-amber-400" /> },
+            ].map(stat => (
+              <div key={stat.label} className="bg-gray-800 rounded-xl p-4">
+                <div className="flex items-center gap-2 mb-1.5">{stat.icon}<span className="text-xs text-gray-400">{stat.label}</span></div>
+                <p className="font-bold text-white text-lg">{stat.value}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Comparatif gratuit vs payant */}
+          <div className="bg-gray-800 rounded-xl p-5">
+            <p className="font-semibold text-white mb-4 flex items-center gap-2">
+              <BarChart2 className="w-4 h-4 text-red-400" />
+              Ventes vs Streaming gratuit
+            </p>
+            <div className="space-y-3">
+              {[
+                { label: 'Revenus vente directe', value: 2948, max: 2948, color: 'bg-emerald-500' },
+                { label: 'Revenus publicités', value: 847, max: 2948, color: 'bg-blue-500' },
+                { label: 'Tips / Pourboires', value: 234, max: 2948, color: 'bg-amber-500' },
+              ].map(item => (
+                <div key={item.label}>
+                  <div className="flex justify-between text-xs text-gray-400 mb-1">
+                    <span>{item.label}</span>
+                    <span className="font-medium text-white">{item.value}€</span>
+                  </div>
+                  <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                    <div className={`h-full ${item.color} rounded-full`} style={{ width: `${(item.value / item.max) * 100}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Top pays */}
+          <div className="bg-gray-800 rounded-xl p-5">
+            <p className="font-semibold text-white mb-4 flex items-center gap-2">
+              <Globe className="w-4 h-4 text-blue-400" />
+              Top pays acheteurs
+            </p>
+            <div className="space-y-2">
+              {[
+                { country: 'France', pct: 62, count: 215 },
+                { country: 'Belgique', pct: 18, count: 62 },
+                { country: 'Suisse', pct: 12, count: 42 },
+                { country: 'Canada', pct: 8, count: 28 },
+              ].map(c => (
+                <div key={c.country} className="flex items-center gap-3 text-sm">
+                  <span className="text-gray-300 w-20 flex-shrink-0">{c.country}</span>
+                  <div className="flex-1 bg-gray-700 rounded-full h-2 overflow-hidden">
+                    <div className="h-full bg-red-600 rounded-full" style={{ width: `${c.pct}%` }} />
+                  </div>
+                  <span className="text-gray-400 w-12 text-right">{c.count}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* SETTINGS TAB */}
+      {activeTab === 'settings' && (
+        <div className="space-y-5">
+          <div className="bg-gray-800 rounded-xl p-5">
+            <p className="font-semibold text-white mb-4">Paramètres de sortie premium</p>
+            <div className="space-y-3">
+              {[
+                { label: 'Durée exclusivité par défaut', value: '30 jours' },
+                { label: 'Commission plateforme', value: '15%' },
+                { label: 'Devise par défaut', value: 'EUR (€)' },
+                { label: 'Territoires par défaut', value: 'Monde entier' },
+              ].map(item => (
+                <div key={item.label} className="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
+                  <span className="text-sm text-gray-300">{item.label}</span>
+                  <span className="text-sm font-medium text-white">{item.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-gray-800 rounded-xl p-5">
+            <p className="font-semibold text-white mb-4 flex items-center gap-2">
+              <Shield className="w-4 h-4 text-blue-400" />
+              Protection & Anti-piratage
+            </p>
+            <div className="space-y-3">
+              {[
+                { label: 'Streaming chiffré DRM', enabled: true },
+                { label: 'Téléchargement désactivé', enabled: true },
+                { label: 'Watermark invisible', enabled: true },
+                { label: 'Limite appareils (3 max)', enabled: true },
+              ].map(item => (
+                <div key={item.label} className="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
+                  <span className="text-sm text-gray-300">{item.label}</span>
+                  <div className="flex items-center gap-2">
+                    <Lock className="w-3.5 h-3.5 text-emerald-400" />
+                    <span className="text-xs text-emerald-400 font-medium">Actif</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-gray-800 rounded-xl p-5">
+            <p className="font-semibold text-white mb-4 flex items-center gap-2">
+              <CreditCard className="w-4 h-4 text-amber-400" />
+              Flux financier
+            </p>
+            <div className="space-y-3">
+              {[
+                { label: 'Retrait automatique', enabled: false },
+                { label: 'Seuil minimum retrait', value: '50€' },
+                { label: 'Export comptable CSV', value: 'Disponible' },
+              ].map(item => (
+                <div key={item.label} className="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
+                  <span className="text-sm text-gray-300">{item.label}</span>
+                  {'enabled' in item ? (
+                    <div className={`w-10 h-5 rounded-full ${item.enabled ? 'bg-emerald-600' : 'bg-gray-600'} flex items-center`}>
+                      <div className={`w-4 h-4 bg-white rounded-full mx-0.5 transition-transform ${item.enabled ? 'translate-x-5' : ''}`} />
+                    </div>
+                  ) : (
+                    <span className="text-sm text-gray-400">{item.value}</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {distributionLevel === 'label' && (
+            <div className="bg-blue-950/30 border border-blue-800/40 rounded-xl p-5">
+              <p className="font-semibold text-blue-300 mb-3">Compte Label Professionnel</p>
+              <div className="space-y-2 text-sm text-gray-400">
+                <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400" />Gestion multi-artistes</div>
+                <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400" />Catalogue complet</div>
+                <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400" />Rapports financiers exportables</div>
+                <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400" />Commission réduite 12% (volume)</div>
+                <div className="flex items-center gap-2 mt-3"><AlertCircle className="w-4 h-4 text-amber-400" /><span className="text-amber-400">Vérification mandat label requise</span></div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
