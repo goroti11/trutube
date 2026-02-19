@@ -17,6 +17,7 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const [expandedArticle, setExpandedArticle] = useState<string | null>(null);
 
   const categories = [
     { id: 'all', label: 'Tout', icon: Book },
@@ -892,25 +893,572 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       description: 'Guide complet pour démarrer sur la plateforme',
       icon: Users,
       color: 'text-cyan-400',
+      content: {
+        introduction: 'Créer un compte Goroti est simple et rapide. Voici le processus complet en 5 étapes.',
+        etapes: [
+          {
+            numero: 1,
+            titre: 'Accéder à la page d\'inscription',
+            actions: [
+              'Cliquez sur "Connexion" dans le header',
+              'Ou accédez directement à /#auth',
+              'Le formulaire s\'affiche avec 2 onglets: Connexion et Inscription'
+            ]
+          },
+          {
+            numero: 2,
+            titre: 'Remplir le formulaire',
+            champs: [
+              {
+                nom: 'Email',
+                requis: true,
+                format: 'adresse@email.com',
+                validation: 'Vérification en temps réel',
+                erreurs: ['Format invalide', 'Email déjà utilisé']
+              },
+              {
+                nom: 'Nom d\'utilisateur',
+                requis: true,
+                format: '3-20 caractères (lettres, chiffres, _)',
+                validation: 'Unicité vérifiée instantanément',
+                erreurs: ['Trop court/long', 'Déjà pris', 'Caractères invalides']
+              },
+              {
+                nom: 'Mot de passe',
+                requis: true,
+                format: 'Minimum 8 caractères',
+                recommandations: ['Majuscule + minuscule', 'Chiffres', 'Caractères spéciaux'],
+                force: 'Indicateur visuel (faible/moyen/fort)'
+              },
+              {
+                nom: 'Confirmation mot de passe',
+                requis: true,
+                validation: 'Doit correspondre exactement'
+              }
+            ]
+          },
+          {
+            numero: 3,
+            titre: 'Accepter les conditions',
+            elements: [
+              'Case à cocher obligatoire',
+              'Lien vers CGU (Conditions Générales d\'Utilisation)',
+              'Lien vers Politique de Confidentialité',
+              'Vous devez avoir 13 ans minimum'
+            ]
+          },
+          {
+            numero: 4,
+            titre: 'Validation du compte',
+            processus: [
+              'Cliquez sur "S\'inscrire"',
+              'Compte créé instantanément',
+              'Pas de vérification email requise',
+              'Connexion automatique'
+            ]
+          },
+          {
+            numero: 5,
+            titre: 'Création automatique de votre chaîne',
+            automatique: [
+              'Une chaîne est créée avec votre nom d\'utilisateur',
+              'URL unique: goroti.com/@votre-nom',
+              'Avatar par défaut (lettres initiales)',
+              'Vous pouvez la personnaliser immédiatement'
+            ]
+          }
+        ],
+        apresInscription: {
+          titre: 'Que faire après l\'inscription ?',
+          actions: [
+            {
+              priorite: 'Haute',
+              action: 'Compléter votre profil',
+              details: 'Photo, bannière, bio (100 caractères minimum pour badge vérifié)'
+            },
+            {
+              priorite: 'Haute',
+              action: 'Vérifier votre identité (KYC)',
+              details: 'Requis pour monétisation et retraits'
+            },
+            {
+              priorite: 'Moyenne',
+              action: 'Explorer les Univers',
+              details: '12 catégories thématiques de contenu'
+            },
+            {
+              priorite: 'Moyenne',
+              action: 'Suivre des créateurs',
+              details: 'Construire votre feed personnalisé'
+            },
+            {
+              priorite: 'Basse',
+              action: 'Activer 2FA',
+              details: 'Sécurité supplémentaire recommandée'
+            }
+          ]
+        },
+        troubleshooting: {
+          titre: 'Problèmes courants',
+          problemes: [
+            {
+              probleme: 'Email déjà utilisé',
+              solution: 'Utilisez un autre email ou récupérez votre compte'
+            },
+            {
+              probleme: 'Nom d\'utilisateur pris',
+              solution: 'Essayez avec chiffres ou underscore (_)'
+            },
+            {
+              probleme: 'Mot de passe refusé',
+              solution: 'Assurez 8+ caractères avec majuscule et chiffre'
+            }
+          ]
+        },
+        tempsEstime: '2-3 minutes',
+        gratuit: true
+      }
     },
     {
       category: 'getting-started',
       title: 'Créer votre première chaîne',
-      description: 'Configuration et personnalisation de votre chaîne',
+      description: 'Configuration et personnalisation complète de votre chaîne',
       icon: PlayCircle,
       color: 'text-cyan-400',
+      content: {
+        prerequis: 'Compte Goroti créé et connecté',
+        acces: 'Header → Studio → Mes Chaînes → Créer une chaîne',
+        etapes: [
+          {
+            numero: 1,
+            titre: 'Informations de base',
+            champs: [
+              {
+                nom: 'Nom de la chaîne',
+                limite: '50 caractères',
+                conseil: 'Clair, mémorable, représentatif',
+                exemples: ['Martin Musique', 'Tech avec Sarah', 'Cuisine Moderne']
+              },
+              {
+                nom: 'Identifiant (@handle)',
+                format: '3-30 caractères (a-z, 0-9, _)',
+                unique: true,
+                url: 'goroti.com/@identifiant',
+                conseil: 'Court et facile à retenir'
+              },
+              {
+                nom: 'Description',
+                limite: '1000 caractères',
+                conseil: 'Expliquez votre contenu et votre proposition de valeur',
+                inclure: ['Thèmes abordés', 'Fréquence publication', 'Pour qui']
+              },
+              {
+                nom: 'Type de chaîne',
+                options: [
+                  'Créateur individuel (personne seule)',
+                  'Artiste musical (musique prioritaire)',
+                  'Label musical (gestion artistes)',
+                  'Studio (production pro)',
+                  'Marque (entreprise/organisation)'
+                ]
+              }
+            ]
+          },
+          {
+            numero: 2,
+            titre: 'Identité visuelle',
+            elements: [
+              {
+                nom: 'Photo de profil',
+                format: 'JPG/PNG',
+                taille: 'Min 400×400px',
+                ratio: 'Carré 1:1',
+                poids: 'Max 2 MB',
+                conseil: 'Logo ou visage reconnaissable'
+              },
+              {
+                nom: 'Bannière',
+                format: 'JPG/PNG',
+                taille: 'Min 1920×1080px',
+                ratio: '16:9 recommandé',
+                poids: 'Max 5 MB',
+                conseil: 'Visuel de marque cohérent'
+              },
+              {
+                nom: 'Couleur de marque',
+                format: 'Hex (#000000)',
+                utilisation: 'Badges, bordures, accents',
+                conseil: 'Cohérent avec votre identité'
+              }
+            ]
+          },
+          {
+            numero: 3,
+            titre: 'Catégorisation',
+            options: [
+              'Sélectionnez votre Univers principal (1 requis)',
+              'Ajoutez jusqu\'à 2 univers secondaires',
+              'Tags personnalisés (10 max)',
+              'Cela aide les utilisateurs à vous découvrir'
+            ],
+            univers: ['Musique', 'Gaming', 'Tech', 'Éducation', 'Sport', 'Beauté', 'Cuisine', 'Voyage', 'Business', 'Art', 'Science', 'Autre']
+          },
+          {
+            numero: 4,
+            titre: 'Configuration des sections',
+            sections: [
+              {
+                nom: 'Accueil',
+                obligatoire: true,
+                description: 'Vidéo à la une + playlists sélectionnées'
+              },
+              {
+                nom: 'Vidéos',
+                obligatoire: true,
+                description: 'Toutes vos vidéos publiques'
+              },
+              {
+                nom: 'Shorts',
+                optionnel: true,
+                description: 'Vidéos courtes (<60s)'
+              },
+              {
+                nom: 'Albums',
+                optionnel: true,
+                description: 'Collections payantes de contenu'
+              },
+              {
+                nom: 'Lives',
+                optionnel: true,
+                description: 'Diffusions en direct et replays'
+              },
+              {
+                nom: 'Store',
+                optionnel: true,
+                description: 'Merchandising et produits dérivés'
+              },
+              {
+                nom: 'Playlists',
+                optionnel: true,
+                description: 'Collections thématiques'
+              },
+              {
+                nom: 'Communauté',
+                optionnel: true,
+                description: 'Posts texte, sondages, annonces'
+              }
+            ],
+            conseil: 'Activez seulement ce que vous utiliserez'
+          },
+          {
+            numero: 5,
+            titre: 'Liens et réseaux sociaux',
+            maximum: 5,
+            exemples: [
+              'Site web personnel',
+              'Instagram',
+              'Twitter/X',
+              'TikTok',
+              'Email professionnel'
+            ]
+          },
+          {
+            numero: 6,
+            titre: 'Paramètres de confidentialité',
+            options: [
+              {
+                nom: 'Visibilité chaîne',
+                choix: ['Public', 'Non répertorié', 'Privé'],
+                conseil: 'Public pour être découvrable'
+              },
+              {
+                nom: 'Qui peut commenter',
+                choix: ['Tout le monde', 'Abonnés uniquement', 'Personne'],
+                defaut: 'Tout le monde'
+              },
+              {
+                nom: 'Statistiques publiques',
+                afficher: ['Nombre abonnés', 'Vues totales'],
+                conseil: 'Transparence = confiance'
+              }
+            ]
+          }
+        ],
+        validation: {
+          titre: 'Validation et publication',
+          processus: [
+            'Revérifiez toutes les informations',
+            'Cliquez sur "Créer la chaîne"',
+            'Chaîne créée instantanément',
+            'URL active: goroti.com/@votre-handle',
+            'Apparaît dans la recherche sous 24h'
+          ]
+        },
+        apresCreation: {
+          titre: 'Prochaines étapes',
+          actions: [
+            'Publier votre première vidéo',
+            'Créer 3-5 playlists thématiques',
+            'Rédiger un post de bienvenue',
+            'Promouvoir sur vos réseaux sociaux',
+            'Configurer la monétisation (si KYC fait)'
+          ]
+        },
+        limites: {
+          chainesParCompte: 5,
+          tempsCreation: '5-10 minutes',
+          modificationPosterieure: 'Possible à tout moment'
+        },
+        bonnesPratiques: [
+          'Nom de chaîne descriptif et unique',
+          'Bio complète avec mots-clés pertinents',
+          'Visuels professionnels haute qualité',
+          'Cohérence identité visuelle',
+          'Sections activées selon contenu réel',
+          'Liens externes vérifiés fonctionnels'
+        ]
+      }
     },
     {
       category: 'getting-started',
       title: 'Vérification d\'identité (KYC)',
-      description: 'Processus de vérification pour la monétisation',
+      description: 'Processus complet de vérification pour débloquer la monétisation',
       icon: CheckCircle,
       color: 'text-cyan-400',
+      content: {
+        definition: 'KYC (Know Your Customer) est le processus de vérification d\'identité requis pour monétiser et retirer des revenus.',
+        pourquoi: [
+          'Conformité réglementaire financière',
+          'Lutte contre fraude et blanchiment',
+          'Protection des créateurs et utilisateurs',
+          'Obligation légale pour paiements'
+        ],
+        prerequis: [
+          'Compte Goroti actif',
+          'Âge minimum 18 ans',
+          'Document d\'identité valide',
+          'Justificatif de domicile récent (<3 mois)',
+          'Smartphone avec caméra (selfie)'
+        ],
+        niveaux: [
+          {
+            niveau: 1,
+            nom: 'Basique',
+            verification: 'Email vérifié',
+            avantages: ['Utiliser la plateforme', 'Commenter', 'S\'abonner'],
+            limites: ['Pas de monétisation', 'Pas d\'achats >50€']
+          },
+          {
+            niveau: 2,
+            nom: 'Intermédiaire',
+            verification: 'ID + Selfie',
+            documentsAcceptes: [
+              'Carte d\'identité nationale',
+              'Passeport',
+              'Permis de conduire'
+            ],
+            avantages: [
+              'Achats jusqu\'à 500€/mois',
+              'Tips créateurs',
+              'Retraits jusqu\'à 500€/mois'
+            ],
+            delaiValidation: '1-3 jours ouvrés'
+          },
+          {
+            niveau: 3,
+            nom: 'Avancé',
+            verification: 'ID + Selfie + Justificatif domicile',
+            documentsAcceptes: [
+              'Facture électricité/gaz/eau',
+              'Attestation assurance habitation',
+              'Avis d\'imposition',
+              'Relevé bancaire'
+            ],
+            avantages: [
+              'Monétisation complète',
+              'Retraits illimités',
+              'Badge vérifié',
+              'Marketplace créateurs'
+            ],
+            delaiValidation: '2-5 jours ouvrés'
+          },
+          {
+            niveau: 4,
+            nom: 'Professionnel/Entreprise',
+            verification: 'Documents légaux entreprise',
+            documentsRequis: [
+              'Extrait Kbis (<3 mois)',
+              'Statuts société',
+              'ID représentant légal',
+              'RIB professionnel'
+            ],
+            avantages: [
+              'Factures automatiques',
+              'TVA intracommunautaire',
+              'Multi-utilisateurs',
+              'API accès'
+            ],
+            delaiValidation: '5-10 jours ouvrés'
+          }
+        ],
+        processusDetaille: {
+          etape1: {
+            titre: 'Démarrer la vérification',
+            acces: 'Profil → Paramètres → Vérification d\'identité',
+            ou: 'Lors de la première tentative de retrait',
+            choix: 'Sélectionnez le niveau de vérification souhaité'
+          },
+          etape2: {
+            titre: 'Informations personnelles',
+            champs: [
+              'Nom complet (tel qu\'inscrit sur ID)',
+              'Date de naissance',
+              'Nationalité',
+              'Adresse complète',
+              'Pays de résidence fiscale'
+            ],
+            important: 'Les informations doivent correspondre exactement aux documents'
+          },
+          etape3: {
+            titre: 'Upload document d\'identité',
+            instructions: [
+              'Photo claire et nette',
+              'Document entier visible',
+              'Tous les coins visibles',
+              'Pas de reflets',
+              'Texte lisible',
+              'Document non expiré'
+            ],
+            formats: 'JPG, PNG, PDF',
+            tailleMax: '10 MB par fichier',
+            faces: 'Recto ET verso requis'
+          },
+          etape4: {
+            titre: 'Selfie de vérification',
+            methode: 'Via webcam ou smartphone',
+            instructions: [
+              'Visage centré et bien éclairé',
+              'Retirez lunettes/chapeau',
+              'Arrière-plan neutre',
+              'Regardez la caméra',
+              'Pas de filtre'
+            ],
+            technologie: 'Reconnaissance faciale comparée à l\'ID',
+            securite: 'Détection de liveness (anti-photo)'
+          },
+          etape5: {
+            titre: 'Justificatif de domicile (Niveau 3+)',
+            conditions: [
+              'Date récente (<3 mois)',
+              'Nom et adresse visibles',
+              'Logo organisme officiel',
+              'Document original (pas de capture)'
+            ]
+          },
+          etape6: {
+            titre: 'Validation manuelle',
+            processus: [
+              'Documents envoyés à l\'équipe',
+              'Vérification par agents certifiés',
+              'Email notification de statut',
+              'Statut consultable dans Paramètres'
+            ],
+            delais: {
+              niveau2: '1-3 jours ouvrés',
+              niveau3: '2-5 jours ouvrés',
+              niveau4: '5-10 jours ouvrés'
+            },
+            heuresOuvrées: 'Lun-Ven 9h-18h (hors jours fériés)'
+          }
+        },
+        refusCommuns: {
+          titre: 'Raisons de refus fréquentes',
+          causes: [
+            {
+              raison: 'Photo floue ou illisible',
+              solution: 'Reprendre photo en bonne luminosité'
+            },
+            {
+              raison: 'Document expiré',
+              solution: 'Utiliser ID valide et à jour'
+            },
+            {
+              raison: 'Informations ne correspondent pas',
+              solution: 'Vérifier orthographe et correspondance exacte'
+            },
+            {
+              raison: 'Selfie ne correspond pas à l\'ID',
+              solution: 'Éclairage optimal, visage découvert'
+            },
+            {
+              raison: 'Document tronqué',
+              solution: 'Capturer le document entier'
+            },
+            {
+              raison: 'Justificatif trop ancien',
+              solution: 'Document <3 mois obligatoire'
+            }
+          ],
+          quefaire: 'Email reçu avec raison précise + possibilité resoumission'
+        },
+        securitePrivacy: {
+          titre: 'Sécurité et confidentialité',
+          garanties: [
+            'Données chiffrées SSL/TLS',
+            'Stockage sécurisé conforme RGPD',
+            'Accès limité équipe KYC',
+            'Aucune revente de données',
+            'Suppression possible sur demande',
+            'Conformité bancaire européenne'
+          ],
+          partenaire: 'Vérification via partenaire certifié (Stripe Identity)',
+          normes: ['ISO 27001', 'PCI DSS', 'SOC 2']
+        },
+        apresValidation: {
+          titre: 'Après validation réussie',
+          immediate: [
+            'Badge vérifié sur profil',
+            'Accès monétisation débloqué',
+            'Limites de retrait augmentées',
+            'Marketplace accessible (niveau 3+)'
+          ],
+          actions: [
+            'Configurer méthode de paiement',
+            'Activer canaux monétisation souhaités',
+            'Publier contenu premium si désiré',
+            'Effectuer premier retrait'
+          ]
+        },
+        faq: [
+          {
+            q: 'Combien de temps la vérification est-elle valide ?',
+            r: 'Illimitée, sauf changement données (adresse, nom)'
+          },
+          {
+            q: 'Puis-je utiliser un pseudonyme ?',
+            r: 'Non, nom légal requis pour KYC. Pseudonyme public reste possible.'
+          },
+          {
+            q: 'Que faire si je n\'ai pas de justificatif à mon nom ?',
+            r: 'Attestation d\'hébergement possible avec ID de l\'hébergeur'
+          },
+          {
+            q: 'La vérification est-elle payante ?',
+            r: 'Non, totalement gratuite'
+          },
+          {
+            q: 'Puis-je retirer avant validation ?',
+            r: 'Non, KYC niveau 2+ obligatoire'
+          }
+        ],
+        coutTotal: 'Gratuit',
+        obligatoire: 'Pour monétisation uniquement'
+      }
     },
     {
       category: 'creators',
       title: 'Publier votre première vidéo',
-      description: 'Upload, métadonnées et optimisation',
+      description: 'Guide complet d\'upload, optimisation SEO et publication',
       icon: Video,
       color: 'text-blue-400',
     },
@@ -943,77 +1491,77 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       color: 'text-blue-400',
     },
     {
-      category: 'payments',
+      category: 'monetization',
       title: 'Acheter du contenu',
       description: 'Paiements sécurisés et accès immédiat',
       icon: ShoppingBag,
       color: 'text-green-400',
     },
     {
-      category: 'payments',
+      category: 'monetization',
       title: 'Utiliser TruCoin',
       description: 'Wallet, recharge et conversion',
       icon: Wallet,
       color: 'text-green-400',
     },
     {
-      category: 'payments',
+      category: 'monetization',
       title: 'Retrait de revenus',
       description: 'Seuils, délais et méthodes de paiement',
       icon: DollarSign,
       color: 'text-green-400',
     },
     {
-      category: 'payments',
+      category: 'monetization',
       title: 'Délais bancaires',
       description: 'Comprendre les délais de virement',
       icon: AlertCircle,
       color: 'text-green-400',
     },
     {
-      category: 'security',
+      category: 'account',
       title: 'Protection copyright',
       description: 'Signaler une violation de droits d\'auteur',
       icon: Shield,
       color: 'text-red-400',
     },
     {
-      category: 'security',
+      category: 'account',
       title: 'Signalement de contenu',
       description: 'Procédure de signalement et modération',
       icon: AlertCircle,
       color: 'text-red-400',
     },
     {
-      category: 'security',
+      category: 'account',
       title: 'Contestation DMCA',
       description: 'Comment contester un retrait de contenu',
       icon: Scale,
       color: 'text-red-400',
     },
     {
-      category: 'security',
+      category: 'account',
       title: 'Suppression de contenu',
       description: 'Politique et procédure de suppression',
       icon: FileText,
       color: 'text-red-400',
     },
     {
-      category: 'marketplace',
+      category: 'community',
       title: 'Commander un service',
       description: 'Marketplace de services créateurs',
       icon: ShoppingBag,
       color: 'text-yellow-400',
     },
     {
-      category: 'marketplace',
+      category: 'community',
       title: 'Livrer un travail',
       description: 'Validation et livraison client',
       icon: CheckCircle,
       color: 'text-yellow-400',
     },
     {
-      category: 'marketplace',
+      category: 'community',
       title: 'Litiges et escrow',
       description: 'Résolution des conflits marketplace',
       icon: Scale,
@@ -1243,25 +1791,37 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
 
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-white mb-6">Articles & Guides Pratiques</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="space-y-4">
             {filteredArticles.map((article, index) => (
-              <button
-                key={index}
-                className="flex items-start gap-4 p-5 bg-gray-800/50 border border-gray-700 rounded-xl hover:border-cyan-600/50 hover:bg-gray-800 transition-all text-left group"
-              >
-                <div className="p-2.5 bg-gray-900 rounded-lg shrink-0 group-hover:bg-gray-800 transition-colors">
-                  <article.icon className={`w-5 h-5 ${article.color}`} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-white font-semibold mb-1 group-hover:text-cyan-400 transition-colors">
-                    {article.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm line-clamp-2">
-                    {article.description}
-                  </p>
-                </div>
-                <ChevronRight className="w-5 h-5 text-gray-600 group-hover:text-cyan-400 shrink-0 transition-colors" />
-              </button>
+              <div key={index} className="bg-gray-800/30 border border-gray-700 rounded-xl overflow-hidden">
+                <button
+                  onClick={() => setExpandedArticle(expandedArticle === article.title ? null : article.title)}
+                  className="w-full flex items-start gap-4 p-5 hover:bg-gray-800/50 transition-all text-left group"
+                >
+                  <div className="p-2.5 bg-gray-900 rounded-lg shrink-0 group-hover:bg-gray-800 transition-colors">
+                    <article.icon className={`w-5 h-5 ${article.color}`} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-white font-semibold mb-1 group-hover:text-cyan-400 transition-colors">
+                      {article.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm">
+                      {article.description}
+                    </p>
+                  </div>
+                  <ChevronDown
+                    className={`w-5 h-5 text-gray-600 group-hover:text-cyan-400 shrink-0 transition-all ${
+                      expandedArticle === article.title ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+
+                {expandedArticle === article.title && article.content && (
+                  <div className="border-t border-gray-700 p-6 bg-gray-900/50">
+                    {renderDocContent(article.content)}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </section>
