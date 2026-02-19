@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import {
   ArrowLeft, Edit, Star, Users, Video, Eye, Share2,
-  MapPin, Calendar, Link2, ExternalLink, Bell, BellOff, Check, Heart
+  MapPin, Calendar, Link2, ExternalLink, Bell, BellOff, Check, Heart, Play
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { profileEnhancedService, EnhancedProfile, SocialLink } from '../services/profileEnhancedService';
 import { videoService } from '../services/videoService';
+import { channelService, CreatorChannel } from '../services/channelService';
 import ShareProfileModal from '../components/profile/ShareProfileModal';
 import ProfileReviewsSection from '../components/profile/ProfileReviewsSection';
 import ProfileOptionsMenu from '../components/profile/ProfileOptionsMenu';
@@ -24,11 +25,12 @@ export default function EnhancedProfilePage({ userId, onNavigate }: EnhancedProf
   const [profile, setProfile] = useState<EnhancedProfile | null>(null);
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
   const [videos, setVideos] = useState<any[]>([]);
+  const [channels, setChannels] = useState<CreatorChannel[]>([]);
   const [loading, setLoading] = useState(true);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showSupportModal, setShowSupportModal] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [activeTab, setActiveTab] = useState<'videos' | 'about' | 'reviews' | 'supporters'>('videos');
+  const [activeTab, setActiveTab] = useState<'videos' | 'channels' | 'about' | 'reviews' | 'supporters'>('videos');
 
   const isOwnProfile = !userId || userId === user?.id;
   const profileId = userId || user?.id || '';
@@ -50,6 +52,9 @@ export default function EnhancedProfilePage({ userId, onNavigate }: EnhancedProf
 
       const videoData = await videoService.getVideosByCreator(profileId);
       setVideos(videoData);
+
+      const channelsData = await channelService.getChannels(profileId);
+      setChannels(channelsData);
     } catch (error) {
       console.error('Error loading profile:', error);
     } finally {
@@ -269,6 +274,16 @@ export default function EnhancedProfilePage({ userId, onNavigate }: EnhancedProf
                 Vidéos
               </button>
               <button
+                onClick={() => setActiveTab('channels')}
+                className={`pb-4 font-semibold transition-colors border-b-2 ${
+                  activeTab === 'channels'
+                    ? 'border-primary-500 text-white'
+                    : 'border-transparent text-gray-400 hover:text-white'
+                }`}
+              >
+                Chaînes ({channels.length})
+              </button>
+              <button
                 onClick={() => setActiveTab('about')}
                 className={`pb-4 font-semibold transition-colors border-b-2 ${
                   activeTab === 'about'
@@ -319,6 +334,110 @@ export default function EnhancedProfilePage({ userId, onNavigate }: EnhancedProf
                       onClick={() => onNavigate('video', { videoId: video.id })}
                     />
                   ))
+                )}
+              </div>
+            )}
+
+            {activeTab === 'channels' && (
+              <div className="space-y-4">
+                {channels.length === 0 ? (
+                  <div className="text-center py-12 bg-gray-900 rounded-xl">
+                    <Play className="w-12 h-12 mx-auto mb-3 opacity-50 text-gray-400" />
+                    <p className="text-gray-400 mb-4">Aucune chaîne créée</p>
+                    {isOwnProfile && (
+                      <button
+                        onClick={() => onNavigate('creator-setup')}
+                        className="px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-semibold transition-colors"
+                      >
+                        Créer une chaîne
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {channels.map((channel) => (
+                      <div
+                        key={channel.id}
+                        onClick={() => onNavigate('channel', { channelId: channel.id })}
+                        className="bg-gray-900 hover:bg-gray-850 rounded-xl overflow-hidden cursor-pointer transition-all group"
+                      >
+                        <div className="relative h-32 bg-gradient-to-r from-primary-500/20 to-accent-500/20">
+                          {channel.banner_url ? (
+                            <img
+                              src={channel.banner_url}
+                              alt={channel.channel_name}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <Play className="w-12 h-12 text-gray-600" />
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-4">
+                          <div className="flex items-start gap-3">
+                            <div className="flex-shrink-0">
+                              {channel.avatar_url ? (
+                                <img
+                                  src={channel.avatar_url}
+                                  alt={channel.channel_name}
+                                  className="w-16 h-16 rounded-full object-cover"
+                                />
+                              ) : (
+                                <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center text-2xl font-bold text-gray-400">
+                                  {channel.channel_name[0]}
+                                </div>
+                              )}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 mb-1">
+                                <h3 className="font-bold text-lg truncate group-hover:text-primary-400 transition-colors">
+                                  {channel.channel_name}
+                                </h3>
+                                {channel.is_verified && (
+                                  <Check className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                                )}
+                              </div>
+                              <p className="text-sm text-gray-400 mb-2 line-clamp-2">
+                                {channel.description || 'Aucune description'}
+                              </p>
+                              <div className="flex items-center gap-4 text-xs text-gray-500">
+                                <div className="flex items-center gap-1">
+                                  <Users className="w-3 h-3" />
+                                  <span>{channel.subscriber_count.toLocaleString()} abonnés</span>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <Video className="w-3 h-3" />
+                                  <span>{channel.video_count} vidéos</span>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <Eye className="w-3 h-3" />
+                                  <span>{(channel.total_views / 1000000).toFixed(1)}M vues</span>
+                                </div>
+                              </div>
+                              {channel.channel_type && (
+                                <div className="mt-2">
+                                  <span className="px-2 py-0.5 bg-primary-500/20 text-primary-400 text-xs rounded-full border border-primary-500/30 capitalize">
+                                    {channel.channel_type}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {isOwnProfile && channels.length > 0 && (
+                  <div className="text-center pt-4">
+                    <button
+                      onClick={() => onNavigate('my-channels')}
+                      className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-semibold transition-colors"
+                    >
+                      Gérer mes chaînes
+                    </button>
+                  </div>
                 )}
               </div>
             )}
