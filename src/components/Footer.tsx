@@ -122,10 +122,18 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('career')}
+                  onClick={() => onNavigate('careers')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
-                  Carrière
+                  Carrières
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('enterprise')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Entreprise
                 </button>
               </li>
               <li>

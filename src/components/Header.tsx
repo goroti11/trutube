@@ -117,13 +117,23 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                           </button>
                           <button
                             onClick={() => {
-                              onNavigate('career');
+                              onNavigate('careers');
                               setShowMoreMenu(false);
                             }}
                             className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
                           >
                             <Briefcase className="w-4 h-4" />
-                            Carrière
+                            Carrières
+                          </button>
+                          <button
+                            onClick={() => {
+                              onNavigate('enterprise');
+                              setShowMoreMenu(false);
+                            }}
+                            className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
+                          >
+                            <Briefcase className="w-4 h-4" />
+                            Entreprise
                           </button>
                           <button
                             onClick={() => {
