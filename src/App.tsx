@@ -59,6 +59,8 @@ import ChannelAnalyticsPage from './pages/ChannelAnalyticsPage';
 import RevenueModelPage from './pages/RevenueModelPage';
 import ShortsSystemPage from './pages/ShortsSystemPage';
 import NativeSponsoringPage from './pages/NativeSponsoringPage';
+import CookieBanner from './components/CookieBanner';
+import NotificationManager from './components/NotificationManager';
 
 type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring';
 
@@ -604,6 +606,9 @@ function AppContent() {
         {currentPage === 'native-sponsoring' && (
           <NativeSponsoringPage onNavigate={(page) => setCurrentPage(page as Page)} />
         )}
+
+        <CookieBanner />
+        <NotificationManager />
 
         {/* Global MiniPlayer */}
         {currentVideo && currentPage !== 'watch' && currentPage !== 'mobile-demo' && (
