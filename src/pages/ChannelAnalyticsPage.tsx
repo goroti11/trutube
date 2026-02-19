@@ -155,7 +155,7 @@ export default function ChannelAnalyticsPage({ channelId, onNavigate }: Props) {
                 <h3 className="text-sm font-semibold text-white mb-4">Sources de trafic</h3>
                 <div className="space-y-3">
                   {[
-                    { label: 'Recherche TruTube', pct: 0 },
+                    { label: 'Recherche GOROTI', pct: 0 },
                     { label: 'Recommandations', pct: 0 },
                     { label: 'Liens externes', pct: 0 },
                     { label: 'Abonnements', pct: 0 },
