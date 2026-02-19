@@ -94,7 +94,7 @@ export default function VideoPlayerPage({
     if (navigator.share) {
       navigator.share({
         title: localVideo.title,
-        text: `Regardez "${localVideo.title}" sur TruTube`,
+        text: `Regardez "${localVideo.title}" sur GOROTI`,
         url: window.location.href
       });
     } else {

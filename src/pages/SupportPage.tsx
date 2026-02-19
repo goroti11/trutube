@@ -13,15 +13,15 @@ interface SupportPageProps {
 const FAQ_ITEMS = [
   {
     question: 'Comment fonctionne le système anti-fausses vues?',
-    answer: 'TruTube utilise un algorithme sophistiqué qui analyse le comportement des utilisateurs, la durée de visionnage, les interactions et d\'autres métriques pour détecter les fausses vues. Les contenus avec des vues artificiellement gonflées sont pénalisés dans les recommandations.',
+    answer: 'GOROTI utilise un algorithme sophistiqué qui analyse le comportement des utilisateurs, la durée de visionnage, les interactions et d\'autres métriques pour détecter les fausses vues. Les contenus avec des vues artificiellement gonflées sont pénalisés dans les recommandations.',
   },
   {
     question: 'Comment créer mon propre univers?',
     answer: 'Pour créer un univers, accédez à votre tableau de bord créateur et cliquez sur "Créer un univers". Vous devrez définir un nom, une description, et les règles de votre univers. Une fois validé, votre univers sera accessible à tous.',
   },
   {
-    question: 'Comment puis-je gagner de l\'argent sur TruTube?',
-    answer: 'TruTube offre plusieurs moyens de monétisation: les tips directs de votre audience, les abonnements mensuels, et le partage des revenus publicitaires basé sur l\'engagement réel (pas seulement les vues).',
+    question: 'Comment puis-je gagner de l\'argent sur GOROTI?',
+    answer: 'GOROTI offre plusieurs moyens de monétisation: les tips directs de votre audience, les abonnements mensuels, et le partage des revenus publicitaires basé sur l\'engagement réel (pas seulement les vues).',
   },
   {
     question: 'Quelle est la différence entre univers et sous-univers?',
@@ -96,30 +96,30 @@ export const SupportPage = ({ onNavigate }: SupportPageProps) => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-cyan-500/50 transition-colors">
+            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-red-500/50 transition-colors">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 bg-cyan-500/20 rounded-lg">
-                  <HelpCircle className="w-6 h-6 text-cyan-500" />
+                <div className="p-3 bg-red-500/20 rounded-lg">
+                  <HelpCircle className="w-6 h-6 text-red-500" />
                 </div>
                 <h2 className="text-2xl font-semibold text-white">FAQ</h2>
               </div>
               <p className="text-gray-300 mb-4">
                 Consultez les questions fréquemment posées par notre communauté
               </p>
-              <p className="text-cyan-400 font-medium">Plus de 50 articles disponibles</p>
+              <p className="text-red-400 font-medium">Plus de 50 articles disponibles</p>
             </div>
 
-            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-cyan-500/50 transition-colors">
+            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 hover:border-red-500/50 transition-colors">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 bg-cyan-500/20 rounded-lg">
-                  <Book className="w-6 h-6 text-cyan-500" />
+                <div className="p-3 bg-red-500/20 rounded-lg">
+                  <Book className="w-6 h-6 text-red-500" />
                 </div>
                 <h2 className="text-2xl font-semibold text-white">Documentation</h2>
               </div>
               <p className="text-gray-300 mb-4">
                 Guides détaillés pour créateurs et utilisateurs
               </p>
-              <p className="text-cyan-400 font-medium">Tutoriels vidéo et articles</p>
+              <p className="text-red-400 font-medium">Tutoriels vidéo et articles</p>
             </div>
           </div>
 
@@ -133,7 +133,7 @@ export const SupportPage = ({ onNavigate }: SupportPageProps) => {
                 >
                   <summary className="px-6 py-4 cursor-pointer hover:bg-gray-800/50 transition-colors flex items-center justify-between">
                     <span className="text-white font-medium">{item.question}</span>
-                    <HelpCircle className="w-5 h-5 text-gray-400 group-open:text-cyan-500 transition-colors" />
+                    <HelpCircle className="w-5 h-5 text-gray-400 group-open:text-red-500 transition-colors" />
                   </summary>
                   <div className="px-6 pb-4 text-gray-300">
                     {item.answer}
@@ -145,7 +145,7 @@ export const SupportPage = ({ onNavigate }: SupportPageProps) => {
 
           <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8">
             <div className="flex items-center gap-3 mb-6">
-              <MessageCircle className="w-6 h-6 text-cyan-500" />
+              <MessageCircle className="w-6 h-6 text-red-500" />
               <h2 className="text-2xl font-semibold text-white">Contactez-nous</h2>
             </div>
 
@@ -180,7 +180,7 @@ export const SupportPage = ({ onNavigate }: SupportPageProps) => {
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   disabled={loading}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
                   required
                 >
                   <option value="">Sélectionnez une catégorie</option>
@@ -202,7 +202,7 @@ export const SupportPage = ({ onNavigate }: SupportPageProps) => {
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   disabled={loading}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
                   placeholder="Résumez votre demande en quelques mots"
                   required
                 />
@@ -217,7 +217,7 @@ export const SupportPage = ({ onNavigate }: SupportPageProps) => {
                   onChange={(e) => setMessage(e.target.value)}
                   disabled={loading}
                   rows={8}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50 resize-none"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 resize-none"
                   placeholder="Décrivez votre problème ou votre question en détail..."
                   required
                 />
@@ -235,7 +235,7 @@ export const SupportPage = ({ onNavigate }: SupportPageProps) => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="flex-1 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {loading ? (
                     <>
@@ -254,11 +254,11 @@ export const SupportPage = ({ onNavigate }: SupportPageProps) => {
 
             <div className="mt-8 pt-8 border-t border-gray-800">
               <div className="flex items-start gap-4">
-                <Mail className="w-5 h-5 text-cyan-500 mt-1" />
+                <Mail className="w-5 h-5 text-red-500 mt-1" />
                 <div>
                   <h3 className="text-white font-medium mb-1">Email de support</h3>
                   <p className="text-gray-400 text-sm">
-                    Pour les demandes urgentes: <span className="text-cyan-400">support@trutube.com</span>
+                    Pour les demandes urgentes: <span className="text-red-400">support@goroti.com</span>
                   </p>
                 </div>
               </div>

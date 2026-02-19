@@ -99,7 +99,7 @@ export const universeDetails: Record<string, UniverseDetail> = {
     icon: '📚',
     color: 'from-yellow-500 to-orange-500',
     description: 'Formations, business, finance, crypto, IA et apprentissage',
-    longDescription: 'L\'univers Know est le hub éducatif de TruTube. Partagez vos connaissances en business, finance, crypto, IA, marketing et bien plus. Aidez votre audience à développer de nouvelles compétences et à se former sur des sujets d\'actualité.',
+    longDescription: 'L\'univers Know est le hub éducatif de GOROTI. Partagez vos connaissances en business, finance, crypto, IA, marketing et bien plus. Aidez votre audience à développer de nouvelles compétences et à se former sur des sujets d\'actualité.',
     bestPractices: [
       'Structurez votre contenu avec une intro, développement et conclusion',
       'Utilisez des supports visuels (slides, graphiques, schémas)',

@@ -165,7 +165,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
       <>
         <Header onNavigate={onNavigate} showNavigation={true} />
         <div className="flex items-center justify-center min-h-[80vh]">
-          <Loader2 className="w-8 h-8 text-cyan-500 animate-spin" />
+          <Loader2 className="w-8 h-8 text-red-500 animate-spin" />
         </div>
       </>
     );
@@ -291,7 +291,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
 
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
               <div className="flex items-center gap-3 mb-6">
-                <Bell className="w-5 h-5 text-cyan-500" />
+                <Bell className="w-5 h-5 text-red-500" />
                 <h2 className="text-xl font-semibold text-white">Notifications</h2>
               </div>
 
@@ -305,7 +305,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                     type="checkbox"
                     checked={settings.email_notifications}
                     onChange={(e) => setSettings({ ...settings, email_notifications: e.target.checked })}
-                    className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-cyan-600 focus:ring-2 focus:ring-cyan-500"
+                    className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-red-600 focus:ring-2 focus:ring-red-500"
                   />
                 </label>
 
@@ -318,7 +318,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                     type="checkbox"
                     checked={settings.push_notifications}
                     onChange={(e) => setSettings({ ...settings, push_notifications: e.target.checked })}
-                    className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-cyan-600 focus:ring-2 focus:ring-cyan-500"
+                    className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-red-600 focus:ring-2 focus:ring-red-500"
                   />
                 </label>
 
@@ -331,7 +331,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                     type="checkbox"
                     checked={settings.marketing_emails}
                     onChange={(e) => setSettings({ ...settings, marketing_emails: e.target.checked })}
-                    className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-cyan-600 focus:ring-2 focus:ring-cyan-500"
+                    className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-red-600 focus:ring-2 focus:ring-red-500"
                   />
                 </label>
               </div>
@@ -339,7 +339,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
 
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
               <div className="flex items-center gap-3 mb-6">
-                <Shield className="w-5 h-5 text-cyan-500" />
+                <Shield className="w-5 h-5 text-red-500" />
                 <h2 className="text-xl font-semibold text-white">Confidentialité</h2>
               </div>
 
@@ -353,7 +353,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                     type="checkbox"
                     checked={settings.privacy_public_profile}
                     onChange={(e) => setSettings({ ...settings, privacy_public_profile: e.target.checked })}
-                    className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-cyan-600 focus:ring-2 focus:ring-cyan-500"
+                    className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-red-600 focus:ring-2 focus:ring-red-500"
                   />
                 </label>
 
@@ -366,7 +366,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                     type="checkbox"
                     checked={settings.privacy_show_activity}
                     onChange={(e) => setSettings({ ...settings, privacy_show_activity: e.target.checked })}
-                    className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-cyan-600 focus:ring-2 focus:ring-cyan-500"
+                    className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-red-600 focus:ring-2 focus:ring-red-500"
                   />
                 </label>
               </div>
@@ -374,7 +374,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
 
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
               <div className="flex items-center gap-3 mb-6">
-                <Eye className="w-5 h-5 text-cyan-500" />
+                <Eye className="w-5 h-5 text-red-500" />
                 <h2 className="text-xl font-semibold text-white">Apparence</h2>
               </div>
 
@@ -383,7 +383,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                   onClick={() => setSettings({ ...settings, theme: 'light' })}
                   className={`flex-1 p-4 rounded-lg border-2 transition-colors ${
                     settings.theme === 'light'
-                      ? 'border-cyan-500 bg-cyan-500/10'
+                      ? 'border-red-500 bg-red-500/10'
                       : 'border-gray-700 bg-gray-800/50 hover:border-gray-600'
                   }`}
                 >
@@ -395,7 +395,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                   onClick={() => setSettings({ ...settings, theme: 'dark' })}
                   className={`flex-1 p-4 rounded-lg border-2 transition-colors ${
                     settings.theme === 'dark'
-                      ? 'border-cyan-500 bg-cyan-500/10'
+                      ? 'border-red-500 bg-red-500/10'
                       : 'border-gray-700 bg-gray-800/50 hover:border-gray-600'
                   }`}
                 >
@@ -407,7 +407,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                   onClick={() => setSettings({ ...settings, theme: 'auto' })}
                   className={`flex-1 p-4 rounded-lg border-2 transition-colors ${
                     settings.theme === 'auto'
-                      ? 'border-cyan-500 bg-cyan-500/10'
+                      ? 'border-red-500 bg-red-500/10'
                       : 'border-gray-700 bg-gray-800/50 hover:border-gray-600'
                   }`}
                 >
@@ -419,7 +419,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
 
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
               <div className="flex items-center gap-3 mb-6">
-                <Lock className="w-5 h-5 text-cyan-500" />
+                <Lock className="w-5 h-5 text-red-500" />
                 <h2 className="text-xl font-semibold text-white">Changer le mot de passe</h2>
               </div>
 
@@ -432,7 +432,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                     type="password"
                     value={passwordData.newPassword}
                     onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500"
                     placeholder="••••••••"
                     minLength={6}
                   />
@@ -446,7 +446,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                     type="password"
                     value={passwordData.confirmPassword}
                     onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500"
                     placeholder="••••••••"
                     minLength={6}
                   />
@@ -455,7 +455,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                 <button
                   onClick={updatePassword}
                   disabled={saving || !passwordData.newPassword}
-                  className="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Mettre à jour le mot de passe
                 </button>
@@ -512,7 +512,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
               <button
                 onClick={saveSettings}
                 disabled={saving}
-                className="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
               >
                 {saving && <Loader2 className="w-4 h-4 animate-spin" />}
                 Enregistrer les paramètres

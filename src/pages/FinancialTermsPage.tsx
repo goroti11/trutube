@@ -69,11 +69,11 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
             Conditions financières
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            Conditions financières TruTube
+            Conditions financières GOROTI
           </h1>
           <p className="text-gray-400 mb-4">
             Termes complets régissant les paiements, commissions, retraits et remboursements
-            sur la plateforme TruTube.
+            sur la plateforme GOROTI.
           </p>
           <div className="flex items-center gap-4 text-xs text-gray-600">
             <span>Version 2.0</span>
@@ -114,7 +114,7 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
               </p>
               <p className="text-gray-400 text-xs">
                 Le traitement des paiements est assuré par des prestataires PSP certifiés PCI-DSS.
-                TruTube ne stocke jamais les données bancaires brutes.
+                GOROTI ne stocke jamais les données bancaires brutes.
               </p>
             </div>
           </div>
@@ -140,7 +140,7 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
             <Row label="Tips & super chats en direct" value="10%" />
             <Row label="Commandes marketplace" value="10%" />
             <Row label="Distribution externe (DSP)" value="5%" />
-            <Row label="Abonnement Premium spectateur" value="100% TruTube" />
+            <Row label="Abonnement Premium spectateur" value="100% GOROTI" />
           </div>
 
           <div className="p-4 bg-green-900/10 border border-green-800/30 rounded-xl mb-5">
@@ -154,15 +154,15 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
 
           <div className="space-y-3">
             <AccordionItem title="Modification des taux de commission">
-              <p>TruTube s'engage à notifier tout changement de taux de commission <strong className="text-white">30 jours calendaires à l'avance</strong> par email direct aux créateurs concernés et annonce publique.</p>
+              <p>GOROTI s'engage à notifier tout changement de taux de commission <strong className="text-white">30 jours calendaires à l'avance</strong> par email direct aux créateurs concernés et annonce publique.</p>
               <p>Les transactions réalisées avant l'entrée en vigueur d'un nouveau taux restent soumises au taux en vigueur au moment de la transaction.</p>
             </AccordionItem>
             <AccordionItem title="Remboursements d'acheteurs et impact créateur">
               <p>En cas de remboursement accordé à un acheteur dans les 14 jours (droit de rétractation UE) pour un contenu non-consommé, la commission précédemment créditée est débitée du wallet créateur.</p>
-              <p>Si le remboursement est accordé pour une raison technique imputable à TruTube, le créateur conserve sa commission.</p>
+              <p>Si le remboursement est accordé pour une raison technique imputable à GOROTI, le créateur conserve sa commission.</p>
             </AccordionItem>
             <AccordionItem title="Litiges et rétrofacturations (chargebacks)">
-              <p>En cas de chargeback initié par un acheteur auprès de sa banque, les fonds concernés sont bloqués en attente d'investigation. Si le chargeback est frauduleux, TruTube défend la transaction et les fonds sont restaurés. Si justifié, le montant (commission incluse) est déduit du wallet créateur concerné.</p>
+              <p>En cas de chargeback initié par un acheteur auprès de sa banque, les fonds concernés sont bloqués en attente d'investigation. Si le chargeback est frauduleux, GOROTI défend la transaction et les fonds sont restaurés. Si justifié, le montant (commission incluse) est déduit du wallet créateur concerné.</p>
             </AccordionItem>
           </div>
         </Section>
@@ -197,7 +197,7 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
                   ['Marketplace', 'Disponibles 48h après validation de la livraison par l\'acheteur'],
                 ].map(([source, delay]) => (
                   <div key={source as string} className="flex gap-3 text-xs">
-                    <Clock className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
+                    <Clock className="w-3.5 h-3.5 text-red-400 shrink-0 mt-0.5" />
                     <span><span className="text-white font-medium">{source} :</span> <span className="text-gray-400">{delay}</span></span>
                   </div>
                 ))}
@@ -207,13 +207,13 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
               <p>Si votre compte est suspendu pour investigation, les fonds sont mis en quarantaine pendant la durée de l'enquête. Si la suspension est levée, les fonds sont restitués intégralement. En cas de suspension définitive pour fraude avérée, les fonds peuvent être saisis conformément aux conditions d'utilisation.</p>
             </AccordionItem>
             <AccordionItem title="Fonds non retirés — expiration">
-              <p>Les fonds dans votre wallet ne sont pas soumis à expiration tant que votre compte est actif. En cas d'inactivité supérieure à 3 ans sans retrait, TruTube peut vous contacter pour vérifier votre intention de retirer. Les soldes inférieurs à 1€ peuvent être annulés après 3 ans d'inactivité.</p>
+              <p>Les fonds dans votre wallet ne sont pas soumis à expiration tant que votre compte est actif. En cas d'inactivité supérieure à 3 ans sans retrait, GOROTI peut vous contacter pour vérifier votre intention de retirer. Les soldes inférieurs à 1€ peuvent être annulés après 3 ans d'inactivité.</p>
             </AccordionItem>
           </div>
         </Section>
 
         {/* Remboursements */}
-        <Section icon={RefreshCw} color="text-cyan-400" title="Remboursements — Politique complète">
+        <Section icon={RefreshCw} color="text-red-400" title="Remboursements — Politique complète">
           <div className="grid md:grid-cols-2 gap-5 mb-5">
             <div className="p-5 bg-gray-900/50 border border-gray-800 rounded-xl">
               <h3 className="font-semibold text-white text-sm mb-3">Acheteurs — Droits de remboursement</h3>
@@ -243,7 +243,7 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
                   'Remboursement sur le moyen de paiement original',
                 ].map((step, i) => (
                   <li key={i} className="flex gap-2.5 text-xs text-gray-400">
-                    <span className="w-4 h-4 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center shrink-0 font-bold">{i + 1}</span>
+                    <span className="w-4 h-4 rounded-full bg-red-500/20 text-red-400 text-xs flex items-center justify-center shrink-0 font-bold">{i + 1}</span>
                     {step}
                   </li>
                 ))}
@@ -253,10 +253,10 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
 
           <div className="space-y-3">
             <AccordionItem title="Politique de remboursement créateur personnalisée">
-              <p>Les créateurs peuvent définir leur propre politique de remboursement dans Créateur Studio &gt; Paramètres &gt; Politique commerciale, à condition qu'elle soit <strong className="text-white">au moins aussi favorable</strong> que la politique minimale TruTube. Une politique plus restrictive que le droit de rétractation légal UE n'est pas autorisée.</p>
+              <p>Les créateurs peuvent définir leur propre politique de remboursement dans Créateur Studio &gt; Paramètres &gt; Politique commerciale, à condition qu'elle soit <strong className="text-white">au moins aussi favorable</strong> que la politique minimale GOROTI. Une politique plus restrictive que le droit de rétractation légal UE n'est pas autorisée.</p>
             </AccordionItem>
             <AccordionItem title="Remboursements pour raisons techniques">
-              <p>Si un problème technique imputable à TruTube empêche l'accès à un contenu payant pendant plus de 24h consécutives, les acheteurs concernés ont droit à un remboursement prorata ou à une extension de leur accès. Ces remboursements sont pris en charge par TruTube et ne débitent pas le wallet créateur.</p>
+              <p>Si un problème technique imputable à GOROTI empêche l'accès à un contenu payant pendant plus de 24h consécutives, les acheteurs concernés ont droit à un remboursement prorata ou à une extension de leur accès. Ces remboursements sont pris en charge par GOROTI et ne débitent pas le wallet créateur.</p>
             </AccordionItem>
           </div>
         </Section>
@@ -264,7 +264,7 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
         {/* Conformité fiscale */}
         <Section icon={Scale} color="text-orange-400" title="Conformité fiscale">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            TruTube fournit les documents nécessaires à la déclaration fiscale de vos revenus.
+            GOROTI fournit les documents nécessaires à la déclaration fiscale de vos revenus.
           </p>
           <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-5 mb-5">
             <h3 className="font-semibold text-white text-sm mb-3">Documents fournis automatiquement</h3>
@@ -282,7 +282,7 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
                   'Auto-entrepreneurs FR sous seuil : franchise de TVA applicable',
                   'SASU / SARL / SA : facture HT + TVA à reverser à l\'État',
                   'Créateurs UE hors France : règle du pays de résidence',
-                  'Créateurs hors UE : pas de TVA sur les services numériques depuis TruTube',
+                  'Créateurs hors UE : pas de TVA sur les services numériques depuis GOROTI',
                 ].map(rule => (
                   <li key={rule} className="flex gap-2 text-xs text-gray-400">
                     <span className="text-gray-700">•</span>{rule}
@@ -291,10 +291,10 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
               </ul>
             </AccordionItem>
             <AccordionItem title="Retenue à la source pour créateurs non-résidents UE">
-              <p>Les créateurs résidant hors de l'Union Européenne peuvent être soumis à une retenue à la source selon les conventions fiscales bilatérales. Une attestation de résidence fiscale permet de bénéficier de taux réduits. Pour obtenir ce formulaire, contactez <span className="text-cyan-400">tax@trutube.tv</span>.</p>
+              <p>Les créateurs résidant hors de l'Union Européenne peuvent être soumis à une retenue à la source selon les conventions fiscales bilatérales. Une attestation de résidence fiscale permet de bénéficier de taux réduits. Pour obtenir ce formulaire, contactez <span className="text-red-400">tax@goroti.tv</span>.</p>
             </AccordionItem>
             <AccordionItem title="Obligations de déclaration automatique (DAC7)">
-              <p>Conformément à la Directive DAC7 (UE 2021/514), TruTube est tenu de transmettre annuellement aux autorités fiscales les informations de revenus des créateurs dépassant certains seuils (250€ ou 30 transactions). Vous serez notifié si vous êtes concerné.</p>
+              <p>Conformément à la Directive DAC7 (UE 2021/514), GOROTI est tenu de transmettre annuellement aux autorités fiscales les informations de revenus des créateurs dépassant certains seuils (250€ ou 30 transactions). Vous serez notifié si vous êtes concerné.</p>
             </AccordionItem>
           </div>
         </Section>
@@ -306,7 +306,7 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
               <h3 className="font-semibold text-white text-sm mb-3">Procédure de réclamation</h3>
               <ol className="space-y-2">
                 {[
-                  'Contacter support@trutube.tv avec le détail du litige',
+                  'Contacter support@goroti.tv avec le détail du litige',
                   'Notre équipe finance examine sous 72h ouvrées',
                   'Proposition de résolution envoyée par email',
                   'Si non satisfait : médiation externe (ORL agréé)',
@@ -323,14 +323,14 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
               <h3 className="font-semibold text-white text-sm mb-3">Contacts finance</h3>
               <div className="space-y-3">
                 {[
-                  { label: 'Support paiements', email: 'payments@trutube.tv' },
-                  { label: 'Litiges et remboursements', email: 'refunds@trutube.tv' },
-                  { label: 'Questions fiscales', email: 'tax@trutube.tv' },
-                  { label: 'Fraude et sécurité', email: 'fraud@trutube.tv' },
+                  { label: 'Support paiements', email: 'payments@goroti.tv' },
+                  { label: 'Litiges et remboursements', email: 'refunds@goroti.tv' },
+                  { label: 'Questions fiscales', email: 'tax@goroti.tv' },
+                  { label: 'Fraude et sécurité', email: 'fraud@goroti.tv' },
                 ].map(({ label, email }) => (
                   <div key={label} className="flex justify-between items-center text-xs">
                     <span className="text-gray-400">{label}</span>
-                    <a href={`mailto:${email}`} className="text-cyan-400 hover:text-cyan-300 transition-colors">{email}</a>
+                    <a href={`mailto:${email}`} className="text-red-400 hover:text-red-300 transition-colors">{email}</a>
                   </div>
                 ))}
               </div>
@@ -351,7 +351,7 @@ export default function FinancialTermsPage({ onNavigate }: Props) {
         <div className="py-8 border-t border-gray-800 flex gap-3 flex-wrap">
           <button
             onClick={() => onNavigate('pricing')}
-            className="flex items-center gap-2 px-5 py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg text-sm font-medium transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
             Voir la tarification
             <ArrowRight className="w-4 h-4" />

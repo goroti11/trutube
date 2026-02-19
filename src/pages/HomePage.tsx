@@ -54,7 +54,7 @@ const universes = [
     id: 'lean',
     name: 'Lean',
     icon: Code,
-    color: 'from-cyan-600 to-cyan-800',
+    color: 'from-red-600 to-red-800',
     description: 'Dev, Frontend, Backend, UI/UX',
   },
   {

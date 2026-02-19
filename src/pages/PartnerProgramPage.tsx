@@ -68,7 +68,7 @@ export default function PartnerProgramPage() {
           <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-white mb-2">Déjà accepté</h2>
           <p className="text-gray-400 mb-6">
-            Vous avez déjà accepté les conditions du Programme Partenaire TruTube.
+            Vous avez déjà accepté les conditions du Programme Partenaire GOROTI.
           </p>
           <button
             onClick={() => navigate('#studio')}
@@ -101,7 +101,7 @@ export default function PartnerProgramPage() {
         <div className="bg-gray-800 rounded-lg overflow-hidden">
           <div className="bg-gradient-to-r from-red-600 to-red-700 p-8 text-center">
             <Shield className="w-16 h-16 text-white mx-auto mb-4" />
-            <h1 className="text-3xl font-bold text-white mb-2">Programme Partenaire TruTube</h1>
+            <h1 className="text-3xl font-bold text-white mb-2">Programme Partenaire GOROTI</h1>
             <p className="text-red-100">
               Rejoignez notre communauté de créateurs et monétisez votre contenu
             </p>
@@ -167,7 +167,7 @@ export default function PartnerProgramPage() {
                 />
                 <span className="text-gray-300 text-sm">
                   J'ai lu, compris et j'accepte l'ensemble des conditions du Programme Partenaire
-                  TruTube (version {terms.version}). Je reconnais être seul responsable de mes
+                  GOROTI (version {terms.version}). Je reconnais être seul responsable de mes
                   contenus, de mes déclarations fiscales et du respect des droits d'auteur.
                 </span>
               </label>
