@@ -57,6 +57,13 @@ export default function AdUnit({
   const loadAd = () => {
     if (isLoaded || isPremium) return;
 
+    const adClient = import.meta.env.VITE_GOOGLE_ADSENSE_CLIENT;
+
+    if (!adClient || adClient === '' || adClient === 'ca-pub-XXXXXXXXXXXXXXXX') {
+      setIsLoaded(true);
+      return;
+    }
+
     try {
       if (typeof window !== 'undefined' && window.adsbygoogle) {
         (window.adsbygoogle as any[]).push({});
@@ -66,7 +73,7 @@ export default function AdUnit({
         const script = document.createElement('script');
         script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
         script.async = true;
-        script.setAttribute('data-ad-client', import.meta.env.VITE_GOOGLE_ADSENSE_CLIENT || '');
+        script.setAttribute('data-ad-client', adClient);
         script.crossOrigin = 'anonymous';
 
         script.onload = () => {
@@ -77,10 +84,15 @@ export default function AdUnit({
           }
         };
 
+        script.onerror = () => {
+          setIsLoaded(true);
+        };
+
         document.head.appendChild(script);
       }
     } catch (error) {
       console.error('Error loading ad:', error);
+      setIsLoaded(true);
     }
   };
 
@@ -102,12 +114,18 @@ export default function AdUnit({
     return null;
   }
 
+  const adClient = import.meta.env.VITE_GOOGLE_ADSENSE_CLIENT;
+
+  if (!adClient || adClient === '' || adClient === 'ca-pub-XXXXXXXXXXXXXXXX') {
+    return null;
+  }
+
   return (
     <div className={`ad-container ${className}`} ref={adRef}>
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client={import.meta.env.VITE_GOOGLE_ADSENSE_CLIENT || ''}
+        data-ad-client={adClient}
         data-ad-slot={slot}
         data-ad-format={format}
         data-full-width-responsive={responsive ? 'true' : 'false'}
