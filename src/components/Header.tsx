@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Upload, LogIn, Compass, Settings, Sparkles, User, LogOut, ChevronDown, HelpCircle, Play, Users, Wallet, Crown, Shield, MoreVertical, Book, Briefcase, Info, MessageCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import Logo from './Logo';
+import LanguageSelector from './LanguageSelector';
 
 interface HeaderProps {
   onNavigate?: (page: string) => void;
@@ -162,6 +163,8 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                 </div>
               </>
             )}
+
+            <LanguageSelector />
 
             {user && (
               <button
