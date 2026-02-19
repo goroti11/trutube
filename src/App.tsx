@@ -61,8 +61,12 @@ import ShortsSystemPage from './pages/ShortsSystemPage';
 import NativeSponsoringPage from './pages/NativeSponsoringPage';
 import CookieBanner from './components/CookieBanner';
 import NotificationManager from './components/NotificationManager';
+import EnterprisePage from './pages/EnterprisePage';
+import CareerPage from './pages/CareerPage';
+import PricingPage from './pages/PricingPage';
+import ResourcesPage from './pages/ResourcesPage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -226,6 +230,10 @@ function AppContent() {
         'revenue-model': 'revenue-model',
         'shorts-system': 'shorts-system',
         'native-sponsoring': 'native-sponsoring',
+        'enterprise': 'enterprise',
+        'careers': 'careers',
+        'pricing': 'pricing',
+        'resources': 'resources',
       };
 
       if (hash in pageMap) {
@@ -605,6 +613,22 @@ function AppContent() {
 
         {currentPage === 'native-sponsoring' && (
           <NativeSponsoringPage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'enterprise' && (
+          <EnterprisePage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'careers' && (
+          <CareerPage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'pricing' && (
+          <PricingPage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'resources' && (
+          <ResourcesPage onNavigate={(page) => setCurrentPage(page as Page)} />
         )}
 
         <CookieBanner />
