@@ -2511,6 +2511,229 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       description: 'Paiements sécurisés et accès immédiat',
       icon: ShoppingBag,
       color: 'text-green-400',
+      content: {
+        introduction: 'Goroti propose un système d\'achat sécurisé pour accéder au contenu premium des créateurs (albums, vidéos payantes, cours, concerts).',
+        typesAchatsPossibles: [
+          {
+            type: 'Vidéo premium unique',
+            prix: '0,99€ - 29,99€',
+            acces: 'Permanent illimité',
+            formats: 'Toutes qualités disponibles'
+          },
+          {
+            type: 'Album/Collection',
+            prix: '4,99€ - 99,99€',
+            contenu: '3-50 vidéos groupées',
+            avantage: 'Économie vs achat unitaire'
+          },
+          {
+            type: 'Cours/Formation',
+            prix: '19,99€ - 299,99€',
+            inclus: 'Vidéos + ressources téléchargeables',
+            certificat: 'Optionnel selon créateur'
+          },
+          {
+            type: 'Location temporaire',
+            prix: '30-50% du prix achat',
+            duree: '24h, 48h ou 7 jours',
+            usages: 'Films, concerts, événements'
+          },
+          {
+            type: 'Pré-commande',
+            prix: 'Réduit de 15-30%',
+            avantages: ['Prix préférentiel', 'Accès anticipé', 'Bonus exclusifs'],
+            disponibilite: 'À la sortie officielle'
+          }
+        ],
+        processusAchat: [
+          {
+            etape: 1,
+            titre: 'Découvrir le contenu',
+            actions: [
+              'Parcourir catalogue créateur',
+              'Voir aperçu gratuit si disponible',
+              'Lire description détaillée',
+              'Consulter avis acheteurs',
+              'Vérifier durée et contenu inclus'
+            ]
+          },
+          {
+            etape: 2,
+            titre: 'Cliquer sur Acheter',
+            affichage: [
+              'Prix affiché clairement',
+              'Type d\'accès (permanent/location)',
+              'TVA incluse dans prix',
+              'Récapitulatif avant validation'
+            ]
+          },
+          {
+            etape: 3,
+            titre: 'Choisir méthode de paiement',
+            options: {
+              trucoin: {
+                description: 'Portefeuille Goroti (TruCoin)',
+                avantage: 'Instantané, pas de frais',
+                rechargement: 'Carte bancaire, PayPal'
+              },
+              carteBancaire: {
+                description: 'Visa, Mastercard, Amex',
+                traitement: 'Stripe sécurisé',
+                frais: 'Aucun frais supplémentaire'
+              },
+              paypal: {
+                description: 'Compte PayPal',
+                redirection: 'PayPal puis retour Goroti',
+                frais: 'Aucun'
+              },
+              autresMoyens: {
+                options: ['Apple Pay', 'Google Pay', 'Bancontact (Belgique)', 'iDEAL (Pays-Bas)'],
+                disponibilite: 'Selon pays'
+              }
+            }
+          },
+          {
+            etape: 4,
+            titre: 'Validation du paiement',
+            securite: [
+              'Chiffrement SSL 256-bit',
+              '3D Secure (si carte bancaire)',
+              'Pas de stockage données bancaires',
+              'Conformité PCI DSS niveau 1'
+            ],
+            duree: 'Quelques secondes',
+            confirmation: 'Email + notification in-app'
+          },
+          {
+            etape: 5,
+            titre: 'Accès immédiat au contenu',
+            instantane: [
+              'Contenu débloqué immédiatement',
+              'Visible dans "Mes achats"',
+              'Streaming illimité',
+              'Téléchargement si autorisé',
+              'Accès multi-appareils'
+            ]
+          }
+        ],
+        gestionAchats: {
+          bibliotheque: {
+            acces: 'Profil → Mes Achats',
+            affichage: 'Liste tous contenus achetés',
+            filtres: ['Par date', 'Par créateur', 'Par type', 'Par prix'],
+            recherche: 'Barre de recherche intégrée'
+          },
+          visionnage: {
+            qualites: 'Toutes disponibles (SD, HD, 4K)',
+            horsLigne: 'Téléchargement si autorisé par créateur',
+            multiAppareils: 'Jusqu\'à 5 appareils simultanés',
+            partage: 'Non transférable (lié à votre compte)'
+          },
+          factures: {
+            acces: 'Paramètres → Facturation → Historique',
+            contenu: 'PDF téléchargeable pour chaque achat',
+            details: ['Date transaction', 'Créateur', 'Titre contenu', 'Prix TTC', 'TVA', 'Méthode paiement'],
+            utilite: 'Déclaration fiscale si professionnel'
+          }
+        },
+        remboursements: {
+          conditions: {
+            eligible: [
+              'Contenu ne correspond pas à description',
+              'Problème technique empêchant visionnage',
+              'Achat accidentel (sous 24h)',
+              'Contenu supprimé par créateur'
+            ],
+            nonEligible: [
+              'Changement d\'avis après visionnage >30%',
+              'Qualité subjective (goûts personnels)',
+              '>14 jours après achat',
+              'Contenu téléchargé complètement'
+            ]
+          },
+          procedure: [
+            {
+              etape: 1,
+              action: 'Aller dans Mes Achats → Sélectionner contenu → Demander remboursement'
+            },
+            {
+              etape: 2,
+              action: 'Remplir formulaire avec raison détaillée'
+            },
+            {
+              etape: 3,
+              action: 'Équipe examine sous 2-5 jours ouvrés'
+            },
+            {
+              etape: 4,
+              action: 'Réponse par email + notification'
+            },
+            {
+              etape: 5,
+              action: 'Si approuvé: remboursement sous 3-7 jours ouvrés'
+            }
+          ],
+          delaisRemboursement: {
+            trucoin: '24-48h (recrédit wallet)',
+            carteBancaire: '3-7 jours ouvrés',
+            paypal: '2-5 jours ouvrés'
+          },
+          montant: 'Intégral (prix payé)'
+        },
+        protectionAcheteur: {
+          garanties: [
+            'Achat sécurisé par Stripe',
+            'Chiffrement données bancaires',
+            'Politique remboursement claire',
+            'Support dédié achats',
+            'Médiation Goroti en cas litige'
+          ],
+          recours: [
+            'Contacter créateur directement',
+            'Signaler problème à Goroti (Support)',
+            'Demande remboursement formelle',
+            'Médiation si désaccord créateur',
+            'Chargeback bancaire en dernier recours'
+          ]
+        },
+        bonnesPratiques: [
+          'Lire description complète avant achat',
+          'Visionner aperçu gratuit si disponible',
+          'Consulter avis d\'autres acheteurs',
+          'Vérifier durée et contenu inclus',
+          'Comparer avec autres offres similaires',
+          'Profiter pré-commandes et promos',
+          'Conserver factures pour comptabilité'
+        ],
+        faq: [
+          {
+            q: 'Puis-je offrir du contenu à quelqu\'un?',
+            r: 'Oui, via l\'option "Offrir en cadeau" sur page produit. Code envoyé par email.'
+          },
+          {
+            q: 'Le contenu acheté est-il permanent?',
+            r: 'Oui, sauf location temporaire. Accès illimité tant que créateur laisse contenu en ligne.'
+          },
+          {
+            q: 'Puis-je télécharger le contenu?',
+            r: 'Uniquement si créateur l\'autorise. Option visible sur page produit.'
+          },
+          {
+            q: 'Que se passe-t-il si créateur supprime contenu?',
+            r: 'Vous gardez accès si déjà acheté. Si suppression avant accès: remboursement automatique.'
+          },
+          {
+            q: 'Puis-je annuler un achat?',
+            r: 'Oui sous 24h si <10% visionné. Après: selon politique remboursement (14 jours).'
+          }
+        ],
+        securite: {
+          paiements: 'Traités par Stripe (leader mondial)',
+          donnees: 'Jamais stockées par Goroti',
+          conformite: 'PCI DSS niveau 1, RGPD',
+          antiFraude: 'Détection automatique transactions suspectes'
+        }
+      }
     },
     {
       category: 'monetization',
@@ -2518,6 +2741,279 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       description: 'Wallet, recharge et conversion',
       icon: Wallet,
       color: 'text-green-400',
+      content: {
+        introduction: 'TruCoin est le portefeuille virtuel de Goroti permettant d\'acheter du contenu, envoyer des tips, et gérer vos revenus créateur.',
+        definition: {
+          trucoin: 'Monnaie virtuelle de Goroti',
+          equivalence: '1 TruCoin = 1 EUR (parité fixe)',
+          usage: 'Achats, tips, paiements créateurs',
+          avantages: ['Transactions instantanées', 'Pas de frais entre utilisateurs', 'Gestion revenus unifiée']
+        },
+        creationWallet: {
+          automatique: 'Créé dès inscription Goroti',
+          acces: 'Header → Icône Wallet ou Profil → TruCoin Wallet',
+          affichage: [
+            'Solde disponible',
+            'Solde en attente (revenus créateur)',
+            'Historique transactions',
+            'Options recharge/retrait'
+          ]
+        },
+        rechargerWallet: {
+          methodes: [
+            {
+              methode: 'Carte bancaire',
+              frais: '0% (gratuit)',
+              instantane: true,
+              minimum: '5€',
+              maximum: '500€ par transaction',
+              cartes: 'Visa, Mastercard, Amex'
+            },
+            {
+              methode: 'PayPal',
+              frais: '2,9% + 0,35€',
+              delai: '1-3 minutes',
+              minimum: '10€',
+              maximum: '1000€ par transaction'
+            },
+            {
+              methode: 'Virement bancaire',
+              frais: '0% (gratuit)',
+              delai: '1-3 jours ouvrés',
+              minimum: '50€',
+              maximum: '10000€',
+              idealpour: 'Gros montants'
+            },
+            {
+              methode: 'Apple Pay / Google Pay',
+              frais: '0%',
+              instantane: true,
+              minimum: '5€',
+              maximum: '500€',
+              disponibilite: 'Selon appareil'
+            }
+          ],
+          processus: [
+            'Cliquer sur "Recharger" dans wallet',
+            'Sélectionner montant ou saisir personnalisé',
+            'Choisir méthode paiement',
+            'Valider transaction',
+            'TruCoin crédités instantanément (ou selon délai méthode)'
+          ],
+          limites: {
+            parJour: '2000€ (tous moyens confondus)',
+            parMois: '10000€',
+            augmentation: 'Possible après KYC niveau 3'
+          }
+        },
+        utiliserTruCoin: {
+          achatsContenu: {
+            description: 'Achat vidéos, albums, cours premium',
+            avantage: 'Paiement instantané sans ressaisir CB',
+            procedure: 'Sélectionner TruCoin comme moyen paiement'
+          },
+          tipsCreateurs: {
+            description: 'Soutenir créateurs volontairement',
+            montants: '1€ à 500€',
+            options: ['Tip unique', 'Tip récurrent mensuel'],
+            visibilite: 'Anonyme ou public (au choix)'
+          },
+          abonnementsCreateurs: {
+            description: 'Devenir membre payant chaîne',
+            paiement: 'Mensuel automatique depuis wallet',
+            renouvellement: 'Auto si solde suffisant, sinon notification'
+          },
+          achatsMarketplace: {
+            description: 'Services créateurs (beats, montage, coaching)',
+            protection: 'Fonds bloqués en escrow jusqu\'à livraison',
+            liberation: 'Après validation acheteur'
+          }
+        },
+        revemusCreateur: {
+          reception: {
+            origine: ['Ventes contenu premium', 'Tips reçus', 'Abonnements membres', 'Services marketplace', 'Publicités (si éligible)', 'Affiliation'],
+            delai: 'Crédités immédiatement au wallet',
+            affichage: 'Onglet "Revenus" dans wallet'
+          },
+          statuts: {
+            disponible: {
+              description: 'Solde retirable immédiatement',
+              condition: 'Transactions validées',
+              utilisation: 'Retrait bancaire ou achats Goroti'
+            },
+            enAttente: {
+              description: 'Revenus en cours validation',
+              duree: '7-14 jours (anti-fraude)',
+              raisons: ['Ventes récentes', 'Remboursements possibles', 'Vérification qualité']
+            },
+            bloque: {
+              description: 'Temporairement indisponible',
+              causes: ['Litige en cours', 'KYC non validé', 'Violation CGU suspectée'],
+              resolution: 'Contacter support'
+            }
+          }
+        },
+        retirerArgent: {
+          prerequis: [
+            'KYC niveau 2 minimum validé',
+            'Solde disponible ≥ 50€',
+            'Méthode retrait configurée',
+            'Pas de litige en cours'
+          ],
+          methodes: [
+            {
+              methode: 'Virement bancaire SEPA',
+              frais: '1€ (fixe)',
+              delai: '3-5 jours ouvrés',
+              minimum: '50€',
+              maximum: 'Illimité',
+              iban: 'Requis (zone SEPA uniquement)'
+            },
+            {
+              methode: 'PayPal',
+              frais: '2% du montant',
+              delai: '1-2 jours ouvrés',
+              minimum: '20€',
+              maximum: '5000€ par transaction',
+              email: 'Compte PayPal vérifié'
+            },
+            {
+              methode: 'Wise (ex-TransferWise)',
+              frais: 'Variable selon pays (0,5-2%)',
+              delai: '1-3 jours',
+              minimum: '50€',
+              international: 'Idéal hors-SEPA'
+            }
+          ],
+          processus: [
+            {
+              etape: 1,
+              action: 'Wallet → Retirer → Sélectionner montant'
+            },
+            {
+              etape: 2,
+              action: 'Choisir méthode retrait'
+            },
+            {
+              etape: 3,
+              action: 'Vérifier coordonnées bancaires/PayPal'
+            },
+            {
+              etape: 4,
+              action: 'Confirmer retrait (code 2FA si activé)'
+            },
+            {
+              etape: 5,
+              action: 'Virement traité selon délais méthode'
+            },
+            {
+              etape: 6,
+              action: 'Email confirmation + notif réception'
+            }
+          ],
+          frequence: {
+            recommandation: 'Mensuelle pour minimiser frais',
+            possibilite: 'À la demande (respect seuils)',
+            automatique: 'Configuration possible (ex: chaque 1er du mois si >100€)'
+          }
+        },
+        historiqueTransactions: {
+          acces: 'Wallet → Historique',
+          affichage: [
+            'Date et heure',
+            'Type transaction',
+            'Montant (+ ou -)',
+            'Solde après transaction',
+            'Référence/ID unique',
+            'Statut (complété, en attente, échoué)'
+          ],
+          filtres: ['Par type', 'Par date', 'Par montant', 'Par créateur'],
+          export: 'CSV ou PDF pour comptabilité',
+          conservation: 'Historique intégral permanent'
+        },
+        securite: {
+          protection: [
+            'Authentification 2FA recommandée',
+            'Notifications transaction email+app',
+            'Détection activité suspecte',
+            'Blocage automatique si fraude détectée',
+            'Historique IP connexions'
+          ],
+          recuperation: {
+            motDePasseOublie: 'Récupération email standard',
+            compteHacke: 'Gel wallet immédiat si signalé',
+            fraudeDetectee: 'Investigation support + gel temporaire',
+            remboursement: 'Si fraude confirmée avérée'
+          }
+        },
+        fiscalite: {
+          declaration: 'Utilisateur responsable déclaration revenus',
+          documents: [
+            'Récapitulatif annuel disponible',
+            'Export détaillé transactions',
+            'Factures tous achats/ventes'
+          ],
+          conseil: 'Consulter expert-comptable si revenus significatifs',
+          tva: {
+            achats: 'Incluse dans prix affiché',
+            ventes: 'Gérée automatiquement selon pays acheteur',
+            auto: 'Entrepreneurs: activer numéro TVA dans paramètres'
+          }
+        },
+        limitesSolde: {
+          utilisateurStandard: {
+            soldeMax: '10000€',
+            rechargeParJour: '2000€',
+            rechargeParMois: '10000€'
+          },
+          kycNiveau2: {
+            soldeMax: '25000€',
+            rechargeParJour: '5000€',
+            rechargeParMois: '25000€'
+          },
+          kycNiveau3: {
+            soldeMax: '50000€',
+            rechargeParJour: '10000€',
+            rechargeParMois: '100000€'
+          },
+          entreprise: {
+            soldeMax: 'Négociable',
+            limites: 'Personnalisées',
+            contact: 'business@goroti.com'
+          }
+        },
+        bonnesPratiques: [
+          'Activer 2FA pour sécurité wallet',
+          'Vérifier toujours destinataire avant tip',
+          'Recharger montants ronds évite centimes',
+          'Retirer régulièrement si gros revenus',
+          'Conserver exports pour comptabilité',
+          'Ne jamais partager codes 2FA',
+          'Surveiller historique transactions'
+        ],
+        faq: [
+          {
+            q: 'Les TruCoin expirent-ils?',
+            r: 'Non, pas de date d\'expiration. Valables indéfiniment.'
+          },
+          {
+            q: 'Puis-je transférer TruCoin à un ami?',
+            r: 'Non, transferts directs interdits (anti-blanchiment). Utilisez tips créateurs.'
+          },
+          {
+            q: 'Que se passe-t-il si je supprime mon compte?',
+            r: 'Solde doit être retiré AVANT suppression. Après: non récupérable.'
+          },
+          {
+            q: 'TruCoin = cryptomonnaie?',
+            r: 'Non, monnaie virtuelle traditionnelle (parité EUR fixe), pas blockchain.'
+          },
+          {
+            q: 'Frais conversion TruCoin → EUR?',
+            r: 'Aucun frais conversion (1 TruCoin = 1 EUR). Frais seulement sur retrait bancaire selon méthode.'
+          }
+        ]
+      }
     },
     {
       category: 'monetization',
@@ -2525,6 +3021,319 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       description: 'Seuils, délais et méthodes de paiement',
       icon: DollarSign,
       color: 'text-green-400',
+      content: {
+        introduction: 'Les créateurs Goroti peuvent retirer leurs revenus une fois les seuils minimums atteints et le KYC validé.',
+        prerequisObligatoires: [
+          {
+            condition: 'KYC validé',
+            niveau: 'Niveau 2 minimum (ID + Selfie)',
+            pourquoi: 'Obligation légale anti-blanchiment',
+            sans: 'Revenus bloqués dans wallet'
+          },
+          {
+            condition: 'Solde disponible minimum',
+            montant: '50€',
+            raison: 'Rentabilité frais traitement bancaire',
+            exception: 'PayPal: 20€ minimum'
+          },
+          {
+            condition: 'Coordonnées bancaires',
+            types: ['IBAN (SEPA)', 'Compte PayPal vérifié', 'Compte Wise'],
+            verification: 'Validées lors 1er retrait',
+            modification: 'Possible à tout moment'
+          },
+          {
+            condition: 'Pas de litige en cours',
+            blocage: 'Retraits gelés si litige client',
+            resolution: 'Débloqué après résolution',
+            mediation: 'Support Goroti si désaccord'
+          }
+        ],
+        methodesRetrait: [
+          {
+            methode: 'Virement SEPA',
+            frais: '1€ fixe',
+            delai: '3-5 jours ouvrés',
+            minimum: '50€',
+            maximum: 'Illimité',
+            zones: ['France', 'Belgique', 'Suisse', 'Allemagne', '+ 33 pays SEPA'],
+            requis: 'IBAN + BIC',
+            ideal: 'Gros montants récurrents'
+          },
+          {
+            methode: 'PayPal',
+            frais: '2% du montant',
+            delai: '1-2 jours ouvrés',
+            minimum: '20€',
+            maximum: '5000€ par transaction',
+            requis: 'Email PayPal vérifié',
+            avantage: 'Rapide et flexible',
+            inconvenient: 'Frais % élevés gros montants'
+          },
+          {
+            methode: 'Wise (TransferWise)',
+            frais: '0,5-2% selon pays',
+            delai: '1-3 jours ouvrés',
+            minimum: '50€',
+            maximum: 'Illimité',
+            zones: '50+ pays (hors SEPA)',
+            avantage: 'Meilleur taux change international',
+            ideal: 'Créateurs hors zone euro'
+          },
+          {
+            methode: 'Virement international (SWIFT)',
+            frais: '15-25€ fixes',
+            delai: '5-10 jours ouvrés',
+            minimum: '200€',
+            zones: 'Monde entier',
+            inconvenient: 'Frais élevés, lent',
+            dernierRecours: 'Si aucune autre option'
+          }
+        ],
+        processusRetrait: {
+          etapes: [
+            {
+              numero: 1,
+              titre: 'Vérifier solde disponible',
+              acces: 'Wallet → Revenus → Solde disponible',
+              distinction: 'Disponible vs En attente',
+              rappel: 'Seul solde disponible retirable'
+            },
+            {
+              numero: 2,
+              titre: 'Demander retrait',
+              chemin: 'Wallet → Retirer',
+              saisir: 'Montant souhaité (respect minimum)',
+              verification: 'Calcul automatique frais + net reçu'
+            },
+            {
+              numero: 3,
+              titre: 'Sélectionner méthode',
+              comparaison: 'Affichage frais et délais chaque méthode',
+              choix: 'Selon préférence vitesse/coût',
+              nouveauCompte: 'Validation coordonnées si 1ère fois'
+            },
+            {
+              numero: 4,
+              titre: 'Confirmer transaction',
+              securite: 'Code 2FA si activé',
+              recap: 'Montant brut, frais, net à recevoir',
+              validation: 'Clic "Confirmer retrait"'
+            },
+            {
+              numero: 5,
+              titre: 'Traitement demande',
+              immediat: 'Déduction wallet immédiate',
+              statut: 'Passage "En cours traitement"',
+              notification: 'Email confirmation envoi'
+            },
+            {
+              numero: 6,
+              titre: 'Réception fonds',
+              delai: 'Selon méthode choisie',
+              notification: 'Email arrivée fonds',
+              verification: 'Consulter relevé bancaire/PayPal'
+            }
+          ],
+          suiviDemande: {
+            acces: 'Wallet → Historique retraits',
+            statuts: {
+              enCours: 'Traitement par Goroti',
+              envoye: 'Transféré établissement bancaire',
+              complete: 'Fonds reçus destination',
+              echoue: 'Erreur (coordonnées invalides)',
+              annule: 'Annulation demandée avant traitement'
+            },
+            dureeMax: '10 jours ouvrés (SWIFT) sinon contacter support'
+          }
+        },
+        calendrierRetraits: {
+          frequenceRecommandee: {
+            petitsRevenus: 'Mensuelle (minimiser impact frais)',
+            revenusMoyens: 'Bimensuelle ou mensuelle',
+            grosRevenus: 'Hebdomadaire (limiter solde wallet)',
+            professionnel: 'Retrait automatique programmé'
+          },
+          retraitAutomatique: {
+            activation: 'Paramètres wallet → Retraits automatiques',
+            frequences: ['Hebdomadaire', 'Bimensuel', 'Mensuel'],
+            seuil: 'Minimum 50€ (ou montant personnalisé)',
+            exemple: 'Chaque 1er du mois si solde ≥100€'
+          },
+          joursFeries: {
+            impact: 'Délais rallongés (banques fermées)',
+            periodes: 'Noël, Jour an, Pâques, 1er mai...',
+            conseil: 'Anticiper retraits avant fêtes'
+          }
+        },
+        periodesAttente: {
+          nouvellesVentes: {
+            duree: '7 jours après vente',
+            raison: 'Fenêtre remboursement acheteurs',
+            affichage: 'Solde "En attente"',
+            liberation: 'Automatique après 7 jours'
+          },
+          premiereVente: {
+            duree: '14 jours',
+            raison: 'Vérification activité + anti-fraude',
+            unique: 'Une seule fois par créateur',
+            communication: 'Email explicatif envoyé'
+          },
+          abonnementsRecurrents: {
+            duree: '5 jours après prélèvement',
+            raison: 'Vérification paiement bancaire',
+            frequence: 'Chaque mois pour nouveaux abonnés'
+          },
+          contestationsEnCours: {
+            duree: 'Jusqu\'à résolution',
+            montant: 'Montant contesté bloqué uniquement',
+            reste: 'Autres revenus retirables normalement',
+            delaiMax: '60 jours max (réglementation)'
+          }
+        },
+        fraisDetailles: {
+          fraisGoroti: {
+            commission: '15% sur ventes (déjà déduite)',
+            retraits: 'Frais méthode paiement uniquement',
+            tips: '5% commission (vs 15% ventes)',
+            abonnements: '10% commission'
+          },
+          fraisBancaires: {
+            sepa: '1€ fixe Goroti (pas frais bancaires supplémentaires)',
+            paypal: '2% Goroti + éventuels frais PayPal destination',
+            wise: 'Variable (généralement <2%)',
+            swift: '15-25€ Goroti + frais banques intermédiaires'
+          },
+          optimiserFrais: [
+            'Privilégier SEPA si zone Euro (frais fixes)',
+            'Grouper petits montants (1 retrait 100€ mieux que 5×20€)',
+            'PayPal rentable <500€ (frais % vs fixe)',
+            'Wise idéal hors SEPA (meilleur change)',
+            'Éviter SWIFT sauf nécessité'
+          ]
+        },
+        taxesFiscalite: {
+          responsabilite: 'Créateur responsable déclaration revenus',
+          documents: {
+            recapitulatif: 'Annuel automatique (janvier)',
+            details: 'Export CSV mensuel disponible',
+            factures: 'Chaque vente (stockage permanent)',
+            certifications: 'Attestation revenus sur demande'
+          },
+          declarationFrance: {
+            categorieImpots: 'BNC (Bénéfices Non Commerciaux) ou BIC',
+            seuil: 'Si >305€/an: déclaration obligatoire',
+            regime: 'Micro-BNC si <77700€/an',
+            conseil: 'Comptable si revenus réguliers importants'
+          },
+          tva: {
+            franchise: 'Exonéré si <36800€/an (France 2026)',
+            auDela: 'Déclaration TVA obligatoire',
+            numeroTVA: 'À renseigner dans paramètres Goroti',
+            autoliquidation: 'Goroti gère selon pays acheteur'
+          },
+          international: {
+            doubleImposition: 'Conventions fiscales selon pays',
+            certificat: 'Résidence fiscale utile',
+            conseil: 'Expert fiscal international si multinationale'
+          }
+        },
+        problemesFrequents: {
+          retraitRefuse: [
+            {
+              cause: 'KYC non validé',
+              solution: 'Compléter vérification identité'
+            },
+            {
+              cause: 'Solde insuffisant',
+              solution: 'Attendre revenus supplémentaires (min 50€)'
+            },
+            {
+              cause: 'Coordonnées bancaires invalides',
+              solution: 'Vérifier IBAN/BIC ou compte PayPal'
+            },
+            {
+              cause: 'Litige client non résolu',
+              solution: 'Répondre litige ou contacter support'
+            },
+            {
+              cause: 'Activité suspecte détectée',
+              solution: 'Contacter support vérifications'
+            }
+          ],
+          retraitNonRecu: [
+            {
+              etape: 'Vérifier statut',
+              action: 'Wallet → Historique → Vérifier "Complété"'
+            },
+            {
+              etape: 'Vérifier délais',
+              action: 'Respecter délais méthode (3-5j SEPA)'
+            },
+            {
+              etape: 'Vérifier coordonnées',
+              action: 'IBAN correct? Email PayPal bon?'
+            },
+            {
+              etape: 'Contacter banque',
+              action: 'Virement peut être en transit'
+            },
+            {
+              etape: 'Contacter support Goroti',
+              action: 'Si >10 jours sans réception',
+              fournir: 'ID transaction, captures écran'
+            }
+          ],
+          montantIncorrect: [
+            'Vérifier frais déduits (affichés confirmation)',
+            'Conversion devise (si hors EUR)',
+            'Frais bancaires intermédiaires (SWIFT)',
+            'Contacter support si écart inexpliqué'
+          ]
+        },
+        optimisationRevenus: {
+          strategies: [
+            {
+              strategie: 'Fréquence adaptée',
+              petit: 'Mensuel (limiter frais)',
+              moyen: 'Bimensuel',
+              gros: 'Hebdomadaire (liquidité)'
+            },
+            {
+              strategie: 'Diversifier revenus',
+              canaux: ['Ventes premium', 'Abonnements', 'Tips', 'Marketplace', 'Affiliation'],
+              avantage: 'Stabilité revenus'
+            },
+            {
+              strategie: 'Promo avant retrait',
+              timing: 'Campagne fin mois → retrait début mois',
+              impact: 'Maximiser montant retrait'
+            },
+            {
+              strategie: 'Comptabilité rigoureuse',
+              outils: 'Export mensuel + factures',
+              avantage: 'Simplif déclaration fiscale'
+            }
+          ]
+        },
+        securite: {
+          protections: [
+            'Notifications email chaque retrait',
+            '2FA obligatoire si retrait >1000€',
+            'Historique IP et appareils',
+            'Blocage si connexion suspecte',
+            'Délai sécurité nouveau compte bancaire'
+          ],
+          bonnesPratiques: [
+            'Activer 2FA sur compte',
+            'Vérifier email confirmation retrait',
+            'Ne jamais partager accès wallet',
+            'Changer mdp régulièrement',
+            'Surveiller historique transactions',
+            'Signaler activité suspecte immédiatement'
+          ]
+        }
+      }
     },
     {
       category: 'monetization',
@@ -2532,6 +3341,251 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       description: 'Comprendre les délais de virement',
       icon: AlertCircle,
       color: 'text-green-400',
+      content: {
+        introduction: 'Les délais bancaires varient selon la méthode de retrait choisie et impliquent plusieurs acteurs (Goroti, banques, réseaux paiement).',
+        chainePaiement: {
+          etapes: [
+            {
+              etape: 1,
+              acteur: 'Goroti',
+              action: 'Réception demande retrait',
+              duree: 'Instantané',
+              details: 'Déduction wallet immédiate'
+            },
+            {
+              etape: 2,
+              acteur: 'Goroti',
+              action: 'Vérifications sécurité',
+              duree: '< 2 heures',
+              verifications: ['Identité', 'Coordonnées bancaires', 'Conformité réglementaire', 'Anti-fraude']
+            },
+            {
+              etape: 3,
+              acteur: 'Processeur paiement (Stripe)',
+              action: 'Transfert vers établissement bancaire',
+              duree: '1-2 jours ouvrés',
+              role: 'Intermédiaire sécurisé Goroti → Banques'
+            },
+            {
+              etape: 4,
+              acteur: 'Réseau bancaire (SEPA/SWIFT)',
+              action: 'Acheminement international',
+              dureeSEPA: '1-2 jours ouvrés',
+              dureeSWIFT: '3-7 jours ouvrés',
+              variables: 'Banques intermédiaires, fuseaux horaires'
+            },
+            {
+              etape: 5,
+              acteur: 'Banque destinataire',
+              action: 'Crédit compte bénéficiaire',
+              duree: '< 1 jour',
+              visible: 'Relevé bancaire / app banque'
+            }
+          ],
+          dureeeTotalesMoyennes: {
+            sepa: '3-5 jours ouvrés',
+            paypal: '1-2 jours ouvrés',
+            wise: '1-3 jours ouvrés',
+            swift: '5-10 jours ouvrés'
+          }
+        },
+        facteursDelais: [
+          {
+            facteur: 'Jours ouvrés vs calendaires',
+            explication: 'Banques fermées week-ends + jours fériés',
+            impact: 'Demande vendredi → traitement lundi',
+            conseil: 'Anticiper retraits fin semaine'
+          },
+          {
+            facteur: 'Fuseaux horaires',
+            explication: 'Heures limites traitement bancaire',
+            heureLimite: 'Généralement 16h-17h heure locale banque',
+            consequence: 'Après limite → lendemain'
+          },
+          {
+            facteur: 'Banques intermédiaires',
+            explication: 'Chaque banque transit ajoute délai',
+            sepa: '1-2 banques max (rapide)',
+            swift: '3-5 banques possible (lent)',
+            imprévisible: 'Trajets peuvent varier'
+          },
+          {
+            facteur: 'Vérifications conformité',
+            explication: 'Contrôles anti-blanchiment',
+            declencheurs: ['Gros montants (>5000€)', 'Nouveau bénéficiaire', 'Pays à risque', 'Activité inhabituelle'],
+            dureeSupp: '+1-3 jours ouvrés'
+          },
+          {
+            facteur: 'Période de l\'année',
+            rallongements: ['Fêtes fin d\'année: +2-3 jours', 'Pâques: +1-2 jours', 'Été (certains pays): +1 jour', '1er janvier, 1er mai: banques fermées'],
+            conseil: 'Retrait 1 semaine avant fêtes importantes'
+          },
+          {
+            facteur: 'Pays destination',
+            europeSEPA: 'Délais courts standardisés',
+            horsEurope: 'Variables selon accords bancaires',
+            paysComplexes: 'Russie, Chine, Brésil: +3-5 jours'
+          }
+        ],
+        delaisParMethode: {
+          virementSEPA: {
+            minimum: '2 jours ouvrés',
+            moyen: '3-4 jours ouvrés',
+            maximum: '5 jours ouvrés',
+            exceptionnel: '7 jours (si complications)',
+            paysCouverts: '36 pays zone SEPA',
+            fiabilite: 'Très élevée (>99%)'
+          },
+          paypal: {
+            minimum: '1 jour ouvré',
+            moyen: '1-2 jours ouvrés',
+            maximum: '3 jours ouvrés',
+            instantane: 'Possible si compte PayPal business',
+            avantage: 'Plus rapide que bancaire',
+            variabilite: 'Vérifications PayPal aléatoires'
+          },
+          wise: {
+            minimum: '1 jour ouvré',
+            moyen: '1-2 jours ouvrés',
+            maximum: '3 jours ouvrés',
+            europe: '80% arrivent en 24h',
+            horsEurope: 'Variable (1-5 jours)',
+            transparent: 'Suivi temps réel dans app Wise'
+          },
+          swift: {
+            minimum: '3 jours ouvrés',
+            moyen: '5-7 jours ouvrés',
+            maximum: '10-15 jours ouvrés',
+            complications: 'Jusqu\'à 20 jours si problèmes',
+            imprévisible: 'Chaque banque intermédiaire ajoute délai',
+            dernierRecours: 'Utiliser seulement si aucune alternative'
+          }
+        },
+        suivreVirement: {
+          gorotiTracking: {
+            acces: 'Wallet → Historique retraits → Détails',
+            statuts: {
+              'Demandé': 'Juste créé, en attente traitement',
+              'En cours': 'Vérifications Goroti en cours',
+              'Traitement': 'Envoyé au processeur paiement',
+              'Envoyé': 'Parti vers banque destination',
+              'Complété': 'Goroti confirme arrivée',
+              'Échec': 'Erreur (coordonnées invalides)'
+            },
+            referenceID: 'Numéro unique pour support'
+          },
+          suiviBancaire: {
+            app: 'Application banque (notifications temps réel)',
+            releve: 'Virement apparaît J-1 avant crédit effectif',
+            libelle: '"Goroti" ou "Stripe" selon processeur',
+            montant: 'Net après frais'
+          },
+          paypalWise: {
+            notifications: 'Email + notif app dès réception',
+            suivi: 'Interface web/app avec statut temps réel',
+            precision: 'Estimation arrivée assez fiable'
+          },
+          problemes: [
+            {
+              situation: 'Statut "Envoyé" depuis >7 jours',
+              action: 'Contacter support Goroti avec ID transaction'
+            },
+            {
+              situation: 'Statut "Échec"',
+              action: 'Vérifier coordonnées bancaires → corriger → relancer'
+            },
+            {
+              situation: 'Virement bancaire incomplet',
+              raisons: ['Frais intermédiaires déduits', 'Conversion devise défavorable'],
+              recours: 'Difficile, prévoir dans montant initial'
+            }
+          ]
+        },
+        accelererRetraits: {
+          impossibleGoroti: 'Goroti ne contrôle pas délais bancaires',
+          strategies: [
+            {
+              methode: 'Choisir PayPal',
+              avantage: 'Plus rapide que bancaire',
+              trade: 'Frais 2% vs 1€ fixe SEPA'
+            },
+            {
+              methode: 'Wise pour international',
+              avantage: 'Réseau propre = plus rapide SWIFT',
+              economies: 'Meilleur taux change aussi'
+            },
+            {
+              methode: 'Retrait début semaine',
+              logique: 'Lundi-mardi traités dans semaine',
+              eviter: 'Vendredi après-midi = traitement lundi'
+            },
+            {
+              methode: 'Vérifier coordonnées préalablement',
+              action: 'Tester petit montant (20€) d\'abord',
+              economie: 'Évite échecs gros montants'
+            },
+            {
+              methode: 'Anticiper périodes chargées',
+              eviter: 'Fin mois (payes), fêtes',
+              prevoir: '+2-3 jours ces périodes'
+            }
+          ]
+        },
+        comparatifMoyensPaiement: {
+          criteres: ['Rapidité', 'Fiabilité', 'Coût', 'Disponibilité'],
+          classement: {
+            rapidite: ['PayPal (1-2j)', 'Wise (1-3j)', 'SEPA (3-5j)', 'SWIFT (5-10j)'],
+            fiabilite: ['SEPA (99%+)', 'Wise (99%)', 'PayPal (98%)', 'SWIFT (95%)'],
+            cout: ['SEPA (1€)', 'Wise (0,5-2%)', 'PayPal (2%)', 'SWIFT (15-25€)'],
+            simplicite: ['PayPal', 'SEPA', 'Wise', 'SWIFT']
+          },
+          recommandations: {
+            petitsMontants: 'PayPal (rapidité > coût)',
+            montantsMoyens: 'SEPA (équilibre coût/délai)',
+            grosMontants: 'SEPA (frais fixes)',
+            international: 'Wise (meilleur rapport qualité/prix)',
+            urgence: 'PayPal ou Wise',
+            recurrence: 'SEPA automatique programmé'
+          }
+        },
+        faq: [
+          {
+            q: 'Pourquoi mon virement prend plus de 5 jours?',
+            r: 'Vérifications complémentaires, banques intermédiaires, ou période fériée. Contacter support si >10 jours.'
+          },
+          {
+            q: 'Puis-je annuler un retrait en cours?',
+            r: 'Seulement si statut encore "Demandé" ou "En cours". Après "Envoyé": impossible.'
+          },
+          {
+            q: 'Délais raccourcis si compte vérifié?',
+            r: 'Non, délais bancaires identiques. KYC juste débloque capacité retrait.'
+          },
+          {
+            q: 'Virement arrivé partiel (montant moindre)?',
+            r: 'Frais bancaires intermédiaires (SWIFT) ou conversion devise. Vérifier détails banque.'
+          },
+          {
+            q: 'Goroti peut-il accélérer un virement?',
+            r: 'Non, une fois envoyé au réseau bancaire, hors contrôle Goroti.'
+          }
+        ],
+        urgences: {
+          besoinRapide: [
+            'Planifier retraits à l\'avance (pas urgence last-minute)',
+            'Garder réserve TruCoin pour achats immédiats',
+            'PayPal si besoin sous 48h',
+            'SEPA généralement fiable 3-5j',
+            'Éviter compter sur argent avant réception effective'
+          ],
+          supportUrgent: {
+            email: 'payments@goroti.com',
+            delaiReponse: '24-48h jours ouvrés',
+            fournir: ['ID transaction', 'Date demande', 'Montant', 'Méthode', 'Captures écran'],
+            attentes: 'Support enquête mais ne peut forcer banques'
+          }
+        }
+      }
     },
     {
       category: 'account',
