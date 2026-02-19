@@ -39,43 +39,17 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       color: 'text-cyan-400',
       content: {
         description: 'Écran de chargement animé qui s\'affiche au premier lancement de Goroti.',
-        duration: '3,5 secondes',
+        duration: 'Quelques secondes',
         phases: [
           {
-            title: 'Phase 1: Logo Animé (0-2s)',
+            title: 'Animation de Bienvenue',
             details: [
-              '0.0s: Écran noir avec dégradé',
-              '0.1s: Lettre "G" apparaît (blanc)',
-              '0.3s: Lettre "O" apparaît (rouge)',
-              '0.5s: Lettre "R" apparaît (blanc)',
-              '0.7s: Lettre "O" apparaît (rouge)',
-              '0.9s: Lettre "T" apparaît (blanc)',
-              '1.1s: Lettre "I" apparaît (rouge)',
-              '1.4s: Effet glow rouge sur toutes les lettres',
-              '2.0s: Baseline "LA VÉRITÉ AVANT TOUT"'
-            ]
-          },
-          {
-            title: 'Phase 2: Tagline (1.8-3.5s)',
-            details: [
-              '1.8s: "Votre plateforme vidéo authentique" (dégradé cyan→blanc→rouge)',
-              '2.2s: "Créez, partagez, monétisez en toute transparence" (gris)'
-            ]
-          },
-          {
-            title: 'Phase 3: Indicateur (0-3.5s)',
-            details: [
-              '3 points animés: cyan, blanc, rouge',
-              'Texte "CHARGEMENT..." en bas',
-              'Animation bounce avec délais'
+              'Logo Goroti animé avec effet de transition',
+              'Slogan: "LA VÉRITÉ AVANT TOUT"',
+              'Message d\'accueil personnalisé'
             ]
           }
-        ],
-        control: {
-          title: 'Contrôler le SplashScreen',
-          revoir: 'sessionStorage.removeItem("hasSeenSplash"); location.reload();',
-          desactiver: 'Modifier showSplash à false dans App.tsx'
-        }
+        ]
       }
     },
     {
@@ -232,115 +206,31 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       icon: Globe,
       color: 'text-purple-400',
       content: {
-        position: 'Fixe en haut, z-index: 40',
-        composants: {
-          logo: {
-            position: 'Gauche',
-            action: 'Retour accueil (/#home)',
-            hover: 'Opacité 80%'
+        overview: 'Barre de navigation principale fixée en haut de toutes les pages.',
+        sections: [
+          {
+            titre: 'Logo et Navigation',
+            description: 'Le logo Goroti vous ramène à l\'accueil. Les icônes permettent d\'accéder aux univers, communautés, préférences, et plus encore.'
           },
-          navigationIcons: [
-            {
-              icon: '🧭 Compass',
-              tooltip: 'Explorer les univers',
-              action: '/#universes',
-              description: 'Parcourir les 15 univers thématiques'
-            },
-            {
-              icon: '👥 Users',
-              tooltip: 'Communautés',
-              action: '/#community',
-              description: 'Liste de toutes les communautés'
-            },
-            {
-              icon: '⚙️ Settings',
-              tooltip: 'Préférences de feed',
-              action: '/#preferences',
-              description: 'Personnaliser votre fil'
-            },
-            {
-              icon: '✨ Sparkles',
-              tooltip: 'Devenir créateur',
-              action: '/#creator-setup',
-              description: 'S\'inscrire comme créateur'
-            },
-            {
-              icon: '⋮ More',
-              tooltip: 'Plus de pages',
-              type: 'Menu déroulant',
-              items: ['À propos', 'Ressources', 'Carrières', 'Entreprise', 'Centre d\'aide', 'Support']
-            }
-          ],
-          recherche: {
-            placeholder: 'Rechercher vidéos, créateurs, communautés...',
-            fonctionnalites: [
-              'Recherche instantanée (debounced 300ms)',
-              'Suggestions automatiques',
-              'Historique de recherche',
-              'Filtres avancés'
-            ],
-            raccourci: '/ (focus automatique)'
+          {
+            titre: 'Recherche',
+            description: 'Barre de recherche pour trouver des vidéos, créateurs, et communautés avec suggestions en temps réel.'
           },
-          actionsUtilisateur: {
-            upload: {
-              visible: 'Si connecté',
-              icon: '📤 Upload',
-              action: '/#upload',
-              raccourci: 'Alt+U'
-            },
-            avatar: {
-              nonConnecte: 'Bouton "Connexion" → /#auth',
-              connecte: 'Avatar + Badge → Menu utilisateur'
-            }
+          {
+            titre: 'Actions',
+            description: 'Boutons d\'upload, notifications, portefeuille TruCoin, et menu de profil utilisateur.'
+          },
+          {
+            titre: 'Menu Utilisateur',
+            sections: [
+              'Profil et paramètres personnels',
+              'Studio créateur et tableau de bord',
+              'Monétisation et portefeuille',
+              'Historique et contenus sauvegardés',
+              'Sécurité et apparence'
+            ]
           }
-        },
-        menuUtilisateur: {
-          sections: [
-            {
-              nom: 'Profil',
-              items: [
-                'Mon profil (/#my-profile)',
-                'Profil créateur enrichi (/#enhanced-profile)',
-                'Paramètres (/#settings)'
-              ]
-            },
-            {
-              nom: 'Créateur',
-              condition: 'Si créateur',
-              items: [
-                'Studio créateur (/#studio)',
-                'Tableau de bord (/#dashboard)',
-                'Mes chaînes (/#my-channels)',
-                'Streaming live (/#live-streaming)'
-              ]
-            },
-            {
-              nom: 'Monétisation',
-              items: [
-                'Portefeuille TruCoin (/#trucoin-wallet)',
-                'Abonnement Premium (/#premium)',
-                'Programme partenaire (/#partner-program)',
-                'Parrainage (/#referral)'
-              ]
-            },
-            {
-              nom: 'Contenu',
-              items: [
-                'Historique (/#watch-history)',
-                'Vidéos sauvegardées (/#saved-videos)',
-                'Mes abonnés (/#subscribers)'
-              ]
-            },
-            {
-              nom: 'Sécurité',
-              items: [
-                'Sécurité (/#security-dashboard)',
-                'Apparence (/#appearance-settings)'
-              ]
-            }
-          ],
-          footer: 'Déconnexion'
-        }
+        ]
       }
     },
     {
