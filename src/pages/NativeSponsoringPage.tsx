@@ -29,7 +29,7 @@ const AD_TYPES = [
     color: 'border-blue-900/40 bg-blue-950/10',
     accent: 'text-blue-400',
     desc: 'Intégration discrète dans l\'interface. Jamais imposée. Toujours clairement identifiée comme partenariat.',
-    tags: ['Recommandé par TruTube', 'Partenaire officiel', 'Offre fans'],
+    tags: ['Recommandé par Goroti', 'Partenaire officiel', 'Offre fans'],
     tagColor: 'bg-blue-900/30 text-blue-300 border-blue-900/40',
   },
   {
@@ -88,7 +88,7 @@ const ECOSYSTEM_TARGETS = [
 const PLATFORM_COMPARE = [
   { platform: 'YouTube', model: 'Intrusive', detail: 'Pre-roll non skippable, mid-roll forcé', accent: 'text-gray-400', bar: 'bg-gray-700', pct: 30 },
   { platform: 'TikTok', model: 'Addictive', detail: 'Intégration totale contenu/pub, confusion', accent: 'text-gray-400', bar: 'bg-gray-700', pct: 50 },
-  { platform: 'TruTube', model: 'Commerciale utile', detail: 'Intégrée à la valeur du contenu, opt-in', accent: 'text-red-400', bar: 'bg-red-600', pct: 100 },
+  { platform: 'Goroti', model: 'Commerciale utile', detail: 'Intégrée à la valeur du contenu, opt-in', accent: 'text-red-400', bar: 'bg-red-600', pct: 100 },
 ];
 
 const COMPLIANCE = [
@@ -120,7 +120,7 @@ export default function NativeSponsoringPage({ onNavigate }: Props) {
               <span className="text-amber-400">Partenaires — Sponsoring Natif</span>
             </h1>
             <p className="text-gray-400 max-w-2xl mx-auto text-base mb-6">
-              La publicité TruTube n'interrompt pas le contenu. Elle s'intègre à sa valeur.
+              La publicité Goroti n'interrompt pas le contenu. Elle s'intègre à sa valeur.
               On ne monétise pas l'attention captive — on monétise l'intérêt réel.
             </p>
             <div className="flex items-center justify-center gap-3 flex-wrap">
@@ -250,7 +250,7 @@ export default function NativeSponsoringPage({ onNavigate }: Props) {
                 </div>
                 <div className="text-left">
                   <p className="font-semibold text-white">Rémunération plateforme</p>
-                  <p className="text-xs text-gray-500">3 sources de revenus côté TruTube</p>
+                  <p className="text-xs text-gray-500">3 sources de revenus côté Goroti</p>
                 </div>
               </div>
               {revenueOpen ? <ChevronUp className="w-4 h-4 text-gray-500" /> : <ChevronDown className="w-4 h-4 text-gray-500" />}
@@ -311,7 +311,7 @@ export default function NativeSponsoringPage({ onNavigate }: Props) {
                 </div>
                 <div className="text-left">
                   <p className="font-semibold text-white">Intégration dans l'écosystème</p>
-                  <p className="text-xs text-gray-500">Le sponsor peut apparaître sur tous les espaces TruTube</p>
+                  <p className="text-xs text-gray-500">Le sponsor peut apparaître sur tous les espaces Goroti</p>
                 </div>
               </div>
               {ecosystemOpen ? <ChevronUp className="w-4 h-4 text-gray-500" /> : <ChevronDown className="w-4 h-4 text-gray-500" />}
@@ -336,7 +336,7 @@ export default function NativeSponsoringPage({ onNavigate }: Props) {
           {/* Platform comparison */}
           <section>
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-black text-white mb-2">TruTube vs les autres modèles</h2>
+              <h2 className="text-2xl font-black text-white mb-2">Goroti vs les autres modèles</h2>
               <p className="text-gray-400 text-sm">La différence de philosophie publicitaire</p>
             </div>
             <div className="space-y-3">
@@ -344,7 +344,7 @@ export default function NativeSponsoringPage({ onNavigate }: Props) {
                 <div
                   key={i}
                   className={`flex flex-col sm:flex-row sm:items-center gap-4 rounded-xl border p-5 ${
-                    row.platform === 'TruTube'
+                    row.platform === 'Goroti'
                       ? 'bg-amber-950/15 border-amber-900/50'
                       : 'bg-gray-900 border-gray-800'
                   }`}
@@ -423,7 +423,7 @@ export default function NativeSponsoringPage({ onNavigate }: Props) {
               <div>
                 <p className="font-bold text-white mb-1">La plateforme reste premium</p>
                 <p className="text-gray-300 text-sm leading-relaxed">
-                  En refusant les formats agressifs, TruTube préserve la qualité perçue de l'expérience.
+                  En refusant les formats agressifs, Goroti préserve la qualité perçue de l'expérience.
                   Les marques accèdent à une audience engagée — pas à une audience captive.
                   Ce positionnement premium permet de facturer plus cher des emplacements plus qualitatifs.
                 </p>

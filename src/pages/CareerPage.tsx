@@ -39,7 +39,7 @@ const JOBS: Job[] = [
     salary: '65 000 – 90 000 €',
     level: 'Senior',
     stack: 'Node.js · TypeScript · PostgreSQL · Redis · Kafka',
-    description: 'Concevoir et maintenir les APIs core de TruTube : upload vidéo, streaming, paiements, analytics temps réel. Vous serez au centre des décisions techniques.',
+    description: 'Concevoir et maintenir les APIs core de Goroti : upload vidéo, streaming, paiements, analytics temps réel. Vous serez au centre des décisions techniques.',
     responsibilities: [
       'Concevoir les APIs RESTful et GraphQL pour les fonctions critiques',
       'Optimiser les pipelines d\'upload et d\'encodage vidéo',
@@ -137,7 +137,7 @@ const JOBS: Job[] = [
     remote: true,
     salary: '38 000 – 52 000 €',
     level: 'Junior / Confirmé',
-    description: 'Accompagner les créateurs dans leur croissance sur TruTube : onboarding, monétisation, optimisation. Vous êtes leur premier point de contact stratégique.',
+    description: 'Accompagner les créateurs dans leur croissance sur Goroti : onboarding, monétisation, optimisation. Vous êtes leur premier point de contact stratégique.',
     responsibilities: [
       'Onboarder les nouveaux créateurs stratégiques',
       'Conseiller sur les stratégies de monétisation',
@@ -297,7 +297,7 @@ export default function CareerPage({ onNavigate }: Props) {
               On recrute — {JOBS.length} postes ouverts
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-5">
-              Rejoignez TruTube
+              Rejoignez Goroti
             </h1>
             <p className="text-lg text-gray-400 leading-relaxed">
               Construisez avec nous la prochaine génération d'infrastructure créative.
@@ -366,7 +366,7 @@ export default function CareerPage({ onNavigate }: Props) {
       <section className="py-14 border-b border-gray-800">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-2xl font-bold text-white mb-1">Organisation interne</h2>
-          <p className="text-gray-400 text-sm mb-8">Les équipes et leurs rôles dans la construction de TruTube</p>
+          <p className="text-gray-400 text-sm mb-8">Les équipes et leurs rôles dans la construction de Goroti</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {TEAMS.map(({ icon: Icon, color, label, desc }) => (
               <div key={label} className="flex gap-3 p-4 bg-gray-900/50 border border-gray-800 rounded-xl">
@@ -396,7 +396,7 @@ export default function CareerPage({ onNavigate }: Props) {
               { icon: Heart, label: 'Mutuelle premium', detail: 'Alan Gold (ou équivalent selon pays) pour vous et famille' },
               { icon: BookOpen, label: 'Budget formation', detail: '1 000€/an : conférences, livres, formations en ligne' },
               { icon: Clock, label: 'Congés flexibles', detail: 'RTT illimités sur validation manager — aucune comptabilité' },
-              { icon: Star, label: 'Accès TruTube Premium', detail: 'Compte Premium offert + accès aux contenus créateurs' },
+              { icon: Star, label: 'Accès Goroti Premium', detail: 'Compte Premium offert + accès aux contenus créateurs' },
               { icon: DollarSign, label: 'Stock-options', detail: 'BSPCE pour les profils seniors. Participation à la croissance' },
             ].map(({ icon: Icon, label, detail }) => (
               <div key={label} className="p-4 bg-gray-900/50 border border-gray-800 rounded-xl">
@@ -549,7 +549,7 @@ export default function CareerPage({ onNavigate }: Props) {
                   value={form.message}
                   onChange={e => setForm({ ...form, message: e.target.value })}
                   className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 text-sm resize-none"
-                  placeholder="Parlez-nous de vous, de vos expériences et de pourquoi TruTube spécifiquement..."
+                  placeholder="Parlez-nous de vous, de vos expériences et de pourquoi Goroti spécifiquement..."
                 />
               </div>
               <button

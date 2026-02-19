@@ -148,7 +148,7 @@ export default function ContentGuidePanel() {
               <p className="text-sm text-gray-300">
                 <span className="font-semibold text-primary-400">Astuce Pro:</span> Utilisez ces conseils
                 lors de la création de votre contenu pour maximiser votre portée, engagement et revenus
-                sur TruTube.
+                sur Goroti.
               </p>
             </div>
           </div>

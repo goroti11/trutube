@@ -28,7 +28,7 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'x',
     name: 'X / Twitter',
-    handle: '@TruTubeOfficial',
+    handle: '@GorotiOfficial',
     url: 'https://x.com/trutube',
     icon: Twitter,
     iconColor: 'text-white',
@@ -65,7 +65,7 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'youtube',
     name: 'YouTube',
-    handle: 'TruTube Officiel',
+    handle: 'Goroti Officiel',
     url: 'https://youtube.com/@trutube',
     icon: Youtube,
     iconColor: 'text-red-400',
@@ -77,7 +77,7 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'linkedin',
     name: 'LinkedIn',
-    handle: 'TruTube',
+    handle: 'Goroti',
     url: 'https://linkedin.com/company/trutube',
     icon: Linkedin,
     iconColor: 'text-blue-400',
@@ -102,7 +102,7 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'telegram',
     name: 'Telegram',
-    handle: '@TruTubeAlerts',
+    handle: '@GorotiAlerts',
     url: 'https://t.me/trutubealerts',
     icon: Send,
     iconColor: 'text-sky-400',
@@ -114,7 +114,7 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'facebook',
     name: 'Facebook',
-    handle: 'TruTube',
+    handle: 'Goroti',
     url: 'https://facebook.com/trutube',
     icon: Facebook,
     iconColor: 'text-blue-500',
@@ -130,7 +130,7 @@ const ROLES = [
     icon: Shield,
     color: 'text-red-400',
     title: 'Prévention des faux comptes',
-    description: 'Cette page recense UNIQUEMENT les comptes officiels vérifiés de TruTube. Tout compte non listé ici n\'est pas officiel et ne représente pas la plateforme.',
+    description: 'Cette page recense UNIQUEMENT les comptes officiels vérifiés de Goroti. Tout compte non listé ici n\'est pas officiel et ne représente pas la plateforme.',
   },
   {
     icon: Bell,
@@ -166,10 +166,10 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
               Présence officielle
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              TruTube sur les réseaux sociaux
+              Goroti sur les réseaux sociaux
             </h1>
             <p className="text-gray-400 text-lg mb-6">
-              Retrouvez tous les comptes officiels et vérifiés de TruTube. Cette page est la référence
+              Retrouvez tous les comptes officiels et vérifiés de Goroti. Cette page est la référence
               pour éviter les faux comptes et rester informé des actualités de la plateforme.
             </p>
             <div className="flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-full w-fit">
@@ -266,14 +266,14 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
                 <h3 className="font-semibold text-white mb-2">Attention aux faux comptes</h3>
                 <div className="text-gray-400 text-sm leading-relaxed space-y-2">
                   <p>
-                    TruTube ne vous demandera <strong className="text-white">jamais</strong> vos identifiants, votre mot de passe, ou un paiement via les réseaux sociaux.
+                    Goroti ne vous demandera <strong className="text-white">jamais</strong> vos identifiants, votre mot de passe, ou un paiement via les réseaux sociaux.
                   </p>
                   <p>
-                    Tout compte prétendant être TruTube et non listé sur cette page est un faux compte. Signalez-le directement à la plateforme concernée et à <span className="text-red-400">security@trutube.tv</span>.
+                    Tout compte prétendant être Goroti et non listé sur cette page est un faux compte. Signalez-le directement à la plateforme concernée et à <span className="text-red-400">security@trutube.tv</span>.
                   </p>
                   <ul className="space-y-1 mt-2">
                     {[
-                      'Ne jamais cliquer sur des liens reçus en DM d\'un compte TruTube non vérifié',
+                      'Ne jamais cliquer sur des liens reçus en DM d\'un compte Goroti non vérifié',
                       'Ne jamais envoyer de fonds suite à une demande sur les réseaux sociaux',
                       'Vérifier l\'URL officielle : trutube.tv (pas de variantes)',
                     ].map(item => (
@@ -297,7 +297,7 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
             </div>
             <h3 className="text-xl font-bold text-white mb-2">Rejoindre la communauté Discord</h3>
             <p className="text-gray-400 text-sm max-w-lg mx-auto mb-6">
-              Le Discord officiel TruTube est le meilleur endroit pour discuter avec d'autres créateurs,
+              Le Discord officiel Goroti est le meilleur endroit pour discuter avec d'autres créateurs,
               avoir un support rapide, accéder aux beta-tests et influencer la roadmap produit.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

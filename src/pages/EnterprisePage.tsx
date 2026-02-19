@@ -83,14 +83,14 @@ export default function EnterprisePage({ onNavigate }: Props) {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-sm mb-6">
               <Building2 className="w-4 h-4" />
-              TruTube — Infrastructure créative
+              Goroti — Infrastructure créative
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-5 leading-tight">
               La plateforme creator-first<br />
               <span className="text-cyan-400">pour l'économie créative mondiale</span>
             </h1>
             <p className="text-lg text-gray-300 leading-relaxed mb-8">
-              TruTube construit une infrastructure juste pour les créateurs de contenu :
+              Goroti construit une infrastructure juste pour les créateurs de contenu :
               revenus directs, droits protégés, transparence totale sur chaque centime généré.
               Une alternative structurelle à la publicité comme seule source de revenus.
             </p>
@@ -135,7 +135,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
           <div>
             <h3 className="text-base font-semibold text-white mb-3">Notre mission</h3>
             <p className="text-gray-400 leading-relaxed mb-4 text-sm">
-              TruTube est né d'un constat simple : les créateurs méritent mieux qu'un modèle publicitaire
+              Goroti est né d'un constat simple : les créateurs méritent mieux qu'un modèle publicitaire
               opaque qui les place en simples vecteurs de trafic. Notre mission est de
               <span className="text-white"> donner aux créateurs un revenu direct indépendant de la publicité</span>,
               en construisant une plateforme où chaque euro vient directement de la valeur créée.
@@ -173,7 +173,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
             <Eye className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
             <p className="text-gray-400 text-sm leading-relaxed">
               <span className="text-white font-medium">Problème résolu :</span> Sur les plateformes existantes,
-              90% des créateurs gagnent moins de 100€/mois. Sur TruTube, le modèle de revenus directs
+              90% des créateurs gagnent moins de 100€/mois. Sur Goroti, le modèle de revenus directs
               permet à des créateurs avec une audience modeste de générer un revenu significatif,
               car chaque achat ou abonnement va directement à eux — pas à un intermédiaire publicitaire.
             </p>
@@ -226,7 +226,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
       </SectionBlock>
 
       {/* 3. Modèle économique */}
-      <SectionBlock title="Modèle économique" subtitle="Comment TruTube génère et redistribue de la valeur — sans dépendance à la publicité">
+      <SectionBlock title="Modèle économique" subtitle="Comment Goroti génère et redistribue de la valeur — sans dépendance à la publicité">
         <div className="grid md:grid-cols-4 gap-4 mb-8">
           {[
             { icon: Coins, color: 'text-yellow-400', label: 'Commission ventes', desc: 'Contenus premium (vidéos, albums, cours)', value: '15%' },
@@ -253,7 +253,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
           </div>
           <div className="flex justify-between text-xs text-gray-500 mt-1">
             <span>Reversé aux créateurs</span>
-            <span>15% commission TruTube (frais bancaires inclus)</span>
+            <span>15% commission Goroti (frais bancaires inclus)</span>
           </div>
         </div>
 
@@ -262,7 +262,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
           <h3 className="font-semibold text-white mb-1">Transparence financière totale</h3>
           <p className="text-gray-400 text-sm leading-relaxed">
             Toutes les commissions sont fixes, publiques et auditables. Les créateurs voient exactement
-            combien TruTube prend sur chaque transaction. Aucun changement silencieux — tout changement
+            combien Goroti prend sur chaque transaction. Aucun changement silencieux — tout changement
             de politique est annoncé 30 jours à l'avance avec notification directe.
           </p>
         </div>
@@ -336,7 +336,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
         <div className="space-y-3">
           <AccordionItem title="Conformité RGPD (Règlement UE 2016/679)">
             <p>
-              TruTube traite les données personnelles conformément au RGPD. Droit d'accès, de rectification,
+              Goroti traite les données personnelles conformément au RGPD. Droit d'accès, de rectification,
               de portabilité et d'effacement garantis pour tous les utilisateurs européens.
             </p>
             <ul className="space-y-1 mt-2">
@@ -379,7 +379,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
           </AccordionItem>
           <AccordionItem title="Fiscalité des payouts">
             <p>
-              TruTube fournit à chaque créateur un relevé fiscal annuel (document 1099-équivalent pour les
+              Goroti fournit à chaque créateur un relevé fiscal annuel (document 1099-équivalent pour les
               US, déclaration UE pour les résidents européens). Les TVA et retenues à la source sont
               gérées automatiquement selon la juridiction.
             </p>
@@ -390,7 +390,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
           </AccordionItem>
           <AccordionItem title="Digital Services Act (DSA) — Conformité UE">
             <p>
-              TruTube se conforme au Règlement (UE) 2022/2065 sur les services numériques. Rapport de
+              Goroti se conforme au Règlement (UE) 2022/2065 sur les services numériques. Rapport de
               transparence annuel publié, mécanisme de signalement accessible, système de réclamation
               interne opérationnel et coopération avec les organismes de règlement des litiges (ORL).
             </p>
@@ -443,7 +443,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
             {[
               ['Logo officiel', 'Utiliser uniquement les fichiers du kit presse'],
               ['Couleurs', '#00C4CC (cyan) — couleur principale officielle'],
-              ['Nom commercial', 'Toujours écrit "TruTube" (T majuscule, T majuscule)'],
+              ['Nom commercial', 'Toujours écrit "Goroti" (T majuscule, T majuscule)'],
               ['Captures d\'écran', 'Utiliser les captures officielles fournies'],
             ].map(([rule, detail]) => (
               <div key={rule as string} className="flex gap-2 text-xs">
@@ -531,7 +531,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
               { phase: 'Actuel', items: 'Vidéo, musique, marketplace, live, communautés, wallet complet' },
               { phase: 'Q2 2026', items: 'Distribution DSP automatisée, app mobile native iOS/Android' },
               { phase: 'Q3 2026', items: 'API publique créateurs, programme ambassadeurs, expansion EU' },
-              { phase: 'Q4 2026', items: 'TruTube Premium B2B, analytics avancés, partenariats label' },
+              { phase: 'Q4 2026', items: 'Goroti Premium B2B, analytics avancés, partenariats label' },
             ].map(({ phase, items }) => (
               <div key={phase} className="flex gap-5 px-5 py-3 text-sm">
                 <span className="text-cyan-400 font-medium w-20 shrink-0">{phase}</span>

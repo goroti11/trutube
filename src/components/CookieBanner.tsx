@@ -44,7 +44,7 @@ const COOKIE_CATEGORIES = [
   {
     key: 'analytics' as const,
     label: 'Cookies analytiques',
-    desc: "Nous aident à comprendre comment vous utilisez TruTube pour améliorer l'expérience.",
+    desc: "Nous aident à comprendre comment vous utilisez Goroti pour améliorer l'expérience.",
     icon: <BarChart2 className="w-4 h-4" />,
     required: false,
     examples: 'Pages visitées, watchtime, erreurs',
@@ -110,7 +110,7 @@ export default function CookieBanner() {
                 <div>
                   <h2 className="font-bold text-white text-base mb-1">Vos préférences de cookies</h2>
                   <p className="text-sm text-gray-400 leading-relaxed">
-                    TruTube utilise des cookies pour assurer le bon fonctionnement du site et améliorer votre expérience. Certains cookies sont essentiels, d'autres optionnels.
+                    Goroti utilise des cookies pour assurer le bon fonctionnement du site et améliorer votre expérience. Certains cookies sont essentiels, d'autres optionnels.
                   </p>
                 </div>
               </div>

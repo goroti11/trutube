@@ -367,7 +367,7 @@ export default function CommunitySettingsPage({ slug = '' }: CommunitySettingsPa
                       Modération automatique
                     </h4>
                     <p className="text-sm text-blue-800">
-                      Les posts et commentaires sont automatiquement modérés selon les règles de TruTube.
+                      Les posts et commentaires sont automatiquement modérés selon les règles de Goroti.
                       Les contenus signalés sont examinés par l'équipe de modération.
                     </p>
                   </div>

@@ -712,7 +712,7 @@ export default function ChannelEditPage({ channelId, onNavigate }: Props) {
 
               <div className="bg-gray-800/50 rounded-xl p-4">
                 <p className="text-xs text-gray-400">
-                  <strong className="text-gray-300">Note :</strong> Même si votre chaîne est privée, votre profil légal reste le responsable juridique de tout le contenu publié. TruTube conserve l'association entre chaîne et titulaire pour assurer la conformité légale.
+                  <strong className="text-gray-300">Note :</strong> Même si votre chaîne est privée, votre profil légal reste le responsable juridique de tout le contenu publié. Goroti conserve l'association entre chaîne et titulaire pour assurer la conformité légale.
                 </p>
               </div>
             </div>

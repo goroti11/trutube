@@ -27,12 +27,12 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
       icon: '📚',
       faqs: [
         {
-          question: "Qu'est-ce que TruTube ?",
-          answer: "TruTube est une plateforme de partage de vidéos révolutionnaire qui utilise un système d'univers thématiques pour organiser le contenu. Notre mission est de créer une communauté authentique où les créateurs peuvent prospérer."
+          question: "Qu'est-ce que Goroti ?",
+          answer: "Goroti est une plateforme de partage de vidéos révolutionnaire qui utilise un système d'univers thématiques pour organiser le contenu. Notre mission est de créer une communauté authentique où les créateurs peuvent prospérer."
         },
         {
           question: "Comment fonctionne la période d'essai gratuite ?",
-          answer: "Vous bénéficiez de 15 jours d'accès gratuit à toutes les fonctionnalités premium de TruTube. Après cette période, vous pouvez continuer avec un compte gratuit limité ou souscrire à un abonnement premium."
+          answer: "Vous bénéficiez de 15 jours d'accès gratuit à toutes les fonctionnalités premium de Goroti. Après cette période, vous pouvez continuer avec un compte gratuit limité ou souscrire à un abonnement premium."
         },
         {
           question: "Quelle est la différence entre gratuit et premium ?",
@@ -102,7 +102,7 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
         },
         {
           question: "L'application mobile est-elle disponible ?",
-          answer: "Oui, TruTube est optimisé pour mobile via notre interface web responsive. Des applications natives iOS et Android seront bientôt disponibles."
+          answer: "Oui, Goroti est optimisé pour mobile via notre interface web responsive. Des applications natives iOS et Android seront bientôt disponibles."
         },
         {
           question: "Comment améliorer la qualité de lecture ?",
@@ -128,7 +128,7 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
         },
         {
           question: "Comment fonctionnent les tips ?",
-          answer: "Les tips permettent de soutenir directement vos créateurs préférés. TruTube prend une commission de 5% sur chaque tip. Les créateurs reçoivent 95% du montant."
+          answer: "Les tips permettent de soutenir directement vos créateurs préférés. Goroti prend une commission de 5% sur chaque tip. Les créateurs reçoivent 95% du montant."
         }
       ]
     }

@@ -53,7 +53,7 @@ export default function DataManagementPage({ onNavigate }: DataManagementPagePro
             </div>
 
             <p className="text-gray-300 mb-6">
-              Téléchargez une copie de toutes vos données TruTube, y compris votre profil,
+              Téléchargez une copie de toutes vos données Goroti, y compris votre profil,
               vidéos, commentaires, abonnements et historique.
             </p>
 

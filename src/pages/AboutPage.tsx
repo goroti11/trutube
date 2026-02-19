@@ -21,7 +21,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
               </div>
             </div>
             <h1 className="text-5xl font-black text-white mb-6">
-              TruTube : La vérité au cœur du contenu
+              Goroti : La vérité au cœur du contenu
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Une plateforme de partage vidéo décentralisée qui valorise l'authenticité,
@@ -33,7 +33,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
         <div className="max-w-6xl mx-auto px-6 py-16">
           <section className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-white mb-4">Pourquoi TruTube existe</h2>
+              <h2 className="text-3xl font-bold text-white mb-4">Pourquoi Goroti existe</h2>
               <p className="text-gray-400 text-lg max-w-3xl mx-auto">
                 Face à une industrie du contenu vidéo dominée par des algorithmes opaques et
                 des métriques manipulables, nous avons créé une alternative transparente et équitable.
@@ -90,7 +90,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
                   </h3>
                   <p className="text-gray-300 text-lg leading-relaxed">
                     Nous croyons que chaque vue doit compter, que chaque interaction doit être authentique,
-                    et que chaque créateur mérite une rémunération juste. TruTube n'est pas juste une plateforme :
+                    et que chaque créateur mérite une rémunération juste. Goroti n'est pas juste une plateforme :
                     c'est un mouvement pour ramener la vérité et la transparence dans le partage de contenu.
                   </p>
                 </div>
@@ -186,7 +186,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
                     <p className="text-gray-300">
                       Les créateurs peuvent créer leurs propres univers thématiques avec leurs règles.
                       Chaque univers fonctionne comme un espace autonome tout en respectant les règles
-                      globales de TruTube.
+                      globales de Goroti.
                     </p>
                   </div>
                 </div>
@@ -202,7 +202,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
                       Monétisation équitable
                     </h3>
                     <p className="text-gray-300">
-                      Fini les CPM mystérieux. Sur TruTube, les créateurs sont payés selon l'engagement
+                      Fini les CPM mystérieux. Sur Goroti, les créateurs sont payés selon l'engagement
                       réel : temps de visionnage, interactions, fidélité de l'audience. Plus votre contenu
                       engage, plus vous gagnez.
                     </p>
@@ -217,7 +217,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
               <h2 className="text-3xl font-bold text-white mb-4">Notre vision pour l'avenir</h2>
               <p className="text-gray-300 text-lg max-w-3xl mx-auto mb-8">
                 Nous imaginons un Internet où la qualité prime sur la quantité, où les créateurs sont
-                valorisés équitablement, et où la communauté a son mot à dire. TruTube n'est que le début
+                valorisés équitablement, et où la communauté a son mot à dire. Goroti n'est que le début
                 d'un écosystème plus large de plateformes décentralisées et transparentes.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
@@ -225,7 +225,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
                   onClick={() => onNavigate('auth')}
                   className="px-8 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium transition-colors"
                 >
-                  Rejoindre TruTube
+                  Rejoindre Goroti
                 </button>
                 <button
                   onClick={() => onNavigate('creator-setup')}

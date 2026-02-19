@@ -321,11 +321,11 @@ export default function MusicMarketplacePage({ onNavigate }: MusicMarketplacePag
               <div className="bg-gray-900 rounded-2xl p-6">
                 <div className="flex items-center gap-2 text-sm font-medium mb-4">
                   <Shield className="w-4 h-4 text-emerald-400" />
-                  Protection acheteur TruTube
+                  Protection acheteur Goroti
                 </div>
                 <div className="space-y-2 text-sm text-gray-400">
                   <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />Paiement bloqué en escrow jusqu'à votre validation</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />Arbitrage TruTube en cas de litige</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />Arbitrage Goroti en cas de litige</div>
                   <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />Historique des échanges conservé</div>
                   <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />Contrat numérique intégré</div>
                 </div>
@@ -447,7 +447,7 @@ export default function MusicMarketplacePage({ onNavigate }: MusicMarketplacePag
         <div className="max-w-5xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-red-950/40 border border-red-800/50 text-red-400 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
             <Briefcase className="w-3.5 h-3.5" />
-            TruTube Marketplace
+            Goroti Marketplace
           </div>
           <h1 className="text-4xl font-bold mb-3">Les professionnels de la création</h1>
           <p className="text-gray-400 max-w-xl mx-auto mb-8">
@@ -550,7 +550,7 @@ export default function MusicMarketplacePage({ onNavigate }: MusicMarketplacePag
               <select className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none">
                 <option>Tous</option>
                 <option>Certifié Pro</option>
-                <option>Vérifié TruTube</option>
+                <option>Vérifié Goroti</option>
               </select>
             </div>
           </div>
@@ -631,7 +631,7 @@ export default function MusicMarketplacePage({ onNavigate }: MusicMarketplacePag
           </div>
           <h3 className="text-xl font-bold mb-2">Vous êtes prestataire ?</h3>
           <p className="text-gray-400 text-sm max-w-md mx-auto mb-6">
-            Rejoignez le Marketplace TruTube et accédez à des milliers de créateurs.
+            Rejoignez le Marketplace Goroti et accédez à des milliers de créateurs.
             Profil vérifié, contrats sécurisés, paiement garanti.
           </p>
           <div className="flex items-center justify-center gap-4 mb-6">

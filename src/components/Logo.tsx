@@ -69,14 +69,9 @@ export default function Logo({ size = 'md', showText = true, className = '' }: L
       </div>
 
       {showText && (
-        <div className="flex flex-col leading-none">
-          <span className={`font-bold ${sizeClasses.text} bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent`}>
-            Tru
-          </span>
-          <span className={`font-bold ${sizeClasses.text} bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent -mt-1`}>
-            Tube
-          </span>
-        </div>
+        <span className={`font-bold ${sizeClasses.text} bg-gradient-to-r from-blue-500 via-green-500 to-red-500 bg-clip-text text-transparent`}>
+          Goroti
+        </span>
       )}
     </div>
   );

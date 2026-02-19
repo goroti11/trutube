@@ -211,10 +211,10 @@ export default function ChannelTeamPage({ channelId, onNavigate }: Props) {
                 <input
                   value={inviteUserId}
                   onChange={e => setInviteUserId(e.target.value)}
-                  placeholder="UUID de l'utilisateur TruTube"
+                  placeholder="UUID de l'utilisateur Goroti"
                   className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-red-500"
                 />
-                <p className="text-xs text-gray-600 mt-1">L'utilisateur doit avoir un compte TruTube actif.</p>
+                <p className="text-xs text-gray-600 mt-1">L'utilisateur doit avoir un compte Goroti actif.</p>
               </div>
 
               <div>

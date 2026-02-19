@@ -88,7 +88,7 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
             Mentions<br />Légales
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl">
-            Informations légales obligatoires relatives à l'éditeur de la plateforme TruTube,
+            Informations légales obligatoires relatives à l'éditeur de la plateforme Goroti,
             conformément à la loi n° 2004-575 du 21 juin 2004 (LCEN).
           </p>
         </div>
@@ -96,7 +96,7 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
         <div className="space-y-3">
           <Section icon={Building2} title="1. Éditeur de la plateforme" accent="text-sky-400">
             <div className="rounded-xl bg-white/[0.03] border border-white/6 overflow-hidden">
-              <InfoRow label="Raison sociale" value="TruTube SAS" />
+              <InfoRow label="Raison sociale" value="Goroti SAS" />
               <InfoRow label="Forme juridique" value="Société par Actions Simplifiée (SAS)" />
               <InfoRow label="Capital social" value="100 000 €" />
               <InfoRow label="Siège social" value="123 Avenue des Champs-Élysées, 75008 Paris, France" />
@@ -133,7 +133,7 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
 
           <Section icon={Server} title="2. Hébergement" accent="text-blue-400">
             <p className="text-gray-400 mb-4">
-              La plateforme TruTube est hébergée par les prestataires suivants :
+              La plateforme Goroti est hébergée par les prestataires suivants :
             </p>
             <div className="space-y-3">
               {[
@@ -176,23 +176,23 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
           <Section icon={Copyright} title="3. Propriété intellectuelle" accent="text-amber-400">
             <div className="space-y-4">
               <p>
-                L'ensemble des éléments constituant la plateforme TruTube (structure, design, textes, logos,
+                L'ensemble des éléments constituant la plateforme Goroti (structure, design, textes, logos,
                 icônes, images, sons, vidéos institutionnelles, logiciels et code source) est la propriété
-                exclusive de TruTube SAS ou de ses partenaires, et est protégé par le Code de la Propriété
+                exclusive de Goroti SAS ou de ses partenaires, et est protégé par le Code de la Propriété
                 Intellectuelle ainsi que par les conventions internationales.
               </p>
 
               <div className="p-4 rounded-xl bg-amber-950/20 border border-amber-800/30 space-y-2">
-                <p className="text-amber-400 font-semibold text-sm">Droits réservés de TruTube</p>
+                <p className="text-amber-400 font-semibold text-sm">Droits réservés de Goroti</p>
                 <p className="text-gray-400 text-sm">
                   Toute reproduction, représentation, modification, publication, adaptation, transmission ou
                   distribution de tout ou partie du contenu de la plateforme, par quelque procédé que ce soit,
-                  est strictement interdite sans l'autorisation écrite préalable de TruTube SAS.
+                  est strictement interdite sans l'autorisation écrite préalable de Goroti SAS.
                 </p>
               </div>
 
               <p>
-                Les marques «  TruTube », les logos associés et les noms des univers (MusicVerse, GameVerse, etc.)
+                Les marques «  Goroti », les logos associés et les noms des univers (MusicVerse, GameVerse, etc.)
                 sont des marques déposées ou en cours de dépôt auprès de l'INPI. Toute utilisation non autorisée
                 constitue une contrefaçon passible de poursuites civiles et pénales.
               </p>
@@ -201,8 +201,8 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
                 <p className="text-sky-400 font-semibold text-sm">Droits des créateurs</p>
                 <p className="text-gray-400 text-sm">
                   Les utilisateurs conservent l'intégralité de leurs droits de propriété intellectuelle sur les
-                  contenus qu'ils publient. La publication sur TruTube n'entraîne pas de transfert de propriété.
-                  Une licence d'utilisation limitée est accordée à TruTube pour les seuls besoins du service
+                  contenus qu'ils publient. La publication sur Goroti n'entraîne pas de transfert de propriété.
+                  Une licence d'utilisation limitée est accordée à Goroti pour les seuls besoins du service
                   (voir les CGU pour les détails).
                 </p>
               </div>
@@ -218,7 +218,7 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
 
           <Section icon={Shield} title="4. Données personnelles et RGPD" accent="text-emerald-400">
             <p>
-              TruTube SAS traite des données personnelles en qualité de responsable du traitement,
+              Goroti SAS traite des données personnelles en qualité de responsable du traitement,
               conformément au Règlement Général sur la Protection des Données (RGPD – Règlement UE 2016/679)
               et à la loi n° 78-17 du 6 janvier 1978 modifiée (loi Informatique et Libertés).
             </p>
@@ -243,7 +243,7 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
 
           <Section icon={Globe} title="5. Cookies">
             <p>
-              La plateforme TruTube utilise des cookies et technologies similaires pour assurer son
+              La plateforme Goroti utilise des cookies et technologies similaires pour assurer son
               fonctionnement, mémoriser vos préférences et réaliser des statistiques d'utilisation anonymes.
             </p>
             <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -268,20 +268,20 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
           <Section icon={AlertTriangle} title="6. Limitation de responsabilité" accent="text-rose-400">
             <div className="space-y-3">
               <p>
-                TruTube SAS agit en qualité d'hébergeur au sens de l'article 6-I-2 de la loi pour la Confiance
+                Goroti SAS agit en qualité d'hébergeur au sens de l'article 6-I-2 de la loi pour la Confiance
                 dans l'Économie Numérique (LCEN) pour les contenus publiés par ses utilisateurs. À ce titre,
-                TruTube ne peut voir sa responsabilité civile ou pénale engagée en raison des informations
+                Goroti ne peut voir sa responsabilité civile ou pénale engagée en raison des informations
                 stockées par des utilisateurs, à condition d'avoir procédé promptement au retrait desdites
                 informations dès qu'elles ont été signalées.
               </p>
               <p>
-                TruTube s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées.
+                Goroti s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées.
                 Toutefois, la plateforme ne peut garantir l'exhaustivité, la précision ou la pertinence
                 des informations mises à disposition, et décline toute responsabilité pour les erreurs
                 ou omissions éventuelles.
               </p>
               <p>
-                TruTube ne saurait être tenue responsable des dommages directs ou indirects résultant :
+                Goroti ne saurait être tenue responsable des dommages directs ou indirects résultant :
               </p>
               <ul className="space-y-1.5 ml-2">
                 {[
@@ -302,11 +302,11 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
 
           <Section icon={FileText} title="7. Liens hypertextes" accent="text-gray-400">
             <p>
-              La création de liens hypertextes pointant vers la plateforme TruTube est soumise à autorisation
-              préalable de TruTube SAS. Pour toute demande, contactez : <a href="mailto:contact@trutube.com" className="text-sky-400 hover:text-sky-300">contact@trutube.com</a>
+              La création de liens hypertextes pointant vers la plateforme Goroti est soumise à autorisation
+              préalable de Goroti SAS. Pour toute demande, contactez : <a href="mailto:contact@trutube.com" className="text-sky-400 hover:text-sky-300">contact@trutube.com</a>
             </p>
             <p className="mt-2">
-              TruTube décline toute responsabilité concernant le contenu des sites tiers vers lesquels
+              Goroti décline toute responsabilité concernant le contenu des sites tiers vers lesquels
               des liens peuvent être présents sur la plateforme. Ces liens n'impliquent aucune approbation
               de notre part quant au contenu de ces sites.
             </p>
@@ -374,7 +374,7 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
             <button onClick={() => onNavigate('terms')} className="hover:text-gray-300 transition-colors">CGU</button>
             <button onClick={() => onNavigate('privacy')} className="hover:text-gray-300 transition-colors">Confidentialité</button>
           </div>
-          <span>© 2026 TruTube SAS — {LAST_UPDATED}</span>
+          <span>© 2026 Goroti SAS — {LAST_UPDATED}</span>
         </div>
       </div>
     </div>

@@ -142,7 +142,7 @@ export const AuthPage = () => {
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">
-            TruTube
+            Goroti
           </h1>
           <p className="text-gray-400">
             {showResetPassword

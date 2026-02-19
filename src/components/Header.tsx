@@ -93,7 +93,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
             <button
               onClick={() => onNavigate?.('premium')}
               className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white rounded-lg font-bold transition-all shadow-lg"
-              title="TruTube Premium"
+              title="Goroti Premium"
             >
               <Crown className="w-4 h-4" />
               <span className="hidden sm:inline">Premium</span>
@@ -180,7 +180,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                           className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2 font-semibold"
                         >
                           <Play className="w-4 h-4" />
-                          TruTube Studio
+                          Goroti Studio
                         </button>
                         <button
                           onClick={() => {

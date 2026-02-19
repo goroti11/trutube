@@ -60,10 +60,10 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
             Politique de droits d'auteur
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            Droits d'auteur & Copyright TruTube
+            Droits d'auteur & Copyright Goroti
           </h1>
           <p className="text-gray-400 mb-4">
-            Cette politique décrit comment TruTube protège les droits d'auteur, traite les signalements
+            Cette politique décrit comment Goroti protège les droits d'auteur, traite les signalements
             et gère les procédures de retrait et de contestation.
           </p>
           <div className="flex items-center gap-4 text-xs text-gray-600">
@@ -81,7 +81,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
         {/* Ce qui est protégé */}
         <Section icon={FileText} color="text-cyan-400" title="Contenus protégés — Vos obligations">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            Tout contenu publié sur TruTube doit respecter les droits de propriété intellectuelle.
+            Tout contenu publié sur Goroti doit respecter les droits de propriété intellectuelle.
             Vous devez posséder ou avoir obtenu les droits nécessaires sur <strong className="text-white">tout</strong> contenu publié.
           </p>
           <div className="grid md:grid-cols-3 gap-4 mb-5">
@@ -131,7 +131,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
         {/* Signalement */}
         <Section icon={AlertTriangle} color="text-red-400" title="Signalement d'une violation">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            Si vous estimez que votre contenu est reproduit sur TruTube sans autorisation,
+            Si vous estimez que votre contenu est reproduit sur Goroti sans autorisation,
             vous pouvez soumettre un signalement via notre procédure officielle.
           </p>
 
@@ -140,7 +140,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
               {
                 step: '1',
                 title: 'Localiser le contenu',
-                desc: 'Identifiez l\'URL exacte du contenu violant vos droits sur TruTube.',
+                desc: 'Identifiez l\'URL exacte du contenu violant vos droits sur Goroti.',
               },
               {
                 step: '2',
@@ -211,7 +211,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
               <p>Notre équipe juridique examine la contre-notification sous <strong className="text-white">72h ouvrées</strong>. Le plaignant original est notifié et dispose de 10 jours pour saisir la justice. Si aucune action judiciaire n'est engagée dans ce délai, le contenu peut être rétabli.</p>
             </AccordionItem>
             <AccordionItem title="Médiation externe">
-              <p>Si la décision de TruTube ne vous satisfait pas, vous pouvez faire appel à un organisme de résolution des litiges externe. TruTube coopère avec les ORL accrédités sous le Digital Services Act (DSA). Contact : <span className="text-cyan-400">mediation@trutube.tv</span></p>
+              <p>Si la décision de Goroti ne vous satisfait pas, vous pouvez faire appel à un organisme de résolution des litiges externe. Goroti coopère avec les ORL accrédités sous le Digital Services Act (DSA). Contact : <span className="text-cyan-400">mediation@trutube.tv</span></p>
             </AccordionItem>
           </div>
 
@@ -228,7 +228,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
         {/* Suspension */}
         <Section icon={AlertTriangle} color="text-orange-400" title="Système d'avertissements & suspension">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            TruTube applique un système progressif de sanctions en cas de violations répétées.
+            Goroti applique un système progressif de sanctions en cas de violations répétées.
           </p>
           <div className="border border-gray-800 rounded-xl overflow-hidden">
             <div className="grid grid-cols-3 px-5 py-3 bg-gray-900/50 text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-800">
@@ -258,7 +258,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
         <Section icon={Globe} color="text-blue-400" title="Blocage territorial">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
             Les détenteurs de droits ayant des licences limitées géographiquement peuvent demander
-            un blocage territorial de leur contenu sur TruTube.
+            un blocage territorial de leur contenu sur Goroti.
           </p>
           <div className="space-y-3">
             <AccordionItem title="Qui peut demander un blocage territorial ?">
@@ -283,7 +283,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
         {/* Preuves horodatées */}
         <Section icon={Clock} color="text-cyan-400" title="Preuves horodatées & antériorité">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            TruTube génère automatiquement des preuves d'antériorité pour chaque contenu publié.
+            Goroti génère automatiquement des preuves d'antériorité pour chaque contenu publié.
           </p>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="p-4 bg-gray-900/50 border border-gray-800 rounded-xl">
@@ -320,7 +320,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
         {/* Fingerprinting */}
         <Section icon={Fingerprint} color="text-green-400" title="Fingerprinting & détection automatique">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            TruTube analyse chaque upload pour détecter les contenus protégés existants.
+            Goroti analyse chaque upload pour détecter les contenus protégés existants.
           </p>
           <div className="grid md:grid-cols-3 gap-4">
             {[

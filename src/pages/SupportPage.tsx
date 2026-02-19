@@ -13,15 +13,15 @@ interface SupportPageProps {
 const FAQ_ITEMS = [
   {
     question: 'Comment fonctionne le système anti-fausses vues?',
-    answer: 'TruTube utilise un algorithme sophistiqué qui analyse le comportement des utilisateurs, la durée de visionnage, les interactions et d\'autres métriques pour détecter les fausses vues. Les contenus avec des vues artificiellement gonflées sont pénalisés dans les recommandations.',
+    answer: 'Goroti utilise un algorithme sophistiqué qui analyse le comportement des utilisateurs, la durée de visionnage, les interactions et d\'autres métriques pour détecter les fausses vues. Les contenus avec des vues artificiellement gonflées sont pénalisés dans les recommandations.',
   },
   {
     question: 'Comment créer mon propre univers?',
     answer: 'Pour créer un univers, accédez à votre tableau de bord créateur et cliquez sur "Créer un univers". Vous devrez définir un nom, une description, et les règles de votre univers. Une fois validé, votre univers sera accessible à tous.',
   },
   {
-    question: 'Comment puis-je gagner de l\'argent sur TruTube?',
-    answer: 'TruTube offre plusieurs moyens de monétisation: les tips directs de votre audience, les abonnements mensuels, et le partage des revenus publicitaires basé sur l\'engagement réel (pas seulement les vues).',
+    question: 'Comment puis-je gagner de l\'argent sur Goroti?',
+    answer: 'Goroti offre plusieurs moyens de monétisation: les tips directs de votre audience, les abonnements mensuels, et le partage des revenus publicitaires basé sur l\'engagement réel (pas seulement les vues).',
   },
   {
     question: 'Quelle est la différence entre univers et sous-univers?',

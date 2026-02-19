@@ -70,7 +70,7 @@ export default function PricingPage({ onNavigate }: Props) {
             Tarification transparente
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-5">
-            Qui paie quoi sur TruTube
+            Qui paie quoi sur Goroti
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
             Aucun frais caché. Commissions fixes et publiques. Tout changement annoncé 30 jours à l'avance.
@@ -100,7 +100,7 @@ export default function PricingPage({ onNavigate }: Props) {
             </div>
             <div>
               <h2 className="text-xl font-bold text-white">Pour les spectateurs</h2>
-              <p className="text-gray-500 text-sm">Ce que coûte regarder du contenu sur TruTube</p>
+              <p className="text-gray-500 text-sm">Ce que coûte regarder du contenu sur Goroti</p>
             </div>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
@@ -137,7 +137,7 @@ export default function PricingPage({ onNavigate }: Props) {
                   <div className="absolute -top-2.5 left-4">
                     <span className="px-3 py-0.5 bg-cyan-600 text-white text-xs font-medium rounded-full">Populaire</span>
                   </div>
-                  <h3 className="font-bold text-white mb-1 mt-1">TruTube Premium</h3>
+                  <h3 className="font-bold text-white mb-1 mt-1">Goroti Premium</h3>
                   <div className="text-2xl font-bold text-white mb-3">6,99€ <span className="text-sm text-gray-400 font-normal">/ mois</span></div>
                   <ul className="space-y-1.5">
                     {['Aucune publicité', 'Qualité jusqu\'à 4K HDR', 'Téléchargement hors-ligne', 'Accès prioritaire aux lives', 'Badge Premium sur le profil', 'Accès anticipé aux nouvelles fonctionnalités'].map(f => (
@@ -242,7 +242,7 @@ export default function PricingPage({ onNavigate }: Props) {
                 color: 'text-blue-400',
                 title: 'Sponsoring natif',
                 billing: 'Forfait négocié',
-                desc: 'Placement directement dans les vidéos des créateurs. Budget négocié directement entre marque et créateur. TruTube facilite la mise en relation, le contrat et la facturation.',
+                desc: 'Placement directement dans les vidéos des créateurs. Budget négocié directement entre marque et créateur. Goroti facilite la mise en relation, le contrat et la facturation.',
                 items: ['Contact direct créateur-marque', 'Contrat standardisé disponible', 'Facturation simplifiée'],
               },
               {
@@ -358,7 +358,7 @@ export default function PricingPage({ onNavigate }: Props) {
             </div>
             <div>
               <h2 className="text-xl font-bold text-white">Simulateur de revenus créateur</h2>
-              <p className="text-gray-500 text-sm">Estimez vos gains nets mensuels sur TruTube</p>
+              <p className="text-gray-500 text-sm">Estimez vos gains nets mensuels sur Goroti</p>
             </div>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
@@ -419,7 +419,7 @@ export default function PricingPage({ onNavigate }: Props) {
                   </div>
                 ))}
                 <div className="pt-2 flex justify-between text-xs text-gray-500">
-                  <span>Commission totale TruTube</span>
+                  <span>Commission totale Goroti</span>
                   <span className="text-gray-400">−{totalCommission.toFixed(2)}€</span>
                 </div>
               </div>
@@ -452,19 +452,19 @@ export default function PricingPage({ onNavigate }: Props) {
               },
               {
                 q: 'Comment fonctionne le TruCoin en détail ?',
-                a: 'Le TruCoin est la monnaie virtuelle de TruTube. 1 TruCoin = 0,01€ de façon garantie et non-spéculative. Les spectateurs achètent des TruCoins pour envoyer des tips aux créateurs. Les créateurs convertissent leurs TruCoins reçus en euros avec un frais fixe minimal. Les TruCoins non utilisés expirent après 2 ans d\'inactivité.',
+                a: 'Le TruCoin est la monnaie virtuelle de Goroti. 1 TruCoin = 0,01€ de façon garantie et non-spéculative. Les spectateurs achètent des TruCoins pour envoyer des tips aux créateurs. Les créateurs convertissent leurs TruCoins reçus en euros avec un frais fixe minimal. Les TruCoins non utilisés expirent après 2 ans d\'inactivité.',
               },
               {
                 q: 'Les frais affichés incluent-ils la TVA ?',
-                a: 'Les prix affichés aux spectateurs sont TTC. Les créateurs basés dans l\'UE doivent déclarer la TVA selon leur statut. TruTube fournit un récapitulatif fiscal annuel téléchargeable. Pour les auto-entrepreneurs français sous le régime micro, la franchise de TVA s\'applique sous les seuils légaux.',
+                a: 'Les prix affichés aux spectateurs sont TTC. Les créateurs basés dans l\'UE doivent déclarer la TVA selon leur statut. Goroti fournit un récapitulatif fiscal annuel téléchargeable. Pour les auto-entrepreneurs français sous le régime micro, la franchise de TVA s\'applique sous les seuils légaux.',
               },
               {
                 q: 'Que se passe-t-il si un spectateur demande un remboursement ?',
-                a: 'Les remboursements sont possibles dans les 14 jours suivant un achat pour un contenu non-consommé (droit UE de rétractation). Le montant est remboursé au spectateur depuis les fonds TruTube. Si le remboursement est dû à une faute du créateur, sa commission est déduite. Les créateurs peuvent configurer une politique de remboursement personnalisée dans leur studio.',
+                a: 'Les remboursements sont possibles dans les 14 jours suivant un achat pour un contenu non-consommé (droit UE de rétractation). Le montant est remboursé au spectateur depuis les fonds Goroti. Si le remboursement est dû à une faute du créateur, sa commission est déduite. Les créateurs peuvent configurer une politique de remboursement personnalisée dans leur studio.',
               },
               {
                 q: 'Y a-t-il des frais d\'inscription ou des abonnements obligatoires pour les créateurs ?',
-                a: 'Non. Créer un compte créateur et publier du contenu est entièrement gratuit. TruTube se rémunère uniquement sur les transactions — si vous ne gagnez rien, vous ne payez rien.',
+                a: 'Non. Créer un compte créateur et publier du contenu est entièrement gratuit. Goroti se rémunère uniquement sur les transactions — si vous ne gagnez rien, vous ne payez rien.',
               },
             ].map(({ q, a }) => (
               <FaqItem key={q} q={q} a={a} />

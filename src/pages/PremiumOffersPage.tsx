@@ -94,7 +94,7 @@ export default function PremiumOffersPage({ onNavigate }: PremiumOffersPageProps
               Devenez Premium
             </h1>
             <p className="text-xl text-gray-400 mb-8">
-              Débloquez tout le potentiel de TruTube avec nos offres Premium
+              Débloquez tout le potentiel de Goroti avec nos offres Premium
             </p>
 
             {/* Billing Toggle */}

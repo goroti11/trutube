@@ -142,7 +142,7 @@ export default function PremiumPage() {
       <main className="max-w-7xl mx-auto px-4 py-12 mt-16">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            Passez à TruTube Premium
+            Passez à Goroti Premium
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Une expérience vidéo sans compromis. Soutenez vos créateurs préférés et débloquez des fonctionnalités exclusives.

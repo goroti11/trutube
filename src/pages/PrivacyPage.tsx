@@ -116,7 +116,7 @@ export const PrivacyPage = ({ onNavigate }: PrivacyPageProps) => {
             Politique de<br />Confidentialité
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl">
-            TruTube s'engage à protéger votre vie privée. Ce document explique comment vos données personnelles
+            Goroti s'engage à protéger votre vie privée. Ce document explique comment vos données personnelles
             sont collectées, utilisées et protégées.
           </p>
 
@@ -126,7 +126,7 @@ export const PrivacyPage = ({ onNavigate }: PrivacyPageProps) => {
               <div>
                 <p className="text-white font-semibold text-sm">Notre engagement fondamental</p>
                 <p className="text-gray-400 text-sm mt-1">
-                  TruTube ne vend jamais vos données personnelles à des tiers. Vos données ne sont utilisées
+                  Goroti ne vend jamais vos données personnelles à des tiers. Vos données ne sont utilisées
                   que pour améliorer votre expérience et faire fonctionner nos services.
                 </p>
               </div>
@@ -141,7 +141,7 @@ export const PrivacyPage = ({ onNavigate }: PrivacyPageProps) => {
                 Le responsable du traitement de vos données personnelles est :
               </p>
               <div className="mt-3 p-4 rounded-xl bg-white/[0.03] border border-white/6 space-y-1.5 text-sm">
-                <p><span className="text-white font-medium">Société :</span> TruTube SAS</p>
+                <p><span className="text-white font-medium">Société :</span> Goroti SAS</p>
                 <p><span className="text-white font-medium">Siège social :</span> 123 Avenue des Champs-Élysées, 75008 Paris, France</p>
                 <p><span className="text-white font-medium">RCS :</span> Paris B 123 456 789</p>
                 <p><span className="text-white font-medium">Email DPO :</span> <a href={`mailto:${DPO_EMAIL}`} className="text-sky-400 hover:text-sky-300">{DPO_EMAIL}</a></p>
@@ -149,7 +149,7 @@ export const PrivacyPage = ({ onNavigate }: PrivacyPageProps) => {
             </Sub>
             <Sub title="1.2 Délégué à la Protection des Données (DPO)">
               <p>
-                TruTube a désigné un Délégué à la Protection des Données (DPO) joignable à l'adresse
+                Goroti a désigné un Délégué à la Protection des Données (DPO) joignable à l'adresse
                 <a href={`mailto:${DPO_EMAIL}`} className="text-sky-400 hover:text-sky-300 mx-1">{DPO_EMAIL}</a>
                 pour toute question relative au traitement de vos données personnelles.
               </p>
@@ -227,7 +227,7 @@ export const PrivacyPage = ({ onNavigate }: PrivacyPageProps) => {
           <Section icon={Globe} title="4. Partage et transfert des données" accent="text-amber-400">
             <Sub title="4.1 Principe de non-vente">
               <p className="font-semibold text-emerald-400">
-                TruTube ne vend, ne loue et ne cède jamais vos données personnelles à des tiers à des fins commerciales.
+                Goroti ne vend, ne loue et ne cède jamais vos données personnelles à des tiers à des fins commerciales.
               </p>
             </Sub>
             <Sub title="4.2 Sous-traitants autorisés">
@@ -257,7 +257,7 @@ export const PrivacyPage = ({ onNavigate }: PrivacyPageProps) => {
             <Sub title="4.4 Divulgations légales">
               <p>
                 Nous pouvons divulguer vos données aux autorités compétentes sur réquisition judiciaire valide,
-                ou pour protéger les droits, la propriété ou la sécurité de TruTube, de ses utilisateurs ou du public.
+                ou pour protéger les droits, la propriété ou la sécurité de Goroti, de ses utilisateurs ou du public.
                 Nous vous informerons de toute demande légale sauf interdiction expresse.
               </p>
             </Sub>
@@ -286,7 +286,7 @@ export const PrivacyPage = ({ onNavigate }: PrivacyPageProps) => {
             <Sub title="5.3 Notification en cas de violation">
               <p>
                 En cas de violation de données susceptible d'engendrer un risque pour vos droits et libertés,
-                TruTube s'engage à en notifier la CNIL dans les 72 heures et à vous informer dans les meilleurs
+                Goroti s'engage à en notifier la CNIL dans les 72 heures et à vous informer dans les meilleurs
                 délais si la violation présente un risque élevé pour vous.
               </p>
             </Sub>
@@ -389,7 +389,7 @@ export const PrivacyPage = ({ onNavigate }: PrivacyPageProps) => {
               <p>
                 Les notifications push nécessitent votre autorisation explicite dans votre navigateur.
                 Vous pouvez les désactiver à tout moment depuis les paramètres de votre navigateur ou
-                de votre compte TruTube.
+                de votre compte Goroti.
               </p>
             </Sub>
           </Section>
@@ -397,7 +397,7 @@ export const PrivacyPage = ({ onNavigate }: PrivacyPageProps) => {
           <Section icon={Globe} title="9. Dispositions spécifiques" accent="text-rose-400">
             <Sub title="9.1 Mineurs">
               <p>
-                TruTube n'est pas destiné aux enfants de moins de 13 ans et ne collecte pas sciemment de données
+                Goroti n'est pas destiné aux enfants de moins de 13 ans et ne collecte pas sciemment de données
                 les concernant. Si vous êtes parent et découvrez que votre enfant nous a fourni des données,
                 contactez-nous immédiatement à <a href={`mailto:${DPO_EMAIL}`} className="text-sky-400 hover:text-sky-300">{DPO_EMAIL}</a> pour suppression.
               </p>
@@ -412,7 +412,7 @@ export const PrivacyPage = ({ onNavigate }: PrivacyPageProps) => {
             <Sub title="9.3 Réseaux sociaux tiers">
               <p>
                 Si vous connectez un réseau social tiers, nous accédons uniquement aux informations nécessaires
-                (nom, email) avec votre consentement explicite. TruTube n'est pas responsable des pratiques
+                (nom, email) avec votre consentement explicite. Goroti n'est pas responsable des pratiques
                 de confidentialité de ces tiers.
               </p>
             </Sub>
@@ -458,7 +458,7 @@ export const PrivacyPage = ({ onNavigate }: PrivacyPageProps) => {
               CNIL <ExternalLink className="w-3 h-3" />
             </a>
           </div>
-          <span>© 2026 TruTube SAS — Tous droits réservés</span>
+          <span>© 2026 Goroti SAS — Tous droits réservés</span>
         </div>
       </div>
     </div>

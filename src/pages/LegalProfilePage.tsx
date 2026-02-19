@@ -327,7 +327,7 @@ export default function LegalProfilePage({ onNavigate }: Props) {
               </div>
               <div className="bg-gray-800/50 rounded-xl p-4">
                 <p className="text-xs text-gray-400">
-                  Requis pour les artistes dépassant les seuils légaux de revenus. Ces informations permettent à TruTube de générer les attestations fiscales annuelles.
+                  Requis pour les artistes dépassant les seuils légaux de revenus. Ces informations permettent à Goroti de générer les attestations fiscales annuelles.
                 </p>
               </div>
             </div>

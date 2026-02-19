@@ -120,7 +120,7 @@ export default function PrivacySettingsPage({ onNavigate }: Props) {
     const result = await Notification.requestPermission();
     setNotifPermission(result);
     if (result === 'granted') {
-      sendNotification('Notifications activées', 'Vous recevrez des alertes en temps réel sur TruTube.');
+      sendNotification('Notifications activées', 'Vous recevrez des alertes en temps réel sur Goroti.');
       showSuccess('Notifications push activées');
     }
   };
@@ -241,7 +241,7 @@ export default function PrivacySettingsPage({ onNavigate }: Props) {
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 flex items-start gap-3">
               <Shield className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
               <p className="text-xs text-gray-400 leading-relaxed">
-                TruTube respecte le RGPD. Vos données ne sont jamais vendues à des tiers. Pour en savoir plus, consultez notre{' '}
+                Goroti respecte le RGPD. Vos données ne sont jamais vendues à des tiers. Pour en savoir plus, consultez notre{' '}
                 <button onClick={() => onNavigate('privacy')} className="text-red-400 hover:text-red-300 underline transition-colors">
                   politique de confidentialité
                 </button>.
@@ -258,7 +258,7 @@ export default function PrivacySettingsPage({ onNavigate }: Props) {
                 <div>
                   <h2 className="font-semibold text-white">Préférences de cookies</h2>
                   <p className="text-xs text-gray-400 mt-1">
-                    Gérez les types de cookies que TruTube peut utiliser. Les cookies essentiels ne peuvent pas être désactivés.
+                    Gérez les types de cookies que Goroti peut utiliser. Les cookies essentiels ne peuvent pas être désactivés.
                   </p>
                 </div>
               </div>
@@ -391,7 +391,7 @@ export default function PrivacySettingsPage({ onNavigate }: Props) {
                   <CheckCircle className="w-4 h-4 text-green-400" />
                   <p className="text-sm text-green-300">Les notifications push sont activées</p>
                   <button
-                    onClick={() => sendNotification('Test TruTube', 'Les notifications fonctionnent correctement !')}
+                    onClick={() => sendNotification('Test Goroti', 'Les notifications fonctionnent correctement !')}
                     className="ml-auto text-xs text-gray-400 hover:text-white transition-colors"
                   >
                     Tester
@@ -422,9 +422,9 @@ export default function PrivacySettingsPage({ onNavigate }: Props) {
             <Section title="Notifications par email" icon={<Bell className="w-4 h-4" />}>
               {[
                 { label: 'Nouvelles vidéos', desc: 'Digest hebdomadaire des nouvelles publications' },
-                { label: 'Résumé mensuel', desc: 'Récapitulatif de votre activité TruTube' },
+                { label: 'Résumé mensuel', desc: 'Récapitulatif de votre activité Goroti' },
                 { label: 'Alertes sécurité', desc: 'Connexions inhabituelles et modifications de compte' },
-                { label: 'Emails marketing', desc: 'Offres spéciales et actualités TruTube' },
+                { label: 'Emails marketing', desc: 'Offres spéciales et actualités Goroti' },
               ].map(({ label, desc }) => (
                 <SettingRow key={label} label={label} desc={desc}>
                   <Toggle checked={label === 'Alertes sécurité'} onChange={() => {}} disabled={label === 'Alertes sécurité'} />
@@ -449,7 +449,7 @@ export default function PrivacySettingsPage({ onNavigate }: Props) {
                 {[
                   {
                     title: 'Droit d\'accès',
-                    desc: 'Obtenez une copie complète de toutes vos données personnelles détenues par TruTube.',
+                    desc: 'Obtenez une copie complète de toutes vos données personnelles détenues par Goroti.',
                     action: 'Demander mes données',
                   },
                   {

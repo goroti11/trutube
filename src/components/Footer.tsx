@@ -14,7 +14,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               <div className="bg-gradient-to-br from-cyan-500 to-cyan-600 p-2 rounded-lg">
                 <Play className="w-5 h-5 text-white fill-white" />
               </div>
-              <span className="text-xl font-bold text-white">TruTube</span>
+              <span className="text-xl font-bold text-white">Goroti</span>
             </div>
             <p className="text-gray-400 text-sm mb-4">
               La plateforme de partage vidéo qui valorise l'authenticité et récompense les vrais créateurs.
@@ -192,7 +192,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
         <div className="pt-8 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} TruTube. Tous droits réservés.
+              © {new Date().getFullYear()} Goroti. Tous droits réservés.
             </p>
             <div className="flex flex-wrap gap-4 text-sm">
               <button
