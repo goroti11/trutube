@@ -5,7 +5,8 @@ import {
   Book, Video, FileText, Users, TrendingUp, Shield, PlayCircle, DollarSign,
   Scale, Cog, Wallet, AlertCircle, HelpCircle, Search, ChevronRight,
   BookOpen, ShoppingBag, Music, Globe, MessageSquare, Newspaper, Activity,
-  CheckCircle, Code, Settings
+  CheckCircle, Code, Settings, ChevronDown, Sparkles, Upload, BarChart,
+  Eye, Lock, CreditCard, Package, MessageCircle, UserCheck
 } from 'lucide-react';
 
 interface ResourcesPageProps {
@@ -15,15 +16,481 @@ interface ResourcesPageProps {
 export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
   const categories = [
     { id: 'all', label: 'Tout', icon: Book },
     { id: 'getting-started', label: 'Démarrage', icon: PlayCircle },
+    { id: 'interface', label: 'Interface', icon: Eye },
+    { id: 'navigation', label: 'Navigation', icon: Globe },
     { id: 'creators', label: 'Créateurs', icon: Video },
-    { id: 'payments', label: 'Paiements', icon: Wallet },
-    { id: 'security', label: 'Sécurité', icon: Shield },
-    { id: 'marketplace', label: 'Marketplace', icon: ShoppingBag },
-    { id: 'account', label: 'Compte', icon: Users },
+    { id: 'monetization', label: 'Monétisation', icon: DollarSign },
+    { id: 'community', label: 'Communauté', icon: Users },
+    { id: 'account', label: 'Compte', icon: UserCheck },
+  ];
+
+  const documentationSections = [
+    {
+      id: 'splashscreen',
+      category: 'getting-started',
+      title: '1. SplashScreen & Première Impression',
+      icon: Sparkles,
+      color: 'text-cyan-400',
+      content: {
+        description: 'Écran de chargement animé qui s\'affiche au premier lancement de Goroti.',
+        duration: '3,5 secondes',
+        phases: [
+          {
+            title: 'Phase 1: Logo Animé (0-2s)',
+            details: [
+              '0.0s: Écran noir avec dégradé',
+              '0.1s: Lettre "G" apparaît (blanc)',
+              '0.3s: Lettre "O" apparaît (rouge)',
+              '0.5s: Lettre "R" apparaît (blanc)',
+              '0.7s: Lettre "O" apparaît (rouge)',
+              '0.9s: Lettre "T" apparaît (blanc)',
+              '1.1s: Lettre "I" apparaît (rouge)',
+              '1.4s: Effet glow rouge sur toutes les lettres',
+              '2.0s: Baseline "LA VÉRITÉ AVANT TOUT"'
+            ]
+          },
+          {
+            title: 'Phase 2: Tagline (1.8-3.5s)',
+            details: [
+              '1.8s: "Votre plateforme vidéo authentique" (dégradé cyan→blanc→rouge)',
+              '2.2s: "Créez, partagez, monétisez en toute transparence" (gris)'
+            ]
+          },
+          {
+            title: 'Phase 3: Indicateur (0-3.5s)',
+            details: [
+              '3 points animés: cyan, blanc, rouge',
+              'Texte "CHARGEMENT..." en bas',
+              'Animation bounce avec délais'
+            ]
+          }
+        ],
+        control: {
+          title: 'Contrôler le SplashScreen',
+          revoir: 'sessionStorage.removeItem("hasSeenSplash"); location.reload();',
+          desactiver: 'Modifier showSplash à false dans App.tsx'
+        }
+      }
+    },
+    {
+      id: 'inscription',
+      category: 'getting-started',
+      title: '2. Inscription & Connexion',
+      icon: UserCheck,
+      color: 'text-green-400',
+      content: {
+        url: '/#auth',
+        modeInscription: {
+          title: 'Mode Inscription (Sign Up)',
+          champs: [
+            {
+              nom: 'Email',
+              format: 'Email valide',
+              validation: 'Temps réel',
+              erreurs: 'Email invalide / Email déjà utilisé'
+            },
+            {
+              nom: 'Nom d\'utilisateur',
+              format: '3-20 caractères (a-z, A-Z, 0-9, _)',
+              validation: 'Unique, instantanée',
+              exemples: 'alex_gamer, Sophie2024, JohnDoe'
+            },
+            {
+              nom: 'Mot de passe',
+              format: 'Min 8 caractères',
+              requis: [
+                'Au moins 1 majuscule',
+                'Au moins 1 minuscule',
+                'Au moins 1 chiffre',
+                'Au moins 1 caractère spécial (@$!%*?&)'
+              ],
+              force: 'Indicateur: Faible / Moyen / Fort'
+            },
+            {
+              nom: 'Conditions',
+              items: [
+                'Accepter CGU (obligatoire)',
+                'Accepter politique confidentialité (obligatoire)',
+                'Newsletter (optionnel)'
+              ]
+            }
+          ]
+        },
+        modeConnexion: {
+          title: 'Mode Connexion (Sign In)',
+          champs: ['Email', 'Mot de passe'],
+          options: [
+            'Se souvenir de moi (7 jours)',
+            'Mot de passe oublié? → Récupération'
+          ]
+        },
+        apresInscription: [
+          'Email de vérification envoyé',
+          'Redirection vers page d\'accueil',
+          'Banner: "Vérifiez votre email"',
+          'Profil créé automatiquement',
+          'Avatar par défaut (initiales)',
+          'Badge "Nouveau" (30 jours)'
+        ],
+        securite: {
+          protection: [
+            'HTTPS obligatoire',
+            'Hashing bcrypt (12 rounds)',
+            'Rate limiting: 5 tentatives / 15min',
+            '2FA disponible (Settings)'
+          ],
+          tokens: [
+            'JWT expiration: 7 jours',
+            'Refresh token: 30 jours',
+            'Révocation: Déconnexion ou changement mdp'
+          ]
+        }
+      }
+    },
+    {
+      id: 'interface',
+      category: 'interface',
+      title: '3. Interface Utilisateur',
+      icon: Eye,
+      color: 'text-blue-400',
+      content: {
+        structure: 'Header (fixe) + Contenu (scrollable) + Footer',
+        couleurs: {
+          fond: '#030712 (gray-950)',
+          cartes: '#111827 (gray-900)',
+          bordures: '#1F2937 (gray-800)',
+          textePrincipal: '#FFFFFF (white)',
+          texteSecondaire: '#9CA3AF (gray-400)',
+          accentCyan: '#06B6D4 (cyan-500)',
+          accentRouge: '#DC2626 (red-600)'
+        },
+        typographie: {
+          police: 'System (system-ui)',
+          tailles: {
+            hero: '6xl (3.75rem)',
+            h1: '4xl (2.25rem)',
+            h2: '3xl (1.875rem)',
+            h3: '2xl (1.5rem)',
+            h4: 'xl (1.25rem)',
+            body: 'base (1rem)',
+            small: 'sm (0.875rem)',
+            tiny: 'xs (0.75rem)'
+          },
+          poids: {
+            thin: 100,
+            light: 300,
+            normal: 400,
+            medium: 500,
+            semibold: 600,
+            bold: 700,
+            black: 900
+          }
+        },
+        espacements: 'Système 8px (1=4px, 2=8px, 3=12px, 4=16px, 6=24px, 8=32px)',
+        composants: {
+          boutons: [
+            'Primary: bg-cyan-600 hover:bg-cyan-700',
+            'Secondary: bg-gray-700 hover:bg-gray-600',
+            'Danger: bg-red-600 hover:bg-red-700',
+            'Success: bg-green-600 hover:bg-green-700'
+          ],
+          cartes: [
+            'Fond: bg-gray-900',
+            'Bordure: border border-gray-800',
+            'Arrondi: rounded-xl',
+            'Ombre: shadow-xl'
+          ],
+          inputs: [
+            'Fond: bg-gray-800',
+            'Bordure: border-gray-700',
+            'Focus: ring-2 ring-cyan-500',
+            'Placeholder: text-gray-400'
+          ]
+        },
+        responsive: {
+          breakpoints: {
+            sm: '640px',
+            md: '768px',
+            lg: '1024px',
+            xl: '1280px',
+            '2xl': '1536px'
+          },
+          approche: 'Mobile-First'
+        }
+      }
+    },
+    {
+      id: 'header',
+      category: 'navigation',
+      title: '4. Header - Navigation Principale',
+      icon: Globe,
+      color: 'text-purple-400',
+      content: {
+        position: 'Fixe en haut, z-index: 40',
+        composants: {
+          logo: {
+            position: 'Gauche',
+            action: 'Retour accueil (/#home)',
+            hover: 'Opacité 80%'
+          },
+          navigationIcons: [
+            {
+              icon: '🧭 Compass',
+              tooltip: 'Explorer les univers',
+              action: '/#universes',
+              description: 'Parcourir les 15 univers thématiques'
+            },
+            {
+              icon: '👥 Users',
+              tooltip: 'Communautés',
+              action: '/#community',
+              description: 'Liste de toutes les communautés'
+            },
+            {
+              icon: '⚙️ Settings',
+              tooltip: 'Préférences de feed',
+              action: '/#preferences',
+              description: 'Personnaliser votre fil'
+            },
+            {
+              icon: '✨ Sparkles',
+              tooltip: 'Devenir créateur',
+              action: '/#creator-setup',
+              description: 'S\'inscrire comme créateur'
+            },
+            {
+              icon: '⋮ More',
+              tooltip: 'Plus de pages',
+              type: 'Menu déroulant',
+              items: ['À propos', 'Ressources', 'Carrières', 'Entreprise', 'Centre d\'aide', 'Support']
+            }
+          ],
+          recherche: {
+            placeholder: 'Rechercher vidéos, créateurs, communautés...',
+            fonctionnalites: [
+              'Recherche instantanée (debounced 300ms)',
+              'Suggestions automatiques',
+              'Historique de recherche',
+              'Filtres avancés'
+            ],
+            raccourci: '/ (focus automatique)'
+          },
+          actionsUtilisateur: {
+            upload: {
+              visible: 'Si connecté',
+              icon: '📤 Upload',
+              action: '/#upload',
+              raccourci: 'Alt+U'
+            },
+            avatar: {
+              nonConnecte: 'Bouton "Connexion" → /#auth',
+              connecte: 'Avatar + Badge → Menu utilisateur'
+            }
+          }
+        },
+        menuUtilisateur: {
+          sections: [
+            {
+              nom: 'Profil',
+              items: [
+                'Mon profil (/#my-profile)',
+                'Profil créateur enrichi (/#enhanced-profile)',
+                'Paramètres (/#settings)'
+              ]
+            },
+            {
+              nom: 'Créateur',
+              condition: 'Si créateur',
+              items: [
+                'Studio créateur (/#studio)',
+                'Tableau de bord (/#dashboard)',
+                'Mes chaînes (/#my-channels)',
+                'Streaming live (/#live-streaming)'
+              ]
+            },
+            {
+              nom: 'Monétisation',
+              items: [
+                'Portefeuille TruCoin (/#trucoin-wallet)',
+                'Abonnement Premium (/#premium)',
+                'Programme partenaire (/#partner-program)',
+                'Parrainage (/#referral)'
+              ]
+            },
+            {
+              nom: 'Contenu',
+              items: [
+                'Historique (/#watch-history)',
+                'Vidéos sauvegardées (/#saved-videos)',
+                'Mes abonnés (/#subscribers)'
+              ]
+            },
+            {
+              nom: 'Sécurité',
+              items: [
+                'Sécurité (/#security-dashboard)',
+                'Apparence (/#appearance-settings)'
+              ]
+            }
+          ],
+          footer: 'Déconnexion'
+        }
+      }
+    },
+    {
+      id: 'footer',
+      category: 'navigation',
+      title: '5. Footer - Liens Rapides',
+      icon: Package,
+      color: 'text-orange-400',
+      content: {
+        structure: '4 colonnes responsive',
+        colonnes: [
+          {
+            nom: 'Goroti',
+            contenu: [
+              'Logo + Description',
+              'Réseaux sociaux: Facebook, Twitter, Instagram, YouTube',
+              'Description: "La plateforme qui valorise l\'authenticité"'
+            ]
+          },
+          {
+            nom: 'Plateforme',
+            liens: [
+              'Accueil (/#home)',
+              'Explorer univers (/#universes)',
+              'Devenir créateur (/#creator-setup)',
+              'Préférences feed (/#preferences)'
+            ]
+          },
+          {
+            nom: 'Ressources',
+            liens: [
+              'À propos (/#about)',
+              'Centre d\'aide (/#help)',
+              'Support (/#support)',
+              'Carrières (/#careers) ⭐',
+              'Entreprise (/#enterprise) ⭐',
+              'Ressources (/#resources)',
+              'CGU (/#terms)',
+              'Confidentialité (/#privacy)',
+              'Mentions légales (/#legal)'
+            ]
+          },
+          {
+            nom: 'Contact',
+            contenu: [
+              'Email support: support@trutube.com',
+              'Email créateurs: creators@trutube.com',
+              'Newsletter (formulaire inscription)'
+            ]
+          }
+        ],
+        barreInferieure: {
+          gauche: '© 2026 Goroti. Tous droits réservés.',
+          droite: ['CGU', 'Confidentialité', 'Mentions légales', 'Aide', 'Support']
+        },
+        visibilite: 'Masqué sur: /#auth, /#watch/{id}, mobile demo'
+      }
+    },
+    {
+      id: 'url-access',
+      category: 'navigation',
+      title: '6. Accès Direct URL (Hash Routing)',
+      icon: Code,
+      color: 'text-yellow-400',
+      content: {
+        format: 'https://goroti.com/#nom-de-page',
+        avantages: [
+          'Pas de rechargement page',
+          'Navigation instantanée',
+          'Historique navigateur préservé',
+          'Bookmarks fonctionnent',
+          'Partage liens direct'
+        ],
+        routesStatiques: {
+          navigation: [
+            '/#home - Accueil',
+            '/#universes - Explorer univers',
+            '/#preferences - Préférences',
+            '/#my-profile - Mon profil',
+            '/#watch-history - Historique',
+            '/#saved-videos - Vidéos sauvegardées'
+          ],
+          authentification: ['/#auth - Connexion/Inscription'],
+          createur: [
+            '/#creator-setup - Devenir créateur',
+            '/#studio - Studio créateur',
+            '/#dashboard - Tableau de bord',
+            '/#upload - Upload vidéo',
+            '/#my-channels - Mes chaînes',
+            '/#live-streaming - Streaming live',
+            '/#subscribers - Mes abonnés'
+          ],
+          monetisation: [
+            '/#premium - Abonnement Premium',
+            '/#premium-offers - Offres Premium',
+            '/#trucoin-wallet - Portefeuille TruCoin',
+            '/#partner-program - Programme partenaire',
+            '/#referral - Parrainage',
+            '/#ad-campaign - Campagnes pub',
+            '/#marketplace - Marketplace musique',
+            '/#album-sale - Vente albums',
+            '/#revenue-model - Modèle revenus',
+            '/#native-sponsoring - Sponsoring natif'
+          ],
+          communaute: [
+            '/#community - Liste communautés',
+            '/#create-community - Créer communauté',
+            '/#official-community - Communauté officielle'
+          ],
+          parametres: [
+            '/#settings - Paramètres',
+            '/#appearance-settings - Apparence',
+            '/#security-dashboard - Sécurité'
+          ],
+          entreprise: [
+            '/#enterprise - Solutions entreprise',
+            '/#careers - Offres d\'emploi',
+            '/#pricing - Tarifs',
+            '/#resources - Ressources'
+          ],
+          support: [
+            '/#help - Centre d\'aide',
+            '/#support - Support',
+            '/#about - À propos',
+            '/#status - Statut services'
+          ],
+          legal: [
+            '/#terms - CGU',
+            '/#privacy - Confidentialité',
+            '/#legal - Mentions légales',
+            '/#copyright-policy - Droits d\'auteur',
+            '/#financial-terms - Conditions financières',
+            '/#legal-profile - Profil légal créateur'
+          ]
+        },
+        routesDynamiques: [
+          '/#universe/{id} - Vue univers (ex: /#universe/gaming)',
+          '/#watch/{id} - Lecteur vidéo (ex: /#watch/abc123)',
+          '/#profile/{username} - Profil public (ex: /#profile/alex_gamer)',
+          '/#community/{slug} - Page communauté (ex: /#community/goroti)',
+          '/#channel-edit/{id} - Éditer chaîne',
+          '/#channel-team/{id} - Équipe chaîne',
+          '/#channel-analytics/{id} - Analytics chaîne'
+        ],
+        navigationProgrammatique: {
+          javascript: 'window.location.hash = "enterprise";',
+          exemple: 'window.location.hash = "watch/abc123";',
+          recuperer: 'const currentHash = window.location.hash.slice(1);'
+        }
+      }
+    }
   ];
 
   const articles = [
@@ -203,6 +670,93 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
     { title: 'Tendances musique streaming 2026', category: 'Industrie', date: '5 Jan 2026' },
   ];
 
+  const renderDocContent = (content: any): JSX.Element => {
+    return (
+      <div className="space-y-6">
+        {Object.entries(content).map(([key, value]) => {
+          if (key === 'description' || key === 'duration') return null;
+
+          return (
+            <div key={key} className="space-y-3">
+              <h4 className="text-lg font-semibold text-cyan-400 capitalize">
+                {key.replace(/([A-Z])/g, ' $1').trim()}
+              </h4>
+
+              {typeof value === 'string' && (
+                <p className="text-gray-300 font-mono text-sm bg-gray-900 p-3 rounded-lg">
+                  {value}
+                </p>
+              )}
+
+              {Array.isArray(value) && (
+                <div className="space-y-2">
+                  {value.map((item, index) => {
+                    if (typeof item === 'string') {
+                      return (
+                        <div key={index} className="flex items-start gap-3 text-gray-300">
+                          <CheckCircle className="w-4 h-4 text-green-400 mt-1 shrink-0" />
+                          <span>{item}</span>
+                        </div>
+                      );
+                    }
+                    if (typeof item === 'object' && item.title) {
+                      return (
+                        <div key={index} className="bg-gray-900 p-4 rounded-lg space-y-2">
+                          <h5 className="text-white font-semibold">{item.title}</h5>
+                          {item.details && (
+                            <div className="space-y-1 pl-4">
+                              {item.details.map((detail: string, i: number) => (
+                                <div key={i} className="text-gray-400 text-sm">• {detail}</div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+              )}
+
+              {typeof value === 'object' && !Array.isArray(value) && (
+                <div className="bg-gray-900 p-4 rounded-lg space-y-3">
+                  {Object.entries(value).map(([subKey, subValue]) => (
+                    <div key={subKey} className="space-y-2">
+                      <div className="text-white font-medium">
+                        {subKey.replace(/([A-Z])/g, ' $1').trim()}:
+                      </div>
+                      {typeof subValue === 'string' ? (
+                        <div className="text-gray-300 text-sm pl-4">{subValue}</div>
+                      ) : Array.isArray(subValue) ? (
+                        <div className="pl-4 space-y-1">
+                          {subValue.map((item, i) => (
+                            <div key={i} className="text-gray-400 text-sm flex items-start gap-2">
+                              <span className="text-cyan-400">→</span>
+                              <span>{typeof item === 'string' ? item : JSON.stringify(item)}</span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : typeof subValue === 'object' ? (
+                        <div className="pl-4 space-y-2">
+                          {Object.entries(subValue as object).map(([k, v]) => (
+                            <div key={k} className="text-gray-400 text-sm">
+                              <span className="text-cyan-400 font-mono">{k}:</span>{' '}
+                              {typeof v === 'object' ? JSON.stringify(v) : String(v)}
+                            </div>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gray-950">
       <Header onNavigate={onNavigate} showNavigation={true} />
@@ -250,7 +804,53 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
         </div>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-white mb-6">Documentation & Guides</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">Documentation Complète & Détaillée</h2>
+          <p className="text-gray-400 mb-8">
+            Guides complets de démarrage jusqu'à la gestion de compte. Cliquez sur une section pour voir tous les détails.
+          </p>
+
+          <div className="space-y-4">
+            {documentationSections
+              .filter(section => selectedCategory === 'all' || section.category === selectedCategory)
+              .map((section) => {
+                const Icon = section.icon;
+                const isExpanded = expandedSection === section.id;
+
+                return (
+                  <div key={section.id} className="bg-gray-800/30 border border-gray-700 rounded-xl overflow-hidden">
+                    <button
+                      onClick={() => setExpandedSection(isExpanded ? null : section.id)}
+                      className="w-full flex items-center justify-between p-6 hover:bg-gray-800/50 transition-colors text-left"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="p-3 bg-gray-900 rounded-lg">
+                          <Icon className={`w-6 h-6 ${section.color}`} />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-semibold text-white mb-1">{section.title}</h3>
+                          <p className="text-gray-400 text-sm">
+                            {typeof section.content === 'object' && 'description' in section.content
+                              ? section.content.description
+                              : 'Documentation complète disponible'}
+                          </p>
+                        </div>
+                      </div>
+                      <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    {isExpanded && (
+                      <div className="px-6 pb-6 space-y-6 border-t border-gray-700 pt-6">
+                        {renderDocContent(section.content)}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-white mb-6">Articles & Guides Pratiques</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredArticles.map((article, index) => (
               <button
