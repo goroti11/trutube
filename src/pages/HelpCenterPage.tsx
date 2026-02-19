@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Search, ChevronDown, ChevronUp, MessageCircle, Mail, Phone } from 'lucide-react';
+import { ArrowLeft, Search, ChevronDown, ChevronUp, MessageCircle, Mail, Phone, BookOpen, Video, Shield, Wallet, Users, Settings } from 'lucide-react';
+import Header from '../components/Header';
+import { Footer } from '../components/Footer';
 
 interface HelpCenterPageProps {
   onNavigate: (page: string) => void;
@@ -24,7 +26,7 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
   const categories: Record<string, HelpCategory> = {
     general: {
       title: 'Questions générales',
-      icon: '📚',
+      icon: <BookOpen className="w-6 h-6 text-cyan-400" />,
       faqs: [
         {
           question: "Qu'est-ce que Goroti ?",
@@ -46,7 +48,7 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
     },
     account: {
       title: 'Compte et profil',
-      icon: '👤',
+      icon: <Users className="w-6 h-6 text-cyan-400" />,
       faqs: [
         {
           question: "Comment créer un compte ?",
@@ -68,7 +70,7 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
     },
     creator: {
       title: 'Créateurs de contenu',
-      icon: '🎬',
+      icon: <Video className="w-6 h-6 text-cyan-400" />,
       faqs: [
         {
           question: "Comment devenir créateur ?",
@@ -90,7 +92,7 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
     },
     technical: {
       title: 'Questions techniques',
-      icon: '⚙️',
+      icon: <Settings className="w-6 h-6 text-cyan-400" />,
       faqs: [
         {
           question: "Quels formats vidéo sont acceptés ?",
@@ -112,7 +114,7 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
     },
     payment: {
       title: 'Paiements et abonnements',
-      icon: '💳',
+      icon: <Wallet className="w-6 h-6 text-cyan-400" />,
       faqs: [
         {
           question: "Quels sont les moyens de paiement acceptés ?",
@@ -150,22 +152,21 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
   })).filter(category => category.faqs.length > 0);
 
   return (
-    <div className="min-h-screen bg-[#0B0B0D] text-white">
-      <header className="bg-[#1A1A1A] border-b border-gray-800 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => onNavigate('home')}
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-            >
-              <ArrowLeft size={24} />
-            </button>
-            <h1 className="text-2xl font-bold">Centre d'aide</h1>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-gray-950">
+      <Header onNavigate={onNavigate} showNavigation={true} />
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="bg-gradient-to-br from-gray-900 via-gray-950 to-gray-950 border-b border-gray-800">
+        <div className="max-w-6xl mx-auto px-6 py-20 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-5">
+            Centre d'aide Goroti
+          </h1>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+            Trouvez rapidement des réponses à vos questions
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="mb-8">
           <div className="relative max-w-2xl mx-auto">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
@@ -174,7 +175,7 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
               placeholder="Rechercher dans l'aide..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 bg-[#1A1A1A] border border-gray-800 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-[#D8A0B6]"
+              className="w-full pl-12 pr-4 py-4 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-cyan-500"
             />
           </div>
         </div>
@@ -186,11 +187,11 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
               onClick={() => setSelectedCategory(key)}
               className={`p-4 rounded-xl text-center transition-all ${
                 selectedCategory === key
-                  ? 'bg-[#D8A0B6] text-white'
-                  : 'bg-[#1A1A1A] text-gray-400 hover:bg-gray-800'
+                  ? 'bg-cyan-600 text-white'
+                  : 'bg-gray-900 text-gray-400 hover:bg-gray-800'
               }`}
             >
-              <div className="text-3xl mb-2">{category.icon}</div>
+              <div className="mb-2 flex justify-center">{category.icon}</div>
               <div className="text-sm font-medium">{category.title}</div>
             </button>
           ))}
@@ -199,15 +200,15 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
         <div className="max-w-4xl mx-auto space-y-8">
           {(searchQuery ? filteredFAQs : [{ key: selectedCategory, ...categories[selectedCategory] }]).map((category) => (
             <div key={category.key}>
-              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                <span className="text-3xl">{category.icon}</span>
+              <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                {category.icon}
                 {category.title}
               </h2>
               <div className="space-y-3">
                 {category.faqs.map((faq) => (
                   <div
                     key={faq.question}
-                    className="bg-[#1A1A1A] rounded-xl overflow-hidden border border-gray-800"
+                    className="bg-gray-900 rounded-xl overflow-hidden border border-gray-800"
                   >
                     <button
                       onClick={() => toggleFAQ(faq.question)}
@@ -215,7 +216,7 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
                     >
                       <span className="font-medium text-left">{faq.question}</span>
                       {expandedFAQ === faq.question ? (
-                        <ChevronUp size={20} className="text-[#D8A0B6] flex-shrink-0" />
+                        <ChevronUp size={20} className="text-cyan-400 flex-shrink-0" />
                       ) : (
                         <ChevronDown size={20} className="text-gray-400 flex-shrink-0" />
                       )}
@@ -232,7 +233,7 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
           ))}
         </div>
 
-        <div className="max-w-4xl mx-auto mt-12 bg-gradient-to-r from-[#D8A0B6]/20 to-purple-500/20 rounded-xl p-8 border border-[#D8A0B6]/30">
+        <div className="max-w-4xl mx-auto mt-12 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-xl p-8 border border-cyan-500/30">
           <h3 className="text-2xl font-bold mb-4">Besoin d'aide supplémentaire ?</h3>
           <p className="text-gray-300 mb-6">
             Notre équipe de support est disponible 7j/7 pour répondre à toutes vos questions.
@@ -240,29 +241,29 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
           <div className="grid md:grid-cols-3 gap-4">
             <button
               onClick={() => onNavigate('support')}
-              className="flex items-center gap-3 p-4 bg-[#1A1A1A] rounded-lg hover:bg-gray-800 transition-colors"
+              className="flex items-center gap-3 p-4 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors border border-gray-800"
             >
-              <MessageCircle className="text-[#D8A0B6]" size={24} />
+              <MessageCircle className="text-cyan-400" size={24} />
               <div className="text-left">
                 <div className="font-medium">Chat en direct</div>
                 <div className="text-sm text-gray-400">Réponse immédiate</div>
               </div>
             </button>
             <a
-              href="mailto:support@trutube.com"
-              className="flex items-center gap-3 p-4 bg-[#1A1A1A] rounded-lg hover:bg-gray-800 transition-colors"
+              href="mailto:support@goroti.com"
+              className="flex items-center gap-3 p-4 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors border border-gray-800"
             >
-              <Mail className="text-[#D8A0B6]" size={24} />
+              <Mail className="text-cyan-400" size={24} />
               <div className="text-left">
                 <div className="font-medium">Email</div>
-                <div className="text-sm text-gray-400">support@trutube.com</div>
+                <div className="text-sm text-gray-400">support@goroti.com</div>
               </div>
             </a>
             <a
               href="tel:+33123456789"
-              className="flex items-center gap-3 p-4 bg-[#1A1A1A] rounded-lg hover:bg-gray-800 transition-colors"
+              className="flex items-center gap-3 p-4 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors border border-gray-800"
             >
-              <Phone className="text-[#D8A0B6]" size={24} />
+              <Phone className="text-cyan-400" size={24} />
               <div className="text-left">
                 <div className="font-medium">Téléphone</div>
                 <div className="text-sm text-gray-400">+33 1 23 45 67 89</div>
@@ -271,6 +272,7 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
           </div>
         </div>
       </div>
+      <Footer onNavigate={onNavigate} />
     </div>
   );
 }
