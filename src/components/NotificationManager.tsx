@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Bell, BellOff, X, CheckCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
-const NOTIF_STORAGE_KEY = 'trutube_notif_prompt_dismissed';
+const NOTIF_STORAGE_KEY = 'goroti_notif_prompt_dismissed';
 const NOTIF_DELAY_MS = 8000;
 
 type NotifStatus = 'default' | 'granted' | 'denied';
@@ -18,7 +18,7 @@ export function sendNotification(title: string, body: string, icon?: string) {
     body,
     icon: icon ?? '/tru.jpeg',
     badge: '/tru.jpeg',
-    tag: 'trutube',
+    tag: 'goroti',
   });
   notif.onclick = () => {
     window.focus();

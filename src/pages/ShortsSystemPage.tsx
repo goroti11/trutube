@@ -69,7 +69,7 @@ const STATS = [
 const PLATFORM_COMPARE = [
   { platform: 'TikTok', role: 'Divertissement', goal: 'Rétention maximale', value: 'Temps passé', accent: 'text-gray-400', bar: 'bg-gray-700' },
   { platform: 'YouTube Shorts', role: 'Visibilité', goal: 'Croissance chaîne', value: 'Abonnés', accent: 'text-gray-400', bar: 'bg-gray-700' },
-  { platform: 'TruTube Shorts', role: 'Tunnel de conversion', goal: 'Transaction', value: 'Revenu direct', accent: 'text-red-400', bar: 'bg-red-600' },
+  { platform: 'GOROTI Shorts', role: 'Tunnel de conversion', goal: 'Transaction', value: 'Revenu direct', accent: 'text-red-400', bar: 'bg-red-600' },
 ];
 
 const ANTI_PIRACY = [
@@ -370,7 +370,7 @@ export default function ShortsSystemPage({ onNavigate }: Props) {
           {/* Platform comparison */}
           <section>
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-black text-white mb-2">TruTube vs les autres formats</h2>
+              <h2 className="text-2xl font-black text-white mb-2">GOROTI vs les autres formats</h2>
               <p className="text-gray-400 text-sm">La différence fondamentale d'objectif</p>
             </div>
             <div className="space-y-3">
@@ -378,7 +378,7 @@ export default function ShortsSystemPage({ onNavigate }: Props) {
                 <div
                   key={i}
                   className={`flex flex-col sm:flex-row sm:items-center gap-4 rounded-xl border p-5 ${
-                    row.platform === 'TruTube Shorts'
+                    row.platform === 'GOROTI Shorts'
                       ? 'bg-red-950/15 border-red-900/50'
                       : 'bg-gray-900 border-gray-800'
                   }`}
@@ -454,7 +454,7 @@ export default function ShortsSystemPage({ onNavigate }: Props) {
               </div>
               <h2 className="text-2xl font-black text-white mb-3">Transformer l'attention courte<br />en revenu long</h2>
               <p className="text-gray-400 text-sm mb-6">
-                Le short TruTube n'est pas un contenu de divertissement autonome.<br />
+                Le short GOROTI n'est pas un contenu de divertissement autonome.<br />
                 C'est un levier commercial natif, conçu pour chaque étape du tunnel de conversion.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">

@@ -39,7 +39,7 @@ const JOBS: Job[] = [
     salary: '65 000 – 90 000 €',
     level: 'Senior',
     stack: 'Node.js · TypeScript · PostgreSQL · Redis · Kafka',
-    description: 'Concevoir et maintenir les APIs core de TruTube : upload vidéo, streaming, paiements, analytics temps réel. Vous serez au centre des décisions techniques.',
+    description: 'Concevoir et maintenir les APIs core de GOROTI : upload vidéo, streaming, paiements, analytics temps réel. Vous serez au centre des décisions techniques.',
     responsibilities: [
       'Concevoir les APIs RESTful et GraphQL pour les fonctions critiques',
       'Optimiser les pipelines d\'upload et d\'encodage vidéo',
@@ -137,7 +137,7 @@ const JOBS: Job[] = [
     remote: true,
     salary: '38 000 – 52 000 €',
     level: 'Junior / Confirmé',
-    description: 'Accompagner les créateurs dans leur croissance sur TruTube : onboarding, monétisation, optimisation. Vous êtes leur premier point de contact stratégique.',
+    description: 'Accompagner les créateurs dans leur croissance sur GOROTI : onboarding, monétisation, optimisation. Vous êtes leur premier point de contact stratégique.',
     responsibilities: [
       'Onboarder les nouveaux créateurs stratégiques',
       'Conseiller sur les stratégies de monétisation',
@@ -170,7 +170,7 @@ const JOBS: Job[] = [
 
 const DEPARTMENTS: Record<string, { icon: React.ElementType; color: string }> = {
   'Ingénierie': { icon: Code2, color: 'text-blue-400' },
-  'Intelligence Artificielle': { icon: Brain, color: 'text-cyan-400' },
+  'Intelligence Artificielle': { icon: Brain, color: 'text-red-400' },
   'Sécurité': { icon: Shield, color: 'text-red-400' },
   'Produit': { icon: Package, color: 'text-yellow-400' },
   'Trust & Safety': { icon: Eye, color: 'text-orange-400' },
@@ -180,7 +180,7 @@ const DEPARTMENTS: Record<string, { icon: React.ElementType; color: string }> = 
 
 const TEAMS = [
   { icon: Cpu, color: 'text-blue-400', label: 'Produit & UX', desc: 'Experience créateur, interface, design system, analytics produit' },
-  { icon: Code2, color: 'text-cyan-400', label: 'Infrastructure', desc: 'Backend, streaming, encodage, CDN, base de données' },
+  { icon: Code2, color: 'text-red-400', label: 'Infrastructure', desc: 'Backend, streaming, encodage, CDN, base de données' },
   { icon: Shield, color: 'text-red-400', label: 'Trust & Safety', desc: 'Modération, conformité DSA, signalement, politiques contenu' },
   { icon: DollarSign, color: 'text-green-400', label: 'Paiement & Finance', desc: 'Wallet, KYC, transactions, comptabilité, conformité financière' },
   { icon: Star, color: 'text-yellow-400', label: 'Creator Success', desc: 'Onboarding, accompagnement, croissance, partenariats créateurs' },
@@ -242,7 +242,7 @@ function JobCard({ job }: { job: Job }) {
             <ul className="space-y-1.5">
               {job.responsibilities.map(r => (
                 <li key={r} className="flex items-start gap-2 text-sm text-gray-400">
-                  <ArrowRight className="w-3.5 h-3.5 text-cyan-500 shrink-0 mt-0.5" />
+                  <ArrowRight className="w-3.5 h-3.5 text-red-500 shrink-0 mt-0.5" />
                   {r}
                 </li>
               ))}
@@ -254,14 +254,14 @@ function JobCard({ job }: { job: Job }) {
             <ul className="space-y-1.5">
               {job.requirements.map(req => (
                 <li key={req} className="flex items-center gap-2 text-sm text-gray-400">
-                  <CheckCircle className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                  <CheckCircle className="w-3.5 h-3.5 text-red-400 shrink-0" />
                   {req}
                 </li>
               ))}
             </ul>
           </div>
 
-          <button className="flex items-center gap-2 px-5 py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg text-sm font-medium transition-colors">
+          <button className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors">
             <Send className="w-4 h-4" />
             Postuler pour ce poste
           </button>
@@ -292,12 +292,12 @@ export default function CareerPage({ onNavigate }: Props) {
       <div className="bg-gradient-to-br from-gray-900 via-gray-950 to-gray-950 border-b border-gray-800">
         <div className="max-w-6xl mx-auto px-6 py-20">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 rounded-full text-red-400 text-sm mb-6">
               <Users className="w-4 h-4" />
               On recrute — {JOBS.length} postes ouverts
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-5">
-              Rejoignez TruTube
+              Rejoignez GOROTI
             </h1>
             <p className="text-lg text-gray-400 leading-relaxed">
               Construisez avec nous la prochaine génération d'infrastructure créative.
@@ -322,7 +322,7 @@ export default function CareerPage({ onNavigate }: Props) {
               },
               {
                 icon: Globe,
-                color: 'text-cyan-400',
+                color: 'text-red-400',
                 title: 'Transparence radicale',
                 desc: 'Les métriques, revenus, décisions stratégiques et erreurs sont partagés avec toute l\'équipe. Pas de silos, pas d\'informations réservées aux managers.',
               },
@@ -353,7 +353,7 @@ export default function CareerPage({ onNavigate }: Props) {
                 'L\'équipe peut refuser de travailler sur une feature contraire à nos valeurs',
               ].map(point => (
                 <div key={point} className="flex gap-2 text-xs text-gray-400">
-                  <CheckCircle className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-3.5 h-3.5 text-red-400 shrink-0 mt-0.5" />
                   {point}
                 </div>
               ))}
@@ -366,7 +366,7 @@ export default function CareerPage({ onNavigate }: Props) {
       <section className="py-14 border-b border-gray-800">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-2xl font-bold text-white mb-1">Organisation interne</h2>
-          <p className="text-gray-400 text-sm mb-8">Les équipes et leurs rôles dans la construction de TruTube</p>
+          <p className="text-gray-400 text-sm mb-8">Les équipes et leurs rôles dans la construction de GOROTI</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {TEAMS.map(({ icon: Icon, color, label, desc }) => (
               <div key={label} className="flex gap-3 p-4 bg-gray-900/50 border border-gray-800 rounded-xl">
@@ -396,11 +396,11 @@ export default function CareerPage({ onNavigate }: Props) {
               { icon: Heart, label: 'Mutuelle premium', detail: 'Alan Gold (ou équivalent selon pays) pour vous et famille' },
               { icon: BookOpen, label: 'Budget formation', detail: '1 000€/an : conférences, livres, formations en ligne' },
               { icon: Clock, label: 'Congés flexibles', detail: 'RTT illimités sur validation manager — aucune comptabilité' },
-              { icon: Star, label: 'Accès TruTube Premium', detail: 'Compte Premium offert + accès aux contenus créateurs' },
+              { icon: Star, label: 'Accès GOROTI Premium', detail: 'Compte Premium offert + accès aux contenus créateurs' },
               { icon: DollarSign, label: 'Stock-options', detail: 'BSPCE pour les profils seniors. Participation à la croissance' },
             ].map(({ icon: Icon, label, detail }) => (
               <div key={label} className="p-4 bg-gray-900/50 border border-gray-800 rounded-xl">
-                <Icon className="w-5 h-5 text-cyan-400 mb-2" />
+                <Icon className="w-5 h-5 text-red-400 mb-2" />
                 <div className="font-medium text-white text-sm mb-1">{label}</div>
                 <div className="text-gray-500 text-xs leading-relaxed">{detail}</div>
               </div>
@@ -444,7 +444,7 @@ export default function CareerPage({ onNavigate }: Props) {
                 onClick={() => setSelectedDept(dept)}
                 className={`px-4 py-1.5 rounded-full text-xs font-medium transition-colors ${
                   selectedDept === dept
-                    ? 'bg-cyan-600 text-white'
+                    ? 'bg-red-600 text-white'
                     : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white'
                 }`}
               >
@@ -482,7 +482,7 @@ export default function CareerPage({ onNavigate }: Props) {
                     required
                     value={form.name}
                     onChange={e => setForm({ ...form, name: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 text-sm"
+                    className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-red-500 text-sm"
                     placeholder="Marie Dupont"
                   />
                 </div>
@@ -493,7 +493,7 @@ export default function CareerPage({ onNavigate }: Props) {
                     required
                     value={form.email}
                     onChange={e => setForm({ ...form, email: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 text-sm"
+                    className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-red-500 text-sm"
                     placeholder="marie@email.com"
                   />
                 </div>
@@ -505,7 +505,7 @@ export default function CareerPage({ onNavigate }: Props) {
                   required
                   value={form.role}
                   onChange={e => setForm({ ...form, role: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 text-sm"
+                  className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-red-500 text-sm"
                   placeholder="Ex: Développeur frontend, Community Manager..."
                 />
               </div>
@@ -516,7 +516,7 @@ export default function CareerPage({ onNavigate }: Props) {
                     type="url"
                     value={form.portfolio}
                     onChange={e => setForm({ ...form, portfolio: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 text-sm"
+                    className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-red-500 text-sm"
                     placeholder="https://monsite.fr"
                   />
                 </div>
@@ -526,7 +526,7 @@ export default function CareerPage({ onNavigate }: Props) {
                     type="url"
                     value={form.github}
                     onChange={e => setForm({ ...form, github: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 text-sm"
+                    className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-red-500 text-sm"
                     placeholder="https://github.com/..."
                   />
                 </div>
@@ -537,7 +537,7 @@ export default function CareerPage({ onNavigate }: Props) {
                   type="text"
                   value={form.availability}
                   onChange={e => setForm({ ...form, availability: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 text-sm"
+                  className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-red-500 text-sm"
                   placeholder="Ex: Immédiate, 1 mois de préavis, 3 mois..."
                 />
               </div>
@@ -548,13 +548,13 @@ export default function CareerPage({ onNavigate }: Props) {
                   required
                   value={form.message}
                   onChange={e => setForm({ ...form, message: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500 text-sm resize-none"
-                  placeholder="Parlez-nous de vous, de vos expériences et de pourquoi TruTube spécifiquement..."
+                  className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-red-500 text-sm resize-none"
+                  placeholder="Parlez-nous de vous, de vos expériences et de pourquoi GOROTI spécifiquement..."
                 />
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                className="w-full py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
               >
                 <Send className="w-4 h-4" />
                 Envoyer ma candidature

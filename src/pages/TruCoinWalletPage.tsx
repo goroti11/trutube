@@ -601,7 +601,7 @@ export default function TruCoinWalletPage() {
 
         {activeTab === 'uses' && (
           <div className="space-y-4">
-            <p className="text-gray-400 text-sm">Les TruCoins peuvent être utilisés pour tous ces services sur TruTube.</p>
+            <p className="text-gray-400 text-sm">Les TruCoins peuvent être utilisés pour tous ces services sur GOROTI.</p>
             {[
               {
                 icon: <Music className="w-5 h-5" />,

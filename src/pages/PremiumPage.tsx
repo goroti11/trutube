@@ -28,7 +28,7 @@ export default function PremiumPage() {
       name: 'Premium',
       icon: Star,
       color: 'blue',
-      gradient: 'from-blue-500 to-cyan-500',
+      gradient: 'from-blue-500 to-red-600',
       monthlyPrice: 9.99,
       annualPrice: 99.99,
       features: [
@@ -142,7 +142,7 @@ export default function PremiumPage() {
       <main className="max-w-7xl mx-auto px-4 py-12 mt-16">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            Passez à TruTube Premium
+            Passez à GOROTI Premium
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Une expérience vidéo sans compromis. Soutenez vos créateurs préférés et débloquez des fonctionnalités exclusives.

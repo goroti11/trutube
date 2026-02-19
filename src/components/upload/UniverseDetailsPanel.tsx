@@ -67,14 +67,14 @@ export default function UniverseDetailsPanel({ universe }: UniverseDetailsPanelP
 
         <div className="border-t border-gray-800 pt-4">
           <div className="flex items-center gap-2 mb-3">
-            <TrendingUp className="w-5 h-5 text-cyan-400" />
+            <TrendingUp className="w-5 h-5 text-red-400" />
             <h4 className="font-semibold text-white">Sujets tendances</h4>
           </div>
           <div className="flex flex-wrap gap-2">
             {universe.trendingTopics.map((topic, index) => (
               <span
                 key={index}
-                className="px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-xs text-cyan-300"
+                className="px-3 py-1 bg-red-500/20 border border-red-500/30 rounded-full text-xs text-red-300"
               >
                 {topic}
               </span>

@@ -60,10 +60,10 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
             Politique de droits d'auteur
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
-            Droits d'auteur & Copyright TruTube
+            Droits d'auteur & Copyright GOROTI
           </h1>
           <p className="text-gray-400 mb-4">
-            Cette politique décrit comment TruTube protège les droits d'auteur, traite les signalements
+            Cette politique décrit comment GOROTI protège les droits d'auteur, traite les signalements
             et gère les procédures de retrait et de contestation.
           </p>
           <div className="flex items-center gap-4 text-xs text-gray-600">
@@ -79,9 +79,9 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
       <div className="max-w-4xl mx-auto px-6 pb-16">
 
         {/* Ce qui est protégé */}
-        <Section icon={FileText} color="text-cyan-400" title="Contenus protégés — Vos obligations">
+        <Section icon={FileText} color="text-red-400" title="Contenus protégés — Vos obligations">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            Tout contenu publié sur TruTube doit respecter les droits de propriété intellectuelle.
+            Tout contenu publié sur GOROTI doit respecter les droits de propriété intellectuelle.
             Vous devez posséder ou avoir obtenu les droits nécessaires sur <strong className="text-white">tout</strong> contenu publié.
           </p>
           <div className="grid md:grid-cols-3 gap-4 mb-5">
@@ -131,7 +131,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
         {/* Signalement */}
         <Section icon={AlertTriangle} color="text-red-400" title="Signalement d'une violation">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            Si vous estimez que votre contenu est reproduit sur TruTube sans autorisation,
+            Si vous estimez que votre contenu est reproduit sur GOROTI sans autorisation,
             vous pouvez soumettre un signalement via notre procédure officielle.
           </p>
 
@@ -140,7 +140,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
               {
                 step: '1',
                 title: 'Localiser le contenu',
-                desc: 'Identifiez l\'URL exacte du contenu violant vos droits sur TruTube.',
+                desc: 'Identifiez l\'URL exacte du contenu violant vos droits sur GOROTI.',
               },
               {
                 step: '2',
@@ -173,8 +173,8 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
           <div className="p-4 bg-gray-900/30 border border-gray-800 rounded-xl">
             <h3 className="font-semibold text-white text-sm mb-2">Contact direct équipe droits</h3>
             <p className="text-gray-400 text-xs mb-2">Pour les signalements urgents ou les demandes de labels/éditeurs :</p>
-            <a href="mailto:copyright@trutube.tv" className="text-cyan-400 text-sm hover:text-cyan-300 transition-colors">
-              copyright@trutube.tv
+            <a href="mailto:copyright@goroti.tv" className="text-red-400 text-sm hover:text-red-300 transition-colors">
+              copyright@goroti.tv
             </a>
           </div>
         </Section>
@@ -211,7 +211,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
               <p>Notre équipe juridique examine la contre-notification sous <strong className="text-white">72h ouvrées</strong>. Le plaignant original est notifié et dispose de 10 jours pour saisir la justice. Si aucune action judiciaire n'est engagée dans ce délai, le contenu peut être rétabli.</p>
             </AccordionItem>
             <AccordionItem title="Médiation externe">
-              <p>Si la décision de TruTube ne vous satisfait pas, vous pouvez faire appel à un organisme de résolution des litiges externe. TruTube coopère avec les ORL accrédités sous le Digital Services Act (DSA). Contact : <span className="text-cyan-400">mediation@trutube.tv</span></p>
+              <p>Si la décision de GOROTI ne vous satisfait pas, vous pouvez faire appel à un organisme de résolution des litiges externe. GOROTI coopère avec les ORL accrédités sous le Digital Services Act (DSA). Contact : <span className="text-red-400">mediation@goroti.tv</span></p>
             </AccordionItem>
           </div>
 
@@ -228,7 +228,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
         {/* Suspension */}
         <Section icon={AlertTriangle} color="text-orange-400" title="Système d'avertissements & suspension">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            TruTube applique un système progressif de sanctions en cas de violations répétées.
+            GOROTI applique un système progressif de sanctions en cas de violations répétées.
           </p>
           <div className="border border-gray-800 rounded-xl overflow-hidden">
             <div className="grid grid-cols-3 px-5 py-3 bg-gray-900/50 text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-800">
@@ -258,14 +258,14 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
         <Section icon={Globe} color="text-blue-400" title="Blocage territorial">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
             Les détenteurs de droits ayant des licences limitées géographiquement peuvent demander
-            un blocage territorial de leur contenu sur TruTube.
+            un blocage territorial de leur contenu sur GOROTI.
           </p>
           <div className="space-y-3">
             <AccordionItem title="Qui peut demander un blocage territorial ?">
               <p>Labels musicaux, studios de cinéma, distributeurs et tout détenteur de droits disposant d'une licence territoriale limitée. La demande doit être accompagnée d'une preuve documentaire de la restriction territoriale (contrat de licence, accord de distribution).</p>
             </AccordionItem>
             <AccordionItem title="Comment faire une demande ?">
-              <p>Contacter <span className="text-cyan-400">rights@trutube.tv</span> avec :</p>
+              <p>Contacter <span className="text-red-400">rights@goroti.tv</span> avec :</p>
               <ul className="mt-2 space-y-1">
                 {['URL du contenu concerné', 'Pays à bloquer (liste ISO 3166)', 'Preuve de la restriction territoriale', 'Coordonnées du détenteur de droits'].map(item => (
                   <li key={item} className="flex gap-2 text-xs">
@@ -275,19 +275,19 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
               </ul>
             </AccordionItem>
             <AccordionItem title="Délais d'application">
-              <p>Les blocages territoriaux validés sont appliqués sous <strong className="text-white">48h ouvrées</strong>. Pour les demandes urgentes (ex : contenu diffusé avant sortie officielle), un traitement prioritaire est disponible via <span className="text-cyan-400">urgent-rights@trutube.tv</span>.</p>
+              <p>Les blocages territoriaux validés sont appliqués sous <strong className="text-white">48h ouvrées</strong>. Pour les demandes urgentes (ex : contenu diffusé avant sortie officielle), un traitement prioritaire est disponible via <span className="text-red-400">urgent-rights@goroti.tv</span>.</p>
             </AccordionItem>
           </div>
         </Section>
 
         {/* Preuves horodatées */}
-        <Section icon={Clock} color="text-cyan-400" title="Preuves horodatées & antériorité">
+        <Section icon={Clock} color="text-red-400" title="Preuves horodatées & antériorité">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            TruTube génère automatiquement des preuves d'antériorité pour chaque contenu publié.
+            GOROTI génère automatiquement des preuves d'antériorité pour chaque contenu publié.
           </p>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="p-4 bg-gray-900/50 border border-gray-800 rounded-xl">
-              <Fingerprint className="w-4 h-4 text-cyan-400 mb-2" />
+              <Fingerprint className="w-4 h-4 text-red-400 mb-2" />
               <h3 className="font-medium text-white text-sm mb-2">Ce qui est enregistré</h3>
               <ul className="space-y-1">
                 {[
@@ -298,13 +298,13 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
                   'Hash des modifications ultérieures',
                 ].map(item => (
                   <li key={item} className="text-xs text-gray-400 flex gap-1.5">
-                    <CheckCircle className="w-3 h-3 text-cyan-400 shrink-0 mt-0.5" />{item}
+                    <CheckCircle className="w-3 h-3 text-red-400 shrink-0 mt-0.5" />{item}
                   </li>
                 ))}
               </ul>
             </div>
             <div className="p-4 bg-gray-900/50 border border-gray-800 rounded-xl">
-              <Clock className="w-4 h-4 text-cyan-400 mb-2" />
+              <Clock className="w-4 h-4 text-red-400 mb-2" />
               <h3 className="font-medium text-white text-sm mb-2">Comment obtenir votre certificat</h3>
               <p className="text-gray-400 text-xs leading-relaxed mb-3">
                 Le certificat d'antériorité peut être téléchargé depuis Créateur Studio &gt;
@@ -320,7 +320,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
         {/* Fingerprinting */}
         <Section icon={Fingerprint} color="text-green-400" title="Fingerprinting & détection automatique">
           <p className="text-gray-400 text-sm leading-relaxed mb-5">
-            TruTube analyse chaque upload pour détecter les contenus protégés existants.
+            GOROTI analyse chaque upload pour détecter les contenus protégés existants.
           </p>
           <div className="grid md:grid-cols-3 gap-4">
             {[
@@ -341,15 +341,15 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
           <h2 className="text-xl font-bold text-white mb-5">Contacts droits d'auteur</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {[
-              { label: 'Signalements copyright', email: 'copyright@trutube.tv', desc: 'Violations de droits d\'auteur' },
-              { label: 'Blocage territorial', email: 'rights@trutube.tv', desc: 'Restrictions géographiques' },
-              { label: 'Médiation & litiges', email: 'mediation@trutube.tv', desc: 'Contestations et arbitrage' },
+              { label: 'Signalements copyright', email: 'copyright@goroti.tv', desc: 'Violations de droits d\'auteur' },
+              { label: 'Blocage territorial', email: 'rights@goroti.tv', desc: 'Restrictions géographiques' },
+              { label: 'Médiation & litiges', email: 'mediation@goroti.tv', desc: 'Contestations et arbitrage' },
             ].map(({ label, email, desc }) => (
               <div key={label} className="p-4 bg-gray-900/50 border border-gray-800 rounded-xl">
                 <Mail className="w-4 h-4 text-gray-500 mb-2" />
                 <div className="font-medium text-white text-sm mb-0.5">{label}</div>
                 <div className="text-gray-600 text-xs mb-2">{desc}</div>
-                <a href={`mailto:${email}`} className="text-cyan-400 text-xs hover:text-cyan-300 transition-colors">{email}</a>
+                <a href={`mailto:${email}`} className="text-red-400 text-xs hover:text-red-300 transition-colors">{email}</a>
               </div>
             ))}
           </div>
