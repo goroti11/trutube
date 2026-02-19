@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import { Footer } from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -316,6 +316,19 @@ function AppContent() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  const [pageTransition, setPageTransition] = useState(false);
+  const prevPageRef = useRef(currentPage);
+
+  useEffect(() => {
+    if (prevPageRef.current !== currentPage) {
+      setPageTransition(true);
+      window.scrollTo({ top: 0 });
+      const timer = setTimeout(() => setPageTransition(false), 20);
+      prevPageRef.current = currentPage;
+      return () => clearTimeout(timer);
+    }
+  }, [currentPage]);
+
   // Handle MiniPlayer when leaving watch page
   useEffect(() => {
     if (currentPage !== 'watch' && currentVideo && currentPage !== 'mobile-demo') {
@@ -365,6 +378,10 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-gray-950">
+      <div
+        className="transition-opacity duration-200 ease-in-out"
+        style={{ opacity: pageTransition ? 0 : 1 }}
+      >
       {currentPage === 'auth' && <AuthPage />}
 
       {currentPage === 'studio' && (
@@ -714,10 +731,14 @@ function AppContent() {
           <ReferralPage onNavigate={(page) => setCurrentPage(page as Page)} />
         )}
 
+        {currentPage !== 'auth' && currentPage !== 'video' && currentPage !== 'watch' && (
+          <Footer onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+      </div>
+
         <CookieBanner />
         <NotificationManager />
 
-        {/* Global MiniPlayer */}
         {currentVideo && currentPage !== 'watch' && currentPage !== 'mobile-demo' && (
           <GlobalMiniPlayer
             onNavigateToPlayer={() => {
@@ -727,10 +748,6 @@ function AppContent() {
               }
             }}
           />
-        )}
-
-        {currentPage !== 'auth' && currentPage !== 'video' && currentPage !== 'watch' && (
-          <Footer onNavigate={(page) => setCurrentPage(page as Page)} />
         )}
     </div>
   );
