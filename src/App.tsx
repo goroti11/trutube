@@ -66,8 +66,10 @@ import CareerPage from './pages/CareerPage';
 import PricingPage from './pages/PricingPage';
 import ResourcesPage from './pages/ResourcesPage';
 import OfficialCommunityPage from './pages/OfficialCommunityPage';
+import CopyrightPolicyPage from './pages/CopyrightPolicyPage';
+import FinancialTermsPage from './pages/FinancialTermsPage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'official-community';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'official-community' | 'copyright-policy' | 'financial-terms';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -236,6 +238,8 @@ function AppContent() {
         'pricing': 'pricing',
         'resources': 'resources',
         'official-community': 'official-community',
+        'copyright-policy': 'copyright-policy',
+        'financial-terms': 'financial-terms',
       };
 
       if (hash in pageMap) {
@@ -635,6 +639,14 @@ function AppContent() {
 
         {currentPage === 'official-community' && (
           <OfficialCommunityPage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'copyright-policy' && (
+          <CopyrightPolicyPage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'financial-terms' && (
+          <FinancialTermsPage onNavigate={(page) => setCurrentPage(page as Page)} />
         )}
 
         <CookieBanner />
