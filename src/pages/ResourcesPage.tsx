@@ -490,6 +490,366 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
           recuperer: 'const currentHash = window.location.hash.slice(1);'
         }
       }
+    },
+    {
+      id: 'user-status',
+      category: 'creators',
+      title: '7. Statuts Utilisateur & Communauté',
+      icon: Users,
+      color: 'text-pink-400',
+      content: {
+        description: 'Système de statuts utilisateur permettant de valoriser l\'engagement et fidéliser la communauté.',
+        statuts: [
+          {
+            nom: 'Visiteur',
+            obtention: 'Regarde sans compte',
+            nature: 'Anonyme',
+            droits: ['Navigation publique', 'Visionnage limité']
+          },
+          {
+            nom: 'Abonné',
+            obtention: 'Bouton s\'abonner',
+            nature: 'Gratuit',
+            droits: ['Notifications nouvelles vidéos', 'Accès posts publics', 'Commentaires', 'Participation sondages publics'],
+            pasAcces: ['Contenu membre', 'Contenu premium', 'Avantages exclusifs']
+          },
+          {
+            nom: 'Membre',
+            obtention: 'Abonnement mensuel',
+            nature: 'Récurrent',
+            avantages: ['Vidéos privées', 'Lives privés', 'Sorties anticipées', 'Réductions store', 'Badge membre', 'Chat prioritaire'],
+            niveaux: ['Fan (2€)', 'Supporter (5€)', 'VIP (10€)']
+          },
+          {
+            nom: 'Acheteur',
+            obtention: 'Achat contenu (album, vidéo premium, location)',
+            nature: 'Transactionnel',
+            droits: ['Accès permanent contenu acheté', 'Badge acheteur', 'HD conservée après sortie publique']
+          },
+          {
+            nom: 'Supporter',
+            obtention: 'Tips / Précommande / Participation lancement',
+            nature: 'Symbolique Premium',
+            effets: ['Badge visible commentaires', 'Mise en avant communauté', 'Historique soutien créateur']
+          },
+          {
+            nom: 'Collectionneur',
+            obtention: 'Édition limitée / Numérotation',
+            nature: 'Prestige',
+            avantages: ['Certificat', 'Prestige profil', 'Futur marché secondaire']
+          }
+        ],
+        prioriteCommentaires: {
+          titre: 'Ordre d\'affichage des commentaires',
+          ordre: ['Collectionneur', 'Supporter', 'Membre', 'Acheteur', 'Abonné', 'Visiteur'],
+          but: 'Valoriser les fans engagés'
+        },
+        notificationsIntelligentes: {
+          'Nouvelle vidéo': 'abonnés',
+          'Précommande': 'membres',
+          'Promo': 'acheteurs',
+          'Live privé': 'membres',
+          'Édition limitée': 'supporters'
+        },
+        segmentation: {
+          titre: 'Tableau créateur — segmentation audience',
+          groupes: {
+            'Fans gratuits': 'portée',
+            'Acheteurs': 'revenus',
+            'Membres': 'revenus récurrents',
+            'Top supporters': 'fidélité'
+          }
+        },
+        cumul: 'Un utilisateur peut cumuler plusieurs statuts (ex: Abonné + Acheteur + Supporter)'
+      }
+    },
+    {
+      id: 'channel-management',
+      category: 'creators',
+      title: '8. Gestion Complète des Chaînes',
+      icon: Video,
+      color: 'text-red-400',
+      content: {
+        description: 'Module complet de création et gestion de chaînes créateur professionnelles.',
+        creation: {
+          access: 'Accessible depuis le compte légal vérifié',
+          etapes: ['Choisir type de chaîne', 'Définir identité publique', 'Paramétrer visibilité', 'Catégoriser contenu', 'Activer monétisation (optionnel)'],
+          typesChaine: {
+            'Créateur individuel': 'contenu personnel',
+            'Artiste musical': 'albums / singles',
+            'Label': 'multi artistes',
+            'Studio / Média': 'production vidéo',
+            'Marque': 'contenu commercial'
+          },
+          champsObligatoires: ['Nom chaîne', 'Pseudo', 'Photo', 'Bannière', 'Catégorie'],
+          champsOptionnels: ['Description', 'Liens sociaux', 'Email pro', 'Pays affiché', 'Langue', 'Hashtags officiels']
+        },
+        visibilite: {
+          'Public': 'visible',
+          'Non répertorié': 'lien uniquement',
+          'Privé': 'accès restreint (option membres uniquement)'
+        },
+        personnalisation: {
+          branding: ['Logo', 'Bannière responsive', 'Intro vidéo', 'Trailer visiteurs', 'Trailer abonnés'],
+          sections: {
+            'Accueil': 'présentation',
+            'Vidéos': 'liste',
+            'Shorts': 'extraits',
+            'Albums': 'premium',
+            'Lives': 'directs',
+            'Store': 'merch',
+            'Playlists': 'collections',
+            'Communauté': 'posts'
+          },
+          organisation: 'Ordre personnalisable drag & drop'
+        },
+        gestionContenu: {
+          uploadVideo: {
+            parametresBase: ['Titre', 'Description', 'Miniature', 'Tags', 'Catégorie', 'Langue', 'Restriction âge', 'Territoires', 'Type (gratuit/premium)'],
+            avances: ['Sous-titres', 'Chapitres', 'Sponsor déclaré', 'Short associé', 'Accès membre', 'Licence']
+          },
+          playlists: {
+            types: ['Standard', 'Série', 'Album', 'Cours', 'Saison'],
+            options: ['Ordre manuel', 'Ordre automatique', 'Verrouillage premium']
+          },
+          lives: ['Live public/privé', 'Live payant', 'Replay automatique', 'Chat', 'Modération', 'Tips en direct', 'Sponsor live']
+        },
+        communityPosts: {
+          types: {
+            'Texte': 'annonce',
+            'Image': 'teaser',
+            'Vidéo courte': 'preview',
+            'Sondage': 'vote fans',
+            'Offre': 'promo'
+          }
+        },
+        equipe: {
+          roles: {
+            'Admin': 'tout',
+            'Éditeur': 'contenu',
+            'Analyste': 'stats',
+            'Modérateur': 'commentaires',
+            'Financier': 'revenus'
+          },
+          description: 'Le propriétaire peut ajouter des collaborateurs'
+        },
+        moderation: {
+          outils: ['Filtres mots interdits', 'Validation manuelle', 'Bannissement', 'Slow mode', 'Blacklist utilisateurs']
+        },
+        analytics: {
+          audience: ['Abonnés', 'Rétention', 'Watchtime', 'Sources trafic'],
+          business: ['Ventes', 'Conversion', 'Revenus'],
+          engagement: ['Likes', 'Commentaires', 'Partages', 'Retour spectateurs']
+        },
+        syntheseModule: {
+          'Publication': true,
+          'Branding': true,
+          'Distribution': true,
+          'Vente': true,
+          'Communauté': true,
+          'Business': true
+        }
+      }
+    },
+    {
+      id: 'monetization-channels',
+      category: 'monetization',
+      title: '9. Canaux de Monétisation',
+      icon: DollarSign,
+      color: 'text-green-400',
+      content: {
+        description: 'Système multi-canal de monétisation permettant aux créateurs de diversifier leurs revenus.',
+        canaux: [
+          {
+            nom: 'Vente Premium',
+            description: 'Vente directe de contenu (vidéos, albums, cours)',
+            commission: '15% plateforme',
+            paiement: 'Instantané au wallet'
+          },
+          {
+            nom: 'Abonnements Fans',
+            description: 'Revenus récurrents mensuels',
+            niveaux: 'Configurables par créateur',
+            commission: '10% plateforme'
+          },
+          {
+            nom: 'Tips & Dons',
+            description: 'Soutien volontaire des fans',
+            commission: '5% plateforme',
+            montantMin: '1€'
+          },
+          {
+            nom: 'Store Merchandising',
+            description: 'Vente produits dérivés',
+            integration: 'Print-on-demand ou stock',
+            commission: '20% plateforme'
+          },
+          {
+            nom: 'Marketplace Services',
+            description: 'Vente de services (coaching, consulting)',
+            escrow: 'Protection acheteur/vendeur',
+            commission: '15% plateforme'
+          },
+          {
+            nom: 'Affiliations',
+            description: 'Commissions sur produits tiers',
+            tracking: 'Liens uniques',
+            paiement: '30 jours après validation'
+          },
+          {
+            nom: 'Sponsoring Natif',
+            description: 'Intégration marques dans contenu',
+            declaration: 'Obligatoire',
+            negociation: 'Directe créateur-marque'
+          },
+          {
+            nom: 'Publicités Display',
+            description: 'Revenus pub automatiques',
+            eligibilite: '1000 abonnés + 4000h watchtime',
+            partage: '55% créateur / 45% plateforme'
+          }
+        ],
+        retraits: {
+          seuilMinimum: '50€',
+          delais: '3-7 jours ouvrés',
+          methodes: ['Virement bancaire', 'PayPal', 'Stripe', 'TruCoin (crypto)'],
+          frequence: 'Mensuelle ou sur demande'
+        },
+        fiscalite: {
+          declaration: 'Créateur responsable',
+          documents: ['Factures automatiques', 'Récapitulatif annuel', 'Export comptable'],
+          tva: 'Selon pays et statut'
+        }
+      }
+    },
+    {
+      id: 'premium-system',
+      category: 'monetization',
+      title: '10. Système Premium & Abonnements',
+      icon: TrendingUp,
+      color: 'text-yellow-400',
+      content: {
+        description: 'Système d\'abonnements Premium multi-niveaux pour utilisateurs et créateurs.',
+        abonnementsUtilisateur: {
+          'Premium Basic (4,99€/mois)': {
+            avantages: ['Sans publicité', 'Qualité HD', 'Lecture hors ligne', 'Badge Premium']
+          },
+          'Premium Plus (9,99€/mois)': {
+            avantages: ['Tout Basic +', 'Qualité 4K', 'Téléchargements illimités', 'Accès anticipé', 'Support prioritaire']
+          },
+          'Premium Ultimate (14,99€/mois)': {
+            avantages: ['Tout Plus +', 'Contenu exclusif', 'Événements VIP', 'Réductions store 20%', 'Badge Ultimate']
+          }
+        },
+        abonnementsAnnuels: {
+          'Basic Annual': '49,99€/an (2 mois gratuits)',
+          'Plus Annual': '99,99€/an (2 mois gratuits)',
+          'Ultimate Annual': '149,99€/an (2 mois gratuits)'
+        },
+        essaiGratuit: {
+          duree: '14 jours',
+          niveau: 'Premium Plus',
+          annulation: 'Sans engagement',
+          limite: 'Une fois par compte'
+        },
+        comparaison: {
+          gratuit: 'Publicités, SD, en ligne uniquement',
+          basic: 'Sans pub, HD, offline limité',
+          plus: '4K, offline illimité, anticipé',
+          ultimate: 'Tout + exclusivités + VIP'
+        }
+      }
+    },
+    {
+      id: 'community-system',
+      category: 'community',
+      title: '11. Système de Communautés',
+      icon: MessageSquare,
+      color: 'text-blue-400',
+      content: {
+        description: 'Plateforme sociale intégrée permettant aux créateurs de créer et gérer leurs communautés.',
+        creation: {
+          acces: 'Créateurs vérifiés uniquement',
+          etapes: ['Nom de communauté', 'Description', 'Règles', 'Catégorie', 'Visibilité', 'Modération'],
+          types: ['Publique', 'Privée', 'Premium (payante)']
+        },
+        fonctionnalites: {
+          posts: ['Texte', 'Images', 'Vidéos', 'Sondages', 'Événements', 'Annonces'],
+          interactions: ['Likes', 'Commentaires', 'Partages', 'Réactions emoji', 'Mentions'],
+          organisation: ['Channels thématiques', 'Tags', 'Épinglage', 'Archives']
+        },
+        moderation: {
+          outils: ['Auto-modération IA', 'Modérateurs bénévoles', 'Filtres contenu', 'Bannissement', 'Signalements'],
+          niveaux: ['Modo', 'Super-modo', 'Admin']
+        },
+        premiumCommunity: {
+          prix: 'Défini par créateur (2-50€/mois)',
+          avantages: ['Accès exclusif', 'Badge spécial', 'Couleur nom', 'Channels privés', 'Événements réservés'],
+          partageRevenus: '85% créateur / 15% plateforme'
+        },
+        gamification: {
+          niveaux: 'XP basé sur activité',
+          badges: ['Membre fondateur', 'Top contributeur', 'Expert', 'Vétéran'],
+          leaderboard: 'Classement mensuel'
+        },
+        analytics: {
+          stats: ['Membres actifs', 'Posts/jour', 'Engagement', 'Croissance', 'Rétention'],
+          insights: 'Suggestions IA pour améliorer engagement'
+        }
+      }
+    },
+    {
+      id: 'account-security',
+      category: 'account',
+      title: '12. Sécurité & Gestion de Compte',
+      icon: Shield,
+      color: 'text-red-400',
+      content: {
+        description: 'Système complet de sécurité et gestion de compte utilisateur.',
+        authentification: {
+          '2FA': {
+            methodes: ['Authenticator App', 'SMS', 'Email'],
+            recommandation: 'Obligatoire pour créateurs',
+            backup: 'Codes de secours générés'
+          },
+          connexion: {
+            historique: 'Dernières 30 connexions',
+            alertes: 'Nouvelle connexion inhabituelle',
+            revocation: 'Déconnexion à distance possible'
+          }
+        },
+        motDePasse: {
+          requis: ['8+ caractères', '1 majuscule', '1 minuscule', '1 chiffre', '1 spécial'],
+          force: 'Indicateur temps réel',
+          changement: 'Recommandé tous les 90 jours',
+          recuperation: 'Email + questions sécurité'
+        },
+        confidentialite: {
+          profil: ['Public', 'Amis', 'Privé'],
+          activite: ['Historique visible/caché', 'Statut en ligne', 'Dernière connexion'],
+          donnees: ['Export RGPD', 'Suppression', 'Portabilité']
+        },
+        notifications: {
+          types: ['Email', 'Push', 'In-app', 'SMS'],
+          categories: ['Activité', 'Social', 'Marketing', 'Système'],
+          frequence: 'Instantané / Résumé quotidien / hebdomadaire'
+        },
+        suppression: {
+          delai: '30 jours de grâce',
+          donnees: 'Suppression définitive après délai',
+          contenu: 'Option conservation contenu public',
+          reversibilite: 'Possible pendant délai grâce'
+        },
+        verificationIdentite: {
+          kyc: {
+            niveau1: 'Email vérifié',
+            niveau2: 'Téléphone vérifié',
+            niveau3: 'Pièce identité (créateurs)',
+            niveau4: 'Profil légal entreprise'
+          },
+          avantages: ['Limites retrait augmentées', 'Badge vérifié', 'Éligibilité monétisation', 'Confiance utilisateurs']
+        }
+      }
     }
   ];
 
