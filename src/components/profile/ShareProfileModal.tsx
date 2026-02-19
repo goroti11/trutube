@@ -32,7 +32,7 @@ export default function ShareProfileModal({
   const handleShare = async (method: 'facebook' | 'twitter' | 'whatsapp' | 'email') => {
     await profileEnhancedService.trackProfileShare(profileId, null, method);
 
-    const text = `Découvrez la chaîne de ${displayName} sur GOROTI`;
+    const text = `Découvrez la chaîne de ${displayName} sur TruTube`;
     const encodedUrl = encodeURIComponent(profileUrl);
     const encodedText = encodeURIComponent(text);
 

@@ -26,7 +26,7 @@ const subscriptionTiers: SubscriptionTier[] = [
     name: 'Premium',
     price: 9.99,
     icon: <Star className="w-10 h-10" />,
-    gradient: 'from-blue-500 to-red-600',
+    gradient: 'from-blue-500 to-cyan-500',
     borderColor: 'border-blue-500',
     benefits: [
       'Vidéos sans publicité',
@@ -205,7 +205,7 @@ export default function SubscriptionPage({ user, onBack }: SubscriptionPageProps
             <ArrowLeft className="w-6 h-6" />
           </button>
           <div>
-            <h1 className="text-xl font-bold">Abonnements Premium GOROTI</h1>
+            <h1 className="text-xl font-bold">Abonnements Premium TruTube</h1>
             <p className="text-sm text-gray-400">Choisissez l'abonnement qui vous convient</p>
           </div>
         </div>
@@ -307,7 +307,7 @@ export default function SubscriptionPage({ user, onBack }: SubscriptionPageProps
         </div>
 
         <div className="bg-gray-900 rounded-2xl p-8 mb-8">
-          <h3 className="text-xl font-bold mb-6 text-center">Pourquoi s'abonner à GOROTI Premium?</h3>
+          <h3 className="text-xl font-bold mb-6 text-center">Pourquoi s'abonner à TruTube Premium?</h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="w-12 h-12 bg-primary-500/20 rounded-full flex items-center justify-center mx-auto mb-3">

@@ -17,8 +17,8 @@ export default function PremiumBadge({
     premium: {
       icon: Star,
       label: 'Premium',
-      gradient: 'from-blue-400 to-red-400',
-      bgGradient: 'from-blue-500/20 to-red-600/20',
+      gradient: 'from-blue-400 to-cyan-400',
+      bgGradient: 'from-blue-500/20 to-cyan-500/20',
       borderColor: 'border-blue-400',
       shadowColor: 'shadow-blue-500/30',
     },

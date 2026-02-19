@@ -13,15 +13,15 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
     <>
       <Header onNavigate={onNavigate} showNavigation={true} />
       <div className="min-h-screen bg-gray-950">
-        <div className="relative bg-gradient-to-br from-red-600/20 via-gray-900 to-gray-950 py-20">
+        <div className="relative bg-gradient-to-br from-cyan-500/20 via-gray-900 to-gray-950 py-20">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <div className="inline-flex items-center justify-center mb-6">
-              <div className="bg-gradient-to-br from-red-600 to-red-700 p-4 rounded-2xl">
+              <div className="bg-gradient-to-br from-cyan-500 to-cyan-600 p-4 rounded-2xl">
                 <Play className="w-12 h-12 text-white fill-white" />
               </div>
             </div>
             <h1 className="text-5xl font-black text-white mb-6">
-              GOROTI : La vérité au cœur du contenu
+              TruTube : La vérité au cœur du contenu
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Une plateforme de partage vidéo décentralisée qui valorise l'authenticité,
@@ -33,7 +33,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
         <div className="max-w-6xl mx-auto px-6 py-16">
           <section className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-white mb-4">Pourquoi GOROTI existe</h2>
+              <h2 className="text-3xl font-bold text-white mb-4">Pourquoi TruTube existe</h2>
               <p className="text-gray-400 text-lg max-w-3xl mx-auto">
                 Face à une industrie du contenu vidéo dominée par des algorithmes opaques et
                 des métriques manipulables, nous avons créé une alternative transparente et équitable.
@@ -41,7 +41,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-red-500/50 transition-colors">
+              <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors">
                 <div className="p-3 bg-red-500/20 rounded-lg w-fit mb-4">
                   <Eye className="w-6 h-6 text-red-500" />
                 </div>
@@ -52,9 +52,9 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
                 </p>
               </div>
 
-              <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-red-500/50 transition-colors">
-                <div className="p-3 bg-red-500/20 rounded-lg w-fit mb-4">
-                  <Shield className="w-6 h-6 text-red-500" />
+              <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors">
+                <div className="p-3 bg-cyan-500/20 rounded-lg w-fit mb-4">
+                  <Shield className="w-6 h-6 text-cyan-500" />
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3">Notre solution</h3>
                 <p className="text-gray-300">
@@ -63,7 +63,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
                 </p>
               </div>
 
-              <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-red-500/50 transition-colors">
+              <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors">
                 <div className="p-3 bg-green-500/20 rounded-lg w-fit mb-4">
                   <TrendingUp className="w-6 h-6 text-green-500" />
                 </div>
@@ -81,16 +81,16 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
               <h2 className="text-3xl font-bold text-white mb-4">Notre mission</h2>
             </div>
 
-            <div className="bg-gradient-to-br from-red-600/10 to-transparent border border-red-500/30 rounded-2xl p-8 mb-8">
+            <div className="bg-gradient-to-br from-cyan-500/10 to-transparent border border-cyan-500/30 rounded-2xl p-8 mb-8">
               <div className="flex items-start gap-4">
-                <Target className="w-8 h-8 text-red-500 flex-shrink-0 mt-1" />
+                <Target className="w-8 h-8 text-cyan-500 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-4">
                     Restaurer la confiance dans l'écosystème du contenu vidéo
                   </h3>
                   <p className="text-gray-300 text-lg leading-relaxed">
                     Nous croyons que chaque vue doit compter, que chaque interaction doit être authentique,
-                    et que chaque créateur mérite une rémunération juste. GOROTI n'est pas juste une plateforme :
+                    et que chaque créateur mérite une rémunération juste. TruTube n'est pas juste une plateforme :
                     c'est un mouvement pour ramener la vérité et la transparence dans le partage de contenu.
                   </p>
                 </div>
@@ -106,7 +106,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Shield className="w-6 h-6 text-red-500" />
+                  <Shield className="w-6 h-6 text-cyan-500" />
                   <h3 className="text-xl font-semibold text-white">Transparence totale</h3>
                 </div>
                 <p className="text-gray-300">
@@ -117,7 +117,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
 
               <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Heart className="w-6 h-6 text-red-500" />
+                  <Heart className="w-6 h-6 text-cyan-500" />
                   <h3 className="text-xl font-semibold text-white">Équité pour tous</h3>
                 </div>
                 <p className="text-gray-300">
@@ -128,7 +128,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
 
               <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Users className="w-6 h-6 text-red-500" />
+                  <Users className="w-6 h-6 text-cyan-500" />
                   <h3 className="text-xl font-semibold text-white">Pouvoir à la communauté</h3>
                 </div>
                 <p className="text-gray-300">
@@ -139,7 +139,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
 
               <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <Lock className="w-6 h-6 text-red-500" />
+                  <Lock className="w-6 h-6 text-cyan-500" />
                   <h3 className="text-xl font-semibold text-white">Sécurité et vie privée</h3>
                 </div>
                 <p className="text-gray-300">
@@ -158,8 +158,8 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
             <div className="space-y-6">
               <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
                 <div className="flex items-start gap-4">
-                  <div className="p-3 bg-red-500/20 rounded-lg flex-shrink-0">
-                    <Zap className="w-6 h-6 text-red-500" />
+                  <div className="p-3 bg-cyan-500/20 rounded-lg flex-shrink-0">
+                    <Zap className="w-6 h-6 text-cyan-500" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-2">
@@ -176,8 +176,8 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
 
               <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
                 <div className="flex items-start gap-4">
-                  <div className="p-3 bg-red-500/20 rounded-lg flex-shrink-0">
-                    <Globe className="w-6 h-6 text-red-500" />
+                  <div className="p-3 bg-cyan-500/20 rounded-lg flex-shrink-0">
+                    <Globe className="w-6 h-6 text-cyan-500" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-2">
@@ -186,7 +186,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
                     <p className="text-gray-300">
                       Les créateurs peuvent créer leurs propres univers thématiques avec leurs règles.
                       Chaque univers fonctionne comme un espace autonome tout en respectant les règles
-                      globales de GOROTI.
+                      globales de TruTube.
                     </p>
                   </div>
                 </div>
@@ -194,15 +194,15 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
 
               <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
                 <div className="flex items-start gap-4">
-                  <div className="p-3 bg-red-500/20 rounded-lg flex-shrink-0">
-                    <Award className="w-6 h-6 text-red-500" />
+                  <div className="p-3 bg-cyan-500/20 rounded-lg flex-shrink-0">
+                    <Award className="w-6 h-6 text-cyan-500" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-2">
                       Monétisation équitable
                     </h3>
                     <p className="text-gray-300">
-                      Fini les CPM mystérieux. Sur GOROTI, les créateurs sont payés selon l'engagement
+                      Fini les CPM mystérieux. Sur TruTube, les créateurs sont payés selon l'engagement
                       réel : temps de visionnage, interactions, fidélité de l'audience. Plus votre contenu
                       engage, plus vous gagnez.
                     </p>
@@ -213,19 +213,19 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
           </section>
 
           <section className="mb-20">
-            <div className="bg-gradient-to-br from-red-600/20 to-transparent border border-red-500/30 rounded-2xl p-8 text-center">
+            <div className="bg-gradient-to-br from-cyan-500/20 to-transparent border border-cyan-500/30 rounded-2xl p-8 text-center">
               <h2 className="text-3xl font-bold text-white mb-4">Notre vision pour l'avenir</h2>
               <p className="text-gray-300 text-lg max-w-3xl mx-auto mb-8">
                 Nous imaginons un Internet où la qualité prime sur la quantité, où les créateurs sont
-                valorisés équitablement, et où la communauté a son mot à dire. GOROTI n'est que le début
+                valorisés équitablement, et où la communauté a son mot à dire. TruTube n'est que le début
                 d'un écosystème plus large de plateformes décentralisées et transparentes.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <button
                   onClick={() => onNavigate('auth')}
-                  className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+                  className="px-8 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium transition-colors"
                 >
-                  Rejoindre GOROTI
+                  Rejoindre TruTube
                 </button>
                 <button
                   onClick={() => onNavigate('creator-setup')}
@@ -245,7 +245,7 @@ export const AboutPage = ({ onNavigate }: AboutPageProps) => {
               </p>
               <button
                 onClick={() => onNavigate('support')}
-                className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+                className="px-8 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium transition-colors"
               >
                 Contactez-nous
               </button>

@@ -259,7 +259,7 @@ export default function EditProfilePage({ onNavigate }: EditProfilePageProps) {
               <label className="block text-sm font-medium mb-2">URL de la chaîne</label>
               <div className="flex gap-2">
                 <div className="flex-1 flex items-center bg-gray-800 border border-gray-700 rounded-lg px-4 py-3">
-                  <span className="text-gray-500 mr-2">goroti.com/channel/</span>
+                  <span className="text-gray-500 mr-2">trutube.com/channel/</span>
                   <input
                     type="text"
                     value={formData.channel_url}

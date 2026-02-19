@@ -200,7 +200,7 @@ export default function RoyaltySplitManager({ splits, onChange }: RoyaltySplitMa
         {splits.slice(0, 3).map((s, i) => (
           <p key={i}>{s.recipient_name || 'Collaborateur'} ({s.role ? ROLE_LABELS[s.role as RoyaltyRole] : ''}) : {((10 * 0.85 * s.percentage) / 100).toFixed(2)}€</p>
         ))}
-        <p>GOROTI (15%) : 1,50€</p>
+        <p>TruTube (15%) : 1,50€</p>
       </div>
     </div>
   );
