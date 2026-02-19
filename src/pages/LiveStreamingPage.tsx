@@ -132,7 +132,7 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
                   icon={Users}
                   label="Spectateurs totaux"
                   value={stats.totalViewers.toString()}
-                  color="text-cyan-400"
+                  color="text-red-400"
                 />
                 <StatCard
                   icon={Users}
@@ -215,7 +215,7 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
                       URL du serveur RTMP
                     </label>
                     <div className="bg-gray-800 rounded-lg px-4 py-3 font-mono text-sm">
-                      rtmp://stream.trutube.com/live
+                      rtmp://stream.goroti.com/live
                     </div>
                   </div>
                 </div>

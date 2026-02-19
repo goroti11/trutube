@@ -55,7 +55,7 @@ export default function CreatorStudioPage({ onNavigate }: CreatorStudioPageProps
             <Play className="w-5 h-5 text-white fill-current" />
           </div>
           <div>
-            <p className="text-white font-bold text-sm leading-none">TruTube</p>
+            <p className="text-white font-bold text-sm leading-none">GOROTI</p>
             <p className="text-gray-500 text-xs mt-0.5">Studio</p>
           </div>
           <span className="ml-auto text-[10px] bg-red-950/50 border border-red-800/40 text-red-400 px-1.5 py-0.5 rounded-full font-medium">BETA</span>
@@ -95,7 +95,7 @@ export default function CreatorStudioPage({ onNavigate }: CreatorStudioPageProps
             className="w-full flex items-center gap-2 px-3 py-2.5 text-gray-500 hover:text-gray-300 hover:bg-white/5 rounded-xl text-sm transition-colors"
           >
             <Home className="w-4 h-4" />
-            Retour à TruTube
+            Retour à GOROTI
           </button>
         </div>
       </aside>
@@ -110,7 +110,7 @@ export default function CreatorStudioPage({ onNavigate }: CreatorStudioPageProps
                 <Play className="w-5 h-5 text-white fill-current" />
               </div>
               <div>
-                <p className="text-white font-bold text-sm">TruTube Studio</p>
+                <p className="text-white font-bold text-sm">GOROTI Studio</p>
               </div>
               <button onClick={() => setSidebarOpen(false)} className="ml-auto p-1 text-gray-500 hover:text-white">
                 <X className="w-5 h-5" />
@@ -145,7 +145,7 @@ export default function CreatorStudioPage({ onNavigate }: CreatorStudioPageProps
                 onClick={() => onNavigate('home')}
                 className="w-full flex items-center gap-2 px-3 py-2.5 text-gray-500 hover:text-gray-300 rounded-xl text-sm"
               >
-                <Home className="w-4 h-4" /> Retour à TruTube
+                <Home className="w-4 h-4" /> Retour à GOROTI
               </button>
             </div>
           </aside>
@@ -432,7 +432,7 @@ function DashboardSection({ onNavigate }: { onNavigate: (p: string) => void }) {
           { label: 'Uploader', icon: Upload, page: 'upload', color: 'from-red-600 to-rose-700' },
           { label: 'Démarrer un live', icon: Radio, page: 'live-streaming', color: 'from-orange-600 to-red-600' },
           { label: 'Mes finances', icon: DollarSign, page: 'trucoin-wallet', color: 'from-emerald-700 to-teal-700' },
-          { label: 'Communauté', icon: Users, page: 'community', color: 'from-blue-700 to-cyan-700' },
+          { label: 'Communauté', icon: Users, page: 'community', color: 'from-blue-700 to-red-700' },
         ].map(a => {
           const Icon = a.icon;
           return (
@@ -745,7 +745,7 @@ function CommunitySection({ onNavigate }: { onNavigate: (p: string) => void }) {
               { name: 'Communauté Générale', members: 25430, posts: 892, premium: false },
             ].map((c, i) => (
               <div key={i} className="p-4 flex items-center gap-4 hover:bg-white/2 transition-colors">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-700 to-cyan-700 rounded-xl flex-shrink-0" />
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-700 to-red-700 rounded-xl flex-shrink-0" />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <p className="text-white font-medium text-sm truncate">{c.name}</p>
@@ -820,7 +820,7 @@ function AnalyticsSection() {
               </div>
               <div>
                 <p className="font-bold text-white text-sm">Qualité du trafic</p>
-                <p className="text-gray-500 text-xs">Système anti-fausses vues TruTube</p>
+                <p className="text-gray-500 text-xs">Système anti-fausses vues GOROTI</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -940,7 +940,7 @@ function CommentsSection() {
             <div key={i} className="p-4 hover:bg-white/2 transition-colors">
               <div className="flex items-start justify-between gap-3 mb-2">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-gradient-to-br from-cyan-700 to-blue-700 rounded-full flex-shrink-0" />
+                  <div className="w-8 h-8 bg-gradient-to-br from-red-700 to-blue-700 rounded-full flex-shrink-0" />
                   <div>
                     <p className="text-white text-sm font-medium">{c.user}</p>
                     <p className="text-gray-600 text-xs">{c.video}</p>
@@ -987,7 +987,7 @@ function CollaborationsSection() {
         ].map((c, i) => (
           <Card key={i} className="p-5">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-cyan-700 to-blue-700 rounded-full flex-shrink-0" />
+              <div className="w-12 h-12 bg-gradient-to-br from-red-700 to-blue-700 rounded-full flex-shrink-0" />
               <div>
                 <p className="text-white font-semibold">{c.creator}</p>
                 <p className="text-gray-500 text-xs">{c.project}</p>
@@ -1141,7 +1141,7 @@ function DistributionSection({ onNavigate }: { onNavigate: (p: string) => void }
             </div>
             <div className="flex justify-between text-xs text-gray-500">
               <span className="flex items-center gap-1.5"><span className="w-2 h-2 bg-emerald-500 rounded-full inline-block" /> Artiste 85% — {STATS.net_revenue.toFixed(0)}€</span>
-              <span className="flex items-center gap-1.5"><span className="w-2 h-2 bg-red-600 rounded-full inline-block" /> TruTube 15% — {(STATS.gross_revenue - STATS.net_revenue).toFixed(0)}€</span>
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 bg-red-600 rounded-full inline-block" /> GOROTI 15% — {(STATS.gross_revenue - STATS.net_revenue).toFixed(0)}€</span>
             </div>
           </Card>
 
@@ -1389,14 +1389,14 @@ function MarketplaceSection({ onNavigate }: { onNavigate: (p: string) => void })
           </div>
           <div>
             <p className="text-white font-bold text-sm">Vous êtes prestataire ?</p>
-            <p className="text-gray-500 text-xs">Vendez vos services aux créateurs TruTube</p>
+            <p className="text-gray-500 text-xs">Vendez vos services aux créateurs GOROTI</p>
           </div>
           <button onClick={() => onNavigate('marketplace')} className="ml-auto flex items-center gap-1 text-xs text-red-400 hover:text-red-300 transition-colors">
             Créer mon profil <ChevronRight className="w-3 h-3" />
           </button>
         </div>
         <div className="grid grid-cols-3 gap-2 text-center">
-          {[{ l: 'Commission', v: '10%' }, { l: 'Paiement escrow', v: 'Sécurisé' }, { l: 'Arbitrage', v: 'TruTube' }].map(i => (
+          {[{ l: 'Commission', v: '10%' }, { l: 'Paiement escrow', v: 'Sécurisé' }, { l: 'Arbitrage', v: 'GOROTI' }].map(i => (
             <div key={i.l} className="bg-white/3 rounded-xl p-3">
               <p className="text-gray-500 text-xs">{i.l}</p>
               <p className="font-bold text-white mt-1 text-sm">{i.v}</p>

@@ -97,7 +97,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             Conditions Générales<br />d'Utilisation
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl">
-            Ces conditions régissent votre utilisation de la plateforme TruTube. Merci de les lire
+            Ces conditions régissent votre utilisation de la plateforme GOROTI. Merci de les lire
             attentivement avant d'utiliser nos services.
           </p>
 
@@ -122,7 +122,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
           <Section id="1" icon={FileText} title="1. Présentation et acceptation du service">
             <Sub title="1.1 Présentation">
               <p>
-                TruTube est une plateforme de partage et de diffusion de contenu vidéo éditée par TruTube SAS,
+                GOROTI est une plateforme de partage et de diffusion de contenu vidéo éditée par GOROTI SAS,
                 société par actions simplifiée au capital de 100 000 €, immatriculée au RCS de Paris
                 sous le numéro 123 456 789, dont le siège social est situé au 123 Avenue des Champs-Élysées,
                 75008 Paris, France.
@@ -134,14 +134,14 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             </Sub>
             <Sub title="1.2 Acceptation des conditions">
               <p>
-                En accédant ou en utilisant TruTube, vous déclarez avoir lu, compris et accepté sans réserve
+                En accédant ou en utilisant GOROTI, vous déclarez avoir lu, compris et accepté sans réserve
                 les présentes Conditions Générales d'Utilisation (« CGU »). Si vous n'acceptez pas ces conditions,
                 vous devez cesser immédiatement toute utilisation du service.
               </p>
             </Sub>
             <Sub title="1.3 Modifications">
               <p>
-                TruTube se réserve le droit de modifier les présentes CGU à tout moment. Les modifications
+                GOROTI se réserve le droit de modifier les présentes CGU à tout moment. Les modifications
                 substantielles vous seront notifiées par email et/ou par une notification visible sur la plateforme
                 au moins 30 jours avant leur entrée en vigueur. L'utilisation continue du service après notification
                 constitue une acceptation des nouvelles conditions.
@@ -151,7 +151,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
 
           <Section id="2" icon={Users} title="2. Conditions d'accès et comptes utilisateurs">
             <Sub title="2.1 Conditions d'éligibilité">
-              <p>Pour utiliser TruTube, vous devez :</p>
+              <p>Pour utiliser GOROTI, vous devez :</p>
               <Ul items={[
                 'Avoir au minimum 13 ans révolus. Entre 13 et 18 ans, l\'accord d\'un parent ou tuteur légal est requis.',
                 'Disposer d\'une connexion Internet valide et d\'un navigateur compatible.',
@@ -167,13 +167,13 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
               </p>
               <p className="mt-2">
                 Vous vous engagez à fournir des informations exactes, complètes et à jour lors de votre
-                inscription et à les maintenir à jour. TruTube se réserve le droit de suspendre ou supprimer
+                inscription et à les maintenir à jour. GOROTI se réserve le droit de suspendre ou supprimer
                 tout compte contenant des informations fausses ou trompeuses.
               </p>
             </Sub>
             <Sub title="2.3 Sécurité du compte">
               <p>
-                Vous devez notifier immédiatement TruTube de tout accès non autorisé à votre compte. TruTube
+                Vous devez notifier immédiatement GOROTI de tout accès non autorisé à votre compte. GOROTI
                 ne pourra être tenu responsable des dommages résultant du non-respect de cette obligation.
                 L'utilisation de l'authentification à deux facteurs est fortement recommandée.
               </p>
@@ -210,7 +210,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             </Sub>
             <Sub title="3.3 Système de modération">
               <p>
-                TruTube applique un système de modération hybride combinant modération automatique (IA) et
+                GOROTI applique un système de modération hybride combinant modération automatique (IA) et
                 modération humaine. Les utilisateurs peuvent signaler tout contenu problématique. Les décisions
                 de modération peuvent être contestées via le système de recours disponible dans votre espace
                 personnel dans un délai de 30 jours.
@@ -227,7 +227,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             <Sub title="3.5 Propriété intellectuelle des créateurs">
               <p>
                 Vous conservez l'intégralité de vos droits de propriété intellectuelle sur les contenus que vous
-                publiez. En publiant sur TruTube, vous accordez à la plateforme une licence mondiale, non exclusive,
+                publiez. En publiant sur GOROTI, vous accordez à la plateforme une licence mondiale, non exclusive,
                 gratuite, sous-licenciable et transférable pour héberger, stocker, reproduire, modifier (uniquement
                 à des fins techniques), diffuser et distribuer votre contenu dans le cadre du service.
                 Cette licence prend fin dès la suppression du contenu ou du compte, dans les délais techniques habituels.
@@ -247,7 +247,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             </Sub>
             <Sub title="4.2 TruCoins et système de paiement">
               <p>
-                TruTube utilise une monnaie virtuelle interne appelée TruCoin, convertible en monnaie réelle selon
+                GOROTI utilise une monnaie virtuelle interne appelée TruCoin, convertible en monnaie réelle selon
                 les taux en vigueur. Les TruCoins acquis par les utilisateurs ne constituent pas une monnaie légale,
                 ne génèrent pas d'intérêts, et ne peuvent pas être échangés entre utilisateurs sauf via les
                 mécanismes prévus par la plateforme (tips, abonnements payants).
@@ -255,7 +255,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             </Sub>
             <Sub title="4.3 Commission de la plateforme">
               <p>
-                TruTube prélève une commission sur les transactions de monétisation selon le barème suivant :
+                GOROTI prélève une commission sur les transactions de monétisation selon le barème suivant :
               </p>
               <Ul items={[
                 'Tips et dons : 10% de la transaction.',
@@ -279,7 +279,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             <Sub title="4.5 Obligations fiscales">
               <p>
                 Chaque créateur est seul responsable de la déclaration et du paiement des impôts et cotisations
-                sociales relatifs aux revenus perçus via TruTube. TruTube émet des récapitulatifs annuels de
+                sociales relatifs aux revenus perçus via GOROTI. GOROTI émet des récapitulatifs annuels de
                 revenus sur simple demande.
               </p>
             </Sub>
@@ -288,7 +288,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
           <Section id="5" icon={Globe} title="5. Univers, communautés et contenu organisé">
             <Sub title="5.1 Système d'univers">
               <p>
-                TruTube organise son contenu en univers thématiques (Music, Game, Know, Culture, Life, Mind,
+                GOROTI organise son contenu en univers thématiques (Music, Game, Know, Culture, Life, Mind,
                 Lean, Movie, Sport). Chaque univers dispose de sous-catégories spécifiques. Les créateurs
                 sélectionnent l'univers le plus pertinent lors de la publication de leur contenu.
               </p>
@@ -297,7 +297,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
               <p>
                 Les utilisateurs peuvent créer et rejoindre des communautés autour de centres d'intérêt communs.
                 Les administrateurs de communautés peuvent définir leurs propres règles complémentaires, sous
-                réserve de conformité avec les présentes CGU. TruTube n'est pas responsable des règles
+                réserve de conformité avec les présentes CGU. GOROTI n'est pas responsable des règles
                 spécifiques édictées par les communautés.
               </p>
             </Sub>
@@ -323,10 +323,10 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             </Sub>
             <Sub title="6.2 Conformité RGPD">
               <p>
-                TruTube traite vos données dans le respect du Règlement Général sur la Protection des Données
+                GOROTI traite vos données dans le respect du Règlement Général sur la Protection des Données
                 (RGPD) et de la loi Informatique et Libertés. Vous disposez d'un droit d'accès, de rectification,
                 de suppression, de portabilité, et d'opposition sur vos données personnelles, exerceable via
-                les paramètres de votre compte ou en contactant privacy@trutube.com.
+                les paramètres de votre compte ou en contactant privacy@goroti.com.
               </p>
             </Sub>
           </Section>
@@ -339,13 +339,13 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
                 aucune disposition légale ou réglementaire.
               </p>
             </Sub>
-            <Sub title="7.2 Limitation de responsabilité de TruTube">
+            <Sub title="7.2 Limitation de responsabilité de GOROTI">
               <p>
-                Dans les limites autorisées par le droit applicable, TruTube ne peut être tenu responsable :
+                Dans les limites autorisées par le droit applicable, GOROTI ne peut être tenu responsable :
               </p>
               <Ul items={[
                 'Des dommages directs ou indirects résultant de l\'utilisation ou de l\'impossibilité d\'utiliser le service.',
-                'Des contenus publiés par les utilisateurs (TruTube agit en tant qu\'hébergeur au sens de la loi).',
+                'Des contenus publiés par les utilisateurs (GOROTI agit en tant qu\'hébergeur au sens de la loi).',
                 'Des interruptions, bugs ou indisponibilités du service, quel qu\'en soit la cause.',
                 'De la perte de données en cas de force majeure ou d\'attaque informatique.',
                 'Des décisions prises sur la base des informations disponibles sur la plateforme.',
@@ -353,14 +353,14 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             </Sub>
             <Sub title="7.3 Disponibilité du service">
               <p>
-                TruTube vise une disponibilité de 99,5% par mois. Des interruptions peuvent survenir pour
-                maintenance planifiée (notifiée à l'avance) ou maintenance d'urgence. TruTube ne garantit pas
+                GOROTI vise une disponibilité de 99,5% par mois. Des interruptions peuvent survenir pour
+                maintenance planifiée (notifiée à l'avance) ou maintenance d'urgence. GOROTI ne garantit pas
                 la disponibilité continue et sans interruption du service.
               </p>
             </Sub>
             <Sub title="7.4 Liens externes">
               <p>
-                La plateforme peut contenir des liens vers des sites tiers. TruTube n'exerce aucun contrôle
+                La plateforme peut contenir des liens vers des sites tiers. GOROTI n'exerce aucun contrôle
                 sur ces sites et décline toute responsabilité quant à leur contenu ou leurs pratiques de
                 confidentialité.
               </p>
@@ -369,7 +369,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
 
           <Section id="8" icon={Gavel} title="8. Sanctions et résiliation" accent="text-red-400">
             <Sub title="8.1 Violations et sanctions">
-              <p>En cas de violation des présentes CGU, TruTube peut, selon la gravité de l'infraction :</p>
+              <p>En cas de violation des présentes CGU, GOROTI peut, selon la gravité de l'infraction :</p>
               <Ul items={[
                 'Émettre un avertissement écrit.',
                 'Supprimer ou masquer le contenu en infraction.',
@@ -382,7 +382,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             <Sub title="8.2 Procédure de recours">
               <p>
                 Toute décision de suspension ou de suppression peut être contestée dans un délai de 30 jours
-                via le formulaire de recours disponible dans votre espace personnel. TruTube s'engage à
+                via le formulaire de recours disponible dans votre espace personnel. GOROTI s'engage à
                 examiner chaque recours dans un délai de 15 jours ouvrés et à vous informer de la décision finale.
               </p>
             </Sub>
@@ -426,7 +426,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             <Sub title="10.1 Intégralité de l'accord">
               <p>
                 Les présentes CGU, la Politique de Confidentialité et les éventuelles conditions spécifiques
-                (programme partenaire, publicités) constituent l'intégralité de l'accord entre TruTube et
+                (programme partenaire, publicités) constituent l'intégralité de l'accord entre GOROTI et
                 l'utilisateur, et remplacent tous les accords antérieurs.
               </p>
             </Sub>
@@ -439,7 +439,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             </Sub>
             <Sub title="10.3 Non-renonciation">
               <p>
-                Le fait pour TruTube de ne pas se prévaloir à un moment donné d'une disposition des CGU
+                Le fait pour GOROTI de ne pas se prévaloir à un moment donné d'une disposition des CGU
                 ne saurait être interprété comme une renonciation à se prévaloir ultérieurement de ladite
                 disposition.
               </p>
@@ -461,10 +461,10 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
                 Contacter le support
               </button>
               <a
-                href="mailto:legal@trutube.com"
+                href="mailto:legal@goroti.com"
                 className="flex items-center gap-1.5 px-5 py-2.5 border border-white/10 hover:border-white/20 text-gray-300 hover:text-white rounded-xl text-sm font-medium transition-colors"
               >
-                legal@trutube.com
+                legal@goroti.com
                 <ExternalLink className="w-3 h-3" />
               </a>
             </div>
@@ -476,7 +476,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
             <button onClick={() => onNavigate('privacy')} className="hover:text-gray-300 transition-colors">Confidentialité</button>
             <button onClick={() => onNavigate('legal')} className="hover:text-gray-300 transition-colors">Mentions légales</button>
           </div>
-          <span>© 2026 TruTube SAS — Tous droits réservés</span>
+          <span>© 2026 GOROTI SAS — Tous droits réservés</span>
         </div>
       </div>
     </div>

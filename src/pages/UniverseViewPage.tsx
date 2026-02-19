@@ -63,8 +63,8 @@ const universeConfig: Record<string, {
   lean: {
     name: 'Lean',
     icon: Code,
-    color: 'cyan',
-    gradient: 'from-cyan-900/20 via-transparent to-transparent',
+    color: 'red',
+    gradient: 'from-red-900/20 via-transparent to-transparent',
     subUniverses: ['Développeur', 'Frontend', 'Backend', 'UI/UX', 'Cybersécurité']
   },
   movie: {

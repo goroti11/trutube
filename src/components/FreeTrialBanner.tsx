@@ -75,7 +75,7 @@ export default function FreeTrialBanner({ onClose, onStartTrial }: FreeTrialBann
           <div>
             <h2 className="text-3xl font-bold text-white flex items-center gap-3">
               <Sparkles className="text-[#D8A0B6]" size={32} />
-              Choisissez votre expérience TruTube
+              Choisissez votre expérience GOROTI
             </h2>
             <p className="text-gray-400 mt-2">Commencez avec 15 jours d'essai gratuit premium</p>
           </div>
