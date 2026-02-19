@@ -53,7 +53,7 @@ export default function EnhancedProfilePage({ userId, onNavigate }: EnhancedProf
       const videoData = await videoService.getVideosByCreator(profileId);
       setVideos(videoData);
 
-      const channelsData = await channelService.getChannels(profileId);
+      const channelsData = await channelService.getMyChannels(profileId);
       setChannels(channelsData);
     } catch (error) {
       console.error('Error loading profile:', error);
