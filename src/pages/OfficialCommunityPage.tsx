@@ -28,8 +28,8 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'x',
     name: 'X / Twitter',
-    handle: '@GOROTIOfficial',
-    url: 'https://x.com/goroti',
+    handle: '@TruTubeOfficial',
+    url: 'https://x.com/trutube',
     icon: Twitter,
     iconColor: 'text-white',
     bgColor: 'bg-black/60',
@@ -41,8 +41,8 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'instagram',
     name: 'Instagram',
-    handle: '@goroti.official',
-    url: 'https://instagram.com/goroti.official',
+    handle: '@trutube.official',
+    url: 'https://instagram.com/trutube.official',
     icon: Instagram,
     iconColor: 'text-pink-400',
     bgColor: 'bg-pink-950/20',
@@ -53,20 +53,20 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'tiktok',
     name: 'TikTok',
-    handle: '@goroti',
-    url: 'https://tiktok.com/@goroti',
+    handle: '@trutube',
+    url: 'https://tiktok.com/@trutube',
     icon: Tv,
-    iconColor: 'text-red-400',
-    bgColor: 'bg-red-950/20',
-    borderColor: 'border-red-900/40',
+    iconColor: 'text-cyan-400',
+    bgColor: 'bg-cyan-950/20',
+    borderColor: 'border-cyan-900/40',
     usage: 'Promotion produit, tutoriels courts, tendances créateurs',
     frequency: '3–4 fois / semaine',
   },
   {
     id: 'youtube',
     name: 'YouTube',
-    handle: 'GOROTI Officiel',
-    url: 'https://youtube.com/@goroti',
+    handle: 'TruTube Officiel',
+    url: 'https://youtube.com/@trutube',
     icon: Youtube,
     iconColor: 'text-red-400',
     bgColor: 'bg-red-950/20',
@@ -77,8 +77,8 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'linkedin',
     name: 'LinkedIn',
-    handle: 'GOROTI',
-    url: 'https://linkedin.com/company/goroti',
+    handle: 'TruTube',
+    url: 'https://linkedin.com/company/trutube',
     icon: Linkedin,
     iconColor: 'text-blue-400',
     bgColor: 'bg-blue-950/20',
@@ -89,8 +89,8 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'discord',
     name: 'Discord',
-    handle: 'discord.gg/goroti',
-    url: 'https://discord.gg/goroti',
+    handle: 'discord.gg/trutube',
+    url: 'https://discord.gg/trutube',
     icon: MessageSquare,
     iconColor: 'text-blue-400',
     bgColor: 'bg-blue-950/20',
@@ -102,8 +102,8 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'telegram',
     name: 'Telegram',
-    handle: '@GOROTIAlerts',
-    url: 'https://t.me/gorotialerts',
+    handle: '@TruTubeAlerts',
+    url: 'https://t.me/trutubealerts',
     icon: Send,
     iconColor: 'text-sky-400',
     bgColor: 'bg-sky-950/20',
@@ -114,8 +114,8 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'facebook',
     name: 'Facebook',
-    handle: 'GOROTI',
-    url: 'https://facebook.com/goroti',
+    handle: 'TruTube',
+    url: 'https://facebook.com/trutube',
     icon: Facebook,
     iconColor: 'text-blue-500',
     bgColor: 'bg-blue-950/20',
@@ -130,7 +130,7 @@ const ROLES = [
     icon: Shield,
     color: 'text-red-400',
     title: 'Prévention des faux comptes',
-    description: 'Cette page recense UNIQUEMENT les comptes officiels vérifiés de GOROTI. Tout compte non listé ici n\'est pas officiel et ne représente pas la plateforme.',
+    description: 'Cette page recense UNIQUEMENT les comptes officiels vérifiés de TruTube. Tout compte non listé ici n\'est pas officiel et ne représente pas la plateforme.',
   },
   {
     icon: Bell,
@@ -140,7 +140,7 @@ const ROLES = [
   },
   {
     icon: MessageSquare,
-    color: 'text-red-400',
+    color: 'text-cyan-400',
     title: 'Support alternatif',
     description: 'Pour les questions urgentes, notre équipe est accessible sur Discord et X/Twitter en dehors du support ticketing. Réponse plus rapide pour les situations critiques.',
   },
@@ -161,15 +161,15 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
       <div className="bg-gradient-to-br from-gray-900 via-gray-950 to-gray-950 border-b border-gray-800">
         <div className="max-w-6xl mx-auto px-6 py-16">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 rounded-full text-red-400 text-sm mb-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-sm mb-5">
               <Globe className="w-4 h-4" />
               Présence officielle
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              GOROTI sur les réseaux sociaux
+              TruTube sur les réseaux sociaux
             </h1>
             <p className="text-gray-400 text-lg mb-6">
-              Retrouvez tous les comptes officiels et vérifiés de GOROTI. Cette page est la référence
+              Retrouvez tous les comptes officiels et vérifiés de TruTube. Cette page est la référence
               pour éviter les faux comptes et rester informé des actualités de la plateforme.
             </p>
             <div className="flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-full w-fit">
@@ -217,7 +217,7 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
                   className={`relative p-5 rounded-xl border ${network.bgColor} ${network.borderColor} hover:brightness-110 transition-all group`}
                 >
                   {network.badge && (
-                    <span className="absolute top-3 right-3 px-2 py-0.5 bg-red-600/80 text-white text-xs rounded-full font-medium">
+                    <span className="absolute top-3 right-3 px-2 py-0.5 bg-cyan-600/80 text-white text-xs rounded-full font-medium">
                       {network.badge}
                     </span>
                   )}
@@ -228,7 +228,7 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5">
                         <h3 className="font-semibold text-white">{network.name}</h3>
-                        <CheckCircle className="w-3.5 h-3.5 text-red-400 shrink-0" />
+                        <CheckCircle className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                       </div>
                       <div className="text-gray-500 text-xs font-mono mb-2">{network.handle}</div>
                       <p className="text-gray-400 text-sm mb-3 leading-relaxed">{network.usage}</p>
@@ -266,16 +266,16 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
                 <h3 className="font-semibold text-white mb-2">Attention aux faux comptes</h3>
                 <div className="text-gray-400 text-sm leading-relaxed space-y-2">
                   <p>
-                    GOROTI ne vous demandera <strong className="text-white">jamais</strong> vos identifiants, votre mot de passe, ou un paiement via les réseaux sociaux.
+                    TruTube ne vous demandera <strong className="text-white">jamais</strong> vos identifiants, votre mot de passe, ou un paiement via les réseaux sociaux.
                   </p>
                   <p>
-                    Tout compte prétendant être GOROTI et non listé sur cette page est un faux compte. Signalez-le directement à la plateforme concernée et à <span className="text-red-400">security@goroti.tv</span>.
+                    Tout compte prétendant être TruTube et non listé sur cette page est un faux compte. Signalez-le directement à la plateforme concernée et à <span className="text-red-400">security@trutube.tv</span>.
                   </p>
                   <ul className="space-y-1 mt-2">
                     {[
-                      'Ne jamais cliquer sur des liens reçus en DM d\'un compte GOROTI non vérifié',
+                      'Ne jamais cliquer sur des liens reçus en DM d\'un compte TruTube non vérifié',
                       'Ne jamais envoyer de fonds suite à une demande sur les réseaux sociaux',
-                      'Vérifier l\'URL officielle : goroti.tv (pas de variantes)',
+                      'Vérifier l\'URL officielle : trutube.tv (pas de variantes)',
                     ].map(item => (
                       <li key={item} className="flex gap-2">
                         <span className="text-red-500 shrink-0">✕</span>
@@ -297,12 +297,12 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
             </div>
             <h3 className="text-xl font-bold text-white mb-2">Rejoindre la communauté Discord</h3>
             <p className="text-gray-400 text-sm max-w-lg mx-auto mb-6">
-              Le Discord officiel GOROTI est le meilleur endroit pour discuter avec d'autres créateurs,
+              Le Discord officiel TruTube est le meilleur endroit pour discuter avec d'autres créateurs,
               avoir un support rapide, accéder aux beta-tests et influencer la roadmap produit.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="https://discord.gg/goroti"
+                href="https://discord.gg/trutube"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
@@ -311,7 +311,7 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
                 <ExternalLink className="w-4 h-4" />
               </a>
               <a
-                href="https://t.me/gorotialerts"
+                href="https://t.me/trutubealerts"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-medium transition-colors"
@@ -328,9 +328,9 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
           <h2 className="text-xl font-bold text-white mb-5">Contact corporate & presse</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {[
-              { icon: Globe, color: 'text-red-400', label: 'Relations presse', contact: 'press@goroti.tv', desc: 'Demandes médias, interviews, kit presse' },
-              { icon: Briefcase, color: 'text-yellow-400', label: 'Partenariats', contact: 'partnerships@goroti.tv', desc: 'Collaborations marques, labels, B2B' },
-              { icon: Users, color: 'text-green-400', label: 'Community', contact: 'community@goroti.tv', desc: 'Créateurs, ambassadeurs, évènements' },
+              { icon: Globe, color: 'text-cyan-400', label: 'Relations presse', contact: 'press@trutube.tv', desc: 'Demandes médias, interviews, kit presse' },
+              { icon: Briefcase, color: 'text-yellow-400', label: 'Partenariats', contact: 'partnerships@trutube.tv', desc: 'Collaborations marques, labels, B2B' },
+              { icon: Users, color: 'text-green-400', label: 'Community', contact: 'community@trutube.tv', desc: 'Créateurs, ambassadeurs, évènements' },
             ].map(({ icon: Icon, color, label, contact, desc }) => (
               <div key={label} className="p-5 bg-gray-900/50 border border-gray-800 rounded-xl">
                 <Icon className={`w-5 h-5 ${color} mb-3`} />
@@ -338,7 +338,7 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
                 <p className="text-gray-500 text-xs mb-2">{desc}</p>
                 <a
                   href={`mailto:${contact}`}
-                  className="text-red-400 text-sm hover:text-red-300 transition-colors"
+                  className="text-cyan-400 text-sm hover:text-cyan-300 transition-colors"
                 >
                   {contact}
                 </a>

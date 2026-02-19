@@ -14,12 +14,12 @@ interface Props {
 
 function PriceRow({ label, value, note, highlight }: { label: string; value: string; note?: string; highlight?: boolean }) {
   return (
-    <div className={`flex items-center justify-between py-3 border-b border-gray-800 last:border-0 ${highlight ? 'bg-red-900/10 -mx-4 px-4 rounded' : ''}`}>
+    <div className={`flex items-center justify-between py-3 border-b border-gray-800 last:border-0 ${highlight ? 'bg-cyan-900/10 -mx-4 px-4 rounded' : ''}`}>
       <div>
         <span className="text-gray-300 text-sm">{label}</span>
         {note && <span className="text-gray-600 text-xs ml-2">({note})</span>}
       </div>
-      <span className={`font-semibold text-sm ${highlight ? 'text-red-400' : 'text-white'}`}>{value}</span>
+      <span className={`font-semibold text-sm ${highlight ? 'text-cyan-400' : 'text-white'}`}>{value}</span>
     </div>
   );
 }
@@ -65,12 +65,12 @@ export default function PricingPage({ onNavigate }: Props) {
       {/* Hero */}
       <div className="bg-gradient-to-br from-gray-900 via-gray-950 to-gray-950 border-b border-gray-800">
         <div className="max-w-6xl mx-auto px-6 py-20 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 rounded-full text-red-400 text-sm mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-sm mb-6">
             <DollarSign className="w-4 h-4" />
             Tarification transparente
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-5">
-            Qui paie quoi sur GOROTI
+            Qui paie quoi sur TruTube
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
             Aucun frais caché. Commissions fixes et publiques. Tout changement annoncé 30 jours à l'avance.
@@ -82,7 +82,7 @@ export default function PricingPage({ onNavigate }: Props) {
               { value: '10€', label: 'seuil de retrait' },
             ].map(({ value, label }) => (
               <div key={label} className="px-5 py-3 bg-gray-900/60 border border-gray-800 rounded-xl text-center">
-                <div className="text-lg font-bold text-red-400">{value}</div>
+                <div className="text-lg font-bold text-cyan-400">{value}</div>
                 <div className="text-gray-500 text-xs">{label}</div>
               </div>
             ))}
@@ -100,7 +100,7 @@ export default function PricingPage({ onNavigate }: Props) {
             </div>
             <div>
               <h2 className="text-xl font-bold text-white">Pour les spectateurs</h2>
-              <p className="text-gray-500 text-sm">Ce que coûte regarder du contenu sur GOROTI</p>
+              <p className="text-gray-500 text-sm">Ce que coûte regarder du contenu sur TruTube</p>
             </div>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
@@ -114,8 +114,8 @@ export default function PricingPage({ onNavigate }: Props) {
                 <PriceRow label="S'abonner à une chaîne" value="Prix fixé par le créateur" />
                 <PriceRow label="Frais de paiement spectateur" value="0€" note="inclus dans le prix" />
               </div>
-              <div className="p-4 bg-red-900/10 border border-red-800/30 rounded-xl text-sm text-gray-400">
-                <Info className="w-4 h-4 text-red-400 inline mr-1.5 -mt-0.5" />
+              <div className="p-4 bg-cyan-900/10 border border-cyan-800/30 rounded-xl text-sm text-gray-400">
+                <Info className="w-4 h-4 text-cyan-400 inline mr-1.5 -mt-0.5" />
                 Les spectateurs ne paient jamais plus que le prix affiché. Aucun frais de traitement n'est ajouté au prix annoncé.
               </div>
             </div>
@@ -133,16 +133,16 @@ export default function PricingPage({ onNavigate }: Props) {
                     ))}
                   </ul>
                 </div>
-                <div className="relative p-5 bg-red-900/20 border border-red-500/30 rounded-xl">
+                <div className="relative p-5 bg-cyan-900/20 border border-cyan-500/30 rounded-xl">
                   <div className="absolute -top-2.5 left-4">
-                    <span className="px-3 py-0.5 bg-red-600 text-white text-xs font-medium rounded-full">Populaire</span>
+                    <span className="px-3 py-0.5 bg-cyan-600 text-white text-xs font-medium rounded-full">Populaire</span>
                   </div>
-                  <h3 className="font-bold text-white mb-1 mt-1">GOROTI Premium</h3>
+                  <h3 className="font-bold text-white mb-1 mt-1">TruTube Premium</h3>
                   <div className="text-2xl font-bold text-white mb-3">6,99€ <span className="text-sm text-gray-400 font-normal">/ mois</span></div>
                   <ul className="space-y-1.5">
                     {['Aucune publicité', 'Qualité jusqu\'à 4K HDR', 'Téléchargement hors-ligne', 'Accès prioritaire aux lives', 'Badge Premium sur le profil', 'Accès anticipé aux nouvelles fonctionnalités'].map(f => (
                       <li key={f} className="flex items-center gap-2 text-xs text-gray-300">
-                        <CheckCircle className="w-3.5 h-3.5 text-red-400" />{f}
+                        <CheckCircle className="w-3.5 h-3.5 text-cyan-400" />{f}
                       </li>
                     ))}
                   </ul>
@@ -181,7 +181,7 @@ export default function PricingPage({ onNavigate }: Props) {
               </div>
               <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-3">
-                  <Clock className="w-4 h-4 text-red-400" />
+                  <Clock className="w-4 h-4 text-cyan-400" />
                   <h3 className="font-semibold text-white text-sm">Délais de disponibilité</h3>
                 </div>
                 <PriceRow label="Tips & super chats" value="Immédiat" />
@@ -193,7 +193,7 @@ export default function PricingPage({ onNavigate }: Props) {
             <div>
               <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-5 mb-4">
                 <div className="flex items-center gap-2 mb-3">
-                  <Info className="w-4 h-4 text-red-400" />
+                  <Info className="w-4 h-4 text-cyan-400" />
                   <h3 className="font-semibold text-white text-sm">Ce que vous gardez en pratique</h3>
                 </div>
                 <div className="space-y-3">
@@ -242,7 +242,7 @@ export default function PricingPage({ onNavigate }: Props) {
                 color: 'text-blue-400',
                 title: 'Sponsoring natif',
                 billing: 'Forfait négocié',
-                desc: 'Placement directement dans les vidéos des créateurs. Budget négocié directement entre marque et créateur. GOROTI facilite la mise en relation, le contrat et la facturation.',
+                desc: 'Placement directement dans les vidéos des créateurs. Budget négocié directement entre marque et créateur. TruTube facilite la mise en relation, le contrat et la facturation.',
                 items: ['Contact direct créateur-marque', 'Contrat standardisé disponible', 'Facturation simplifiée'],
               },
               {
@@ -353,12 +353,12 @@ export default function PricingPage({ onNavigate }: Props) {
         {/* 5. Simulateur */}
         <section>
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-red-500/10 rounded-lg">
-              <Calculator className="w-5 h-5 text-red-400" />
+            <div className="p-2 bg-cyan-500/10 rounded-lg">
+              <Calculator className="w-5 h-5 text-cyan-400" />
             </div>
             <div>
               <h2 className="text-xl font-bold text-white">Simulateur de revenus créateur</h2>
-              <p className="text-gray-500 text-sm">Estimez vos gains nets mensuels sur GOROTI</p>
+              <p className="text-gray-500 text-sm">Estimez vos gains nets mensuels sur TruTube</p>
             </div>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
@@ -368,35 +368,35 @@ export default function PricingPage({ onNavigate }: Props) {
                   <span>Ventes de contenu / mois</span>
                   <span className="text-white font-medium">{viewerSales} ventes</span>
                 </label>
-                <input type="range" min={0} max={500} value={viewerSales} onChange={e => setViewerSales(Number(e.target.value))} className="w-full accent-red-500" />
+                <input type="range" min={0} max={500} value={viewerSales} onChange={e => setViewerSales(Number(e.target.value))} className="w-full accent-cyan-500" />
               </div>
               <div>
                 <label className="flex justify-between text-sm text-gray-400 mb-2">
                   <span>Prix unitaire moyen</span>
                   <span className="text-white font-medium">{viewerPrice.toFixed(2)}€</span>
                 </label>
-                <input type="range" min={1} max={50} step={0.5} value={viewerPrice} onChange={e => setViewerPrice(Number(e.target.value))} className="w-full accent-red-500" />
+                <input type="range" min={1} max={50} step={0.5} value={viewerPrice} onChange={e => setViewerPrice(Number(e.target.value))} className="w-full accent-cyan-500" />
               </div>
               <div>
                 <label className="flex justify-between text-sm text-gray-400 mb-2">
                   <span>Membres abonnés</span>
                   <span className="text-white font-medium">{viewerMembers} membres</span>
                 </label>
-                <input type="range" min={0} max={2000} step={10} value={viewerMembers} onChange={e => setViewerMembers(Number(e.target.value))} className="w-full accent-red-500" />
+                <input type="range" min={0} max={2000} step={10} value={viewerMembers} onChange={e => setViewerMembers(Number(e.target.value))} className="w-full accent-cyan-500" />
               </div>
               <div>
                 <label className="flex justify-between text-sm text-gray-400 mb-2">
                   <span>Prix abonnement mensuel</span>
                   <span className="text-white font-medium">{memberPrice.toFixed(2)}€ / mois</span>
                 </label>
-                <input type="range" min={1} max={20} step={0.5} value={memberPrice} onChange={e => setMemberPrice(Number(e.target.value))} className="w-full accent-red-500" />
+                <input type="range" min={1} max={20} step={0.5} value={memberPrice} onChange={e => setMemberPrice(Number(e.target.value))} className="w-full accent-cyan-500" />
               </div>
               <div>
                 <label className="flex justify-between text-sm text-gray-400 mb-2">
                   <span>Tips reçus / mois (en €)</span>
                   <span className="text-white font-medium">{tips.toFixed(0)}€</span>
                 </label>
-                <input type="range" min={0} max={500} step={5} value={tips} onChange={e => setTips(Number(e.target.value))} className="w-full accent-red-500" />
+                <input type="range" min={0} max={500} step={5} value={tips} onChange={e => setTips(Number(e.target.value))} className="w-full accent-cyan-500" />
               </div>
             </div>
             <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 flex flex-col">
@@ -419,12 +419,12 @@ export default function PricingPage({ onNavigate }: Props) {
                   </div>
                 ))}
                 <div className="pt-2 flex justify-between text-xs text-gray-500">
-                  <span>Commission totale GOROTI</span>
+                  <span>Commission totale TruTube</span>
                   <span className="text-gray-400">−{totalCommission.toFixed(2)}€</span>
                 </div>
               </div>
-              <div className="mt-5 p-5 bg-gradient-to-br from-red-900/30 to-blue-900/20 border border-red-800/30 rounded-xl text-center">
-                <div className="text-4xl font-bold text-red-400 mb-1">{totalNet.toFixed(2)}€</div>
+              <div className="mt-5 p-5 bg-gradient-to-br from-cyan-900/30 to-blue-900/20 border border-cyan-800/30 rounded-xl text-center">
+                <div className="text-4xl font-bold text-cyan-400 mb-1">{totalNet.toFixed(2)}€</div>
                 <div className="text-gray-400 text-sm">revenus nets / mois</div>
                 <div className="text-gray-600 text-xs mt-1">
                   soit {(totalNet * 12).toFixed(0)}€ / an estimé
@@ -452,19 +452,19 @@ export default function PricingPage({ onNavigate }: Props) {
               },
               {
                 q: 'Comment fonctionne le TruCoin en détail ?',
-                a: 'Le TruCoin est la monnaie virtuelle de GOROTI. 1 TruCoin = 0,01€ de façon garantie et non-spéculative. Les spectateurs achètent des TruCoins pour envoyer des tips aux créateurs. Les créateurs convertissent leurs TruCoins reçus en euros avec un frais fixe minimal. Les TruCoins non utilisés expirent après 2 ans d\'inactivité.',
+                a: 'Le TruCoin est la monnaie virtuelle de TruTube. 1 TruCoin = 0,01€ de façon garantie et non-spéculative. Les spectateurs achètent des TruCoins pour envoyer des tips aux créateurs. Les créateurs convertissent leurs TruCoins reçus en euros avec un frais fixe minimal. Les TruCoins non utilisés expirent après 2 ans d\'inactivité.',
               },
               {
                 q: 'Les frais affichés incluent-ils la TVA ?',
-                a: 'Les prix affichés aux spectateurs sont TTC. Les créateurs basés dans l\'UE doivent déclarer la TVA selon leur statut. GOROTI fournit un récapitulatif fiscal annuel téléchargeable. Pour les auto-entrepreneurs français sous le régime micro, la franchise de TVA s\'applique sous les seuils légaux.',
+                a: 'Les prix affichés aux spectateurs sont TTC. Les créateurs basés dans l\'UE doivent déclarer la TVA selon leur statut. TruTube fournit un récapitulatif fiscal annuel téléchargeable. Pour les auto-entrepreneurs français sous le régime micro, la franchise de TVA s\'applique sous les seuils légaux.',
               },
               {
                 q: 'Que se passe-t-il si un spectateur demande un remboursement ?',
-                a: 'Les remboursements sont possibles dans les 14 jours suivant un achat pour un contenu non-consommé (droit UE de rétractation). Le montant est remboursé au spectateur depuis les fonds GOROTI. Si le remboursement est dû à une faute du créateur, sa commission est déduite. Les créateurs peuvent configurer une politique de remboursement personnalisée dans leur studio.',
+                a: 'Les remboursements sont possibles dans les 14 jours suivant un achat pour un contenu non-consommé (droit UE de rétractation). Le montant est remboursé au spectateur depuis les fonds TruTube. Si le remboursement est dû à une faute du créateur, sa commission est déduite. Les créateurs peuvent configurer une politique de remboursement personnalisée dans leur studio.',
               },
               {
                 q: 'Y a-t-il des frais d\'inscription ou des abonnements obligatoires pour les créateurs ?',
-                a: 'Non. Créer un compte créateur et publier du contenu est entièrement gratuit. GOROTI se rémunère uniquement sur les transactions — si vous ne gagnez rien, vous ne payez rien.',
+                a: 'Non. Créer un compte créateur et publier du contenu est entièrement gratuit. TruTube se rémunère uniquement sur les transactions — si vous ne gagnez rien, vous ne payez rien.',
               },
             ].map(({ q, a }) => (
               <FaqItem key={q} q={q} a={a} />
@@ -479,7 +479,7 @@ export default function PricingPage({ onNavigate }: Props) {
           <div className="flex gap-3 justify-center flex-wrap">
             <button
               onClick={() => onNavigate('support')}
-              className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg text-sm font-medium transition-colors"
             >
               Contacter le support
             </button>

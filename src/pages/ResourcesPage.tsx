@@ -42,9 +42,9 @@ const DOC_CATEGORIES: DocCategory[] = [
       {
         id: 'create-account',
         title: 'Créer un compte',
-        summary: 'Tout ce qu\'il faut savoir pour s\'inscrire sur GOROTI.',
+        summary: 'Tout ce qu\'il faut savoir pour s\'inscrire sur TruTube.',
         steps: [
-          'Aller sur goroti.tv et cliquer sur "S\'inscrire"',
+          'Aller sur trutube.tv et cliquer sur "S\'inscrire"',
           'Renseigner votre email et choisir un mot de passe sécurisé',
           'Choisir un nom d\'utilisateur unique (ne peut pas être changé)',
           'Confirmer votre email (vérifier les spams si nécessaire)',
@@ -55,7 +55,7 @@ const DOC_CATEGORIES: DocCategory[] = [
       {
         id: 'create-channel',
         title: 'Créer une chaîne',
-        summary: 'Lancer votre espace créateur ou artiste sur GOROTI.',
+        summary: 'Lancer votre espace créateur ou artiste sur TruTube.',
         steps: [
           'Connectez-vous et aller dans votre profil > "Mes chaînes"',
           'Cliquer sur "Créer une nouvelle chaîne"',
@@ -99,7 +99,7 @@ const DOC_CATEGORIES: DocCategory[] = [
     id: 'creators',
     label: 'Créateurs',
     icon: Video,
-    color: 'text-red-400',
+    color: 'text-cyan-400',
     articles: [
       {
         id: 'publish-video',
@@ -119,7 +119,7 @@ const DOC_CATEGORIES: DocCategory[] = [
       {
         id: 'sell-album',
         title: 'Vendre un album',
-        summary: 'Publier et vendre un album ou EP sur GOROTI Music.',
+        summary: 'Publier et vendre un album ou EP sur TruTube Music.',
         steps: [
           'Créateur Studio > "Nouvelle release"',
           'Choisir le type : Album, EP, Single, Mixtape',
@@ -137,7 +137,7 @@ const DOC_CATEGORIES: DocCategory[] = [
         steps: [
           'Ouvrir la release ou le contenu concerné',
           'Onglet "Monétisation" > "Gestion des royalties"',
-          'Ajouter chaque collaborateur (nom GOROTI ou email)',
+          'Ajouter chaque collaborateur (nom TruTube ou email)',
           'Affecter un pourcentage à chacun (total = 100%)',
           'Chaque collaborateur reçoit une notification et doit accepter',
           'Les paiements sont automatiquement distribués selon les splits',
@@ -202,7 +202,7 @@ const DOC_CATEGORIES: DocCategory[] = [
       {
         id: 'trucoin',
         title: 'Utiliser le TruCoin',
-        summary: 'La monnaie virtuelle de GOROTI — pour tips et achats.',
+        summary: 'La monnaie virtuelle de TruTube — pour tips et achats.',
         steps: [
           'Aller dans Wallet > Acheter des TruCoins',
           '1 TruCoin = 0,01€ (packs disponibles : 500, 1000, 5000 TC)',
@@ -249,7 +249,7 @@ const DOC_CATEGORIES: DocCategory[] = [
       {
         id: 'copyright',
         title: 'Droits d\'auteur & copyright',
-        summary: 'Ce que vous pouvez et ne pouvez pas publier sur GOROTI.',
+        summary: 'Ce que vous pouvez et ne pouvez pas publier sur TruTube.',
         steps: [
           'Vous devez posséder les droits sur TOUT contenu que vous publiez',
           'Musique : droits d\'auteur + droits voisins nécessaires',
@@ -306,7 +306,7 @@ const DOC_CATEGORIES: DocCategory[] = [
       {
         id: 'order-service',
         title: 'Commander un service',
-        summary: 'Passer une commande sur la marketplace GOROTI.',
+        summary: 'Passer une commande sur la marketplace TruTube.',
         steps: [
           'Aller dans Marketplace et parcourir les offres',
           'Filtrer par catégorie : mixage, graphisme, coaching, production...',
@@ -337,7 +337,7 @@ const DOC_CATEGORIES: DocCategory[] = [
           'Si le client refuse la livraison injustement, ouvrir un litige',
           'Aller dans la commande > "Ouvrir un litige"',
           'Fournir les preuves : fichiers livrés, échanges, scope initial',
-          'Un médiateur GOROTI intervient sous 48h',
+          'Un médiateur TruTube intervient sous 48h',
           'La décision du médiateur est définitive et libère ou rembourse l\'escrow',
         ],
       },
@@ -368,7 +368,7 @@ const DOC_CATEGORIES: DocCategory[] = [
           'Page de connexion > "Mot de passe oublié"',
           'Entrer l\'email associé au compte',
           'Ouvrir l\'email de réinitialisation (vérifier les spams)',
-          'Si l\'email n\'est plus accessible, contacter support@goroti.tv',
+          'Si l\'email n\'est plus accessible, contacter support@trutube.tv',
           'Fournir une pièce d\'identité et preuve de propriété du compte',
         ],
       },
@@ -406,7 +406,7 @@ const BLOG_POSTS = [
     id: 1,
     category: 'Produit',
     categoryColor: 'text-blue-400 bg-blue-400/10',
-    title: 'GOROTI Studio V3 : le nouveau tableau de bord créateur',
+    title: 'TruTube Studio V3 : le nouveau tableau de bord créateur',
     excerpt: 'Découvrez les nouvelles fonctionnalités du studio créateur : analytics avancés, gestion des royalties simplifiée et nouvelle interface d\'upload.',
     date: '14 févr. 2026',
     readTime: '4 min',
@@ -415,9 +415,9 @@ const BLOG_POSTS = [
   {
     id: 2,
     category: 'Créateurs',
-    categoryColor: 'text-red-400 bg-red-400/10',
+    categoryColor: 'text-cyan-400 bg-cyan-400/10',
     title: 'Comment doubler vos revenus d\'abonnement en 90 jours',
-    excerpt: 'Analyse de 500 créateurs GOROTI : les stratégies qui fonctionnent vraiment pour convertir vos spectateurs en abonnés payants.',
+    excerpt: 'Analyse de 500 créateurs TruTube : les stratégies qui fonctionnent vraiment pour convertir vos spectateurs en abonnés payants.',
     date: '10 févr. 2026',
     readTime: '8 min',
     author: 'Léa Martin',
@@ -427,7 +427,7 @@ const BLOG_POSTS = [
     category: 'Industrie',
     categoryColor: 'text-purple-400 bg-purple-400/10',
     title: 'L\'économie des créateurs en 2026 : les chiffres clés',
-    excerpt: 'Le marché mondial de l\'économie créative dépasse 200 milliards. Où se positionne GOROTI et quelles opportunités pour les artistes indépendants ?',
+    excerpt: 'Le marché mondial de l\'économie créative dépasse 200 milliards. Où se positionne TruTube et quelles opportunités pour les artistes indépendants ?',
     date: '7 févr. 2026',
     readTime: '6 min',
     author: 'Research Team',
@@ -447,7 +447,7 @@ const BLOG_POSTS = [
     category: 'Partenaires',
     categoryColor: 'text-yellow-400 bg-yellow-400/10',
     title: 'Partenariat avec 3 distributeurs musicaux indépendants',
-    excerpt: 'GOROTI s\'associe avec DistroKid, TuneCore et Believe pour simplifier la distribution multi-plateforme depuis le studio créateur.',
+    excerpt: 'TruTube s\'associe avec DistroKid, TuneCore et Believe pour simplifier la distribution multi-plateforme depuis le studio créateur.',
     date: '28 janv. 2026',
     readTime: '2 min',
     author: 'Partenariats',
@@ -455,7 +455,7 @@ const BLOG_POSTS = [
   {
     id: 6,
     category: 'Créateurs',
-    categoryColor: 'text-red-400 bg-red-400/10',
+    categoryColor: 'text-cyan-400 bg-cyan-400/10',
     title: 'Shorts : 6 mois après le lancement — ce que les données nous disent',
     excerpt: 'Analyse des métriques de croissance des créateurs qui ont adopté les Shorts. Les formats courts génèrent 3x plus de nouveaux abonnés.',
     date: '22 janv. 2026',
@@ -548,16 +548,16 @@ function ArticleItem({ article }: { article: DocArticle }) {
             <ol className="space-y-2.5">
               {article.steps.map((step, i) => (
                 <li key={i} className="flex gap-3 text-sm">
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-red-500/20 text-red-400 text-xs flex items-center justify-center font-bold">{i + 1}</span>
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-bold">{i + 1}</span>
                   <span className="text-gray-300 leading-relaxed">{step}</span>
                 </li>
               ))}
             </ol>
           </div>
           {article.tips && article.tips.length > 0 && (
-            <div className="p-3 bg-red-900/20 border border-red-800/30 rounded-lg space-y-1.5">
+            <div className="p-3 bg-cyan-900/20 border border-cyan-800/30 rounded-lg space-y-1.5">
               {article.tips.map((tip, i) => (
-                <p key={i} className="text-red-300 text-xs flex gap-2">
+                <p key={i} className="text-cyan-300 text-xs flex gap-2">
                   <Zap className="w-3.5 h-3.5 shrink-0 mt-0.5" />
                   {tip}
                 </p>
@@ -603,15 +603,15 @@ export default function ResourcesPage({ onNavigate }: Props) {
         <div className="max-w-6xl mx-auto px-6 py-14">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 rounded-full text-red-400 text-sm mb-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-sm mb-5">
                 <BookOpen className="w-4 h-4" />
-                Ressources GOROTI
+                Ressources TruTube
               </div>
               <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
                 Documentation, blog & statuts
               </h1>
               <p className="text-gray-400 max-w-xl">
-                Tout ce qu'il faut pour comprendre, utiliser et optimiser GOROTI — en un seul endroit.
+                Tout ce qu'il faut pour comprendre, utiliser et optimiser TruTube — en un seul endroit.
               </p>
             </div>
             <div className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium ${
@@ -640,7 +640,7 @@ export default function ResourcesPage({ onNavigate }: Props) {
                 onClick={() => setMainTab(id)}
                 className={`flex items-center gap-2 px-5 py-4 text-sm font-medium border-b-2 transition-colors ${
                   mainTab === id
-                    ? 'border-red-500 text-white'
+                    ? 'border-cyan-500 text-white'
                     : 'border-transparent text-gray-500 hover:text-gray-300'
                 }`}
               >
@@ -691,7 +691,7 @@ export default function ResourcesPage({ onNavigate }: Props) {
                       key={cat.id}
                       onClick={() => { setSelectedCat(cat.id); setSearch(''); }}
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-colors ${
-                        selectedCat === cat.id ? 'bg-red-600 text-white' : 'bg-gray-800 text-gray-400'
+                        selectedCat === cat.id ? 'bg-cyan-600 text-white' : 'bg-gray-800 text-gray-400'
                       }`}
                     >
                       <Icon className="w-3.5 h-3.5" />
@@ -721,7 +721,7 @@ export default function ResourcesPage({ onNavigate }: Props) {
                         value={search}
                         onChange={e => setSearch(e.target.value)}
                         placeholder="Rechercher..."
-                        className="pl-9 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 text-sm focus:outline-none focus:border-red-500 w-44"
+                        className="pl-9 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-500 w-44"
                       />
                     </div>
                   </div>
@@ -747,7 +747,7 @@ export default function ResourcesPage({ onNavigate }: Props) {
           <div>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-xl font-bold text-white">Blog officiel GOROTI</h2>
+                <h2 className="text-xl font-bold text-white">Blog officiel TruTube</h2>
                 <p className="text-gray-500 text-sm mt-0.5">Actualités, guides et analyses de l'équipe</p>
               </div>
               <button className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg text-sm transition-colors">
@@ -763,7 +763,7 @@ export default function ResourcesPage({ onNavigate }: Props) {
                   onClick={() => setBlogCategory(cat)}
                   className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                     blogCategory === cat
-                      ? 'bg-red-600 text-white'
+                      ? 'bg-cyan-600 text-white'
                       : 'bg-gray-800 text-gray-400 hover:text-white'
                   }`}
                 >
@@ -787,7 +787,7 @@ export default function ResourcesPage({ onNavigate }: Props) {
                       {post.readTime}
                     </div>
                   </div>
-                  <h3 className="font-semibold text-white mb-2 group-hover:text-red-400 transition-colors leading-snug">
+                  <h3 className="font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors leading-snug">
                     {post.title}
                   </h3>
                   <p className="text-gray-500 text-sm mb-4 leading-relaxed line-clamp-2">{post.excerpt}</p>
