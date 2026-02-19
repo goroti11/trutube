@@ -358,73 +358,91 @@ export default function EnhancedProfilePage({ userId, onNavigate }: EnhancedProf
                     {channels.map((channel) => (
                       <div
                         key={channel.id}
-                        onClick={() => onNavigate('channel', { channelId: channel.id })}
-                        className="bg-gray-900 hover:bg-gray-850 rounded-xl overflow-hidden cursor-pointer transition-all group"
+                        className="bg-gray-900 rounded-xl overflow-hidden transition-all group relative"
                       >
-                        <div className="relative h-32 bg-gradient-to-r from-primary-500/20 to-accent-500/20">
-                          {channel.banner_url ? (
-                            <img
-                              src={channel.banner_url}
-                              alt={channel.channel_name}
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center">
-                              <Play className="w-12 h-12 text-gray-600" />
-                            </div>
-                          )}
-                        </div>
-                        <div className="p-4">
-                          <div className="flex items-start gap-3">
-                            <div className="flex-shrink-0">
-                              {channel.avatar_url ? (
-                                <img
-                                  src={channel.avatar_url}
-                                  alt={channel.channel_name}
-                                  className="w-16 h-16 rounded-full object-cover"
-                                />
-                              ) : (
-                                <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center text-2xl font-bold text-gray-400">
-                                  {channel.channel_name[0]}
-                                </div>
-                              )}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 mb-1">
-                                <h3 className="font-bold text-lg truncate group-hover:text-primary-400 transition-colors">
-                                  {channel.channel_name}
-                                </h3>
-                                {channel.is_verified && (
-                                  <Check className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                        <div
+                          onClick={() => onNavigate('channel', { channelId: channel.id })}
+                          className="cursor-pointer"
+                        >
+                          <div className="relative h-32 bg-gradient-to-r from-primary-500/20 to-accent-500/20">
+                            {channel.banner_url ? (
+                              <img
+                                src={channel.banner_url}
+                                alt={channel.channel_name}
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center">
+                                <Play className="w-12 h-12 text-gray-600" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="p-4">
+                            <div className="flex items-start gap-3">
+                              <div className="flex-shrink-0">
+                                {channel.avatar_url ? (
+                                  <img
+                                    src={channel.avatar_url}
+                                    alt={channel.channel_name}
+                                    className="w-16 h-16 rounded-full object-cover"
+                                  />
+                                ) : (
+                                  <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center text-2xl font-bold text-gray-400">
+                                    {channel.channel_name[0]}
+                                  </div>
                                 )}
                               </div>
-                              <p className="text-sm text-gray-400 mb-2 line-clamp-2">
-                                {channel.description || 'Aucune description'}
-                              </p>
-                              <div className="flex items-center gap-4 text-xs text-gray-500">
-                                <div className="flex items-center gap-1">
-                                  <Users className="w-3 h-3" />
-                                  <span>{channel.subscriber_count.toLocaleString()} abonnés</span>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <h3 className="font-bold text-lg truncate group-hover:text-primary-400 transition-colors">
+                                    {channel.channel_name}
+                                  </h3>
+                                  {channel.is_verified && (
+                                    <Check className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                                  )}
                                 </div>
-                                <div className="flex items-center gap-1">
-                                  <Video className="w-3 h-3" />
-                                  <span>{channel.video_count} vidéos</span>
+                                <p className="text-sm text-gray-400 mb-2 line-clamp-2">
+                                  {channel.description || 'Aucune description'}
+                                </p>
+                                <div className="flex items-center gap-4 text-xs text-gray-500">
+                                  <div className="flex items-center gap-1">
+                                    <Users className="w-3 h-3" />
+                                    <span>{channel.subscriber_count.toLocaleString()} abonnés</span>
+                                  </div>
+                                  <div className="flex items-center gap-1">
+                                    <Video className="w-3 h-3" />
+                                    <span>{channel.video_count} vidéos</span>
+                                  </div>
+                                  <div className="flex items-center gap-1">
+                                    <Eye className="w-3 h-3" />
+                                    <span>{(channel.total_views / 1000000).toFixed(1)}M vues</span>
+                                  </div>
                                 </div>
-                                <div className="flex items-center gap-1">
-                                  <Eye className="w-3 h-3" />
-                                  <span>{(channel.total_views / 1000000).toFixed(1)}M vues</span>
-                                </div>
+                                {channel.channel_type && (
+                                  <div className="mt-2">
+                                    <span className="px-2 py-0.5 bg-primary-500/20 text-primary-400 text-xs rounded-full border border-primary-500/30 capitalize">
+                                      {channel.channel_type}
+                                    </span>
+                                  </div>
+                                )}
                               </div>
-                              {channel.channel_type && (
-                                <div className="mt-2">
-                                  <span className="px-2 py-0.5 bg-primary-500/20 text-primary-400 text-xs rounded-full border border-primary-500/30 capitalize">
-                                    {channel.channel_type}
-                                  </span>
-                                </div>
-                              )}
                             </div>
                           </div>
                         </div>
+                        {isOwnProfile && (
+                          <div className="absolute top-2 right-2">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onNavigate(`channel-edit/${channel.id}`);
+                              }}
+                              className="p-2 bg-gray-900/90 hover:bg-gray-800 rounded-lg backdrop-blur-sm transition-colors"
+                              title="Modifier la chaîne"
+                            >
+                              <Edit className="w-4 h-4 text-gray-300" />
+                            </button>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
