@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { supabase } from '../lib/supabase';
 
 export type Language =
   | 'fr' | 'en' | 'es' | 'de' | 'it' | 'pt' | 'ru' | 'zh' | 'ja' | 'ko'
@@ -26,19 +27,44 @@ interface LanguageProviderProps {
   children: ReactNode;
 }
 
+const detectLanguageFromRegion = (): Language => {
+  const supportedLangs: Language[] = [
+    'fr', 'en', 'es', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko',
+    'ar', 'hi', 'bn', 'tr', 'nl', 'pl', 'sv', 'no', 'da', 'fi',
+    'cs', 'el', 'he', 'th', 'vi', 'id', 'ms', 'tl', 'uk', 'ro'
+  ];
+
+  const navigatorLang = navigator.language || (navigator as any).userLanguage;
+
+  const fullLang = navigatorLang.toLowerCase();
+  const baseLang = fullLang.split('-')[0];
+
+  const regionMapping: Record<string, Language> = {
+    'fr-fr': 'fr', 'fr-ca': 'fr', 'fr-be': 'fr', 'fr-ch': 'fr',
+    'en-us': 'en', 'en-gb': 'en', 'en-ca': 'en', 'en-au': 'en',
+    'es-es': 'es', 'es-mx': 'es', 'es-ar': 'es',
+    'pt-br': 'pt', 'pt-pt': 'pt',
+    'zh-cn': 'zh', 'zh-tw': 'zh', 'zh-hk': 'zh',
+    'ar-sa': 'ar', 'ar-ae': 'ar', 'ar-eg': 'ar',
+  };
+
+  if (regionMapping[fullLang]) {
+    return regionMapping[fullLang];
+  }
+
+  if (supportedLangs.includes(baseLang as Language)) {
+    return baseLang as Language;
+  }
+
+  return 'en';
+};
+
 export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem('trutube_language');
     if (saved) return saved as Language;
 
-    const browserLang = navigator.language.split('-')[0];
-    const supportedLangs: Language[] = [
-      'fr', 'en', 'es', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko',
-      'ar', 'hi', 'bn', 'tr', 'nl', 'pl', 'sv', 'no', 'da', 'fi',
-      'cs', 'el', 'he', 'th', 'vi', 'id', 'ms', 'tl', 'uk', 'ro'
-    ];
-
-    return supportedLangs.includes(browserLang as Language) ? (browserLang as Language) : 'en';
+    return detectLanguageFromRegion();
   });
 
   const [translations, setTranslations] = useState<Record<string, string>>({});
@@ -90,6 +116,53 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
 
     loadTranslations();
   }, [language]);
+
+  useEffect(() => {
+    const syncLanguageWithDB = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        try {
+          await supabase
+            .from('user_profiles')
+            .update({
+              language_preference: language,
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', user.id);
+        } catch (error) {
+          console.error('Failed to sync language with DB:', error);
+        }
+      }
+    };
+
+    syncLanguageWithDB();
+  }, [language]);
+
+  useEffect(() => {
+    const loadUserLanguagePreference = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        try {
+          const { data } = await supabase
+            .from('user_profiles')
+            .select('language_preference')
+            .eq('id', user.id)
+            .single();
+
+          if (data?.language_preference && data.language_preference !== language) {
+            setLanguageState(data.language_preference as Language);
+            localStorage.setItem('trutube_language', data.language_preference);
+          }
+        } catch (error) {
+          console.error('Failed to load user language preference:', error);
+        }
+      }
+    };
+
+    loadUserLanguagePreference();
+  }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);

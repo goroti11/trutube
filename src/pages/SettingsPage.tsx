@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import {
   Bell, Shield, Eye,
-  Trash2, Lock, Check, AlertCircle, Loader2, Moon, Sun, Monitor, Crown, Star
+  Trash2, Lock, Check, AlertCircle, Loader2, Moon, Sun, Monitor, Crown, Star, Globe
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { useLanguage, Language } from '../contexts/LanguageContext';
 import { supabase } from '../lib/supabase';
 import Header from '../components/Header';
 import PremiumBadge from '../components/PremiumBadge';
@@ -24,6 +25,7 @@ interface UserSettings {
 
 export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
   const { user, signOut } = useAuth();
+  const { language, setLanguage, languages } = useLanguage();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -369,6 +371,42 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                     className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-cyan-600 focus:ring-2 focus:ring-cyan-500"
                   />
                 </label>
+              </div>
+            </div>
+
+            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
+              <div className="flex items-center gap-3 mb-6">
+                <Globe className="w-5 h-5 text-cyan-500" />
+                <h2 className="text-xl font-semibold text-white">Langue</h2>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-gray-400 mb-3">
+                    La langue est détectée automatiquement selon votre région. Vous pouvez la changer manuellement ci-dessous.
+                  </p>
+                  <label className="block">
+                    <span className="text-white font-medium mb-2 block">Langue de l'interface</span>
+                    <select
+                      value={language}
+                      onChange={(e) => {
+                        setLanguage(e.target.value as Language);
+                        setSuccess('Langue modifiée avec succès');
+                        setTimeout(() => setSuccess(''), 3000);
+                      }}
+                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                    >
+                      {languages.map((lang) => (
+                        <option key={lang.code} value={lang.code}>
+                          {lang.nativeName} ({lang.name})
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Votre préférence est automatiquement sauvegardée et synchronisée sur tous vos appareils
+                  </p>
+                </div>
               </div>
             </div>
 
