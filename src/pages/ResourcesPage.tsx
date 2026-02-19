@@ -1,94 +1,598 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Header from '../components/Header';
 import { Footer } from '../components/Footer';
 import {
   BookOpen, DollarSign, Scale, Cpu, HelpCircle, MessageSquare,
-  Mail, Ticket, ChevronDown, ChevronUp, Play, Music, Settings,
-  FileText, Globe, Shield, Search, ChevronRight, Star
+  Mail, Play, Music, Settings, FileText, Globe, Shield, Search,
+  ChevronRight, Star, Rss, Activity, UserPlus, Video, CreditCard,
+  Wallet, AlertTriangle, ShoppingBag, User, ChevronDown, ChevronUp,
+  CheckCircle, Circle, Wrench, Package, Camera, Clock, ArrowRight,
+  TrendingUp, Zap, ExternalLink
 } from 'lucide-react';
 
 interface Props {
   onNavigate: (page: string) => void;
 }
 
-type Tab = 'creator' | 'monetization' | 'legal' | 'technical' | 'faq' | 'support';
+type MainTab = 'docs' | 'blog' | 'status';
 
-const TABS: { id: Tab; label: string; icon: React.ElementType }[] = [
-  { id: 'creator', label: 'Guide créateur', icon: Play },
-  { id: 'monetization', label: 'Monétisation', icon: DollarSign },
-  { id: 'legal', label: 'Légal', icon: Scale },
-  { id: 'technical', label: 'Technique', icon: Cpu },
-  { id: 'faq', label: 'FAQ', icon: HelpCircle },
-  { id: 'support', label: 'Support', icon: MessageSquare },
+interface DocArticle {
+  id: string;
+  title: string;
+  summary: string;
+  steps: string[];
+  tips?: string[];
+}
+
+interface DocCategory {
+  id: string;
+  label: string;
+  icon: React.ElementType;
+  color: string;
+  articles: DocArticle[];
+}
+
+const DOC_CATEGORIES: DocCategory[] = [
+  {
+    id: 'start',
+    label: 'Démarrage',
+    icon: UserPlus,
+    color: 'text-blue-400',
+    articles: [
+      {
+        id: 'create-account',
+        title: 'Créer un compte',
+        summary: 'Tout ce qu\'il faut savoir pour s\'inscrire sur TruTube.',
+        steps: [
+          'Aller sur trutube.tv et cliquer sur "S\'inscrire"',
+          'Renseigner votre email et choisir un mot de passe sécurisé',
+          'Choisir un nom d\'utilisateur unique (ne peut pas être changé)',
+          'Confirmer votre email (vérifier les spams si nécessaire)',
+          'Compléter votre profil : photo, bio, localisation',
+        ],
+        tips: ['Choisissez un nom d\'utilisateur court et mémorable — il sera votre URL.', 'L\'email ne peut pas être changé sans contacter le support.']
+      },
+      {
+        id: 'create-channel',
+        title: 'Créer une chaîne',
+        summary: 'Lancer votre espace créateur ou artiste sur TruTube.',
+        steps: [
+          'Connectez-vous et aller dans votre profil > "Mes chaînes"',
+          'Cliquer sur "Créer une nouvelle chaîne"',
+          'Choisir le type : Créateur, Artiste, Label, Studio, Marque',
+          'Ajouter un nom de chaîne, une description et une bannière',
+          'Configurer l\'URL personnalisée de la chaîne',
+          'Choisir l\'univers principal de la chaîne (musique, gaming, tech…)',
+        ],
+        tips: ['Une chaîne peut avoir plusieurs univers mais en avoir un principal améliore la visibilité.']
+      },
+      {
+        id: 'verify-identity',
+        title: 'Vérifier son identité (KYC)',
+        summary: 'La vérification est nécessaire pour activer les paiements et les retraits.',
+        steps: [
+          'Aller dans Paramètres > Vérification d\'identité',
+          'Choisir le type de document : CNI, passeport ou titre de séjour',
+          'Photographier le recto et verso du document en bonne résolution',
+          'Prendre une selfie avec l\'instruction affichée à l\'écran',
+          'Patienter 24-48h pour la validation (résultat par email)',
+        ],
+        tips: ['Les documents doivent être en cours de validité.', 'La vérification est requise pour tout retrait ou réception de paiement.']
+      },
+      {
+        id: 'first-content',
+        title: 'Publier ses premiers contenus',
+        summary: 'Les étapes pour uploader et rendre visible votre premier contenu.',
+        steps: [
+          'Aller dans Créateur Studio > "Nouvel upload"',
+          'Glisser-déposer le fichier vidéo (MP4 H.264 recommandé)',
+          'Pendant l\'encodage, remplir titre, description et tags',
+          'Choisir la vignette : automatique ou personnalisée',
+          'Définir la visibilité : public, non-listé, réservé aux abonnés ou payant',
+          'Cliquer sur "Publier" ou planifier une date de publication',
+        ],
+        tips: ['Préparez votre vignette à l\'avance — c\'est l\'élément n°1 pour le taux de clic.']
+      },
+    ]
+  },
+  {
+    id: 'creators',
+    label: 'Créateurs',
+    icon: Video,
+    color: 'text-cyan-400',
+    articles: [
+      {
+        id: 'publish-video',
+        title: 'Publier une vidéo',
+        summary: 'Guide complet pour uploader, configurer et optimiser une vidéo.',
+        steps: [
+          'Dans Créateur Studio, cliquer sur "Nouvelle vidéo"',
+          'Upload du fichier (max 20 Go, MP4/MOV/WebM acceptés)',
+          'Titre optimisé : mot-clé principal en premier',
+          'Description détaillée avec chapitres (00:00 Intro, 02:30 Partie 1...)',
+          'Tags : 5 à 15 tags pertinents',
+          'Sélectionner l\'univers et les sous-univers',
+          'Ajouter des liens d\'affiliation si applicable',
+          'Configurer les cartes et écrans de fin',
+        ],
+      },
+      {
+        id: 'sell-album',
+        title: 'Vendre un album',
+        summary: 'Publier et vendre un album ou EP sur TruTube Music.',
+        steps: [
+          'Créateur Studio > "Nouvelle release"',
+          'Choisir le type : Album, EP, Single, Mixtape',
+          'Uploader les pistes audio (WAV/FLAC pour la qualité master)',
+          'Définir pochette (3000×3000px min), tracklist et crédits',
+          'Configurer : prix de vente, streaming seul, ou les deux',
+          'Définir les splits de royalties entre collaborateurs',
+          'Planifier la date de sortie ou publier immédiatement',
+        ],
+      },
+      {
+        id: 'configure-royalties',
+        title: 'Configurer les royalties',
+        summary: 'Gérer les droits et répartitions entre artistes et collaborateurs.',
+        steps: [
+          'Ouvrir la release ou le contenu concerné',
+          'Onglet "Monétisation" > "Gestion des royalties"',
+          'Ajouter chaque collaborateur (nom TruTube ou email)',
+          'Affecter un pourcentage à chacun (total = 100%)',
+          'Chaque collaborateur reçoit une notification et doit accepter',
+          'Les paiements sont automatiquement distribués selon les splits',
+        ],
+        tips: ['Les splits s\'appliquent à tous les revenus futurs. Modifier un split n\'affecte pas les transactions passées.']
+      },
+      {
+        id: 'member-subscription',
+        title: 'Abonnement membres',
+        summary: 'Créer des tiers d\'abonnement payants pour vos fans.',
+        steps: [
+          'Chaîne > Monétisation > Abonnements',
+          'Créer de 1 à 5 tiers (ex : Supporter 3€, Fan 7€, Super Fan 15€)',
+          'Pour chaque tier : définir nom, prix, avantages et contenu accessible',
+          'Activer une période d\'essai gratuite (7 ou 14 jours recommandé)',
+          'Vos abonnés reçoivent un badge coloré sur leur profil',
+        ],
+        tips: ['Communiquez chaque mois sur les avantages pour réduire le churn.']
+      },
+      {
+        id: 'merchandising',
+        title: 'Merchandising',
+        summary: 'Vendre des produits physiques et numériques depuis votre chaîne.',
+        steps: [
+          'Créateur Studio > Boutique > "Ajouter un produit"',
+          'Produit physique : print-on-demand (intégration Printful disponible)',
+          'Produit numérique : uploader le fichier — livraison automatique',
+          'Configurer prix, stock (infini pour digital), images produit',
+          'Activer la section "Boutique" sur votre page chaîne',
+        ],
+      },
+      {
+        id: 'shorts-promo',
+        title: 'Shorts & promotion',
+        summary: 'Utiliser les formats courts pour augmenter votre visibilité.',
+        steps: [
+          'Uploader une vidéo verticale < 60 secondes et cocher "Format Short"',
+          'Les Shorts sont distribués dans le feed dédié avec algorithme séparé',
+          'Ajouter un CTA visible vers une vidéo longue ou une release',
+          'Publier régulièrement : 3 à 5 Shorts / semaine pour la croissance',
+        ],
+      },
+    ]
+  },
+  {
+    id: 'payments',
+    label: 'Paiements & Wallet',
+    icon: Wallet,
+    color: 'text-green-400',
+    articles: [
+      {
+        id: 'buy-content',
+        title: 'Acheter du contenu',
+        summary: 'Comment acheter, accéder et télécharger du contenu payant.',
+        steps: [
+          'Cliquer sur "Acheter" ou "Débloquer" sur le contenu',
+          'Choisir le mode de paiement : carte, PayPal ou TruCoin',
+          'Confirmer l\'achat — accès immédiat au contenu',
+          'Retrouver vos achats dans Profil > Bibliothèque',
+        ],
+      },
+      {
+        id: 'trucoin',
+        title: 'Utiliser le TruCoin',
+        summary: 'La monnaie virtuelle de TruTube — pour tips et achats.',
+        steps: [
+          'Aller dans Wallet > Acheter des TruCoins',
+          '1 TruCoin = 0,01€ (packs disponibles : 500, 1000, 5000 TC)',
+          'Envoyer des TruCoins via le bouton "Tip" sur une vidéo ou un profil',
+          'Les TruCoins reçus apparaissent dans votre Wallet créateur',
+          'Conversion TruCoin → € disponible avec un frais fixe minimal',
+        ],
+        tips: ['Les TruCoins achetés ont une durée de validité de 2 ans.']
+      },
+      {
+        id: 'withdrawals',
+        title: 'Retraits',
+        summary: 'Comment retirer vos gains vers votre compte bancaire.',
+        steps: [
+          'Vérifier que votre KYC est validé (obligatoire)',
+          'Aller dans Wallet > Retirer des fonds',
+          'Choisir le montant (seuil minimum : 10€)',
+          'Sélectionner le mode : virement SEPA (gratuit) ou PayPal',
+          'Confirmer avec votre code 2FA si activé',
+          'Le virement arrive sous 3 à 5 jours ouvrés',
+        ],
+        tips: ['Les retraits sont traités chaque lundi. Une demande faite le mardi partira lundi suivant.']
+      },
+      {
+        id: 'thresholds',
+        title: 'Seuils et délais',
+        summary: 'Comprendre les seuils de retrait et délais de traitement.',
+        steps: [
+          'Seuil minimum retrait : 10€',
+          'Fréquence maximale : 1 retrait par semaine',
+          'Les revenus des ventes sont disponibles 48h après la transaction',
+          'Les revenus des abonnements sont disponibles le 1er du mois suivant',
+          'Les tips sont disponibles immédiatement',
+        ],
+      },
+    ]
+  },
+  {
+    id: 'security',
+    label: 'Sécurité & droits',
+    icon: Shield,
+    color: 'text-red-400',
+    articles: [
+      {
+        id: 'copyright',
+        title: 'Droits d\'auteur & copyright',
+        summary: 'Ce que vous pouvez et ne pouvez pas publier sur TruTube.',
+        steps: [
+          'Vous devez posséder les droits sur TOUT contenu que vous publiez',
+          'Musique : droits d\'auteur + droits voisins nécessaires',
+          'Extraits tiers : obtenir une licence ou s\'assurer du fair use',
+          'Covers musicaux : obtenir une licence mécanique',
+          'Visuels : images libres de droits ou avec licence explicite',
+        ],
+        tips: ['En cas de doute, ne publiez pas. Contactez notre équipe droits avant.']
+      },
+      {
+        id: 'reporting',
+        title: 'Signalement de contenu',
+        summary: 'Signaler un contenu qui enfreint les règles ou vos droits.',
+        steps: [
+          'Cliquer sur "..." sur le contenu puis "Signaler"',
+          'Choisir la catégorie : copyright, harcèlement, faux, autre',
+          'Pour copyright : sélectionner "Violation de mes droits"',
+          'Fournir le lien de l\'original et une preuve de propriété',
+          'Notre équipe examine sous 24h ouvrées',
+        ],
+      },
+      {
+        id: 'contestation',
+        title: 'Contester un retrait',
+        summary: 'Votre contenu a été retiré ? Comment contester la décision.',
+        steps: [
+          'Aller dans Créateur Studio > Violations > "Contester"',
+          'Remplir le formulaire avec la justification légale',
+          'Joindre les preuves : contrats, licences, actes d\'achat',
+          'Notre équipe traite la contestation sous 72h ouvrées',
+          'En cas de refus, une médiation externe est disponible',
+        ],
+        tips: ['Les fausses contestations peuvent entraîner la suspension du compte.']
+      },
+      {
+        id: 'content-removal',
+        title: 'Supprimer du contenu',
+        summary: 'Comment supprimer définitivement vos contenus publiés.',
+        steps: [
+          'Créateur Studio > Vos contenus > Sélectionner le contenu',
+          'Cliquer sur "Supprimer" puis confirmer',
+          'La suppression est permanente après 30 jours (période de grâce)',
+          'Les acheteurs du contenu gardent leur accès pendant 90 jours après suppression',
+        ],
+      },
+    ]
+  },
+  {
+    id: 'marketplace',
+    label: 'Marketplace',
+    icon: ShoppingBag,
+    color: 'text-yellow-400',
+    articles: [
+      {
+        id: 'order-service',
+        title: 'Commander un service',
+        summary: 'Passer une commande sur la marketplace TruTube.',
+        steps: [
+          'Aller dans Marketplace et parcourir les offres',
+          'Filtrer par catégorie : mixage, graphisme, coaching, production...',
+          'Cliquer sur "Commander" sur l\'offre choisie',
+          'Remplir le brief et définir la date de livraison',
+          'Le paiement est mis en séquestre (escrow) jusqu\'à livraison',
+          'Valider la livraison ou demander une révision',
+        ],
+        tips: ['Le paiement n\'est libéré au prestataire qu\'après votre validation.']
+      },
+      {
+        id: 'deliver-work',
+        title: 'Livrer un travail',
+        summary: 'Soumettre votre livrable en tant que prestataire.',
+        steps: [
+          'Aller dans Marketplace > Mes commandes actives',
+          'Uploader les fichiers livrables dans la commande',
+          'Ajouter un message explicatif au client',
+          'Soumettre — le client a 5 jours pour accepter ou demander révision',
+          'Sans réponse après 5 jours, la livraison est automatiquement validée',
+        ],
+      },
+      {
+        id: 'escrow-dispute',
+        title: 'Litiges escrow',
+        summary: 'Résoudre un désaccord sur une commande marketplace.',
+        steps: [
+          'Si le client refuse la livraison injustement, ouvrir un litige',
+          'Aller dans la commande > "Ouvrir un litige"',
+          'Fournir les preuves : fichiers livrés, échanges, scope initial',
+          'Un médiateur TruTube intervient sous 48h',
+          'La décision du médiateur est définitive et libère ou rembourse l\'escrow',
+        ],
+      },
+    ]
+  },
+  {
+    id: 'account',
+    label: 'Compte',
+    icon: User,
+    color: 'text-orange-400',
+    articles: [
+      {
+        id: 'password',
+        title: 'Changer son mot de passe',
+        summary: 'Modifier ou réinitialiser votre mot de passe.',
+        steps: [
+          'Paramètres > Sécurité > "Changer le mot de passe"',
+          'Entrer votre mot de passe actuel pour confirmer',
+          'Choisir un nouveau mot de passe (12+ caractères recommandé)',
+          'Activer l\'authentification à deux facteurs pour plus de sécurité',
+        ],
+      },
+      {
+        id: 'account-recovery',
+        title: 'Récupérer son compte',
+        summary: 'Vous ne pouvez plus vous connecter ? Procédure de récupération.',
+        steps: [
+          'Page de connexion > "Mot de passe oublié"',
+          'Entrer l\'email associé au compte',
+          'Ouvrir l\'email de réinitialisation (vérifier les spams)',
+          'Si l\'email n\'est plus accessible, contacter support@trutube.tv',
+          'Fournir une pièce d\'identité et preuve de propriété du compte',
+        ],
+      },
+      {
+        id: 'delete-account',
+        title: 'Supprimer son compte',
+        summary: 'Demander la suppression définitive de votre compte.',
+        steps: [
+          'Paramètres > Confidentialité > "Supprimer mon compte"',
+          'Lire les conséquences (contenu supprimé, gains transférés)',
+          'Retirer tous les gains avant la suppression',
+          'Confirmer avec votre mot de passe',
+          'Le compte est désactivé immédiatement, supprimé définitivement sous 30 jours',
+        ],
+        tips: ['La suppression est irréversible après 30 jours. Assurez-vous d\'avoir exporté vos données.']
+      },
+      {
+        id: 'privacy',
+        title: 'Confidentialité',
+        summary: 'Gérer qui voit quoi sur votre profil et vos activités.',
+        steps: [
+          'Paramètres > Confidentialité',
+          'Choisir qui peut voir votre profil : tous, abonnés, personne',
+          'Activer/désactiver l\'historique de visionnage',
+          'Gérer les autorisations de suivi et de recommandation',
+          'Télécharger vos données (droit RGPD) depuis cette section',
+        ],
+      },
+    ]
+  },
 ];
 
-function GuideItem({ title, description, steps }: { title: string; description: string; steps?: string[] }) {
+const BLOG_POSTS = [
+  {
+    id: 1,
+    category: 'Produit',
+    categoryColor: 'text-blue-400 bg-blue-400/10',
+    title: 'TruTube Studio V3 : le nouveau tableau de bord créateur',
+    excerpt: 'Découvrez les nouvelles fonctionnalités du studio créateur : analytics avancés, gestion des royalties simplifiée et nouvelle interface d\'upload.',
+    date: '14 févr. 2026',
+    readTime: '4 min',
+    author: 'Équipe Produit',
+  },
+  {
+    id: 2,
+    category: 'Créateurs',
+    categoryColor: 'text-cyan-400 bg-cyan-400/10',
+    title: 'Comment doubler vos revenus d\'abonnement en 90 jours',
+    excerpt: 'Analyse de 500 créateurs TruTube : les stratégies qui fonctionnent vraiment pour convertir vos spectateurs en abonnés payants.',
+    date: '10 févr. 2026',
+    readTime: '8 min',
+    author: 'Léa Martin',
+  },
+  {
+    id: 3,
+    category: 'Industrie',
+    categoryColor: 'text-purple-400 bg-purple-400/10',
+    title: 'L\'économie des créateurs en 2026 : les chiffres clés',
+    excerpt: 'Le marché mondial de l\'économie créative dépasse 200 milliards. Où se positionne TruTube et quelles opportunités pour les artistes indépendants ?',
+    date: '7 févr. 2026',
+    readTime: '6 min',
+    author: 'Research Team',
+  },
+  {
+    id: 4,
+    category: 'Plateforme',
+    categoryColor: 'text-green-400 bg-green-400/10',
+    title: 'Mise à jour sécurité : nouveaux protocoles anti-fraude',
+    excerpt: 'Nous avons renforcé notre système de détection de fraude sur les vues et les transactions. Détails techniques de la mise à jour 4.2.',
+    date: '3 févr. 2026',
+    readTime: '3 min',
+    author: 'Équipe Sécurité',
+  },
+  {
+    id: 5,
+    category: 'Partenaires',
+    categoryColor: 'text-yellow-400 bg-yellow-400/10',
+    title: 'Partenariat avec 3 distributeurs musicaux indépendants',
+    excerpt: 'TruTube s\'associe avec DistroKid, TuneCore et Believe pour simplifier la distribution multi-plateforme depuis le studio créateur.',
+    date: '28 janv. 2026',
+    readTime: '2 min',
+    author: 'Partenariats',
+  },
+  {
+    id: 6,
+    category: 'Créateurs',
+    categoryColor: 'text-cyan-400 bg-cyan-400/10',
+    title: 'Shorts : 6 mois après le lancement — ce que les données nous disent',
+    excerpt: 'Analyse des métriques de croissance des créateurs qui ont adopté les Shorts. Les formats courts génèrent 3x plus de nouveaux abonnés.',
+    date: '22 janv. 2026',
+    readTime: '5 min',
+    author: 'Data Team',
+  },
+];
+
+const BLOG_CATEGORIES = ['Tous', 'Produit', 'Créateurs', 'Industrie', 'Plateforme', 'Partenaires'];
+
+interface ServiceStatus {
+  name: string;
+  status: 'operational' | 'degraded' | 'incident' | 'maintenance';
+  latency?: string;
+}
+
+const SERVICES: ServiceStatus[] = [
+  { name: 'Streaming vidéo', status: 'operational', latency: '42ms' },
+  { name: 'Upload & encodage', status: 'operational', latency: '—' },
+  { name: 'Paiements', status: 'operational', latency: '120ms' },
+  { name: 'Retraits', status: 'degraded' },
+  { name: 'Marketplace', status: 'maintenance' },
+  { name: 'Live streaming', status: 'operational', latency: '38ms' },
+  { name: 'API partenaires', status: 'operational', latency: '75ms' },
+  { name: 'CDN & images', status: 'operational', latency: '18ms' },
+];
+
+const INCIDENTS = [
+  {
+    date: '12 févr. 2026',
+    service: 'Retraits',
+    duration: '4h 30min',
+    cause: 'Délai de traitement chez le partenaire bancaire PSP suite à une maintenance non planifiée.',
+    resolution: 'Les retraits en attente ont été traités en priorité. Nouveau fournisseur de backup activé.',
+    status: 'résolu',
+  },
+  {
+    date: '8 févr. 2026',
+    service: 'Upload',
+    duration: '1h 12min',
+    cause: 'Saturation du cluster d\'encodage suite à un pic de trafic inattendu (+300%).',
+    resolution: 'Auto-scaling activé. Capacité d\'encodage doublée pour prévenir la récurrence.',
+    status: 'résolu',
+  },
+  {
+    date: '1 févr. 2026',
+    service: 'Paiements',
+    duration: '22min',
+    cause: 'Timeout intermittent sur les transactions Stripe dû à une mise à jour API côté Stripe.',
+    resolution: 'Fallback activé vers le processeur secondaire. Aucune transaction perdue.',
+    status: 'résolu',
+  },
+];
+
+function StatusBadge({ status }: { status: ServiceStatus['status'] }) {
+  const config = {
+    operational: { label: 'Opérationnel', color: 'text-green-400 bg-green-400/10 border-green-400/20' },
+    degraded: { label: 'Dégradé', color: 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20' },
+    incident: { label: 'Incident', color: 'text-red-400 bg-red-400/10 border-red-400/20' },
+    maintenance: { label: 'Maintenance', color: 'text-blue-400 bg-blue-400/10 border-blue-400/20' },
+  }[status];
+
+  return (
+    <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${config.color}`}>
+      {config.label}
+    </span>
+  );
+}
+
+function ArticleItem({ article }: { article: DocArticle }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="border border-gray-800 rounded-xl overflow-hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-900/50 transition-colors"
+        className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gray-900/30 transition-colors"
       >
         <div>
-          <div className="font-medium text-white">{title}</div>
-          <div className="text-gray-500 text-sm mt-0.5">{description}</div>
+          <div className="font-medium text-white text-sm">{article.title}</div>
+          <div className="text-gray-500 text-xs mt-0.5">{article.summary}</div>
         </div>
-        {open ? <ChevronUp className="w-4 h-4 text-gray-400 shrink-0 ml-4" /> : <ChevronDown className="w-4 h-4 text-gray-400 shrink-0 ml-4" />}
-      </button>
-      {open && steps && (
-        <div className="px-6 pb-5 border-t border-gray-800 pt-4">
-          <ol className="space-y-3">
-            {steps.map((step, i) => (
-              <li key={i} className="flex gap-3 text-sm">
-                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-medium">{i + 1}</span>
-                <span className="text-gray-400 leading-relaxed">{step}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function FaqItem({ question, answer }: { question: string; answer: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="border border-gray-800 rounded-xl overflow-hidden">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-900/50 transition-colors"
-      >
-        <span className="font-medium text-white text-sm">{question}</span>
-        {open ? <span className="text-gray-500 text-xl ml-4">−</span> : <span className="text-gray-500 text-xl ml-4">+</span>}
+        {open
+          ? <ChevronUp className="w-4 h-4 text-gray-500 shrink-0 ml-4" />
+          : <ChevronDown className="w-4 h-4 text-gray-500 shrink-0 ml-4" />}
       </button>
       {open && (
-        <div className="px-6 pb-4 text-gray-400 text-sm border-t border-gray-800 pt-4 leading-relaxed">
-          {answer}
+        <div className="border-t border-gray-800 px-5 py-5 space-y-4">
+          <div>
+            <h4 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">Étapes</h4>
+            <ol className="space-y-2.5">
+              {article.steps.map((step, i) => (
+                <li key={i} className="flex gap-3 text-sm">
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-bold">{i + 1}</span>
+                  <span className="text-gray-300 leading-relaxed">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          {article.tips && article.tips.length > 0 && (
+            <div className="p-3 bg-cyan-900/20 border border-cyan-800/30 rounded-lg space-y-1.5">
+              {article.tips.map((tip, i) => (
+                <p key={i} className="text-cyan-300 text-xs flex gap-2">
+                  <Zap className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                  {tip}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
       )}
-    </div>
-  );
-}
-
-function SectionHeader({ icon: Icon, title, subtitle }: { icon: React.ElementType; title: string; subtitle: string }) {
-  return (
-    <div className="flex items-start gap-4 mb-8 pb-6 border-b border-gray-800">
-      <div className="p-3 bg-cyan-500/10 rounded-xl">
-        <Icon className="w-6 h-6 text-cyan-400" />
-      </div>
-      <div>
-        <h2 className="text-xl font-bold text-white">{title}</h2>
-        <p className="text-gray-400 text-sm mt-1">{subtitle}</p>
-      </div>
     </div>
   );
 }
 
 export default function ResourcesPage({ onNavigate }: Props) {
-  const [activeTab, setActiveTab] = useState<Tab>('creator');
+  const [mainTab, setMainTab] = useState<MainTab>('docs');
+  const [selectedCat, setSelectedCat] = useState<string>('start');
+  const [blogCategory, setBlogCategory] = useState('Tous');
   const [search, setSearch] = useState('');
+
+  const currentCategory = DOC_CATEGORIES.find(c => c.id === selectedCat);
+
+  const filteredArticles = useMemo(() => {
+    if (!currentCategory) return [];
+    if (!search) return currentCategory.articles;
+    const q = search.toLowerCase();
+    return currentCategory.articles.filter(
+      a => a.title.toLowerCase().includes(q) || a.summary.toLowerCase().includes(q)
+    );
+  }, [currentCategory, search]);
+
+  const filteredBlog = blogCategory === 'Tous'
+    ? BLOG_POSTS
+    : BLOG_POSTS.filter(p => p.category === blogCategory);
+
+  const allOperational = SERVICES.every(s => s.status === 'operational');
+  const hasIssues = SERVICES.some(s => s.status === 'incident' || s.status === 'degraded');
 
   return (
     <div className="min-h-screen bg-gray-950">
@@ -96,427 +600,333 @@ export default function ResourcesPage({ onNavigate }: Props) {
 
       {/* Hero */}
       <div className="bg-gradient-to-br from-gray-900 via-gray-950 to-gray-950 border-b border-gray-800">
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-sm mb-5">
-              <BookOpen className="w-4 h-4" />
-              Centre de ressources
+        <div className="max-w-6xl mx-auto px-6 py-14">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-sm mb-5">
+                <BookOpen className="w-4 h-4" />
+                Ressources TruTube
+              </div>
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                Documentation, blog & statuts
+              </h1>
+              <p className="text-gray-400 max-w-xl">
+                Tout ce qu'il faut pour comprendre, utiliser et optimiser TruTube — en un seul endroit.
+              </p>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Tout ce qu'il faut savoir pour réussir sur TruTube
-            </h1>
-            <p className="text-gray-400 mb-6">
-              Guides pratiques, documentation technique, cadre légal et support — tout au même endroit.
-            </p>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-              <input
-                type="text"
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-                placeholder="Rechercher dans les ressources..."
-                className="w-full pl-10 pr-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 text-sm"
-              />
+            <div className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium ${
+              hasIssues
+                ? 'bg-yellow-500/10 border-yellow-500/20 text-yellow-400'
+                : 'bg-green-500/10 border-green-500/20 text-green-400'
+            }`}>
+              <Circle className={`w-2 h-2 rounded-full ${hasIssues ? 'bg-yellow-400' : 'bg-green-400'}`} />
+              {hasIssues ? 'Perturbations en cours' : 'Tous les services opérationnels'}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        {/* Tabs */}
-        <div className="flex overflow-x-auto gap-1 mb-8 pb-1">
-          {TABS.map(tab => {
-            const Icon = tab.icon;
-            return (
+      {/* Main tabs */}
+      <div className="border-b border-gray-800 bg-gray-950 sticky top-0 z-10">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex gap-1">
+            {([
+              { id: 'docs' as MainTab, label: 'Documentation', icon: BookOpen },
+              { id: 'blog' as MainTab, label: 'Blog', icon: Rss },
+              { id: 'status' as MainTab, label: 'Statuts plateforme', icon: Activity },
+            ]).map(({ id, label, icon: Icon }) => (
               <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
-                  activeTab === tab.id
-                    ? 'bg-cyan-600 text-white'
-                    : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                key={id}
+                onClick={() => setMainTab(id)}
+                className={`flex items-center gap-2 px-5 py-4 text-sm font-medium border-b-2 transition-colors ${
+                  mainTab === id
+                    ? 'border-cyan-500 text-white'
+                    : 'border-transparent text-gray-500 hover:text-gray-300'
                 }`}
               >
                 <Icon className="w-4 h-4" />
-                {tab.label}
+                {label}
               </button>
-            );
-          })}
+            ))}
+          </div>
         </div>
+      </div>
 
-        {/* Guide créateur */}
-        {activeTab === 'creator' && (
-          <div>
-            <SectionHeader icon={Play} title="Guide créateur" subtitle="Tout pour lancer et développer votre présence sur TruTube" />
-            <div className="space-y-3">
-              <GuideItem
-                title="Démarrer sa chaîne"
-                description="Créer et configurer sa chaîne TruTube de A à Z"
-                steps={[
-                  'Créer un compte et compléter votre profil (photo, bio, liens sociaux)',
-                  'Aller dans "Mes chaînes" et cliquer sur "Créer une chaîne"',
-                  'Choisir le type de chaîne : créateur, artiste, label, studio ou marque',
-                  'Configurer l\'identité visuelle : bannière, avatar, couleur de marque',
-                  'Rédiger la description de la chaîne et ajouter vos hashtags officiels',
-                  'Configurer les sections de la page d\'accueil (ordre drag-and-drop)',
-                  'Uploader votre première vidéo et la mettre en avant sur votre page',
-                ]}
-              />
-              <GuideItem
-                title="Sortir un album"
-                description="Publier et vendre un album sur TruTube Music"
-                steps={[
-                  'Accéder à Créateur Studio > "Nouvelle release"',
-                  'Choisir le type : album, EP, single ou mixtape',
-                  'Uploader les fichiers audio (WAV ou FLAC recommandé)',
-                  'Configurer le prix de vente et les options (téléchargement, streaming, aperçu)',
-                  'Définir les splits de royalties entre les collaborateurs',
-                  'Ajouter la pochette (minimum 3000×3000px) et les métadonnées',
-                  'Planifier ou publier immédiatement',
-                ]}
-              />
-              <GuideItem
-                title="Configurer les royalties"
-                description="Gérer les droits et splits entre collaborateurs"
-                steps={[
-                  'Accéder aux paramètres de la release ou du contenu concerné',
-                  'Cliquer sur "Gestion des royalties" dans l\'onglet Monétisation',
-                  'Ajouter chaque collaborateur par nom d\'utilisateur TruTube ou email',
-                  'Définir le pourcentage pour chaque partie (total doit = 100%)',
-                  'Chaque collaborateur reçoit une notification et doit accepter',
-                  'Les paiements sont automatiquement distribués selon les splits à chaque retrait',
-                ]}
-              />
-              <GuideItem
-                title="Stratégie de prix"
-                description="Choisir les bons prix pour maximiser vos revenus"
-                steps={[
-                  'Analyser votre audience : taille, engagement, localisation géographique',
-                  'Comparer avec des créateurs similaires dans votre niche',
-                  'Tester avec un contenu gratuit d\'abord pour construire la confiance',
-                  'Pour les abonnements : commencer entre 2,99€ et 9,99€ selon la valeur perçue',
-                  'Utiliser le simulateur de revenus sur la page Tarification pour modéliser',
-                  'Proposer des offres groupées (bundle) pour augmenter le panier moyen',
-                ]}
-              />
-              <GuideItem
-                title="Utiliser les Shorts"
-                description="Créer et promouvoir des contenus courts"
-                steps={[
-                  'Les Shorts sont des vidéos verticales de moins de 60 secondes',
-                  'Uploader comme une vidéo normale et cocher "Format Short"',
-                  'Ajouter un titre accrocheur et des hashtags pertinents',
-                  'Les Shorts sont distribués dans le feed Shorts dédié',
-                  'Utiliser les Shorts pour promouvoir du contenu long ou des releases',
-                ]}
-              />
-            </div>
-          </div>
-        )}
+      <div className="max-w-6xl mx-auto px-6 py-8">
 
-        {/* Guide monétisation */}
-        {activeTab === 'monetization' && (
-          <div>
-            <SectionHeader icon={DollarSign} title="Guide monétisation" subtitle="Activer et optimiser toutes les sources de revenus disponibles" />
-            <div className="space-y-3">
-              <GuideItem
-                title="Abonnements chaîne"
-                description="Créer des tiers d'abonnement pour vos fans"
-                steps={[
-                  'Aller dans Chaîne > Monétisation > Abonnements',
-                  'Définir vos tiers : Supporter, Fan, Super Fan (noms personnalisables)',
-                  'Pour chaque tier : définir prix, avantages et contenu exclusif',
-                  'Exemples d\'avantages : badge, accès posts réservés, Discord privé, contenu premium',
-                  'Activer la période d\'essai gratuite (recommandé : 7 jours) pour augmenter les conversions',
-                  'Communiquer régulièrement sur les avantages pour fidéliser',
-                ]}
-              />
-              <GuideItem
-                title="Ventes de contenu"
-                description="Mettre du contenu en accès payant"
-                steps={[
-                  'À l\'upload, choisir "Contenu payant" dans les paramètres de visibilité',
-                  'Définir un prix unique ou une location (ex : 3,99€ pour 48h)',
-                  'Optionnel : définir un aperçu gratuit (les X premières minutes)',
-                  'Le contenu apparaît avec un badge "Premium" dans les listings',
-                  'Les acheteurs ont accès illimité (hors location)',
-                ]}
-              />
-              <GuideItem
-                title="Merchandising"
-                description="Vendre des produits physiques et numériques"
-                steps={[
-                  'Accéder à Créateur Studio > Boutique',
-                  'Choisir produit physique (print-on-demand) ou numérique (PDF, preset, sample)',
-                  'Pour physique : intégrer avec Printful ou Printify via l\'API partenaire',
-                  'Pour numérique : uploader le fichier — livraison automatique après achat',
-                  'Configurer les prix, descriptions et visuels produits',
-                  'Activer la section "Boutique" sur la page de votre chaîne',
-                ]}
-              />
-              <GuideItem
-                title="Communauté payante"
-                description="Créer un espace exclusif pour vos membres"
-                steps={[
-                  'Créer ou gérer votre communauté depuis Communautés > Créer',
-                  'Activer le mode Premium dans les paramètres de la communauté',
-                  'Définir le prix d\'accès mensuel ou annuel',
-                  'Configurer les canaux : discussions, ressources exclusives, live privés',
-                  'Les membres de la communauté sont distincts des abonnés chaîne',
-                ]}
-              />
-            </div>
-          </div>
-        )}
+        {/* ===== DOCS ===== */}
+        {mainTab === 'docs' && (
+          <div className="flex gap-6">
+            {/* Sidebar */}
+            <aside className="w-52 shrink-0 hidden md:block">
+              <div className="sticky top-20 space-y-1">
+                {DOC_CATEGORIES.map(cat => {
+                  const Icon = cat.icon;
+                  return (
+                    <button
+                      key={cat.id}
+                      onClick={() => { setSelectedCat(cat.id); setSearch(''); }}
+                      className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-colors text-left ${
+                        selectedCat === cat.id
+                          ? 'bg-gray-800 text-white'
+                          : 'text-gray-400 hover:text-white hover:bg-gray-900'
+                      }`}
+                    >
+                      <Icon className={`w-4 h-4 shrink-0 ${cat.color}`} />
+                      {cat.label}
+                      <span className="ml-auto text-xs text-gray-600">{cat.articles.length}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </aside>
 
-        {/* Guide légal */}
-        {activeTab === 'legal' && (
-          <div>
-            <SectionHeader icon={Scale} title="Guide légal" subtitle="Droits, obligations et responsabilités sur TruTube" />
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              {[
-                {
-                  icon: Music,
-                  title: 'Droits musicaux',
-                  items: [
-                    'Vous devez détenir les droits sur la musique que vous publiez',
-                    'Covers : obtenir une licence mécanique ou utiliser des plateformes agréées',
-                    'Samples : obtenir clearance avant publication',
-                    'Musique libre de droits : vérifier les conditions d\'utilisation commerciale',
-                  ]
-                },
-                {
-                  icon: FileText,
-                  title: 'Déclarations fiscales',
-                  items: [
-                    'Les revenus TruTube sont imposables dans votre pays de résidence',
-                    'TruTube fournit un récapitulatif annuel téléchargeable',
-                    'Auto-entrepreneur : déclarer en BNC ou BIC selon votre activité',
-                    'Au-delà de 10 000€/an : envisager la création d\'une structure juridique',
-                  ]
-                },
-                {
-                  icon: Shield,
-                  title: 'Responsabilités créateur',
-                  items: [
-                    'Vous êtes responsable de tout contenu publié sur votre chaîne',
-                    'Les contenus violant les CGU peuvent être supprimés sans préavis',
-                    'Mentions obligatoires pour les placements de produit rémunérés',
-                    'Respecter les restrictions territoriales pour certains contenus',
-                  ]
-                },
-                {
-                  icon: Globe,
-                  title: 'Territoires & droits',
-                  items: [
-                    'Les droits musicaux varient par territoire — gérez l\'accès géographique',
-                    'RGPD : si vous collectez des données via votre communauté, vous êtes co-responsable',
-                    'Pour les artistes hors UE : vérifier les conventions fiscales bilatérales',
-                    'Distribution internationale : configurer dans les paramètres de la release',
-                  ]
-                },
-              ].map(({ icon: Icon, title, items }) => (
-                <div key={title} className="bg-gray-900/50 border border-gray-800 rounded-xl p-5">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Icon className="w-4 h-4 text-cyan-400" />
-                    <h3 className="font-semibold text-white">{title}</h3>
-                  </div>
-                  <ul className="space-y-2">
-                    {items.map(item => (
-                      <li key={item} className="text-gray-400 text-sm flex gap-2">
-                        <ChevronRight className="w-4 h-4 text-gray-600 shrink-0 mt-0.5" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+            {/* Mobile category selector */}
+            <div className="md:hidden w-full">
+              <div className="flex overflow-x-auto gap-2 pb-2 mb-4">
+                {DOC_CATEGORIES.map(cat => {
+                  const Icon = cat.icon;
+                  return (
+                    <button
+                      key={cat.id}
+                      onClick={() => { setSelectedCat(cat.id); setSearch(''); }}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs whitespace-nowrap transition-colors ${
+                        selectedCat === cat.id ? 'bg-cyan-600 text-white' : 'bg-gray-800 text-gray-400'
+                      }`}
+                    >
+                      <Icon className="w-3.5 h-3.5" />
+                      {cat.label}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-            <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
-              <p className="text-yellow-300 text-sm">
-                <strong>Avertissement :</strong> Ces informations sont fournies à titre indicatif et ne constituent pas un conseil juridique.
-                Pour toute situation complexe, consultez un avocat spécialisé en droit des médias ou de la propriété intellectuelle.
-              </p>
-            </div>
-          </div>
-        )}
 
-        {/* Guide technique */}
-        {activeTab === 'technical' && (
-          <div>
-            <SectionHeader icon={Cpu} title="Guide technique" subtitle="Formats, codecs et recommandations pour un résultat optimal" />
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
-                <h3 className="font-semibold text-white mb-4">Formats vidéo acceptés</h3>
-                <div className="space-y-2">
-                  {[
-                    ['MP4 (H.264/H.265)', 'Recommandé', 'text-green-400'],
-                    ['MOV', 'Supporté', 'text-cyan-400'],
-                    ['WebM (VP9)', 'Supporté', 'text-cyan-400'],
-                    ['AVI', 'Converti automatiquement', 'text-yellow-400'],
-                    ['WMV', 'Converti automatiquement', 'text-yellow-400'],
-                  ].map(([fmt, status, color]) => (
-                    <div key={fmt} className="flex items-center justify-between text-sm">
-                      <span className="text-gray-300 font-mono">{fmt}</span>
-                      <span className={color}>{status}</span>
+            {/* Content */}
+            <div className="flex-1 min-w-0">
+              {currentCategory && (
+                <>
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="p-2 bg-gray-800 rounded-lg">
+                      <currentCategory.icon className={`w-5 h-5 ${currentCategory.color}`} />
                     </div>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
-                <h3 className="font-semibold text-white mb-4">Qualité recommandée</h3>
-                <div className="space-y-3">
-                  {[
-                    { res: '4K (3840×2160)', fps: '24/30/60fps', bitrate: '35–68 Mbps' },
-                    { res: '1080p Full HD', fps: '24/30/60fps', bitrate: '8–12 Mbps' },
-                    { res: '720p HD', fps: '24/30fps', bitrate: '5–7.5 Mbps' },
-                    { res: 'Shorts 1080×1920', fps: '24/30/60fps', bitrate: '8–12 Mbps' },
-                  ].map(({ res, fps, bitrate }) => (
-                    <div key={res} className="text-sm">
-                      <div className="text-white font-medium">{res}</div>
-                      <div className="text-gray-500">{fps} — {bitrate}</div>
+                    <div>
+                      <h2 className="text-lg font-bold text-white">{currentCategory.label}</h2>
+                      <p className="text-gray-500 text-sm">{currentCategory.articles.length} articles</p>
                     </div>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
-                <h3 className="font-semibold text-white mb-4">Formats audio</h3>
-                <div className="space-y-2">
-                  {[
-                    ['WAV 24bit/48kHz', 'Meilleure qualité', 'text-green-400'],
-                    ['FLAC', 'Sans perte', 'text-green-400'],
-                    ['AAC 320 kbps', 'Recommandé streaming', 'text-cyan-400'],
-                    ['MP3 320 kbps', 'Supporté', 'text-cyan-400'],
-                    ['OGG Vorbis', 'Supporté', 'text-yellow-400'],
-                  ].map(([fmt, status, color]) => (
-                    <div key={fmt} className="flex items-center justify-between text-sm">
-                      <span className="text-gray-300 font-mono">{fmt}</span>
-                      <span className={color}>{status}</span>
+                    <div className="ml-auto relative">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-500" />
+                      <input
+                        type="text"
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                        placeholder="Rechercher..."
+                        className="pl-9 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-500 w-44"
+                      />
                     </div>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6">
-                <h3 className="font-semibold text-white mb-4">DRM & protection</h3>
-                <div className="space-y-3 text-sm text-gray-400">
-                  <p>Le contenu premium est automatiquement protégé selon la plateforme :</p>
-                  <ul className="space-y-1.5">
-                    {[
-                      'Chrome / Android — Widevine L1',
-                      'Safari / iOS — FairPlay Streaming',
-                      'Edge / Windows — PlayReady',
-                      'Fallback — AES-128 encryption HLS',
-                    ].map(item => (
-                      <li key={item} className="flex gap-2">
-                        <Shield className="w-4 h-4 text-cyan-400 shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="text-gray-500 text-xs mt-3">
-                    La protection DRM est activée automatiquement pour tout contenu avec un prix d'accès.
-                    Aucune configuration requise de votre part.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* FAQ */}
-        {activeTab === 'faq' && (
-          <div>
-            <SectionHeader icon={HelpCircle} title="Questions fréquentes" subtitle="Réponses aux questions les plus courantes" />
-            <div className="space-y-6">
-              {[
-                {
-                  category: 'Paiements',
-                  icon: DollarSign,
-                  items: [
-                    { q: 'Quand est-ce que je reçois mon argent ?', a: 'Les paiements sont traités chaque mois. Le virement arrive sous 3 à 5 jours ouvrés après traitement, dès lors que votre solde dépasse 10€ et que votre KYC est validé.' },
-                    { q: 'Quels modes de retrait sont disponibles ?', a: 'Virement SEPA (recommandé), PayPal et en TruCoin. Le virement SEPA est gratuit. PayPal applique les frais standard de PayPal. La conversion TruCoin → € applique un frais fixe minimal.' },
-                    { q: 'Comment fonctionne le remboursement d\'un achat ?', a: 'Les remboursements sont possibles dans les 14 jours pour les contenus non consultés. Pour les contenus consultés, contactez notre support. En cas de fraude confirmée, le remboursement est systématique.' },
-                  ]
-                },
-                {
-                  category: 'Copyright',
-                  icon: Scale,
-                  items: [
-                    { q: 'Mon contenu a été retiré pour copyright, que faire ?', a: 'Si vous pensez que le retrait est une erreur, utilisez le formulaire de contestation accessible depuis votre tableau de bord. Notre équipe traite les contestations sous 72h ouvrées. En cas de dispute persistante, une médiation est disponible.' },
-                    { q: 'Quelqu\'un a copié mon contenu, comment le signaler ?', a: 'Utilisez le bouton "Signaler" sur le contenu concerné, puis choisissez "Violation copyright". Fournissez une preuve de votre droit de propriété. Le contenu suspect est mis en revue sous 24h.' },
-                  ]
-                },
-                {
-                  category: 'Compte',
-                  icon: Settings,
-                  items: [
-                    { q: 'J\'ai perdu l\'accès à mon compte, comment le récupérer ?', a: 'Utilisez la procédure "Mot de passe oublié" depuis la page de connexion. Si vous n\'avez plus accès à votre email, contactez le support avec une pièce d\'identité et la preuve que vous êtes le titulaire.' },
-                    { q: 'Puis-je avoir plusieurs comptes ?', a: 'Un seul compte personnel est autorisé par personne. Vous pouvez en revanche créer plusieurs chaînes depuis votre compte unique. Chaque chaîne peut avoir son propre univers et monétisation.' },
-                  ]
-                },
-              ].map(({ category, icon: Icon, items }) => (
-                <div key={category}>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Icon className="w-4 h-4 text-gray-500" />
-                    <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider">{category}</h3>
                   </div>
                   <div className="space-y-2">
-                    {items.map(({ q, a }) => <FaqItem key={q} question={q} answer={a} />)}
+                    {filteredArticles.length > 0
+                      ? filteredArticles.map(article => <ArticleItem key={article.id} article={article} />)
+                      : (
+                        <div className="text-center py-12 text-gray-600">
+                          <Search className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                          Aucun résultat pour "{search}"
+                        </div>
+                      )
+                    }
                   </div>
-                </div>
-              ))}
+                </>
+              )}
             </div>
           </div>
         )}
 
-        {/* Support */}
-        {activeTab === 'support' && (
+        {/* ===== BLOG ===== */}
+        {mainTab === 'blog' && (
           <div>
-            <SectionHeader icon={MessageSquare} title="Support" subtitle="Plusieurs façons de nous contacter selon l'urgence" />
-            <div className="grid md:grid-cols-3 gap-5 mb-8">
-              <div className="p-6 bg-gray-900/50 border border-gray-800 rounded-xl">
-                <Ticket className="w-6 h-6 text-blue-400 mb-3" />
-                <h3 className="font-semibold text-white mb-1">Ticket support</h3>
-                <p className="text-gray-400 text-sm mb-4">Pour toute demande nécessitant un suivi. Réponse sous 24-48h ouvrées.</p>
-                <button className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">
-                  Ouvrir un ticket
-                </button>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-xl font-bold text-white">Blog officiel TruTube</h2>
+                <p className="text-gray-500 text-sm mt-0.5">Actualités, guides et analyses de l'équipe</p>
               </div>
-              <div className="p-6 bg-gray-900/50 border border-gray-800 rounded-xl">
-                <MessageSquare className="w-6 h-6 text-green-400 mb-3" />
-                <h3 className="font-semibold text-white mb-1">Chat en direct</h3>
-                <p className="text-gray-400 text-sm mb-4">Disponible du lundi au vendredi, 9h–18h CET. Réponse immédiate.</p>
-                <button className="w-full py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors">
-                  Démarrer le chat
+              <button className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg text-sm transition-colors">
+                <Rss className="w-4 h-4" />
+                S'abonner au flux RSS
+              </button>
+            </div>
+
+            <div className="flex flex-wrap gap-2 mb-7">
+              {BLOG_CATEGORIES.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setBlogCategory(cat)}
+                  className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    blogCategory === cat
+                      ? 'bg-cyan-600 text-white'
+                      : 'bg-gray-800 text-gray-400 hover:text-white'
+                  }`}
+                >
+                  {cat}
                 </button>
+              ))}
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {filteredBlog.map(post => (
+                <article
+                  key={post.id}
+                  className="bg-gray-900/50 border border-gray-800 rounded-xl p-5 hover:border-gray-700 transition-colors cursor-pointer group"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${post.categoryColor}`}>
+                      {post.category}
+                    </span>
+                    <div className="flex items-center gap-1 text-gray-600 text-xs">
+                      <Clock className="w-3 h-3" />
+                      {post.readTime}
+                    </div>
+                  </div>
+                  <h3 className="font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors leading-snug">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm mb-4 leading-relaxed line-clamp-2">{post.excerpt}</p>
+                  <div className="flex items-center justify-between text-xs text-gray-600">
+                    <span>{post.author}</span>
+                    <span>{post.date}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {filteredBlog.length === 0 && (
+              <div className="text-center py-16 text-gray-600">
+                Aucun article dans cette catégorie.
               </div>
-              <div className="p-6 bg-gray-900/50 border border-gray-800 rounded-xl">
-                <Mail className="w-6 h-6 text-yellow-400 mb-3" />
-                <h3 className="font-semibold text-white mb-1">Email</h3>
-                <p className="text-gray-400 text-sm mb-4">Pour les demandes complexes ou confidentielles. Réponse sous 48h.</p>
-                <button className="w-full py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg text-sm font-medium transition-colors">
-                  support@trutube.tv
-                </button>
+            )}
+
+            <div className="mt-8 text-center">
+              <button className="flex items-center gap-2 px-6 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg text-sm font-medium mx-auto transition-colors">
+                Voir tous les articles
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ===== STATUS ===== */}
+        {mainTab === 'status' && (
+          <div>
+            {/* Global status banner */}
+            <div className={`mb-8 p-5 rounded-xl border flex items-center gap-4 ${
+              hasIssues
+                ? 'bg-yellow-500/10 border-yellow-500/20'
+                : 'bg-green-500/10 border-green-500/20'
+            }`}>
+              {hasIssues
+                ? <AlertTriangle className="w-6 h-6 text-yellow-400 shrink-0" />
+                : <CheckCircle className="w-6 h-6 text-green-400 shrink-0" />
+              }
+              <div>
+                <div className={`font-semibold ${hasIssues ? 'text-yellow-300' : 'text-green-300'}`}>
+                  {hasIssues ? 'Perturbations en cours sur certains services' : 'Tous les systèmes opérationnels'}
+                </div>
+                <div className="text-gray-400 text-sm">
+                  Mis à jour le {new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })} à {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                </div>
               </div>
             </div>
 
-            <div className="p-6 bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-800/30 rounded-xl">
-              <div className="flex items-start gap-4">
-                <Star className="w-6 h-6 text-yellow-400 shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="font-semibold text-white mb-1">Support prioritaire — Créateurs vérifiés</h3>
-                  <p className="text-gray-400 text-sm">
-                    Les créateurs avec un compte vérifié (badge ✓) bénéficient d'un support prioritaire :
-                    réponse chat garantie sous 2h, ticket traité sous 8h ouvrées, ligne directe pour les urgences
-                    liées à la monétisation.
-                  </p>
-                  <button
-                    onClick={() => onNavigate('creator-setup')}
-                    className="mt-3 px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg text-sm font-medium transition-colors"
+            {/* Services grid */}
+            <div className="mb-10">
+              <h2 className="text-lg font-bold text-white mb-4">État des services</h2>
+              <div className="border border-gray-800 rounded-xl overflow-hidden">
+                {SERVICES.map((service, i) => (
+                  <div
+                    key={service.name}
+                    className={`flex items-center justify-between px-5 py-4 ${
+                      i < SERVICES.length - 1 ? 'border-b border-gray-800' : ''
+                    }`}
                   >
-                    Obtenir la vérification
-                  </button>
+                    <div className="flex items-center gap-3">
+                      <div className={`w-2 h-2 rounded-full ${
+                        service.status === 'operational' ? 'bg-green-400' :
+                        service.status === 'degraded' ? 'bg-yellow-400' :
+                        service.status === 'incident' ? 'bg-red-400' :
+                        'bg-blue-400'
+                      }`} />
+                      <span className="text-white text-sm font-medium">{service.name}</span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      {service.latency && (
+                        <span className="text-gray-600 text-xs font-mono">{service.latency}</span>
+                      )}
+                      <StatusBadge status={service.status} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Uptime visual (last 30 days) */}
+            <div className="mb-10">
+              <h2 className="text-lg font-bold text-white mb-4">Disponibilité — 30 derniers jours</h2>
+              <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-5">
+                <div className="flex items-center gap-1 mb-3">
+                  {Array.from({ length: 30 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className={`flex-1 h-7 rounded-sm ${
+                        i === 18 ? 'bg-yellow-500/70' :
+                        i === 22 ? 'bg-yellow-500/70' :
+                        i === 28 ? 'bg-blue-500/50' :
+                        'bg-green-500/70'
+                      }`}
+                      title={`Jour ${30 - i}`}
+                    />
+                  ))}
                 </div>
+                <div className="flex justify-between text-xs text-gray-600">
+                  <span>Il y a 30 jours</span>
+                  <span className="text-gray-400 font-medium">99.1% de disponibilité</span>
+                  <span>Aujourd'hui</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Incidents */}
+            <div>
+              <h2 className="text-lg font-bold text-white mb-4">Historique des incidents</h2>
+              <div className="space-y-4">
+                {INCIDENTS.map((incident, i) => (
+                  <div key={i} className="border border-gray-800 rounded-xl p-5">
+                    <div className="flex items-start justify-between gap-4 mb-3">
+                      <div>
+                        <div className="font-semibold text-white">{incident.service}</div>
+                        <div className="text-gray-500 text-sm">{incident.date}</div>
+                      </div>
+                      <div className="flex items-center gap-3 shrink-0">
+                        <span className="text-gray-500 text-xs flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {incident.duration}
+                        </span>
+                        <span className="px-2.5 py-1 bg-green-500/10 border border-green-500/20 text-green-400 rounded-full text-xs">
+                          {incident.status}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div>
+                        <span className="text-gray-500 text-xs uppercase tracking-wider">Cause :</span>
+                        <p className="text-gray-400 mt-0.5">{incident.cause}</p>
+                      </div>
+                      <div>
+                        <span className="text-gray-500 text-xs uppercase tracking-wider">Résolution :</span>
+                        <p className="text-gray-400 mt-0.5">{incident.resolution}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
