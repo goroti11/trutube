@@ -76,7 +76,7 @@ export default function CommentsSection({
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" id="comments-section">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold text-white">
           {commentCount} commentaire{commentCount > 1 ? 's' : ''}
