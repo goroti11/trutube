@@ -8,7 +8,7 @@ export interface CookiePreferences {
   marketing: boolean;
 }
 
-const STORAGE_KEY = 'goroti_cookie_consent';
+const STORAGE_KEY = 'trutube_cookie_consent';
 
 export function getCookieConsent(): (CookiePreferences & { decided: boolean }) | null {
   try {
@@ -44,7 +44,7 @@ const COOKIE_CATEGORIES = [
   {
     key: 'analytics' as const,
     label: 'Cookies analytiques',
-    desc: "Nous aident à comprendre comment vous utilisez GOROTI pour améliorer l'expérience.",
+    desc: "Nous aident à comprendre comment vous utilisez TruTube pour améliorer l'expérience.",
     icon: <BarChart2 className="w-4 h-4" />,
     required: false,
     examples: 'Pages visitées, watchtime, erreurs',
@@ -110,7 +110,7 @@ export default function CookieBanner() {
                 <div>
                   <h2 className="font-bold text-white text-base mb-1">Vos préférences de cookies</h2>
                   <p className="text-sm text-gray-400 leading-relaxed">
-                    GOROTI utilise des cookies pour assurer le bon fonctionnement du site et améliorer votre expérience. Certains cookies sont essentiels, d'autres optionnels.
+                    TruTube utilise des cookies pour assurer le bon fonctionnement du site et améliorer votre expérience. Certains cookies sont essentiels, d'autres optionnels.
                   </p>
                 </div>
               </div>

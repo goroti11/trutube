@@ -119,7 +119,7 @@ export const UserProfilePage = ({ onNavigate }: UserProfilePageProps) => {
       <>
         <Header onNavigate={onNavigate} showNavigation={true} />
         <div className="flex items-center justify-center min-h-[80vh]">
-          <Loader2 className="w-8 h-8 text-red-500 animate-spin" />
+          <Loader2 className="w-8 h-8 text-cyan-500 animate-spin" />
         </div>
       </>
     );
@@ -131,7 +131,7 @@ export const UserProfilePage = ({ onNavigate }: UserProfilePageProps) => {
       <div className="min-h-screen bg-gray-950 py-12">
         <div className="max-w-3xl mx-auto px-6">
           <div className="bg-gray-900/50 border border-gray-800 rounded-2xl overflow-hidden">
-            <div className="h-32 bg-gradient-to-r from-red-600/20 to-blue-500/20"></div>
+            <div className="h-32 bg-gradient-to-r from-cyan-500/20 to-blue-500/20"></div>
 
             <div className="px-8 pb-8">
               <div className="relative -mt-16 mb-6">
@@ -163,7 +163,7 @@ export const UserProfilePage = ({ onNavigate }: UserProfilePageProps) => {
                 {!editing ? (
                   <button
                     onClick={() => setEditing(true)}
-                    className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+                    className="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium transition-colors"
                   >
                     Modifier le profil
                   </button>
@@ -180,7 +180,7 @@ export const UserProfilePage = ({ onNavigate }: UserProfilePageProps) => {
                     <button
                       onClick={handleSave}
                       disabled={saving}
-                      className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
+                      className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
                     >
                       {saving ? (
                         <Loader2 className="w-4 h-4 animate-spin" />
@@ -219,7 +219,7 @@ export const UserProfilePage = ({ onNavigate }: UserProfilePageProps) => {
                         setFormData({ ...formData, username: e.target.value })
                       }
                       disabled={saving}
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
+                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50"
                       placeholder="votre_pseudo"
                     />
                   ) : (
@@ -240,7 +240,7 @@ export const UserProfilePage = ({ onNavigate }: UserProfilePageProps) => {
                         setFormData({ ...formData, full_name: e.target.value })
                       }
                       disabled={saving}
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
+                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50"
                       placeholder="Votre nom complet"
                     />
                   ) : (
@@ -274,7 +274,7 @@ export const UserProfilePage = ({ onNavigate }: UserProfilePageProps) => {
                       }
                       disabled={saving}
                       rows={4}
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 resize-none"
+                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50 resize-none"
                       placeholder="Parlez-nous de vous..."
                     />
                   ) : (
@@ -297,7 +297,7 @@ export const UserProfilePage = ({ onNavigate }: UserProfilePageProps) => {
                         setFormData({ ...formData, website: e.target.value })
                       }
                       disabled={saving}
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
+                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50"
                       placeholder="https://votre-site.com"
                     />
                   ) : profile?.website ? (
@@ -305,7 +305,7 @@ export const UserProfilePage = ({ onNavigate }: UserProfilePageProps) => {
                       href={profile.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-red-400 hover:text-red-300 flex items-center gap-1"
+                      className="text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
                     >
                       {profile.website}
                     </a>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ArrowLeft, Home } from 'lucide-react';
 import { Video } from '../types';
 import { useAuth } from '../contexts/AuthContext';
@@ -11,8 +11,6 @@ import RelatedVideos from '../components/video/RelatedVideos';
 import TipModal from '../components/TipModal';
 import ReportContentModal from '../components/ReportContentModal';
 import AdUnit from '../components/AdUnit';
-import ShareVideoModal from '../components/video/ShareVideoModal';
-import { savedVideosService } from '../services/savedVideosService';
 
 interface VideoPlayerPageProps {
   video: Video;
@@ -38,15 +36,9 @@ export default function VideoPlayerPage({
   const [hasNotifications, setHasNotifications] = useState(false);
   const [showTipModal, setShowTipModal] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
-  const [showShareModal, setShowShareModal] = useState(false);
 
   const [localVideo, setLocalVideo] = useState(video);
   const [comments, setComments] = useState<any[]>([]);
-
-  useEffect(() => {
-    if (!user) return;
-    savedVideosService.isVideoSaved(user.id, video.id).then(setIsSaved);
-  }, [user, video.id]);
 
   const handleLike = () => {
     if (isLiked) {
@@ -99,36 +91,24 @@ export default function VideoPlayerPage({
   };
 
   const handleShare = () => {
-    setShowShareModal(true);
-  };
-
-  const handleSave = async () => {
-    if (!user) { alert('Connectez-vous pour sauvegarder des vidéos'); return; }
-    if (isSaved) {
-      await savedVideosService.unsaveVideo(user.id, localVideo.id);
-      setIsSaved(false);
-    } else {
-      await savedVideosService.saveVideo(user.id, {
-        video_id: localVideo.id,
-        video_title: localVideo.title,
-        video_thumbnail: localVideo.thumbnailUrl || '',
-        video_creator: localVideo.user?.displayName || '',
-        video_duration: (localVideo as any).duration || 0
+    if (navigator.share) {
+      navigator.share({
+        title: localVideo.title,
+        text: `Regardez "${localVideo.title}" sur TruTube`,
+        url: window.location.href
       });
-      setIsSaved(true);
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('Lien copié dans le presse-papier!');
     }
   };
 
+  const handleSave = () => {
+    setIsSaved(!isSaved);
+  };
+
   const handleDownload = () => {
-    const url = localVideo.videoUrl;
-    if (!url) { alert('Téléchargement non disponible pour cette vidéo.'); return; }
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = localVideo.title.replace(/[^a-z0-9]/gi, '_') + '.mp4';
-    a.target = '_blank';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    alert('Téléchargement commencé...');
   };
 
   const handleCreateClip = () => {
@@ -309,14 +289,6 @@ export default function VideoPlayerPage({
             setShowReportModal(false);
             alert('Signalement envoyé');
           }}
-        />
-      )}
-
-      {showShareModal && (
-        <ShareVideoModal
-          videoId={localVideo.id}
-          videoTitle={localVideo.title}
-          onClose={() => setShowShareModal(false)}
         />
       )}
     </div>
