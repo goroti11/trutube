@@ -71,8 +71,9 @@ import FinancialTermsPage from './pages/FinancialTermsPage';
 import SavedVideosPage from './pages/SavedVideosPage';
 import ReferralPage from './pages/ReferralPage';
 import StatusPage from './pages/StatusPage';
+import ChannelPage from './pages/ChannelPage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral' | 'channel';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -193,6 +194,12 @@ function AppContent() {
           setCurrentPage('channel-analytics');
           setShowSplash(false);
         }
+        return;
+      }
+
+      if (hash.startsWith('channel/')) {
+        setCurrentPage('channel');
+        setShowSplash(false);
         return;
       }
 
@@ -642,6 +649,8 @@ function AppContent() {
         {currentPage === 'resources' && (
           <ResourcesPage onNavigate={(page) => setCurrentPage(page as Page)} />
         )}
+
+        {currentPage === 'channel' && <ChannelPage />}
 
         {currentPage === 'status' && (
           <StatusPage onNavigate={(page) => setCurrentPage(page as Page)} />
