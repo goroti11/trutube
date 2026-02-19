@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Upload, LogIn, Compass, Settings, Sparkles, User, LogOut, ChevronDown, HelpCircle, Play, Users, Wallet, Crown, Shield } from 'lucide-react';
+import { Upload, LogIn, Compass, Settings, Sparkles, User, LogOut, ChevronDown, HelpCircle, Play, Users, Wallet, Crown, Shield, MoreVertical, Book, Briefcase, Info, MessageCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import Logo from './Logo';
 
@@ -11,6 +11,7 @@ interface HeaderProps {
 export default function Header({ onNavigate, showNavigation = true }: HeaderProps) {
   const { user, signOut } = useAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showMoreMenu, setShowMoreMenu] = useState(false);
 
   const handleSignOut = async () => {
     await signOut();
@@ -76,6 +77,79 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                 >
                   <Sparkles className="w-5 h-5" />
                 </button>
+
+                <div className="relative">
+                  <button
+                    onClick={() => setShowMoreMenu(!showMoreMenu)}
+                    className="flex items-center gap-2 px-3 py-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+                    title="Plus de pages"
+                  >
+                    <MoreVertical className="w-5 h-5" />
+                  </button>
+
+                  {showMoreMenu && (
+                    <>
+                      <div
+                        className="fixed inset-0 z-40"
+                        onClick={() => setShowMoreMenu(false)}
+                      />
+                      <div className="absolute right-0 mt-2 w-56 bg-gray-800 border border-gray-700 rounded-lg shadow-xl z-50">
+                        <div className="py-2">
+                          <button
+                            onClick={() => {
+                              onNavigate('about');
+                              setShowMoreMenu(false);
+                            }}
+                            className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
+                          >
+                            <Info className="w-4 h-4" />
+                            À propos
+                          </button>
+                          <button
+                            onClick={() => {
+                              onNavigate('resources');
+                              setShowMoreMenu(false);
+                            }}
+                            className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
+                          >
+                            <Book className="w-4 h-4" />
+                            Ressources
+                          </button>
+                          <button
+                            onClick={() => {
+                              onNavigate('career');
+                              setShowMoreMenu(false);
+                            }}
+                            className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
+                          >
+                            <Briefcase className="w-4 h-4" />
+                            Carrière
+                          </button>
+                          <button
+                            onClick={() => {
+                              onNavigate('help');
+                              setShowMoreMenu(false);
+                            }}
+                            className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
+                          >
+                            <HelpCircle className="w-4 h-4" />
+                            Centre d'aide
+                          </button>
+                          <button
+                            onClick={() => {
+                              onNavigate('support');
+                              setShowMoreMenu(false);
+                            }}
+                            className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
+                          >
+                            <MessageCircle className="w-4 h-4" />
+                            Support
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
               </>
             )}
 

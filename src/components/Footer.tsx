@@ -122,6 +122,22 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
+                  onClick={() => onNavigate('career')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Carrière
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('resources')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Ressources
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => onNavigate('terms')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
