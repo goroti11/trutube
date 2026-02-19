@@ -571,8 +571,40 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       color: 'text-red-400',
       content: {
         description: 'Module complet de création et gestion de chaînes créateur professionnelles.',
+        creationAutomatique: {
+          principe: 'Chaque compte TruTube possède toujours au moins une chaîne',
+          declenchement: 'Création automatique lors de l\'inscription',
+          flux: ['Inscription utilisateur', 'Validation email', 'Création profil', 'Génération automatique chaîne', 'Aucune action manuelle requise'],
+          donneesUtilisees: {
+            'Nom chaîne': 'pseudo choisi',
+            'Pseudo': 'identifiant utilisateur',
+            'Photo': 'avatar compte',
+            'Bannière': 'bannière par défaut',
+            'Catégorie': '"Créateur" par défaut',
+            'Visibilité': 'publique'
+          },
+          statutInitial: {
+            'Publication vidéo': 'activée ✔',
+            'Monétisation': 'désactivée (jusqu\'au KYC)',
+            'Vente premium': 'désactivée',
+            'Marketplace': 'désactivée',
+            'Paiements': 'bloqués jusqu\'au KYC'
+          },
+          activationPostKYC: {
+            'Ventes': 'activées après KYC approuvé',
+            'Retraits': 'activés après KYC approuvé',
+            'Marketplace': 'activée après vérification',
+            'Abonnements': 'activés'
+          },
+          personnalisation: 'Utilisateur peut modifier nom, branding, visibilité, catégorie après création',
+          multiplesChaines: {
+            max: 'Limite selon statut KYC',
+            exemples: ['Projet musical (alias artiste)', 'Chaîne éducative (tutos)', 'Label (multi artistes)']
+          },
+          avantages: ['Zéro friction utilisateur', 'Pas de configuration complexe', 'Publication immédiate', 'Chaque compte devient créateur potentiel']
+        },
         creation: {
-          access: 'Accessible depuis le compte légal vérifié',
+          access: 'Chaînes supplémentaires accessibles après création compte',
           etapes: ['Choisir type de chaîne', 'Définir identité publique', 'Paramétrer visibilité', 'Catégoriser contenu', 'Activer monétisation (optionnel)'],
           typesChaine: {
             'Créateur individuel': 'contenu personnel',
