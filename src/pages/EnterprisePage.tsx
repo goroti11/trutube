@@ -29,7 +29,7 @@ function SectionBlock({ title, subtitle, children }: { title: string; subtitle?:
   );
 }
 
-function FeatureCard({ icon: Icon, title, description, color = 'text-red-400' }: {
+function FeatureCard({ icon: Icon, title, description, color = 'text-cyan-400' }: {
   icon: React.ElementType; title: string; description: string; color?: string;
 }) {
   return (
@@ -81,23 +81,23 @@ export default function EnterprisePage({ onNavigate }: Props) {
       <div className="bg-gradient-to-br from-gray-900 via-gray-950 to-gray-950 border-b border-gray-800">
         <div className="max-w-6xl mx-auto px-6 py-20">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 rounded-full text-red-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-sm mb-6">
               <Building2 className="w-4 h-4" />
-              GOROTI — Infrastructure créative
+              TruTube — Infrastructure créative
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-5 leading-tight">
               La plateforme creator-first<br />
-              <span className="text-red-400">pour l'économie créative mondiale</span>
+              <span className="text-cyan-400">pour l'économie créative mondiale</span>
             </h1>
             <p className="text-lg text-gray-300 leading-relaxed mb-8">
-              GOROTI construit une infrastructure juste pour les créateurs de contenu :
+              TruTube construit une infrastructure juste pour les créateurs de contenu :
               revenus directs, droits protégés, transparence totale sur chaque centime généré.
               Une alternative structurelle à la publicité comme seule source de revenus.
             </p>
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={() => onNavigate('pricing')}
-                className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+                className="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium transition-colors"
               >
                 Voir la tarification
               </button>
@@ -122,7 +122,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
             { value: 'Multi-univers', label: 'Vidéo, musique, live, marketplace' },
           ].map(({ value, label }) => (
             <div key={label} className="text-center p-5 bg-gray-900/50 border border-gray-800 rounded-xl">
-              <div className="text-2xl font-bold text-red-400 mb-1">{value}</div>
+              <div className="text-2xl font-bold text-cyan-400 mb-1">{value}</div>
               <div className="text-gray-500 text-xs">{label}</div>
             </div>
           ))}
@@ -135,7 +135,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
           <div>
             <h3 className="text-base font-semibold text-white mb-3">Notre mission</h3>
             <p className="text-gray-400 leading-relaxed mb-4 text-sm">
-              GOROTI est né d'un constat simple : les créateurs méritent mieux qu'un modèle publicitaire
+              TruTube est né d'un constat simple : les créateurs méritent mieux qu'un modèle publicitaire
               opaque qui les place en simples vecteurs de trafic. Notre mission est de
               <span className="text-white"> donner aux créateurs un revenu direct indépendant de la publicité</span>,
               en construisant une plateforme où chaque euro vient directement de la valeur créée.
@@ -157,7 +157,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
                 ['Protection des droits native', 'Fingerprinting, DMCA interne, preuves horodatées'],
               ].map(([title, desc]) => (
                 <div key={title as string} className="flex gap-3">
-                  <CheckCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
                   <div className="text-sm">
                     <span className="text-white font-medium">{title}</span>
                     <span className="text-gray-500"> — {desc}</span>
@@ -168,12 +168,12 @@ export default function EnterprisePage({ onNavigate }: Props) {
           </div>
         </div>
 
-        <div className="p-5 bg-gradient-to-r from-red-900/20 to-blue-900/10 border border-red-800/30 rounded-xl">
+        <div className="p-5 bg-gradient-to-r from-cyan-900/20 to-blue-900/10 border border-cyan-800/30 rounded-xl">
           <div className="flex gap-3">
-            <Eye className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+            <Eye className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
             <p className="text-gray-400 text-sm leading-relaxed">
               <span className="text-white font-medium">Problème résolu :</span> Sur les plateformes existantes,
-              90% des créateurs gagnent moins de 100€/mois. Sur GOROTI, le modèle de revenus directs
+              90% des créateurs gagnent moins de 100€/mois. Sur TruTube, le modèle de revenus directs
               permet à des créateurs avec une audience modeste de générer un revenu significatif,
               car chaque achat ou abonnement va directement à eux — pas à un intermédiaire publicitaire.
             </p>
@@ -226,11 +226,11 @@ export default function EnterprisePage({ onNavigate }: Props) {
       </SectionBlock>
 
       {/* 3. Modèle économique */}
-      <SectionBlock title="Modèle économique" subtitle="Comment GOROTI génère et redistribue de la valeur — sans dépendance à la publicité">
+      <SectionBlock title="Modèle économique" subtitle="Comment TruTube génère et redistribue de la valeur — sans dépendance à la publicité">
         <div className="grid md:grid-cols-4 gap-4 mb-8">
           {[
             { icon: Coins, color: 'text-yellow-400', label: 'Commission ventes', desc: 'Contenus premium (vidéos, albums, cours)', value: '15%' },
-            { icon: Package, color: 'text-red-400', label: 'Marketplace', desc: 'Services entre créateurs', value: '10%' },
+            { icon: Package, color: 'text-cyan-400', label: 'Marketplace', desc: 'Services entre créateurs', value: '10%' },
             { icon: Globe, color: 'text-blue-400', label: 'Distribution DSP', desc: 'Export musique vers services tiers', value: '5%' },
             { icon: Handshake, color: 'text-orange-400', label: 'Partenariats', desc: 'Sponsoring natif & campagnes marques', value: 'Variable' },
           ].map(({ icon: Icon, color, label, desc, value }) => (
@@ -247,22 +247,22 @@ export default function EnterprisePage({ onNavigate }: Props) {
           <h3 className="font-semibold text-white mb-4">Répartition des revenus</h3>
           <div className="flex items-center gap-3">
             <div className="flex-1 h-4 bg-gray-800 rounded-full overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-red-600 to-green-500 rounded-full" style={{ width: '85%' }} />
+              <div className="h-full bg-gradient-to-r from-cyan-500 to-green-500 rounded-full" style={{ width: '85%' }} />
             </div>
             <span className="text-white font-bold text-sm w-12 shrink-0">85%</span>
           </div>
           <div className="flex justify-between text-xs text-gray-500 mt-1">
             <span>Reversé aux créateurs</span>
-            <span>15% commission GOROTI (frais bancaires inclus)</span>
+            <span>15% commission TruTube (frais bancaires inclus)</span>
           </div>
         </div>
 
-        <div className="p-5 bg-gradient-to-r from-red-900/20 to-blue-900/10 border border-red-800/30 rounded-xl">
-          <Eye className="w-5 h-5 text-red-400 mb-2" />
+        <div className="p-5 bg-gradient-to-r from-cyan-900/20 to-blue-900/10 border border-cyan-800/30 rounded-xl">
+          <Eye className="w-5 h-5 text-cyan-400 mb-2" />
           <h3 className="font-semibold text-white mb-1">Transparence financière totale</h3>
           <p className="text-gray-400 text-sm leading-relaxed">
             Toutes les commissions sont fixes, publiques et auditables. Les créateurs voient exactement
-            combien GOROTI prend sur chaque transaction. Aucun changement silencieux — tout changement
+            combien TruTube prend sur chaque transaction. Aucun changement silencieux — tout changement
             de politique est annoncé 30 jours à l'avance avec notification directe.
           </p>
         </div>
@@ -298,7 +298,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
             },
             {
               icon: Clock,
-              color: 'text-red-400',
+              color: 'text-cyan-400',
               title: 'Preuves horodatées',
               desc: 'Chaque publication est enregistrée avec hash, timestamp et métadonnées cryptographiques. Preuve d\'antériorité disponible en format légal sur demande.',
             },
@@ -323,7 +323,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
         <div className="text-center">
           <button
             onClick={() => onNavigate('terms')}
-            className="inline-flex items-center gap-2 text-red-400 hover:text-red-300 text-sm transition-colors"
+            className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
           >
             Lire la politique copyright complète
             <ArrowRight className="w-4 h-4" />
@@ -336,13 +336,13 @@ export default function EnterprisePage({ onNavigate }: Props) {
         <div className="space-y-3">
           <AccordionItem title="Conformité RGPD (Règlement UE 2016/679)">
             <p>
-              GOROTI traite les données personnelles conformément au RGPD. Droit d'accès, de rectification,
+              TruTube traite les données personnelles conformément au RGPD. Droit d'accès, de rectification,
               de portabilité et d'effacement garantis pour tous les utilisateurs européens.
             </p>
             <ul className="space-y-1 mt-2">
               {['DPO désigné et coordonnées publiques', 'Registre de traitement maintenu à jour', 'Sous-traitants contractualisés (DPA)', 'Base légale explicite pour chaque traitement', 'Consentement granulaire via cookie manager'].map(item => (
                 <li key={item} className="flex gap-2 text-xs">
-                  <CheckCircle className="w-3.5 h-3.5 text-red-400 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
                   {item}
                 </li>
               ))}
@@ -379,7 +379,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
           </AccordionItem>
           <AccordionItem title="Fiscalité des payouts">
             <p>
-              GOROTI fournit à chaque créateur un relevé fiscal annuel (document 1099-équivalent pour les
+              TruTube fournit à chaque créateur un relevé fiscal annuel (document 1099-équivalent pour les
               US, déclaration UE pour les résidents européens). Les TVA et retenues à la source sont
               gérées automatiquement selon la juridiction.
             </p>
@@ -390,7 +390,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
           </AccordionItem>
           <AccordionItem title="Digital Services Act (DSA) — Conformité UE">
             <p>
-              GOROTI se conforme au Règlement (UE) 2022/2065 sur les services numériques. Rapport de
+              TruTube se conforme au Règlement (UE) 2022/2065 sur les services numériques. Rapport de
               transparence annuel publié, mécanisme de signalement accessible, système de réclamation
               interne opérationnel et coopération avec les organismes de règlement des litiges (ORL).
             </p>
@@ -430,8 +430,8 @@ export default function EnterprisePage({ onNavigate }: Props) {
             <p className="text-gray-500 text-xs mb-3 leading-relaxed">
               Demandes d'interview, d'accréditation ou d'information.
             </p>
-            <a href="mailto:press@goroti.tv" className="block text-red-400 text-sm hover:text-red-300 transition-colors">
-              press@goroti.tv
+            <a href="mailto:press@trutube.tv" className="block text-cyan-400 text-sm hover:text-cyan-300 transition-colors">
+              press@trutube.tv
             </a>
             <p className="text-gray-600 text-xs mt-1">Réponse sous 24h ouvrées</p>
           </div>
@@ -443,11 +443,11 @@ export default function EnterprisePage({ onNavigate }: Props) {
             {[
               ['Logo officiel', 'Utiliser uniquement les fichiers du kit presse'],
               ['Couleurs', '#00C4CC (cyan) — couleur principale officielle'],
-              ['Nom commercial', 'Toujours écrit "GOROTI" (T majuscule, T majuscule)'],
+              ['Nom commercial', 'Toujours écrit "TruTube" (T majuscule, T majuscule)'],
               ['Captures d\'écran', 'Utiliser les captures officielles fournies'],
             ].map(([rule, detail]) => (
               <div key={rule as string} className="flex gap-2 text-xs">
-                <CheckCircle className="w-3.5 h-3.5 text-red-400 shrink-0 mt-0.5" />
+                <CheckCircle className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
                 <span><span className="text-gray-300 font-medium">{rule} :</span><span className="text-gray-500"> {detail}</span></span>
               </div>
             ))}
@@ -459,7 +459,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
       <SectionBlock title="Partenaires" subtitle="Labels, marques, distributeurs et prestataires techniques">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {[
-            { icon: Music, color: 'text-red-400', label: 'Labels indépendants', desc: 'Distribution directe, gestion royalties multi-artistes, contrats de licence' },
+            { icon: Music, color: 'text-cyan-400', label: 'Labels indépendants', desc: 'Distribution directe, gestion royalties multi-artistes, contrats de licence' },
             { icon: Tag, color: 'text-yellow-400', label: 'Marques & annonceurs', desc: 'Sponsoring natif, campagnes créateurs, placement contextuel' },
             { icon: Globe, color: 'text-blue-400', label: 'Distributeurs musicaux', desc: 'Intégration DistroKid, TuneCore, Believe pour distribution multi-DSP' },
             { icon: Code2, color: 'text-green-400', label: 'Prestataires techniques', desc: 'API partenaires pour outils créateurs, analytics tiers, services B2B' },
@@ -474,16 +474,16 @@ export default function EnterprisePage({ onNavigate }: Props) {
         <div className="flex gap-3 flex-wrap">
           <button
             onClick={() => onNavigate('partner-program')}
-            className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
             Programme partenaire
             <ArrowRight className="w-4 h-4" />
           </button>
           <a
-            href="mailto:partnerships@goroti.tv"
+            href="mailto:partnerships@trutube.tv"
             className="flex items-center gap-2 px-5 py-2.5 bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-sm transition-colors"
           >
-            partnerships@goroti.tv
+            partnerships@trutube.tv
           </a>
         </div>
       </SectionBlock>
@@ -500,7 +500,7 @@ export default function EnterprisePage({ onNavigate }: Props) {
             </p>
           </div>
           <div className="p-5 bg-gray-900/50 border border-gray-800 rounded-xl">
-            <TrendingUp className="w-5 h-5 text-red-400 mb-3" />
+            <TrendingUp className="w-5 h-5 text-cyan-400 mb-3" />
             <h3 className="font-semibold text-white mb-2">Avantages structurels</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               LTV créateur supérieur aux plateformes ad-based. Rétention élevée grâce aux revenus directs.
@@ -514,10 +514,10 @@ export default function EnterprisePage({ onNavigate }: Props) {
               Deck complet, métriques et roadmap disponibles sous NDA.
             </p>
             <a
-              href="mailto:investors@goroti.tv"
-              className="text-red-400 hover:text-red-300 text-sm transition-colors"
+              href="mailto:investors@trutube.tv"
+              className="text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
             >
-              investors@goroti.tv
+              investors@trutube.tv
             </a>
           </div>
         </div>
@@ -531,10 +531,10 @@ export default function EnterprisePage({ onNavigate }: Props) {
               { phase: 'Actuel', items: 'Vidéo, musique, marketplace, live, communautés, wallet complet' },
               { phase: 'Q2 2026', items: 'Distribution DSP automatisée, app mobile native iOS/Android' },
               { phase: 'Q3 2026', items: 'API publique créateurs, programme ambassadeurs, expansion EU' },
-              { phase: 'Q4 2026', items: 'GOROTI Premium B2B, analytics avancés, partenariats label' },
+              { phase: 'Q4 2026', items: 'TruTube Premium B2B, analytics avancés, partenariats label' },
             ].map(({ phase, items }) => (
               <div key={phase} className="flex gap-5 px-5 py-3 text-sm">
-                <span className="text-red-400 font-medium w-20 shrink-0">{phase}</span>
+                <span className="text-cyan-400 font-medium w-20 shrink-0">{phase}</span>
                 <span className="text-gray-400">{items}</span>
               </div>
             ))}

@@ -116,7 +116,7 @@ export default function MonetizationDashboard() {
                 Programme Partenaire - Acceptation requise
               </h3>
               <p className="text-red-200 text-sm mb-4">
-                Pour activer la monétisation, vous devez accepter les conditions du Programme Partenaire GOROTI.
+                Pour activer la monétisation, vous devez accepter les conditions du Programme Partenaire TruTube.
               </p>
               <button
                 onClick={() => navigate('#partner-program')}
@@ -169,7 +169,7 @@ export default function MonetizationDashboard() {
           icon={CheckCircle}
         />
         <RevenueCard
-          label="Commission GOROTI"
+          label="Commission TruTube"
           amount="15%"
           sublabel={`€${(totalEstimated * 0.15).toFixed(2)}`}
           color="text-gray-400"

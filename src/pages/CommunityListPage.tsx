@@ -111,7 +111,7 @@ export default function CommunityListPage() {
       <main className="max-w-7xl mx-auto px-4 py-8 mt-16">
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">GOROTI Communauté</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-2">TruTube Communauté</h1>
             <p className="text-lg text-gray-600">
               Rejoignez des communautés actives et créez de vraies relations
             </p>

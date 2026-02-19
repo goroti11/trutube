@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Upload, LogIn, Compass, Settings, Sparkles, User, LogOut, ChevronDown, HelpCircle, Play, Users, Wallet, Crown, Shield, Bookmark, Gift } from 'lucide-react';
+import { Upload, LogIn, Compass, Settings, Sparkles, User, LogOut, ChevronDown, HelpCircle, Play, Users, Wallet, Crown, Shield } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import Logo from './Logo';
 
@@ -93,7 +93,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
             <button
               onClick={() => onNavigate?.('premium')}
               className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white rounded-lg font-bold transition-all shadow-lg"
-              title="GOROTI Premium"
+              title="TruTube Premium"
             >
               <Crown className="w-4 h-4" />
               <span className="hidden sm:inline">Premium</span>
@@ -102,7 +102,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
             {user && (
               <button
                 onClick={() => onNavigate?.('upload')}
-                className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-bold transition-colors"
               >
                 <Upload className="w-4 h-4" />
                 <span className="hidden sm:inline">Upload</span>
@@ -122,7 +122,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                       className="w-6 h-6 rounded-full"
                     />
                   ) : (
-                    <div className="w-6 h-6 rounded-full bg-red-600 flex items-center justify-center">
+                    <div className="w-6 h-6 rounded-full bg-cyan-600 flex items-center justify-center">
                       <User className="w-4 h-4" />
                     </div>
                   )}
@@ -164,26 +164,6 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                         </button>
                         <button
                           onClick={() => {
-                            onNavigate?.('saved-videos');
-                            setShowUserMenu(false);
-                          }}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
-                        >
-                          <Bookmark className="w-4 h-4" />
-                          Vidéos sauvegardées
-                        </button>
-                        <button
-                          onClick={() => {
-                            onNavigate?.('referral');
-                            setShowUserMenu(false);
-                          }}
-                          className="w-full text-left px-4 py-2 text-sm text-green-400 hover:bg-gray-700 flex items-center gap-2 font-semibold"
-                        >
-                          <Gift className="w-4 h-4" />
-                          Parrainage
-                        </button>
-                        <button
-                          onClick={() => {
                             onNavigate?.('dashboard');
                             setShowUserMenu(false);
                           }}
@@ -200,7 +180,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                           className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2 font-semibold"
                         >
                           <Play className="w-4 h-4" />
-                          GOROTI Studio
+                          TruTube Studio
                         </button>
                         <button
                           onClick={() => {
