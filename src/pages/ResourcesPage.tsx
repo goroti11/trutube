@@ -1351,6 +1351,332 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       description: 'Guide complet d\'upload, optimisation SEO et publication',
       icon: Video,
       color: 'text-blue-400',
+      content: {
+        introduction: 'Publier votre première vidéo sur Goroti est simple. Suivez ce guide pour optimiser votre contenu et maximiser sa portée.',
+        prerequis: [
+          'Compte Goroti avec chaîne créée',
+          'Vidéo au format MP4, MOV ou WebM',
+          'Taille maximale: 10 GB',
+          'Durée: 10 secondes à 12 heures',
+          'Résolution recommandée: 1080p minimum'
+        ],
+        etapes: [
+          {
+            numero: 1,
+            titre: 'Accéder à l\'upload',
+            methodes: [
+              'Cliquer sur l\'icône Upload dans le header',
+              'Aller dans Studio → Upload',
+              'URL directe: /#upload',
+              'Raccourci clavier: Alt+U'
+            ]
+          },
+          {
+            numero: 2,
+            titre: 'Sélectionner la vidéo',
+            actions: [
+              'Glisser-déposer le fichier dans la zone',
+              'Ou cliquer pour parcourir vos fichiers',
+              'L\'upload commence automatiquement',
+              'Barre de progression visible'
+            ],
+            formatsAcceptes: ['MP4 (recommandé)', 'MOV', 'AVI', 'WebM', 'MKV', 'FLV'],
+            tailleMax: '10 GB',
+            dureeMax: '12 heures'
+          },
+          {
+            numero: 3,
+            titre: 'Informations de base',
+            champObligatoires: [
+              {
+                nom: 'Titre',
+                limite: '100 caractères',
+                conseils: [
+                  'Descriptif et accrocheur',
+                  'Inclure mots-clés principaux',
+                  'Éviter clickbait trompeur',
+                  'Capitalisation naturelle'
+                ],
+                exemples: [
+                  'Comment créer une chaîne Goroti en 5 minutes',
+                  'Top 10 des astuces de montage vidéo',
+                  'Tutoriel complet: Monétisation sur Goroti'
+                ]
+              },
+              {
+                nom: 'Description',
+                limite: '5000 caractères',
+                structure: [
+                  'Paragraphe d\'accroche (2-3 lignes)',
+                  'Contenu détaillé avec timestamps',
+                  'Liens utiles et ressources',
+                  'Appel à l\'action (s\'abonner, liker)',
+                  'Hashtags pertinents (max 10)'
+                ],
+                seo: [
+                  'Inclure mots-clés naturellement',
+                  'Première ligne cruciale (visible avant "voir plus")',
+                  'Utiliser timestamps cliquables (00:00)',
+                  'Ajouter liens vers autres contenus'
+                ]
+              },
+              {
+                nom: 'Miniature',
+                format: 'JPG ou PNG',
+                dimensionsRecommandees: '1280×720 px (ratio 16:9)',
+                taille: 'Max 2 MB',
+                conseils: [
+                  'Image claire et attrayante',
+                  'Texte lisible même en petit',
+                  'Contraste élevé',
+                  'Éviter zones de coupure mobile',
+                  'Représenter réellement le contenu'
+                ],
+                bonnesPratiques: [
+                  'Visage expressif si applicable',
+                  'Texte gros et court (3-5 mots max)',
+                  'Couleurs vives et contrastées',
+                  'Logo/marque cohérent'
+                ]
+              }
+            ]
+          },
+          {
+            numero: 4,
+            titre: 'Catégorisation et tags',
+            categories: {
+              universPrincipal: {
+                obligatoire: true,
+                choix: ['Musique', 'Gaming', 'Tech', 'Éducation', 'Sport', 'Beauté', 'Cuisine', 'Voyage', 'Business', 'Art', 'Science', 'Divertissement']
+              },
+              tags: {
+                nombre: '5-15 tags recommandés',
+                limite: '30 tags maximum',
+                types: [
+                  'Mots-clés principaux (ex: "tutoriel", "débutant")',
+                  'Thèmes spécifiques (ex: "montage vidéo", "Adobe Premiere")',
+                  'Audience cible (ex: "créateurs", "entrepreneurs")',
+                  'Format (ex: "guide complet", "top 10")'
+                ],
+                conseils: [
+                  'Éviter spam de tags non pertinents',
+                  'Utiliser tags populaires ET spécifiques',
+                  'Vérifier suggestions automatiques',
+                  'Analyser tags de vidéos similaires performantes'
+                ]
+              }
+            }
+          },
+          {
+            numero: 5,
+            titre: 'Paramètres avancés',
+            options: [
+              {
+                nom: 'Langue',
+                description: 'Langue principale de la vidéo',
+                importance: 'Aide algorithme et découvrabilité',
+                detectionAutomatique: 'Suggérée basée sur audio/description'
+              },
+              {
+                nom: 'Sous-titres',
+                formats: ['SRT', 'VTT', 'ASS'],
+                types: [
+                  'Manuels (uploadés)',
+                  'Auto-générés (IA)',
+                  'Crowdsourced (communauté)'
+                ],
+                avantages: [
+                  'Accessibilité (sourds/malentendants)',
+                  'SEO amélioré',
+                  'Compréhension internationale',
+                  'Watchtime augmenté'
+                ]
+              },
+              {
+                nom: 'Chapitres',
+                format: 'Timestamps dans description',
+                exemple: [
+                  '00:00 Introduction',
+                  '01:30 Étape 1: Configuration',
+                  '05:45 Étape 2: Optimisation',
+                  '10:20 Conclusion'
+                ],
+                minimum: '3 chapitres de 10 secondes minimum',
+                avantages: [
+                  'Navigation facilitée',
+                  'Rétention améliorée',
+                  'Segments partageables',
+                  'Expérience utilisateur'
+                ]
+              },
+              {
+                nom: 'Restriction d\'âge',
+                options: ['Tout public', '13+', '16+', '18+'],
+                impacts: [
+                  'Algorithme de recommandation',
+                  'Monétisation disponible',
+                  'Visibilité réduite pour 18+'
+                ]
+              },
+              {
+                nom: 'Zones géographiques',
+                options: [
+                  'Disponible partout (défaut)',
+                  'Restreindre certains pays',
+                  'Autoriser certains pays uniquement'
+                ],
+                usages: ['Droits de diffusion', 'Contenu régionalisé', 'Respect réglementations locales']
+              }
+            ]
+          },
+          {
+            numero: 6,
+            titre: 'Type de contenu et monétisation',
+            choixPrincipal: {
+              gratuit: {
+                description: 'Visible par tous immédiatement',
+                monetisation: ['Publicités (si éligible)', 'Tips volontaires', 'Affiliation']
+              },
+              premiumPayant: {
+                description: 'Achat requis pour visionner',
+                prixSuggeres: '0,99€ à 19,99€',
+                commission: '15% plateforme',
+                acheteurs: 'Accès permanent',
+                avantages: ['Revenus directs garantis', 'Valorise expertise', 'Audience engagée']
+              },
+              membreUniquement: {
+                description: 'Réservé aux abonnés chaîne payants',
+                condition: 'Programme membres activé',
+                avantages: ['Fidélisation', 'Revenus récurrents', 'Communauté exclusive']
+              },
+              nonRepertorie: {
+                description: 'Visible uniquement via lien direct',
+                usages: ['Clients privés', 'Preview avant publication', 'Contenu sensible']
+              }
+            }
+          },
+          {
+            numero: 7,
+            titre: 'Planification de publication',
+            options: [
+              {
+                type: 'Publication immédiate',
+                description: 'Disponible dès traitement terminé',
+                delai: '2-30 minutes selon qualité/durée'
+              },
+              {
+                type: 'Publication planifiée',
+                description: 'Choisir date et heure précises',
+                avantages: [
+                  'Publication aux heures optimales',
+                  'Coordination avec campagne marketing',
+                  'Préparer à l\'avance',
+                  'Régularité pour algorithme'
+                ],
+                recommandations: [
+                  'Analyser quand votre audience est active',
+                  'Éviter concurrence avec gros créateurs',
+                  'Planifier série pour cohérence'
+                ]
+              }
+            ]
+          },
+          {
+            numero: 8,
+            titre: 'Révision et publication',
+            checklistFinale: [
+              'Titre accrocheur et descriptif',
+              'Description complète avec timestamps',
+              'Miniature professionnelle',
+              'Tags pertinents ajoutés',
+              'Catégorie correcte sélectionnée',
+              'Paramètres de visibilité vérifiés',
+              'Type de monétisation confirmé',
+              'Sous-titres ajoutés si applicable'
+            ],
+            publication: [
+              'Cliquer sur "Publier"',
+              'Traitement automatique (qualités HD/SD)',
+              'Notification abonnés activée',
+              'URL unique générée',
+              'Visible dans votre chaîne'
+            ]
+          }
+        ],
+        apresPublication: {
+          titre: 'Optimisation post-publication',
+          actionsImportantes: [
+            {
+              action: 'Promouvoir la vidéo',
+              canaux: [
+                'Partager sur réseaux sociaux',
+                'Post dans votre communauté Goroti',
+                'Email à newsletter si applicable',
+                'Embed sur site web/blog',
+                'Partage groupes thématiques'
+              ]
+            },
+            {
+              action: 'Engager avec audience',
+              details: [
+                'Répondre premiers commentaires rapidement',
+                'Épingler commentaire contexte/liens',
+                'Liker commentaires constructifs',
+                'Créer conversation'
+              ]
+            },
+            {
+              action: 'Analyser performances',
+              metriques: [
+                'Vues premières 24h/48h',
+                'Taux de clics miniature (CTR)',
+                'Durée de visionnage moyenne',
+                'Taux de rétention',
+                'Sources de trafic',
+                'Données démographiques'
+              ],
+              acces: 'Studio → Analytics → Sélectionner vidéo'
+            },
+            {
+              action: 'Ajustements si nécessaire',
+              modifications: [
+                'Changer miniature si CTR faible',
+                'Améliorer description SEO',
+                'Ajouter tags supplémentaires',
+                'Créer Short promotionnel',
+                'Ajouter dans playlists pertinentes'
+              ]
+            }
+          ]
+        },
+        bonnesPratiquesGenerales: [
+          'Qualité vidéo/audio professionnelle',
+          'Intro courte (<10 secondes)',
+          'Rythme dynamique pour rétention',
+          'Appel à l\'action clair',
+          'Cohérence marque/style',
+          'Régularité publication',
+          'Interaction avec commentaires',
+          'Analyse continue performances'
+        ],
+        erreursAEviter: [
+          'Clickbait trompeur (pénalisé)',
+          'Violation copyright musique/images',
+          'Contenu réutilisé sans ajout valeur',
+          'Tags spam non pertinents',
+          'Description vide ou trop courte',
+          'Miniature de mauvaise qualité',
+          'Ignorer commentaires/communauté',
+          'Ne pas analyser métriques'
+        ],
+        tempsEstime: '15-30 minutes pour upload complet',
+        ressourcesUtiles: [
+          'Guide miniatures efficaces (Ressources)',
+          'Optimisation SEO vidéo (Ressources)',
+          'Analyse analytics (Studio)',
+          'Musique libre de droits (Marketplace)'
+        ]
+      }
     },
     {
       category: 'creators',
@@ -1358,6 +1684,220 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       description: 'Configuration de prix et droits d\'accès',
       icon: Music,
       color: 'text-blue-400',
+      content: {
+        introduction: 'Les albums et contenus premium permettent de monétiser directement votre travail. Créez des collections de vidéos, cours, ou musique et vendez-les à un prix fixe.',
+        prerequis: ['KYC niveau 3 validé', 'Chaîne créateur active', 'Contenu original prêt'],
+        typesContenuPremium: [
+          {
+            type: 'Album vidéo',
+            description: 'Collection de vidéos thématiques ou série',
+            exemples: ['Cours complet (10 vidéos)', 'Documentaire en chapitres', 'Série exclusive'],
+            prixSuggeres: '9,99€ - 49,99€'
+          },
+          {
+            type: 'Album musical',
+            description: 'EP, album, ou compilation musicale',
+            formats: ['Audio seul', 'Audio + clips vidéo', 'Édition deluxe avec bonus'],
+            prixSuggeres: '4,99€ - 19,99€'
+          },
+          {
+            type: 'Contenu unique premium',
+            description: 'Vidéo ou concert exclusif payant',
+            exemples: ['Concert live complet', 'Masterclass', 'Film documentaire'],
+            prixSuggeres: '2,99€ - 29,99€'
+          },
+          {
+            type: 'Formation/Cours',
+            description: 'Contenu éducatif structuré',
+            inclus: ['Vidéos de cours', 'Ressources téléchargeables', 'Certificat optionnel'],
+            prixSuggeres: '19,99€ - 199,99€'
+          }
+        ],
+        etapesCreation: [
+          {
+            numero: 1,
+            titre: 'Créer l\'album',
+            acces: 'Studio → Monétisation → Créer Album Premium',
+            champsObligatoires: [
+              'Titre de l\'album (100 caractères max)',
+              'Description détaillée (1000 caractères)',
+              'Pochette/Cover (1400×1400px, format carré)',
+              'Prix de vente (0,99€ à 499,99€)',
+              'Catégorie principale'
+            ]
+          },
+          {
+            numero: 2,
+            titre: 'Ajouter le contenu',
+            options: [
+              'Uploader nouvelles vidéos directement',
+              'Sélectionner vidéos existantes',
+              'Ordonner contenu (drag & drop)',
+              'Définir aperçu gratuit (preview)'
+            ],
+            recommandation: 'Minimum 3 vidéos pour un album cohérent'
+          },
+          {
+            numero: 3,
+            titre: 'Configurer les droits d\'accès',
+            typesAcces: {
+              achatUnique: {
+                description: 'Paiement unique, accès permanent',
+                avantages: ['Simplicité', 'Revenus immédiats', 'Pas d\'engagement récurrent']
+              },
+              location: {
+                description: 'Accès temporaire (24h, 48h, 7 jours)',
+                prixSuggeres: '30-50% du prix d\'achat',
+                usages: ['Films', 'Concerts', 'Événements']
+              },
+              abonnementInclus: {
+                description: 'Inclus dans abonnement membres',
+                combinaison: 'Peut être vendu séparément aussi',
+                avantages: ['Valeur ajoutée membres', 'Incitation abonnement']
+              }
+            }
+          },
+          {
+            numero: 4,
+            titre: 'Tarification stratégique',
+            facteurs: [
+              'Durée totale du contenu',
+              'Qualité de production',
+              'Expertise/rareté',
+              'Prix marché concurrent',
+              'Audience cible (pouvoir d\'achat)'
+            ],
+            strategies: {
+              prixLancement: 'Réduction 20-30% premières semaines',
+              precommande: 'Prix préférentiel avant sortie',
+              bundling: 'Plusieurs albums groupés avec réduction',
+              dynamic: 'Ajuster prix selon performances'
+            }
+          },
+          {
+            numero: 5,
+            titre: 'Options avancées',
+            fonctionnalites: [
+              {
+                nom: 'Aperçu gratuit',
+                description: 'Extrait ou vidéo complète visible gratuitement',
+                conseil: '10-20% du contenu total',
+                impact: 'Augmente conversions de 40%'
+              },
+              {
+                nom: 'Bonus exclusifs',
+                exemples: ['Behind the scenes', 'Interviews', 'Fichiers sources', 'Ressources PDF'],
+                impact: 'Justifie prix plus élevé'
+              },
+              {
+                nom: 'Éditions limitées',
+                description: 'Numérotation limitée avec certificat',
+                prixPremium: '+30-50% du prix standard',
+                rareté: 'Crée urgence et désirabilité'
+              },
+              {
+                nom: 'Pré-commande',
+                duree: '1-4 semaines avant sortie',
+                avantages: ['Revenus anticipés', 'Buzz pré-lancement', 'Feedback early adopters'],
+                reductionTypique: '15-25%'
+              }
+            ]
+          }
+        ],
+        gestionVentes: {
+          commissionsGoroti: '15% du prix de vente',
+          reversementCreateur: '85% du prix de vente',
+          fraisPaiement: 'Inclus dans commission plateforme',
+          delaiPaiement: 'Instantané au wallet créateur',
+          facturation: 'Automatique pour chaque achat',
+          tva: 'Applicable selon pays acheteur'
+        },
+        promotion: {
+          methodesEfficaces: [
+            {
+              methode: 'Trailer gratuit',
+              description: 'Vidéo promotionnelle 1-2 minutes',
+              diffusion: 'Chaîne principale + réseaux sociaux',
+              conversionTypique: '5-15%'
+            },
+            {
+              methode: 'Posts communauté',
+              timing: ['Annonce initiale', 'Teaser contenu', 'Compte à rebours sortie', 'Post lancement'],
+              engagement: 'Répondre questions, créer hype'
+            },
+            {
+              methode: 'Partenariats créateurs',
+              principe: 'Cross-promotion avec créateurs similaires',
+              format: 'Mentions mutuelles, interviews croisées'
+            },
+            {
+              methode: 'Campagne email',
+              cibles: ['Abonnés chaîne', 'Membres existants', 'Acheteurs précédents'],
+              timing: 'J-7, J-3, J-1, Jour J'
+            },
+            {
+              methode: 'Réductions flash',
+              duree: '24-48h',
+              occasions: ['Anniversaire chaîne', 'Fêtes', 'Milestones'],
+              impact: 'Pic ventes immédiat'
+            }
+          ]
+        },
+        optimisation: {
+          titre: 'Optimiser les ventes',
+          tactiques: [
+            {
+              tactique: 'A/B Testing',
+              elements: ['Prix', 'Titre', 'Pochette', 'Description'],
+              outils: 'Analytics intégré Goroti Studio',
+              frequence: 'Tous les 30 jours'
+            },
+            {
+              tactique: 'Upselling',
+              technique: 'Proposer album complet lors d\'achat vidéo seule',
+              discount: '20% si achète album complet',
+              augmentation: '+35% panier moyen'
+            },
+            {
+              tactique: 'Bundles',
+              exemple: 'Pack 3 albums à prix réduit',
+              economie: '25-30% vs achat séparé',
+              conversion: 'Augmente valeur vie client'
+            },
+            {
+              tactique: 'Social proof',
+              elements: ['Nombre d\'achats', 'Avis clients', 'Notes/étoiles', 'Témoignages'],
+              affichage: 'Automatique sur page album',
+              impact: '+60% confiance acheteurs'
+            }
+          ]
+        },
+        bonnesPratiques: [
+          'Qualité irréprochable du contenu',
+          'Description détaillée avec valeur claire',
+          'Pochette professionnelle attrayante',
+          'Prix cohérent avec marché',
+          'Promotion régulière multi-canal',
+          'Engagement avec acheteurs (merci, bonus)',
+          'Mise à jour contenu si promis',
+          'Respect délais annoncés'
+        ],
+        erreursFrequentes: [
+          'Prix trop élevé sans justification',
+          'Description vague ou incomplète',
+          'Pas d\'aperçu gratuit',
+          'Promotion insuffisante',
+          'Contenu de qualité inégale',
+          'Promesses non tenues',
+          'Ignorer feedback acheteurs'
+        ],
+        ressourcesUtiles: [
+          'Analyse concurrence (recherche albums similaires)',
+          'Statistiques ventes (Studio → Revenus)',
+          'Feedback acheteurs (commentaires/notes)',
+          'Support créateurs (help@goroti.com)'
+        ]
+      }
     },
     {
       category: 'creators',
@@ -1365,6 +1905,184 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       description: 'Splits automatiques pour collaborations',
       icon: TrendingUp,
       color: 'text-blue-400',
+      content: {
+        introduction: 'Le système de royalties partagées permet de distribuer automatiquement les revenus entre plusieurs contributeurs (artistes, producteurs, compositeurs, etc.).',
+        casUsage: [
+          'Collaboration musicale (feat.)',
+          'Production partagée (producteur + artiste)',
+          'Équipe création (réalisateur, monteur, acteurs)',
+          'Label avec multiples artistes',
+          'Co-création de contenu'
+        ],
+        prerequis: ['KYC niveau 3 validé pour tous les bénéficiaires', 'Contenu uploadé ou album créé', 'Email des collaborateurs confirmés'],
+        fonctionnement: {
+          principe: 'Revenus divisés automatiquement selon pourcentages définis',
+          distribution: 'Instantanée à chaque vente',
+          wallets: 'Chaque bénéficiaire reçoit sa part dans son wallet',
+          transparence: 'Chacun voit ses revenus en temps réel'
+        },
+        configuration: [
+          {
+            etape: 1,
+            titre: 'Accéder aux paramètres de split',
+            chemin: 'Studio → Contenu → Sélectionner vidéo/album → Royalties',
+            moment: 'Avant ou après publication (modifiable)'
+          },
+          {
+            etape: 2,
+            titre: 'Ajouter les bénéficiaires',
+            informations: [
+              'Email Goroti du bénéficiaire',
+              'Nom/pseudo (affiché)',
+              'Rôle (artiste, producteur, compositeur, etc.)',
+              'Pourcentage de royalties (0.01% à 100%)'
+            ],
+            validation: 'Invitation envoyée, doit être acceptée',
+            limites: 'Maximum 50 bénéficiaires par contenu'
+          },
+          {
+            etape: 3,
+            titre: 'Définir les pourcentages',
+            regles: [
+              'Total doit égaler 100%',
+              'Minimum 0.01% par personne',
+              'Précision: 2 décimales',
+              'Vérification automatique calcul'
+            ],
+            exemples: [
+              {
+                scenario: 'Duo 50/50',
+                split: 'Artiste A: 50%, Artiste B: 50%'
+              },
+              {
+                scenario: 'Artiste + Producteur',
+                split: 'Artiste: 70%, Producteur: 30%'
+              },
+              {
+                scenario: 'Label + Artistes',
+                split: 'Label: 40%, Artiste 1: 35%, Artiste 2: 25%'
+              },
+              {
+                scenario: 'Équipe production',
+                split: 'Réalisateur: 40%, Scénariste: 30%, Monteur: 20%, Acteur: 10%'
+              }
+            ]
+          },
+          {
+            etape: 4,
+            titre: 'Validation par tous',
+            processus: [
+              'Chaque bénéficiaire reçoit email notification',
+              'Doit se connecter et accepter les termes',
+              'Peut refuser si désaccord',
+              'Split actif une fois tous validé'
+            ],
+            delai: 'Notifications rappel à J+3 et J+7',
+            expiration: 'Invitation expire après 30 jours'
+          }
+        ],
+        typesSplit: {
+          fixe: {
+            description: 'Pourcentages définis ne changent jamais',
+            usages: 'Collaborations ponctuelles standard',
+            avantage: 'Simplicité, clarté'
+          },
+          echelonne: {
+            description: 'Pourcentages évoluent selon seuils atteints',
+            exemple: '0-1000€: 70/30, >1000€: 60/40',
+            usages: 'Avances récupérables, investisseurs',
+            complexite: 'Configuration avancée requise'
+          },
+          hybride: {
+            description: 'Partie fixe + bonus conditionnels',
+            exemple: '50% fixe + 10% bonus si >10k ventes',
+            usages: 'Incentiver performances'
+          }
+        },
+        gestionConflits: {
+          modification: {
+            titre: 'Modifier un split existant',
+            condition: 'Accord unanime requis',
+            processus: [
+              'Propriétaire propose modification',
+              'Tous bénéficiaires notifiés',
+              'Chacun doit approuver',
+              'Actif dès approbation complète'
+            ],
+            nonRetroactif: 'Ventes passées restent selon ancien split'
+          },
+          desaccord: {
+            titre: 'Résolution désaccords',
+            etapes: [
+              'Discussion interne (messagerie Goroti)',
+              'Médiation support Goroti (sur demande)',
+              'Arbitrage selon CGU si nécessaire',
+              'Gel temporaire revenus si litige grave'
+            ]
+          },
+          retrait: {
+            titre: 'Retirer un bénéficiaire',
+            conditions: [
+              'Accord du bénéficiaire concerné',
+              'Ou violation manifeste contrat',
+              'Redistribution pourcentage aux autres'
+            ],
+            impact: 'Non rétroactif'
+          }
+        },
+        aspectsLegaux: {
+          contrat: 'Split Goroti = contrat légal exécutoire',
+          fiscalite: 'Chaque bénéficiaire responsable sa déclaration',
+          droitsAuteur: 'Split revenus ≠ droits d\'auteur légaux',
+          documentation: 'Export détaillé transactions disponible',
+          conseil: 'Contrat écrit externe recommandé pour clarté rôles'
+        },
+        analytics: {
+          tableauBord: 'Studio → Royalties → Vue d\'ensemble',
+          metriques: [
+            'Revenus totaux par contenu',
+            'Votre part reçue',
+            'Parts versées collaborateurs',
+            'Historique paiements',
+            'Projections futures'
+          ],
+          transparence: 'Chaque bénéficiaire voit seulement ses propres revenus'
+        },
+        bonnesPratiques: [
+          'Définir split AVANT publication',
+          'Documenter accords par écrit (externe)',
+          'Communiquer clairement attentes',
+          'Respecter contributions réelles',
+          'Prévoir clause révision si succès',
+          'Vérifier KYC tous bénéficiaires validé',
+          'Tester avec petit montant d\'abord'
+        ],
+        erreursEviter: [
+          'Oublier un contributeur',
+          'Pourcentages inéquitables non discutés',
+          'Pas de documentation externe',
+          'Modifier split unilatéralement',
+          'Confondre revenus et droits auteur légaux'
+        ],
+        faq: [
+          {
+            q: 'Puis-je avoir plusieurs splits sur différents contenus?',
+            r: 'Oui, chaque contenu a son propre split indépendant'
+          },
+          {
+            q: 'Que se passe-t-il si un bénéficiaire n\'accepte pas?',
+            r: 'Le split n\'est pas actif. Vous devez le modifier ou retirer la personne'
+          },
+          {
+            q: 'Les collaborateurs peuvent-ils voir mes revenus totaux?',
+            r: 'Non, chacun voit uniquement sa propre part'
+          },
+          {
+            q: 'Puis-je retirer des revenus si split non validé?',
+            r: 'Oui, vous recevez 100% tant que split non actif'
+          }
+        ]
+      }
     },
     {
       category: 'creators',
@@ -1372,6 +2090,213 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       description: 'Définir les prix optimaux pour votre contenu',
       icon: DollarSign,
       color: 'text-blue-400',
+      content: {
+        introduction: 'Bien tarifer votre contenu est crucial pour maximiser revenus sans nuire à l\'accessibilité. Voici comment définir des prix optimaux.',
+        philosophieTarification: {
+          equilibre: 'Trouver le point entre valeur perçue et accessibilité',
+          objetif: 'Maximiser (Prix × Volume ventes) et non prix seul',
+          psychologie: 'Prix influence perception qualité'
+        },
+        facteursConsiderer: [
+          {
+            facteur: 'Type de contenu',
+            guidelines: {
+              'Vidéo unique': '0,99€ - 4,99€',
+              'Album/Série (3-5 vidéos)': '9,99€ - 29,99€',
+              'Cours complet': '19,99€ - 199,99€',
+              'Concert/Live exclusif': '4,99€ - 19,99€',
+              'Masterclass expert': '49,99€ - 299,99€'
+            }
+          },
+          {
+            facteur: 'Durée du contenu',
+            regle: '~1€ par 10 minutes de contenu de qualité',
+            exemples: [
+              '30 min → 2,99€',
+              '2h → 9,99€ - 14,99€',
+              '10h (cours) → 49,99€ - 99,99€'
+            ]
+          },
+          {
+            facteur: 'Qualité de production',
+            niveaux: {
+              'Amateur (smartphone)': '-30% prix marché',
+              'Semi-pro (bon équipement)': 'Prix marché standard',
+              'Professionnel (studio)': '+30-50% prix marché'
+            }
+          },
+          {
+            facteur: 'Notoriété créateur',
+            impact: [
+              'Nouveau créateur (<1k abonnés): Prix bas/moyen',
+              'Établi (1k-10k): Prix moyen',
+              'Influent (10k-100k): Prix moyen/élevé',
+              'Star (>100k): Prix élevé/premium'
+            ]
+          },
+          {
+            facteur: 'Rareté/Exclusivité',
+            augmentation: [
+              'Contenu commun: Prix standard',
+              'Expertise niche: +20-40%',
+              'Accès exclusif: +50-100%',
+              'Édition limitée: +30-80%'
+            ]
+          },
+          {
+            facteur: 'Concurrence',
+            analyse: [
+              'Rechercher contenu similaire sur Goroti',
+              'Noter prix pratiqués',
+              'Évaluer qualité comparative',
+              'Se positionner légèrement en dessous si nouveau'
+            ]
+          }
+        ],
+        strategiesPrix: [
+          {
+            strategie: 'Pénétration',
+            description: 'Prix bas initial pour gagner marché',
+            quand: 'Lancement, nouveau créateur, marché concurrentiel',
+            exemple: 'Cours valeur 49€ lancé à 19€',
+            avantages: ['Adoption rapide', 'Reviews nombreuses', 'Notoriété'],
+            risques: ['Revenus limités court terme', 'Difficile augmenter après']
+          },
+          {
+            strategie: 'Écrémage',
+            description: 'Prix élevé initial puis baisse graduelle',
+            quand: 'Contenu unique, expertise rare, forte demande',
+            exemple: 'Masterclass 299€ → 199€ après 3 mois → 149€ après 6 mois',
+            avantages: ['Maximise revenus early adopters', 'Crée perception haute qualité'],
+            risques: ['Volume initial limité', 'Attente baisse prix']
+          },
+          {
+            strategie: 'Prix psychologique',
+            description: 'Utiliser prix terminant par .99 ou .97',
+            exemples: ['9,99€ au lieu de 10€', '49,99€ au lieu de 50€'],
+            impact: '+15-25% conversions',
+            explication: 'Perception prix inférieur catégorie'
+          },
+          {
+            strategie: 'Bundling',
+            description: 'Grouper plusieurs contenus à prix réduit',
+            exemple: '3 albums à 29€ (au lieu de 12€ chacun)',
+            avantages: ['Augmente panier moyen', 'Écou le catalogue ancien', 'Valeur perçue élevée']
+          },
+          {
+            strategie: 'Versioning',
+            description: 'Plusieurs versions à prix différents',
+            exemple: {
+              'Basique (7,99€)': 'Contenu principal seul',
+              'Standard (14,99€)': '+ Bonus et ressources',
+              'Premium (24,99€)': '+ Accès communauté privée + Q&A'
+            },
+            impact: '+40% revenus moyens'
+          },
+          {
+            strategie: 'Tarification dynamique',
+            description: 'Prix évolue selon demande/temps',
+            tactiques: [
+              'Prix lancement réduit premières semaines',
+              'Augmentation progressive si succès',
+              'Promotions flash occasionnelles',
+              'Prix saisonnier (soldes, fêtes)'
+            ]
+          }
+        ],
+        optimisationConversions: {
+          titre: 'Maximiser taux de conversion',
+          leviers: [
+            {
+              levier: 'Ancrage de prix',
+              technique: 'Afficher prix barré plus élevé',
+              exemple: '14,99€ (au lieu de 24,99€)',
+              augmentation: '+30% conversions'
+            },
+            {
+              levier: 'Urgence',
+              tactiques: ['Offre limitée 48h', 'Plus que 50 places', 'Prix augmente J+7'],
+              psychologie: 'Peur de manquer (FOMO)',
+              impact: '+50% conversions court terme'
+            },
+            {
+              levier: 'Garantie satisfait ou remboursé',
+              duree: '14 ou 30 jours',
+              conditions: 'Si <30% contenu visionné',
+              reductionFriction: '+25% conversions',
+              tauxRemboursement: 'Généralement <5%'
+            },
+            {
+              levier: 'Social proof',
+              elements: ['X achats', 'Note moyenne', 'Témoignages', 'Badges'],
+              seuilEfficacite: '>100 achats = très efficace',
+              impact: '+60% confiance'
+            },
+            {
+              levier: 'Preuve valeur',
+              methodes: [
+                'Aperçu gratuit substantiel',
+                'Témoignages détaillés',
+                'Résultats obtenus élèves',
+                'Comparaison avant/après'
+              ]
+            }
+          ]
+        },
+        testOptimisation: {
+          titre: 'Tester et ajuster',
+          processus: [
+            {
+              etape: 'Définir hypothèse',
+              exemple: 'Passer de 14,99€ à 12,99€ augmentera ventes de 40%'
+            },
+            {
+              etape: 'Tester prix (A/B test)',
+              duree: 'Minimum 2-4 semaines',
+              metriques: ['Nombre vues page', 'Taux conversion', 'Revenus total']
+            },
+            {
+              etape: 'Analyser résultats',
+              calculer: 'Revenus total = Prix × Nombre ventes',
+              decider: 'Garder prix générant plus de revenus totaux'
+            },
+            {
+              etape: 'Itérer',
+              frequence: 'Tous les 30-60 jours',
+              variation: '±15-25% du prix actuel'
+            }
+          ]
+        },
+        erreursFrequentes: [
+          'Fixer prix trop bas par manque de confiance',
+          'Prix trop élevé sans preuve de valeur',
+          'Ne jamais ajuster prix initial',
+          'Ignorer prix concurrents',
+          'Prix incohérents entre contenus',
+          'Ne pas tester variations',
+          'Baisser prix précipitamment si ventes lentes'
+        ],
+        calculRentabilite: {
+          formule: 'Revenu net = (Prix × Ventes) × 85% - Coûts production',
+          commission: '15% Goroti déduits automatiquement',
+          objectifMinimum: 'Couvrir coûts + rémunération temps',
+          exemple: {
+            prix: '29,99€',
+            ventes: '200',
+            revenuBrut: '5998€',
+            commissionPlateforme: '900€',
+            revenuNet: '5098€',
+            coutProduction: '1000€',
+            profit: '4098€'
+          }
+        },
+        ressourcesUtiles: [
+          'Analyse concurrence (rechercher contenus similaires)',
+          'Statistiques conversions (Studio Analytics)',
+          'Feedback acheteurs (commentaires/messages)',
+          'Sondages audience (communauté)'
+        ]
+      }
     },
     {
       category: 'creators',
@@ -1379,6 +2304,206 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       description: 'Format court pour promotion et engagement',
       icon: PlayCircle,
       color: 'text-blue-400',
+      content: {
+        introduction: 'Les Shorts sont des vidéos verticales de moins de 60 secondes, optimisées pour consommation mobile rapide et viralité.',
+        caracteristiques: {
+          format: 'Vertical 9:16 (1080×1920px)',
+          duree: 'Maximum 60 secondes',
+          lecture: 'Auto-play en boucle',
+          interface: 'Swipe up/down pour vidéo suivante',
+          algorithme: 'Feed dédié haute découvrabilité'
+        },
+        avantages: [
+          'Viralité potentielle élevée',
+          'Découvrabilité algorithme favorisé',
+          'Engagement rapide audience',
+          'Faible barrière création',
+          'Cross-promotion contenu long',
+          'Adapté mobile-first'
+        ],
+        typesShorts: [
+          {
+            type: 'Teaser/Trailer',
+            description: 'Extraits meilleurs moments vidéo longue',
+            objectif: 'Drive vers contenu complet',
+            longueurIdeale: '15-30 secondes',
+            cta: 'Lien vers vidéo complète'
+          },
+          {
+            type: 'Tips rapides',
+            description: 'Astuce actionnable unique',
+            structure: 'Problème → Solution → Résultat',
+            duree: '30-45 secondes',
+            exemple: 'Comment créer miniature efficace en 3 étapes'
+          },
+          {
+            type: 'Behind the scenes',
+            description: 'Coulisses création contenu',
+            angle: 'Authenticité, proximité',
+            engagement: 'Très élevé',
+            exemples: ['Setup studio', 'Bloopers', 'Processus création']
+          },
+          {
+            type: 'Réaction/Commentaire',
+            description: 'Réagir trend, news, ou contenu viral',
+            timing: 'Rapidité cruciale (trend éphémère)',
+            reach: 'Algorithme favorise contenu trend'
+          },
+          {
+            type: 'Tutorial express',
+            description: 'Micro-tuto complet condensé',
+            format: 'Étapes numérotées visuellement',
+            tempo: 'Rapide, dynamique',
+            duree: '45-60 secondes'
+          },
+          {
+            type: 'Storytelling court',
+            description: 'Anecdote captivante complète',
+            structure: 'Hook → Développement → Chute',
+            emotion: 'Rire, surprise, inspiration',
+            viralite: 'Très élevée si bien exécuté'
+          }
+        ],
+        creationOptimale: {
+          etape1: {
+            titre: 'Capturer attention (3 premières secondes)',
+            techniques: [
+              'Question intrigante',
+              'Affirmation choquante',
+              'Visuel spectaculaire',
+              'Promesse bénéfice clair',
+              'Pattern interrupt'
+            ],
+            criticalite: '85% abandons si hook faible'
+          },
+          etape2: {
+            titre: 'Maintenir engagement',
+            tactiques: [
+              'Rythme rapide (coupes fréquentes)',
+              'Transitions dynamiques',
+              'Textes/sous-titres lisibles',
+              'Musique énergique',
+              'Pas de temps mort'
+            ],
+            objectif: 'Rétention >50% = algorithme favorise'
+          },
+          etape3: {
+            titre: 'Call-to-action final',
+            options: [
+              'Suivre chaîne',
+              'Voir vidéo complète',
+              'Commenter opinion',
+              'Partager à ami',
+              'Visiter profil'
+            ],
+            placement: '3-5 dernières secondes'
+          }
+        },
+        aspectsTechniques: {
+          resolution: '1080×1920px (9:16) obligatoire',
+          framerate: '30fps ou 60fps',
+          codec: 'H.264 recommandé',
+          audio: 'AAC, 128kbps minimum',
+          poids: 'Max 500 MB',
+          subtitles: 'Fortement recommandés (80% regardent sans son)',
+          accessibilite: 'Contraste élevé, textes lisibles mobile'
+        },
+        optimisationAlgorithme: {
+          titre: 'Maximiser reach algorithme',
+          facteurs: [
+            {
+              facteur: 'Taux de rétention',
+              importance: 'Critique',
+              objectif: '>70% finissent vidéo',
+              impact: 'Principal facteur algorithme'
+            },
+            {
+              facteur: 'Engagement (likes, comments, shares)',
+              importance: 'Très élevée',
+              stimuler: 'Question directe, avis polarisant',
+              ratio: '>5% vues = excellent'
+            },
+            {
+              facteur: 'Re-watch (boucles)',
+              importance: 'Élevée',
+              technique: 'Fin connecte au début',
+              indicateur: 'Watchtime >100% durée'
+            },
+            {
+              facteur: 'Rapidité engagement',
+              importance: 'Élevée',
+              definition: 'Engagement premières heures publication',
+              booster: 'Publier heures pic audience'
+            },
+            {
+              facteur: 'Cohérence publication',
+              frequenceIdeale: '3-7 Shorts / semaine',
+              regularite: 'Plus important que quantité ponctuelle'
+            }
+          ]
+        },
+        monetisation: {
+          direct: 'Shorts non monétisables directement (pas pub)',
+          indirect: [
+            'Drive trafic vers contenu monétisé',
+            'Croissance abonnés (↑ revenus autres contenus)',
+            'Visibilité marque/produits',
+            'Tips sur profil si viral'
+          ],
+          strategie: 'Shorts = outil acquisition, pas revenu direct'
+        },
+        analytics: {
+          metriques: [
+            'Vues totales',
+            'Taux rétention moyen',
+            'Pic abandon (à quel moment)',
+            'Sources trafic (Shorts feed vs profil)',
+            'Engagement rate',
+            'Nouveaux abonnés générés'
+          ],
+          acces: 'Studio → Shorts → Sélectionner Short → Analytics',
+          optimisation: 'Identifier patterns Shorts performants → répliquer'
+        },
+        bonnesPratiques: [
+          'Hook puissant 3 premières secondes',
+          'Sous-titres auto lisibles',
+          'Format vertical strict',
+          'Rythme rapide, coupes dynamiques',
+          'CTA clair fin vidéo',
+          'Musique trending (bibliothèque Goroti)',
+          'Thumbnail attractive (même si auto-play)',
+          'Hashtags pertinents (3-5 max)',
+          'Publier heures pic activité',
+          'Tester différents formats/styles'
+        ],
+        erreursEviter: [
+          'Introduction trop lente',
+          'Format horizontal (rejeté)',
+          'Contenu trop complexe (pas adaptable 60s)',
+          'Pas de sous-titres',
+          'Watermark autres plateformes visible',
+          'Musique copyrightée non autorisée',
+          'CTA absent ou confus',
+          'Publication irrégulière'
+        ],
+        workflow: {
+          etape1: 'Créer sur mobile ou bureau (export 9:16)',
+          etape2: 'Studio → Shorts → Upload',
+          etape3: 'Titre (100 car) + Description (500 car) + Hashtags',
+          etape4: 'Sélectionner miniature frame',
+          etape5: 'Choisir musique (ou garder audio original)',
+          etape6: 'Publier immédiatement ou planifier',
+          etape7: 'Promouvoir 1h après (commenter, partager)',
+          etape8: 'Analyser performances à J+1 et J+7'
+        },
+        outilsRecommandes: [
+          'CapCut (montage mobile)',
+          'InShot (édition rapide)',
+          'Canva (textes/graphiques)',
+          'Adobe Premiere Rush (avancé)',
+          'Bibliothèque musique Goroti (libre droits)'
+        ]
+      }
     },
     {
       category: 'monetization',
