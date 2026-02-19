@@ -98,6 +98,14 @@ export const Footer = ({ onNavigate }: FooterProps) => {
             <ul className="space-y-2">
               <li>
                 <button
+                  onClick={() => onNavigate('blog')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Blog
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => onNavigate('about')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >

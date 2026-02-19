@@ -72,8 +72,10 @@ import SavedVideosPage from './pages/SavedVideosPage';
 import ReferralPage from './pages/ReferralPage';
 import StatusPage from './pages/StatusPage';
 import ChannelPage from './pages/ChannelPage';
+import BlogPage from './pages/BlogPage';
+import BlogArticlePage from './pages/BlogArticlePage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral' | 'channel';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral' | 'channel' | 'blog' | 'blog-article';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -93,6 +95,7 @@ function AppContent() {
   const [channelEditId, setChannelEditId] = useState<string | null>(null);
   const [channelTeamId, setChannelTeamId] = useState<string | null>(null);
   const [channelAnalyticsId, setChannelAnalyticsId] = useState<string | null>(null);
+  const [blogArticleSlug, setBlogArticleSlug] = useState<string | null>(null);
 
   const { setIsMiniPlayer, currentVideo } = usePlayerStore();
 
@@ -203,8 +206,19 @@ function AppContent() {
         return;
       }
 
+      if (hash.startsWith('blog/')) {
+        const slug = hash.split('/')[1];
+        if (slug) {
+          setBlogArticleSlug(slug);
+          setCurrentPage('blog-article');
+          setShowSplash(false);
+        }
+        return;
+      }
+
       // Handle generic page routes
       const pageMap: Record<string, Page> = {
+        'blog': 'blog',
         'premium': 'premium',
         'auth': 'auth',
         'settings': 'settings',
@@ -482,6 +496,32 @@ function AppContent() {
 
         {currentPage === 'legal' && (
           <LegalPage onNavigate={(page) => setCurrentPage(page as Page)} />
+        )}
+
+        {currentPage === 'blog' && (
+          <BlogPage onNavigate={(page, params) => {
+            if (page === 'blog-article' && params?.slug) {
+              setBlogArticleSlug(params.slug);
+              setCurrentPage('blog-article');
+            } else {
+              setCurrentPage(page as Page);
+            }
+          }} />
+        )}
+
+        {currentPage === 'blog-article' && blogArticleSlug && (
+          <BlogArticlePage
+            slug={blogArticleSlug}
+            onNavigate={(page, params) => {
+              if (page === 'blog-article' && params?.slug) {
+                setBlogArticleSlug(params.slug);
+              } else if (page === 'blog') {
+                setCurrentPage('blog');
+              } else {
+                setCurrentPage(page as Page);
+              }
+            }}
+          />
         )}
 
         {currentPage === 'community' && <CommunityListPage />}
