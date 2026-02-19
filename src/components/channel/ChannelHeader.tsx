@@ -1,4 +1,4 @@
-import { User, Users, Video, Share2, MoreVertical, Edit, Settings } from 'lucide-react';
+import { User, Users, Video, Share2, MoreVertical, Edit } from 'lucide-react';
 import { useState } from 'react';
 
 interface ChannelHeaderProps {

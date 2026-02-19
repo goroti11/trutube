@@ -1,4 +1,4 @@
-import { ThumbsUp, MessageCircle, CheckCircle, Clock, AlertTriangle } from 'lucide-react';
+import { ThumbsUp, CheckCircle, Clock, AlertTriangle } from 'lucide-react';
 import { CommunityFeedback } from '../../services/resourceService';
 
 interface FeedbackCardProps {

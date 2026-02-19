@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ShoppingBag, ExternalLink, Star } from 'lucide-react';
+import { ShoppingBag, ExternalLink,  } from 'lucide-react';
 import { merchandisingService, MerchandiseProduct } from '../../services/merchandisingService';
 
 interface CreatorShopSectionProps {

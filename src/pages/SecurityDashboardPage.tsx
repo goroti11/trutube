@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Shield, AlertTriangle, CheckCircle, Lock, Activity, Eye, TrendingUp, Users, Clock } from 'lucide-react';
+import { Shield, AlertTriangle, CheckCircle, Lock, Activity, Eye, Clock } from 'lucide-react';
 import { securityService } from '../services/securityService';
 import { useAuth } from '../contexts/AuthContext';
 

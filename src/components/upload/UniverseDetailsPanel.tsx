@@ -1,4 +1,4 @@
-import { CheckCircle, Target, TrendingUp, DollarSign, Lightbulb, Users } from 'lucide-react';
+import { CheckCircle, TrendingUp, DollarSign, Lightbulb, Users } from 'lucide-react';
 import { UniverseDetail } from '../../data/universeDetails';
 
 interface UniverseDetailsPanelProps {

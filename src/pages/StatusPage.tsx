@@ -1,6 +1,6 @@
 import Header from '../components/Header';
 import { Footer } from '../components/Footer';
-import { CheckCircle, AlertTriangle, XCircle, Clock, Activity, Server, Database, Upload, Video, Wallet, ShoppingBag, Radio, Globe } from 'lucide-react';
+import { CheckCircle, AlertTriangle, XCircle, Clock, Activity, Server, Database, Upload, Video, Wallet, ShoppingBag, Radio,  } from 'lucide-react';
 
 interface StatusPageProps {
   onNavigate: (page: string) => void;
@@ -166,7 +166,7 @@ export default function StatusPage({ onNavigate }: StatusPageProps) {
 
   const allOperational = services.every(s => s.status === 'operational');
   const someDown = services.some(s => s.status === 'down');
-  const someDegraded = services.some(s => s.status === 'degraded');
+  const _someDegraded = services.some(s => s.status === 'degraded');
 
   return (
     <div className="min-h-screen bg-gray-950">

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Bell, BellOff, Share2, ChevronRight } from 'lucide-react';
+import { Bell, BellOff, Share2,  } from 'lucide-react';
 
 interface MobileChannelPageProps {
   channelName: string;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { MessageCircle, ThumbsUp, ChevronRight } from 'lucide-react';
 
 interface Comment {

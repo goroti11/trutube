@@ -313,13 +313,13 @@ export default function AppearanceSettingsPage({ onNavigate }: AppearanceSetting
                 label="Afficher les miniatures"
                 description="Afficher les aperçus des vidéos"
                 checked={settings.show_thumbnails}
-                onChange={(checked) => setSettings({ ...settings, show_thumbnails: checked })}
+                onChange={(checked: boolean) => setSettings({ ...settings, show_thumbnails: checked })}
               />
               <ToggleOption
                 label="Lecture automatique"
                 description="Lancer automatiquement la vidéo suivante"
                 checked={settings.autoplay_videos}
-                onChange={(checked) => setSettings({ ...settings, autoplay_videos: checked })}
+                onChange={(checked: boolean) => setSettings({ ...settings, autoplay_videos: checked })}
               />
             </div>
           </div>

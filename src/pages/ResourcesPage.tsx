@@ -1613,7 +1613,7 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
   const renderDocContent = (content: any): JSX.Element => {
     return (
       <div className="space-y-6">
-        {Object.entries(content).map(([key, value]) => {
+        {Object.entries(content || {}).map(([key, value]) => {
           if (key === 'description' || key === 'duration') return null;
 
           return (

@@ -22,8 +22,7 @@ import { LegalPage } from './pages/LegalPage';
 import { LoadingScreen } from './components/LoadingScreen';
 import SplashScreen from './components/SplashScreen';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { Video, User } from './types';
-import { users } from './data/mockData';
+import { Video } from './types';
 import MobileVideoPage from './pages/MobileVideoPage';
 import VideoUploadPage from './pages/VideoUploadPage';
 import CreatorDashboardV2Page from './pages/CreatorDashboardV2Page';
@@ -326,9 +325,6 @@ function AppContent() {
     }
   }, [currentPage, currentVideo, setIsMiniPlayer]);
 
-  if (currentPage === 'mobile-demo') {
-    return <MobileVideoPage />;
-  }
 
   if (showSplash) {
     return <SplashScreen onComplete={handleSplashComplete} />;
@@ -345,10 +341,6 @@ function AppContent() {
     setCurrentPage('watch');
   };
 
-  const handleProfileClick = (user: User) => {
-    setSelectedUser(user);
-    setCurrentPage('profile');
-  };
 
   const handleSupportClick = (user: User) => {
     setSelectedUser(user);

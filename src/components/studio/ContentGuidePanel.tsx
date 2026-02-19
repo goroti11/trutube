@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CheckCircle, Target, TrendingUp, DollarSign, Lightbulb, Users, ChevronRight, Globe } from 'lucide-react';
+import { CheckCircle, TrendingUp, DollarSign, Lightbulb, Users, ChevronRight, Globe } from 'lucide-react';
 import { UniverseDetail, getUniverseDetail, getAllUniverseDetails } from '../../data/universeDetails';
 
 export default function ContentGuidePanel() {

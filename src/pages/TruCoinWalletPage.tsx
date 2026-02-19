@@ -670,7 +670,7 @@ export default function TruCoinWalletPage() {
 
       </main>
 
-      <Footer />
+      <Footer onNavigate={onNavigate} />
     </div>
   );
 }

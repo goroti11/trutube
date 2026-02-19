@@ -167,15 +167,7 @@ class VideoUploadService {
         .from('video-content')
         .upload(videoPath, data.video, {
           cacheControl: '3600',
-          upsert: true,
-          onUploadProgress: (progress) => {
-            const percentage = 30 + Math.round((progress.loaded / progress.total) * 60);
-            onProgress?.({
-              status: 'uploading',
-              progress: percentage,
-              message: `Upload en cours... ${percentage}%`
-            });
-          }
+          upsert: true
         });
 
       if (uploadError) {

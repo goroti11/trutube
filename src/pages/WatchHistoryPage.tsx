@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Clock, Trash2, Search, Filter, X, Calendar } from 'lucide-react';
+import { Clock, Trash2, Search, X, Calendar } from 'lucide-react';
 import Header from '../components/Header';
 
 interface WatchHistoryPageProps {

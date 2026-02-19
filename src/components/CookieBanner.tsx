@@ -128,9 +128,9 @@ export default function CookieBanner() {
                     ) : (
                       <div
                         onClick={() => setPrefs(p => ({ ...p, [cat.key]: !p[cat.key] }))}
-                        className={`w-9 h-5 rounded-full cursor-pointer relative transition-colors ${(prefs as Record<string, boolean>)[cat.key] ? 'bg-red-600' : 'bg-gray-700'}`}
+                        className={`w-9 h-5 rounded-full cursor-pointer relative transition-colors ${prefs[cat.key] ? 'bg-red-600' : 'bg-gray-700'}`}
                       >
-                        <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${(prefs as Record<string, boolean>)[cat.key] ? 'translate-x-4' : 'translate-x-0.5'}`} />
+                        <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${prefs[cat.key] ? 'translate-x-4' : 'translate-x-0.5'}`} />
                       </div>
                     )}
                   </div>
@@ -187,9 +187,9 @@ export default function CookieBanner() {
                     {!cat.required && (
                       <div
                         onClick={() => setPrefs(p => ({ ...p, [cat.key]: !p[cat.key] }))}
-                        className={`w-9 h-5 rounded-full cursor-pointer relative transition-colors flex-shrink-0 ${(prefs as Record<string, boolean>)[cat.key] ? 'bg-red-600' : 'bg-gray-600'}`}
+                        className={`w-9 h-5 rounded-full cursor-pointer relative transition-colors flex-shrink-0 ${prefs[cat.key] ? 'bg-red-600' : 'bg-gray-600'}`}
                       >
-                        <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${(prefs as Record<string, boolean>)[cat.key] ? 'translate-x-4' : 'translate-x-0.5'}`} />
+                        <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${prefs[cat.key] ? 'translate-x-4' : 'translate-x-0.5'}`} />
                       </div>
                     )}
                   </div>

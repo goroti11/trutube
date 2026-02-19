@@ -519,7 +519,7 @@ export default function RevenueModelPage({ onNavigate }: Props) {
         </div>
       </main>
 
-      <Footer />
+      <Footer onNavigate={onNavigate} />
     </div>
   );
 }

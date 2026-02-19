@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Lock, Repeat, Palette, Moon, MessageCircle, Flag } from 'lucide-react';
+import { Lock, Repeat, Palette, MessageCircle, Flag } from 'lucide-react';
 import BottomSheet from './BottomSheet';
 
 interface VideoOptionsSheetProps {

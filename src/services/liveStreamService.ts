@@ -214,7 +214,7 @@ class LiveStreamService {
 
       await supabase
         .from('live_streams')
-        .update({ total_messages: supabase.raw('total_messages + 1') })
+        .update({ total_messages: supabase('total_messages + 1') })
         .eq('id', streamId);
 
       return { success: true };

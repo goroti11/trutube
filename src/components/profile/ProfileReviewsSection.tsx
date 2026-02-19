@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Star, ThumbsUp, MoreVertical, Edit2, Trash2 } from 'lucide-react';
+import { Star, ThumbsUp, Trash2 } from 'lucide-react';
 import { profileEnhancedService, ProfileReview } from '../../services/profileEnhancedService';
 import { useAuth } from '../../contexts/AuthContext';
 

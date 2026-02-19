@@ -1,4 +1,4 @@
-import { X, Copy, Facebook, Twitter, MessageCircle, Mail, Link2, Check } from 'lucide-react';
+import { X, Copy, Facebook, Twitter, MessageCircle, Mail, Check } from 'lucide-react';
 import { useState } from 'react';
 import { profileEnhancedService } from '../../services/profileEnhancedService';
 

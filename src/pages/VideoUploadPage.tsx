@@ -11,7 +11,7 @@ interface VideoUploadPageProps {
 }
 
 export default function VideoUploadPage({ onNavigate }: VideoUploadPageProps) {
-  const { user } = useAuth();
+  const { user: _user } = useAuth();
   const [universes, setUniverses] = useState<any[]>([]);
   const [subUniverses, setSubUniverses] = useState<any[]>([]);
   const [formData, setFormData] = useState({

@@ -1,4 +1,4 @@
-import { ArrowLeft, Award, Crown, Gem, Star, Check, Zap, Shield, Video, Download, TrendingUp } from 'lucide-react';
+import { ArrowLeft, Crown, Gem, Star, Check, Zap, Shield, Video, Download } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { User } from '../types';
 import { paymentService, PremiumSubscription } from '../services/paymentService';
@@ -83,7 +83,7 @@ export default function SubscriptionPage({ user, onBack }: SubscriptionPageProps
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [currentSubscription, setCurrentSubscription] = useState<PremiumSubscription | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [_loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadCurrentSubscription();

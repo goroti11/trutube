@@ -476,7 +476,7 @@ export default function ShortsSystemPage({ onNavigate }: Props) {
 
         </div>
       </main>
-      <Footer />
+      <Footer onNavigate={onNavigate} />
     </div>
   );
 }

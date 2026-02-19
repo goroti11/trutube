@@ -280,7 +280,7 @@ export const musicSalesService = {
       new Date(release.promo_ends_at) > now &&
       (release.promo_starts_at === null || new Date(release.promo_starts_at) <= now);
 
-    const price = isPromo && release.price_promo ? release.price_promo : release.price_standard;
+    const _price = isPromo && release.price_promo ? release.price_promo : release.price_standard;
     const totalPaid = options.card_amount + options.trucoin_amount;
 
     const isFounder = release.phase === 'exclusive';
@@ -354,7 +354,7 @@ export const musicSalesService = {
     const release = await this.getRelease(releaseId);
     if (!release || !release.preorder_enabled) return null;
 
-    const price = release.preorder_price ?? release.price_standard;
+    const _price = release.preorder_price ?? release.price_standard;
 
     const { data, error } = await supabase
       .from('music_sale_preorders')
