@@ -123,7 +123,7 @@ const REVENUE_SOURCES = [
     accent: 'text-gray-400',
     border: 'border-gray-700/50',
     bg: 'bg-gray-800/40',
-    description: 'Revente interne des éditions limitées entre utilisateurs GOROTI. Commission sur chaque transaction secondaire.',
+    description: 'Revente interne des éditions limitées entre utilisateurs TruTube. Commission sur chaque transaction secondaire.',
     table: [
       { action: 'Édition numérotée revendue', gain: 'Commission plateforme + artiste' },
       { action: 'Certificate de propriété', gain: 'Authenticité garantie' },
@@ -166,7 +166,7 @@ export default function RevenueModelPage({ onNavigate }: Props) {
               Modèle économique
             </span>
             <h1 className="text-4xl sm:text-5xl font-black text-white mb-5 leading-tight">
-              GOROTI n'est pas financé<br />
+              TruTube n'est pas financé<br />
               <span className="text-red-400">par l'attention.</span>
             </h1>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-4">
@@ -322,7 +322,7 @@ export default function RevenueModelPage({ onNavigate }: Props) {
                   <p className="text-sm text-gray-300">La plateforme vend de l'espace publicitaire à des annonceurs</p>
                 </div>
                 <div className="bg-red-950/30 border border-red-900/40 rounded-xl p-4">
-                  <p className="text-xs text-red-400 mb-1">GOROTI</p>
+                  <p className="text-xs text-red-400 mb-1">TruTube</p>
                   <p className="text-sm text-gray-300">La plateforme <strong className="text-white">remplace l'annonceur par le fan</strong></p>
                 </div>
               </div>
@@ -375,7 +375,7 @@ export default function RevenueModelPage({ onNavigate }: Props) {
                 </div>
                 <div className="text-left">
                   <p className="font-semibold text-white">Revenus plateforme</p>
-                  <p className="text-xs text-gray-500">Comment GOROTI génère ses revenus sans publicité</p>
+                  <p className="text-xs text-gray-500">Comment TruTube génère ses revenus sans publicité</p>
                 </div>
               </div>
               {showPlatform ? <ChevronUp className="w-4 h-4 text-gray-500" /> : <ChevronDown className="w-4 h-4 text-gray-500" />}
@@ -413,7 +413,7 @@ export default function RevenueModelPage({ onNavigate }: Props) {
                   </table>
                 </div>
                 <p className="text-xs text-gray-500">
-                  Aucune régie publicitaire. Aucun tracking de données à des fins commerciales tierces. La croissance de GOROTI est directement corrélée à celle de ses créateurs.
+                  Aucune régie publicitaire. Aucun tracking de données à des fins commerciales tierces. La croissance de TruTube est directement corrélée à celle de ses créateurs.
                 </p>
               </div>
             )}

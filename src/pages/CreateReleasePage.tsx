@@ -292,7 +292,7 @@ export default function CreateReleasePage({ onNavigate }: CreateReleasePageProps
             <div className="bg-amber-950/30 border border-amber-700/40 rounded-xl p-4 text-sm text-amber-300">
               <div className="flex items-start gap-2">
                 <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <p>GOROTI vérifie la conformité des droits avant publication. Toute déclaration frauduleuse entraîne des pénalités.</p>
+                <p>TruTube vérifie la conformité des droits avant publication. Toute déclaration frauduleuse entraîne des pénalités.</p>
               </div>
             </div>
 
@@ -307,7 +307,7 @@ export default function CreateReleasePage({ onNavigate }: CreateReleasePageProps
                 <div>
                   <p className="font-medium text-sm">Je confirme détenir tous les droits nécessaires sur ce contenu</p>
                   <p className="text-xs text-gray-400 mt-1">
-                    En cochant cette case, je déclare sur l'honneur être titulaire ou ayant-droit de l'ensemble des droits d'auteur, droits voisins, droits de marque et tout autre droit relatif à ce contenu. Je m'engage à indemniser GOROTI en cas de réclamation de tiers.
+                    En cochant cette case, je déclare sur l'honneur être titulaire ou ayant-droit de l'ensemble des droits d'auteur, droits voisins, droits de marque et tout autre droit relatif à ce contenu. Je m'engage à indemniser TruTube en cas de réclamation de tiers.
                   </p>
                 </div>
               </label>
@@ -489,7 +489,7 @@ export default function CreateReleasePage({ onNavigate }: CreateReleasePageProps
                   <span className="text-gray-500"> vous</span>
                   <span className="text-gray-600 mx-2">·</span>
                   <span className="text-gray-400">15%</span>
-                  <span className="text-gray-500"> GOROTI</span>
+                  <span className="text-gray-500"> TruTube</span>
                 </div>
               </div>
               <p className="text-xs text-gray-600 mt-1">Sur {form.price_standard}€ : vous recevez {(form.price_standard * 0.85).toFixed(2)}€</p>

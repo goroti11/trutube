@@ -114,14 +114,14 @@ export default function ContentGuidePanel() {
 
             <div className="border-t border-gray-700 pt-6">
               <div className="flex items-center gap-2 mb-4">
-                <TrendingUp className="w-5 h-5 text-red-400" />
+                <TrendingUp className="w-5 h-5 text-cyan-400" />
                 <h4 className="font-semibold text-white">Sujets tendances</h4>
               </div>
               <div className="flex flex-wrap gap-2">
                 {selectedUniverse.trendingTopics.map((topic, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-red-500/20 border border-red-500/30 rounded-full text-xs text-red-300"
+                    className="px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-xs text-cyan-300"
                   >
                     {topic}
                   </span>
@@ -148,7 +148,7 @@ export default function ContentGuidePanel() {
               <p className="text-sm text-gray-300">
                 <span className="font-semibold text-primary-400">Astuce Pro:</span> Utilisez ces conseils
                 lors de la création de votre contenu pour maximiser votre portée, engagement et revenus
-                sur GOROTI.
+                sur TruTube.
               </p>
             </div>
           </div>
