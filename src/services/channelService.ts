@@ -1,8 +1,11 @@
 import { supabase } from '../lib/supabase';
 
 export type KycStatus = 'not_submitted' | 'pending' | 'verified' | 'rejected';
-export type ChannelVisibility = 'public' | 'private';
+export type ChannelVisibility = 'public' | 'private' | 'unlisted';
 export type LegalEntityType = 'individual' | 'company' | 'auto_entrepreneur' | 'association';
+export type ChannelType = 'creator' | 'artist' | 'label' | 'studio' | 'brand';
+export type CollaboratorRole = 'admin' | 'editor' | 'analyst' | 'moderator' | 'finance';
+export type PlaylistType = 'standard' | 'series' | 'album' | 'course' | 'season';
 
 export interface LegalProfile {
   id: string;
@@ -37,6 +40,7 @@ export interface CreatorChannel {
   legal_profile_id: string | null;
   channel_name: string;
   channel_slug: string;
+  channel_type: ChannelType;
   description: string;
   avatar_url: string;
   banner_url: string;
@@ -44,6 +48,8 @@ export interface CreatorChannel {
   contact_email: string;
   display_country: string;
   channel_category: string;
+  channel_language: string;
+  official_hashtags: string[];
   visibility: ChannelVisibility;
   is_primary: boolean;
   is_verified: boolean;
@@ -56,12 +62,79 @@ export interface CreatorChannel {
   monetization_tier: string;
   social_links: Record<string, string>;
   custom_tags: string[];
+  intro_video_url: string | null;
+  trailer_visitors_url: string | null;
+  trailer_subscribers_url: string | null;
+  notification_settings: {
+    video_release: boolean;
+    album_release: boolean;
+    live_start: boolean;
+    merch_promo: boolean;
+    preorder: boolean;
+  };
+  page_sections_order: string[];
   created_at: string;
   updated_at: string;
 }
 
+export interface ChannelPlaylist {
+  id: string;
+  channel_id: string;
+  user_id: string;
+  title: string;
+  description: string;
+  playlist_type: PlaylistType;
+  thumbnail_url: string | null;
+  visibility: 'public' | 'unlisted' | 'private';
+  is_premium_locked: boolean;
+  video_count: number;
+  sort_order: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ChannelCollaborator {
+  id: string;
+  channel_id: string;
+  user_id: string;
+  invited_by: string;
+  role: CollaboratorRole;
+  permissions: Record<string, boolean>;
+  accepted: boolean;
+  accepted_at: string | null;
+  created_at: string;
+}
+
 export type LegalProfileInput = Partial<Omit<LegalProfile, 'id' | 'user_id' | 'created_at' | 'updated_at'>>;
 export type ChannelInput = Partial<Omit<CreatorChannel, 'id' | 'user_id' | 'created_at' | 'updated_at'>>;
+export type PlaylistInput = Partial<Omit<ChannelPlaylist, 'id' | 'user_id' | 'channel_id' | 'created_at' | 'updated_at'>>;
+
+export const CHANNEL_TYPES: { value: ChannelType; label: string; desc: string; icon: string }[] = [
+  { value: 'creator', label: 'Créateur individuel', desc: 'Contenu personnel, vlogs, tutoriels', icon: '🎬' },
+  { value: 'artist', label: 'Artiste musical', desc: 'Albums, singles, clips musicaux', icon: '🎵' },
+  { value: 'label', label: 'Label', desc: 'Multi-artistes, gestion de catalogue', icon: '🏷️' },
+  { value: 'studio', label: 'Studio / Média', desc: 'Production vidéo, émissions, podcasts', icon: '🎙️' },
+  { value: 'brand', label: 'Marque', desc: 'Contenu commercial, brand content', icon: '💼' },
+];
+
+export const CHANNEL_SECTIONS = [
+  { id: 'home', label: 'Accueil', desc: 'Présentation de la chaîne' },
+  { id: 'videos', label: 'Vidéos', desc: 'Liste des vidéos' },
+  { id: 'shorts', label: 'Shorts', desc: 'Formats courts' },
+  { id: 'albums', label: 'Albums', desc: 'Contenu premium musical' },
+  { id: 'lives', label: 'Lives', desc: 'Diffusions en direct' },
+  { id: 'store', label: 'Store', desc: 'Merchandising et produits' },
+  { id: 'playlists', label: 'Playlists', desc: 'Collections et séries' },
+  { id: 'community', label: 'Communauté', desc: 'Posts et interactions' },
+];
+
+export const COLLABORATOR_ROLES: { value: CollaboratorRole; label: string; desc: string; perms: string[] }[] = [
+  { value: 'admin', label: 'Admin', desc: 'Accès complet', perms: ['Tout gérer'] },
+  { value: 'editor', label: 'Éditeur', desc: 'Gérer les contenus', perms: ['Vidéos', 'Posts', 'Playlists'] },
+  { value: 'analyst', label: 'Analyste', desc: 'Voir les statistiques', perms: ['Stats', 'Analytics'] },
+  { value: 'moderator', label: 'Modérateur', desc: 'Gérer les commentaires', perms: ['Commentaires', 'Signalements'] },
+  { value: 'finance', label: 'Financier', desc: 'Voir les revenus', perms: ['Revenus', 'Paiements'] },
+];
 
 export const channelService = {
   async getLegalProfile(userId: string): Promise<LegalProfile | null> {
@@ -197,6 +270,124 @@ export const channelService = {
     }
   },
 
+  async getPlaylists(channelId: string): Promise<ChannelPlaylist[]> {
+    try {
+      const { data, error } = await supabase
+        .from('channel_playlists')
+        .select('*')
+        .eq('channel_id', channelId)
+        .order('created_at', { ascending: false });
+      if (error) throw error;
+      return data || [];
+    } catch (error) {
+      console.error('Error getting playlists:', error);
+      return [];
+    }
+  },
+
+  async createPlaylist(channelId: string, userId: string, input: PlaylistInput & { title: string }): Promise<ChannelPlaylist | null> {
+    try {
+      const { data, error } = await supabase
+        .from('channel_playlists')
+        .insert({ channel_id: channelId, user_id: userId, ...input })
+        .select()
+        .single();
+      if (error) throw error;
+      return data;
+    } catch (error) {
+      console.error('Error creating playlist:', error);
+      return null;
+    }
+  },
+
+  async updatePlaylist(playlistId: string, input: PlaylistInput): Promise<ChannelPlaylist | null> {
+    try {
+      const { data, error } = await supabase
+        .from('channel_playlists')
+        .update(input)
+        .eq('id', playlistId)
+        .select()
+        .single();
+      if (error) throw error;
+      return data;
+    } catch (error) {
+      console.error('Error updating playlist:', error);
+      return null;
+    }
+  },
+
+  async deletePlaylist(playlistId: string): Promise<boolean> {
+    try {
+      const { error } = await supabase
+        .from('channel_playlists')
+        .delete()
+        .eq('id', playlistId);
+      if (error) throw error;
+      return true;
+    } catch (error) {
+      console.error('Error deleting playlist:', error);
+      return false;
+    }
+  },
+
+  async getCollaborators(channelId: string): Promise<ChannelCollaborator[]> {
+    try {
+      const { data, error } = await supabase
+        .from('channel_collaborators')
+        .select('*')
+        .eq('channel_id', channelId)
+        .order('created_at', { ascending: true });
+      if (error) throw error;
+      return data || [];
+    } catch (error) {
+      console.error('Error getting collaborators:', error);
+      return [];
+    }
+  },
+
+  async addCollaborator(channelId: string, invitedBy: string, userId: string, role: CollaboratorRole): Promise<ChannelCollaborator | null> {
+    try {
+      const { data, error } = await supabase
+        .from('channel_collaborators')
+        .insert({ channel_id: channelId, invited_by: invitedBy, user_id: userId, role, permissions: {}, accepted: false })
+        .select()
+        .single();
+      if (error) throw error;
+      return data;
+    } catch (error) {
+      console.error('Error adding collaborator:', error);
+      return null;
+    }
+  },
+
+  async updateCollaboratorRole(collaboratorId: string, role: CollaboratorRole): Promise<boolean> {
+    try {
+      const { error } = await supabase
+        .from('channel_collaborators')
+        .update({ role })
+        .eq('id', collaboratorId);
+      if (error) throw error;
+      return true;
+    } catch (error) {
+      console.error('Error updating collaborator role:', error);
+      return false;
+    }
+  },
+
+  async removeCollaborator(collaboratorId: string): Promise<boolean> {
+    try {
+      const { error } = await supabase
+        .from('channel_collaborators')
+        .delete()
+        .eq('id', collaboratorId);
+      if (error) throw error;
+      return true;
+    } catch (error) {
+      console.error('Error removing collaborator:', error);
+      return false;
+    }
+  },
+
   generateSlug(name: string): string {
     return name
       .toLowerCase()
@@ -225,5 +416,13 @@ export const channelService = {
       rejected: 'text-red-400',
     };
     return colors[status];
+  },
+
+  getChannelTypeLabel(type: ChannelType): string {
+    return CHANNEL_TYPES.find(t => t.value === type)?.label ?? type;
+  },
+
+  getRoleLabel(role: CollaboratorRole): string {
+    return COLLABORATOR_ROLES.find(r => r.value === role)?.label ?? role;
   },
 };

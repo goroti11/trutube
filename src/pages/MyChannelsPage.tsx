@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react';
 import {
   Plus, Settings, Globe, Lock, Users, Video, Eye,
   ChevronRight, Shield, AlertCircle, CheckCircle,
-  MoreVertical, Trash2, Edit2, Star, ArrowLeft, Zap
+  MoreVertical, Trash2, Edit2, Star, ArrowLeft, Zap,
+  BarChart2, Radio, ListVideo, UserPlus, ChevronLeft
 } from 'lucide-react';
-import { channelService, CreatorChannel, LegalProfile } from '../services/channelService';
+import {
+  channelService, CreatorChannel, LegalProfile,
+  CHANNEL_TYPES, ChannelType
+} from '../services/channelService';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -19,12 +23,28 @@ function formatCount(n: number): string {
   return n.toString();
 }
 
+type CreateStep = 'type' | 'details';
+
+const CATEGORIES = [
+  'Musique', 'Hip-Hop / Rap', 'R&B / Soul', 'Électronique', 'Jazz / Blues',
+  'Pop', 'Rock', 'Classique', 'Vidéo / Film', 'Podcast', 'Gaming', 'Art', 'Autre'
+];
+
+const CHANNEL_TYPE_ICONS: Record<ChannelType, string> = {
+  creator: '🎬',
+  artist: '🎵',
+  label: '🏷',
+  studio: '🎙',
+  brand: '💼',
+};
+
 export default function MyChannelsPage({ onNavigate }: Props) {
   const { user } = useAuth();
   const [channels, setChannels] = useState<CreatorChannel[]>([]);
   const [legalProfile, setLegalProfile] = useState<LegalProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
+  const [createStep, setCreateStep] = useState<CreateStep>('type');
   const [creating, setCreating] = useState(false);
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
 
@@ -33,6 +53,8 @@ export default function MyChannelsPage({ onNavigate }: Props) {
     channel_slug: '',
     description: '',
     channel_category: '',
+    channel_type: '' as ChannelType | '',
+    channel_language: 'fr',
     visibility: 'public' as 'public' | 'private',
   });
   const [slugManual, setSlugManual] = useState(false);
@@ -40,10 +62,7 @@ export default function MyChannelsPage({ onNavigate }: Props) {
   const [slugChecking, setSlugChecking] = useState(false);
 
   useEffect(() => {
-    if (!user) {
-      onNavigate('auth');
-      return;
-    }
+    if (!user) { onNavigate('auth'); return; }
     load();
   }, [user]);
 
@@ -84,17 +103,30 @@ export default function MyChannelsPage({ onNavigate }: Props) {
   };
 
   const handleCreate = async () => {
-    if (!user || !newChannel.channel_name || !newChannel.channel_slug || !slugAvailable) return;
+    if (!user || !newChannel.channel_name || !newChannel.channel_slug || !slugAvailable || !newChannel.channel_type) return;
     setCreating(true);
-    const created = await channelService.createChannel(user.id, newChannel);
+    const created = await channelService.createChannel(user.id, {
+      channel_name: newChannel.channel_name,
+      channel_slug: newChannel.channel_slug,
+      description: newChannel.description,
+      channel_category: newChannel.channel_category,
+      channel_type: newChannel.channel_type as ChannelType,
+      channel_language: newChannel.channel_language,
+      visibility: newChannel.visibility,
+    });
     if (created) {
       setChannels(prev => [...prev, created]);
-      setShowCreate(false);
-      setNewChannel({ channel_name: '', channel_slug: '', description: '', channel_category: '', visibility: 'public' });
-      setSlugManual(false);
-      setSlugAvailable(null);
+      closeCreate();
     }
     setCreating(false);
+  };
+
+  const closeCreate = () => {
+    setShowCreate(false);
+    setCreateStep('type');
+    setNewChannel({ channel_name: '', channel_slug: '', description: '', channel_category: '', channel_type: '', channel_language: 'fr', visibility: 'public' });
+    setSlugManual(false);
+    setSlugAvailable(null);
   };
 
   const handleDelete = async (channelId: string) => {
@@ -106,11 +138,6 @@ export default function MyChannelsPage({ onNavigate }: Props) {
   };
 
   const kycVerified = legalProfile?.kyc_status === 'verified';
-
-  const CATEGORIES = [
-    'Musique', 'Hip-Hop / Rap', 'R&B / Soul', 'Électronique', 'Jazz / Blues',
-    'Pop', 'Rock', 'Classique', 'Vidéo / Film', 'Podcast', 'Gaming', 'Art', 'Autre'
-  ];
 
   if (loading) {
     return (
@@ -136,7 +163,7 @@ export default function MyChannelsPage({ onNavigate }: Props) {
             </button>
             <div>
               <h1 className="text-xl font-bold text-white">Mes Chaînes</h1>
-              <p className="text-sm text-gray-400">{channels.length} chaîne{channels.length !== 1 ? 's' : ''} créée{channels.length !== 1 ? 's' : ''}</p>
+              <p className="text-sm text-gray-400">{channels.length} chaîne{channels.length !== 1 ? 's' : ''}</p>
             </div>
           </div>
           <button
@@ -154,10 +181,7 @@ export default function MyChannelsPage({ onNavigate }: Props) {
               <p className="text-sm text-amber-300 font-medium">Profil légal requis pour activer les paiements</p>
               <p className="text-xs text-gray-400 mt-0.5">Vos chaînes sont actives mais les revenus seront bloqués jusqu'à vérification KYC.</p>
             </div>
-            <button
-              onClick={() => onNavigate('legal-profile')}
-              className="flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 whitespace-nowrap"
-            >
+            <button onClick={() => onNavigate('legal-profile')} className="flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 whitespace-nowrap">
               Compléter <ChevronRight className="w-3 h-3" />
             </button>
           </div>
@@ -171,7 +195,7 @@ export default function MyChannelsPage({ onNavigate }: Props) {
               </div>
               <div>
                 <p className="text-sm font-medium text-white">Profil Légal</p>
-                <p className="text-xs text-gray-500">Identité juridique privée — wallet & revenus</p>
+                <p className="text-xs text-gray-500">Identité juridique — wallet & revenus</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -186,17 +210,14 @@ export default function MyChannelsPage({ onNavigate }: Props) {
               ) : (
                 <span className="text-xs bg-gray-800 text-gray-500 px-2.5 py-1 rounded-full">Non configuré</span>
               )}
-              <button
-                onClick={() => onNavigate('legal-profile')}
-                className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400"
-              >
+              <button onClick={() => onNavigate('legal-profile')} className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400">
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>
         </div>
 
-        {channels.length === 0 && !showCreate ? (
+        {channels.length === 0 ? (
           <div className="text-center py-16">
             <div className="w-16 h-16 rounded-2xl bg-gray-900 border border-gray-800 flex items-center justify-center mx-auto mb-4">
               <Zap className="w-8 h-8 text-gray-700" />
@@ -205,10 +226,7 @@ export default function MyChannelsPage({ onNavigate }: Props) {
             <p className="text-gray-400 text-sm max-w-sm mx-auto mb-6">
               Créez votre première identité artistique. Vous pouvez avoir plusieurs chaînes avec des univers différents.
             </p>
-            <button
-              onClick={() => setShowCreate(true)}
-              className="bg-red-600 hover:bg-red-500 text-white px-6 py-3 rounded-xl text-sm font-semibold transition-colors"
-            >
+            <button onClick={() => setShowCreate(true)} className="bg-red-600 hover:bg-red-500 text-white px-6 py-3 rounded-xl text-sm font-semibold transition-colors">
               Créer ma première chaîne
             </button>
           </div>
@@ -221,8 +239,8 @@ export default function MyChannelsPage({ onNavigate }: Props) {
                     {channel.avatar_url ? (
                       <img src={channel.avatar_url} alt={channel.channel_name} className="w-14 h-14 rounded-xl object-cover" />
                     ) : (
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-red-800 to-gray-800 flex items-center justify-center">
-                        <span className="text-xl font-bold text-white">{channel.channel_name[0]?.toUpperCase()}</span>
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-red-900 to-gray-800 flex items-center justify-center">
+                        <span className="text-xl">{CHANNEL_TYPE_ICONS[channel.channel_type] ?? '📺'}</span>
                       </div>
                     )}
                     {channel.is_primary && (
@@ -233,35 +251,38 @@ export default function MyChannelsPage({ onNavigate }: Props) {
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
+                    <div className="flex items-center gap-2 mb-0.5 flex-wrap">
                       <p className="font-semibold text-white truncate">{channel.channel_name}</p>
                       {channel.is_verified && <CheckCircle className="w-4 h-4 text-blue-400 flex-shrink-0" />}
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-gray-800 text-gray-400 flex-shrink-0">
+                        {channelService.getChannelTypeLabel(channel.channel_type)}
+                      </span>
                       <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 ${
-                        channel.visibility === 'public'
-                          ? 'bg-green-900/40 text-green-400'
-                          : 'bg-gray-800 text-gray-400'
+                        channel.visibility === 'public' ? 'bg-green-900/40 text-green-400' : 'bg-gray-800 text-gray-400'
                       }`}>
                         {channel.visibility === 'public' ? <><Globe className="w-2.5 h-2.5 inline mr-1" />Publique</> : <><Lock className="w-2.5 h-2.5 inline mr-1" />Privée</>}
                       </span>
                     </div>
                     <p className="text-xs text-gray-500">@{channel.channel_slug}</p>
                     <div className="flex items-center gap-4 mt-2">
-                      <span className="text-xs text-gray-400 flex items-center gap-1">
-                        <Users className="w-3 h-3" /> {formatCount(channel.subscriber_count)}
-                      </span>
-                      <span className="text-xs text-gray-400 flex items-center gap-1">
-                        <Video className="w-3 h-3" /> {channel.video_count} vidéos
-                      </span>
-                      <span className="text-xs text-gray-400 flex items-center gap-1">
-                        <Eye className="w-3 h-3" /> {formatCount(channel.total_views)} vues
-                      </span>
+                      <span className="text-xs text-gray-400 flex items-center gap-1"><Users className="w-3 h-3" /> {formatCount(channel.subscriber_count)}</span>
+                      <span className="text-xs text-gray-400 flex items-center gap-1"><Video className="w-3 h-3" /> {channel.video_count} vidéos</span>
+                      <span className="text-xs text-gray-400 flex items-center gap-1"><Eye className="w-3 h-3" /> {formatCount(channel.total_views)} vues</span>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 flex-shrink-0 relative">
+                  <div className="flex items-center gap-1 flex-shrink-0 relative">
+                    <button
+                      onClick={() => onNavigate(`channel-analytics/${channel.id}`)}
+                      className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white"
+                      title="Analytics"
+                    >
+                      <BarChart2 className="w-4 h-4" />
+                    </button>
                     <button
                       onClick={() => onNavigate(`channel-edit/${channel.id}`)}
                       className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white"
+                      title="Modifier"
                     >
                       <Edit2 className="w-4 h-4" />
                     </button>
@@ -272,12 +293,24 @@ export default function MyChannelsPage({ onNavigate }: Props) {
                       <MoreVertical className="w-4 h-4" />
                     </button>
                     {openMenuId === channel.id && (
-                      <div className="absolute right-0 top-10 bg-gray-800 border border-gray-700 rounded-xl shadow-xl z-10 min-w-[160px]">
+                      <div className="absolute right-0 top-10 bg-gray-800 border border-gray-700 rounded-xl shadow-xl z-10 min-w-[180px]">
                         <button
                           onClick={() => { setOpenMenuId(null); onNavigate(`channel-edit/${channel.id}`); }}
                           className="w-full flex items-center gap-2 px-4 py-3 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors rounded-t-xl"
                         >
                           <Settings className="w-4 h-4" /> Paramètres
+                        </button>
+                        <button
+                          onClick={() => { setOpenMenuId(null); onNavigate(`channel-team/${channel.id}`); }}
+                          className="w-full flex items-center gap-2 px-4 py-3 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
+                        >
+                          <UserPlus className="w-4 h-4" /> Équipe
+                        </button>
+                        <button
+                          onClick={() => { setOpenMenuId(null); onNavigate(`channel-analytics/${channel.id}`); }}
+                          className="w-full flex items-center gap-2 px-4 py-3 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
+                        >
+                          <BarChart2 className="w-4 h-4" /> Analytics
                         </button>
                         <button
                           onClick={() => handleDelete(channel.id)}
@@ -290,26 +323,79 @@ export default function MyChannelsPage({ onNavigate }: Props) {
                   </div>
                 </div>
 
-                {channel.monetization_enabled && (
-                  <div className="px-4 pb-3">
-                    <div className="bg-green-900/20 border border-green-800/50 rounded-xl px-3 py-2 flex items-center gap-2">
-                      <Zap className="w-3.5 h-3.5 text-green-400" />
+                <div className="px-4 pb-3 flex items-center gap-2 flex-wrap">
+                  {channel.monetization_enabled && (
+                    <div className="bg-green-900/20 border border-green-800/50 rounded-xl px-3 py-1.5 flex items-center gap-1.5">
+                      <Zap className="w-3 h-3 text-green-400" />
                       <span className="text-xs text-green-400">Monétisation active</span>
-                      {channel.monetization_tier && <span className="text-xs text-gray-500">— tier {channel.monetization_tier}</span>}
+                      {channel.monetization_tier && <span className="text-xs text-gray-500">— {channel.monetization_tier}</span>}
                     </div>
-                  </div>
-                )}
+                  )}
+                  {channel.is_suspended && (
+                    <div className="bg-red-900/20 border border-red-800/50 rounded-xl px-3 py-1.5 flex items-center gap-1.5">
+                      <AlertCircle className="w-3 h-3 text-red-400" />
+                      <span className="text-xs text-red-400">Suspendue</span>
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
         )}
 
-        {showCreate && (
-          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-gray-900 border border-gray-800 rounded-2xl w-full max-w-lg p-6">
-              <h2 className="text-lg font-bold text-white mb-5">Créer une nouvelle chaîne</h2>
+      </main>
 
-              <div className="space-y-4">
+      <Footer />
+
+      {showCreate && (
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-900 border border-gray-800 rounded-2xl w-full max-w-lg">
+
+            <div className="flex items-center gap-3 p-5 border-b border-gray-800">
+              {createStep === 'details' && (
+                <button onClick={() => setCreateStep('type')} className="p-1.5 hover:bg-gray-800 rounded-lg transition-colors text-gray-400">
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+              )}
+              <div className="flex-1">
+                <h2 className="text-base font-bold text-white">
+                  {createStep === 'type' ? 'Quel type de chaîne ?' : 'Configurer la chaîne'}
+                </h2>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  {createStep === 'type' ? 'Étape 1 sur 2' : 'Étape 2 sur 2'}
+                </p>
+              </div>
+              <button onClick={closeCreate} className="p-1.5 hover:bg-gray-800 rounded-lg text-gray-400 transition-colors text-lg leading-none">&times;</button>
+            </div>
+
+            {createStep === 'type' && (
+              <div className="p-5">
+                <div className="grid grid-cols-1 gap-2">
+                  {CHANNEL_TYPES.map(type => (
+                    <button
+                      key={type.value}
+                      onClick={() => { setNewChannel(c => ({ ...c, channel_type: type.value })); setCreateStep('details'); }}
+                      className="flex items-center gap-4 p-4 rounded-xl border border-gray-700 hover:border-red-500 hover:bg-red-600/5 text-left transition-all group"
+                    >
+                      <span className="text-2xl w-10 text-center">{type.icon}</span>
+                      <div className="flex-1">
+                        <p className="font-semibold text-white text-sm group-hover:text-red-300 transition-colors">{type.label}</p>
+                        <p className="text-xs text-gray-500 mt-0.5">{type.desc}</p>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-red-400 transition-colors" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {createStep === 'details' && (
+              <div className="p-5 space-y-4">
+                <div className="bg-gray-800 rounded-xl px-4 py-2.5 flex items-center gap-3">
+                  <span className="text-xl">{CHANNEL_TYPE_ICONS[newChannel.channel_type as ChannelType]}</span>
+                  <span className="text-sm text-gray-300">{channelService.getChannelTypeLabel(newChannel.channel_type as ChannelType)}</span>
+                </div>
+
                 <div>
                   <label className="block text-xs text-gray-400 mb-2">Nom de la chaîne *</label>
                   <input
@@ -344,20 +430,33 @@ export default function MyChannelsPage({ onNavigate }: Props) {
                   {slugAvailable === true && <p className="text-xs text-green-400 mt-1">Handle disponible !</p>}
                 </div>
 
-                <div>
-                  <label className="block text-xs text-gray-400 mb-2">Catégorie</label>
-                  <select
-                    value={newChannel.channel_category}
-                    onChange={e => setNewChannel(c => ({ ...c, channel_category: e.target.value }))}
-                    className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-red-500"
-                  >
-                    <option value="">Choisir une catégorie</option>
-                    {CATEGORIES.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-                  </select>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs text-gray-400 mb-2">Catégorie</label>
+                    <select
+                      value={newChannel.channel_category}
+                      onChange={e => setNewChannel(c => ({ ...c, channel_category: e.target.value }))}
+                      className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-3 text-sm text-white focus:outline-none focus:border-red-500"
+                    >
+                      <option value="">Choisir...</option>
+                      {CATEGORIES.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs text-gray-400 mb-2">Visibilité</label>
+                    <select
+                      value={newChannel.visibility}
+                      onChange={e => setNewChannel(c => ({ ...c, visibility: e.target.value as 'public' | 'private' }))}
+                      className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-3 text-sm text-white focus:outline-none focus:border-red-500"
+                    >
+                      <option value="public">Publique</option>
+                      <option value="private">Privée</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs text-gray-400 mb-2">Description</label>
+                  <label className="block text-xs text-gray-400 mb-2">Description (optionnel)</label>
                   <textarea
                     value={newChannel.description}
                     onChange={e => setNewChannel(c => ({ ...c, description: e.target.value }))}
@@ -367,55 +466,27 @@ export default function MyChannelsPage({ onNavigate }: Props) {
                   />
                 </div>
 
-                <div>
-                  <label className="block text-xs text-gray-400 mb-2">Visibilité</label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {[
-                      { value: 'public', label: 'Publique', desc: 'Visible par tous', icon: <Globe className="w-4 h-4" /> },
-                      { value: 'private', label: 'Privée', desc: 'Accès par lien uniquement', icon: <Lock className="w-4 h-4" /> },
-                    ].map(opt => (
-                      <button
-                        key={opt.value}
-                        onClick={() => setNewChannel(c => ({ ...c, visibility: opt.value as 'public' | 'private' }))}
-                        className={`flex items-start gap-3 p-3 rounded-xl border text-left transition-all ${
-                          newChannel.visibility === opt.value
-                            ? 'border-red-500 bg-red-600/10'
-                            : 'border-gray-700 bg-gray-800 hover:border-gray-600'
-                        }`}
-                      >
-                        <div className={`mt-0.5 ${newChannel.visibility === opt.value ? 'text-red-400' : 'text-gray-500'}`}>{opt.icon}</div>
-                        <div>
-                          <p className="text-sm font-medium text-white">{opt.label}</p>
-                          <p className="text-xs text-gray-500">{opt.desc}</p>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
+                <div className="flex gap-3 pt-1">
+                  <button
+                    onClick={closeCreate}
+                    className="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl py-3 text-sm font-medium transition-colors"
+                  >
+                    Annuler
+                  </button>
+                  <button
+                    onClick={handleCreate}
+                    disabled={creating || !newChannel.channel_name || !newChannel.channel_slug || slugAvailable !== true}
+                    className="flex-1 bg-red-600 hover:bg-red-500 disabled:bg-gray-700 disabled:text-gray-500 text-white rounded-xl py-3 text-sm font-semibold transition-colors"
+                  >
+                    {creating ? 'Création...' : 'Créer la chaîne'}
+                  </button>
                 </div>
               </div>
+            )}
 
-              <div className="flex gap-3 mt-6">
-                <button
-                  onClick={() => setShowCreate(false)}
-                  className="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl py-3 text-sm font-medium transition-colors"
-                >
-                  Annuler
-                </button>
-                <button
-                  onClick={handleCreate}
-                  disabled={creating || !newChannel.channel_name || !newChannel.channel_slug || slugAvailable !== true}
-                  className="flex-1 bg-red-600 hover:bg-red-500 disabled:bg-gray-700 disabled:text-gray-500 text-white rounded-xl py-3 text-sm font-semibold transition-colors"
-                >
-                  {creating ? 'Création...' : 'Créer la chaîne'}
-                </button>
-              </div>
-            </div>
           </div>
-        )}
-
-      </main>
-
-      <Footer />
+        </div>
+      )}
     </div>
   );
 }

@@ -54,11 +54,13 @@ import CreateReleasePage from './pages/CreateReleasePage';
 import LegalProfilePage from './pages/LegalProfilePage';
 import MyChannelsPage from './pages/MyChannelsPage';
 import ChannelEditPage from './pages/ChannelEditPage';
+import ChannelTeamPage from './pages/ChannelTeamPage';
+import ChannelAnalyticsPage from './pages/ChannelAnalyticsPage';
 import RevenueModelPage from './pages/RevenueModelPage';
 import ShortsSystemPage from './pages/ShortsSystemPage';
 import NativeSponsoringPage from './pages/NativeSponsoringPage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'revenue-model' | 'shorts-system' | 'native-sponsoring';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -76,6 +78,8 @@ function AppContent() {
   const [postCommunitySlug, setPostCommunitySlug] = useState<string | null>(null);
   const [settingsCommunitySlug, setSettingsCommunitySlug] = useState<string | null>(null);
   const [channelEditId, setChannelEditId] = useState<string | null>(null);
+  const [channelTeamId, setChannelTeamId] = useState<string | null>(null);
+  const [channelAnalyticsId, setChannelAnalyticsId] = useState<string | null>(null);
 
   const { setIsMiniPlayer, currentVideo } = usePlayerStore();
 
@@ -155,6 +159,26 @@ function AppContent() {
         if (channelId) {
           setChannelEditId(channelId);
           setCurrentPage('channel-edit');
+          setShowSplash(false);
+        }
+        return;
+      }
+
+      if (hash.startsWith('channel-team/')) {
+        const channelId = hash.split('/')[1];
+        if (channelId) {
+          setChannelTeamId(channelId);
+          setCurrentPage('channel-team');
+          setShowSplash(false);
+        }
+        return;
+      }
+
+      if (hash.startsWith('channel-analytics/')) {
+        const channelId = hash.split('/')[1];
+        if (channelId) {
+          setChannelAnalyticsId(channelId);
+          setCurrentPage('channel-analytics');
           setShowSplash(false);
         }
         return;
@@ -503,6 +527,14 @@ function AppContent() {
               const id = page.split('/')[1];
               setChannelEditId(id);
               setCurrentPage('channel-edit');
+            } else if (page.startsWith('channel-team/')) {
+              const id = page.split('/')[1];
+              setChannelTeamId(id);
+              setCurrentPage('channel-team');
+            } else if (page.startsWith('channel-analytics/')) {
+              const id = page.split('/')[1];
+              setChannelAnalyticsId(id);
+              setCurrentPage('channel-analytics');
             } else {
               setCurrentPage(page as Page);
             }
@@ -516,6 +548,44 @@ function AppContent() {
               if (page.startsWith('channel-edit/')) {
                 const id = page.split('/')[1];
                 setChannelEditId(id);
+              } else if (page.startsWith('channel-team/')) {
+                const id = page.split('/')[1];
+                setChannelTeamId(id);
+                setCurrentPage('channel-team');
+              } else if (page.startsWith('channel-analytics/')) {
+                const id = page.split('/')[1];
+                setChannelAnalyticsId(id);
+                setCurrentPage('channel-analytics');
+              } else {
+                setCurrentPage(page as Page);
+              }
+            }}
+          />
+        )}
+
+        {currentPage === 'channel-team' && channelTeamId && (
+          <ChannelTeamPage
+            channelId={channelTeamId}
+            onNavigate={(page) => {
+              if (page.startsWith('channel-edit/')) {
+                const id = page.split('/')[1];
+                setChannelEditId(id);
+                setCurrentPage('channel-edit');
+              } else {
+                setCurrentPage(page as Page);
+              }
+            }}
+          />
+        )}
+
+        {currentPage === 'channel-analytics' && channelAnalyticsId && (
+          <ChannelAnalyticsPage
+            channelId={channelAnalyticsId}
+            onNavigate={(page) => {
+              if (page.startsWith('channel-edit/')) {
+                const id = page.split('/')[1];
+                setChannelEditId(id);
+                setCurrentPage('channel-edit');
               } else {
                 setCurrentPage(page as Page);
               }
