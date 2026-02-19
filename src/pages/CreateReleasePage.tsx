@@ -46,7 +46,7 @@ export default function CreateReleasePage({ onNavigate }: CreateReleasePageProps
     rights_owned: false,
     territories_allowed: ['worldwide'],
     credits: [],
-    price_standard: 4.99,
+    price_standard: 9.99,
     price_promo: undefined,
     promo_ends_at: undefined,
     currency: 'EUR',

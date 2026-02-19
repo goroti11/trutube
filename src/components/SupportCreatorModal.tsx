@@ -34,7 +34,7 @@ export default function SupportCreatorModal({
     {
       tier: 'basic',
       name: 'Supporter',
-      amount: 4.99,
+      amount: 9.99,
       benefits: ['Badge exclusif', 'Emojis personnalisés', 'Nom dans les crédits']
     },
     {

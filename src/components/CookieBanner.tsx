@@ -9,6 +9,7 @@ export interface CookiePreferences {
 }
 
 const STORAGE_KEY = 'goroti_cookie_consent';
+const SESSION_KEY = 'goroti_cookie_banner_shown';
 
 export function getCookieConsent(): (CookiePreferences & { decided: boolean }) | null {
   try {
@@ -22,6 +23,7 @@ export function getCookieConsent(): (CookiePreferences & { decided: boolean }) |
 
 export function saveCookieConsent(prefs: CookiePreferences) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...prefs, essential: true, decided: true }));
+  sessionStorage.setItem(SESSION_KEY, 'true');
 }
 
 const COOKIE_CATEGORIES = [
@@ -70,10 +72,19 @@ export default function CookieBanner() {
   });
 
   useEffect(() => {
-    const existing = getCookieConsent();
-    if (!existing || !existing.decided) {
+    const shownThisSession = sessionStorage.getItem(SESSION_KEY);
+    if (!shownThisSession) {
       const timer = setTimeout(() => setVisible(true), 1200);
       return () => clearTimeout(timer);
+    }
+    const existing = getCookieConsent();
+    if (existing) {
+      setPrefs({
+        essential: true,
+        functional: existing.functional ?? true,
+        analytics: existing.analytics ?? false,
+        marketing: existing.marketing ?? false,
+      });
     }
   }, []);
 

@@ -48,7 +48,7 @@ export default function PricingPage({ onNavigate }: Props) {
   const [viewerSales, setViewerSales] = useState(50);
   const [viewerPrice, setViewerPrice] = useState(9.99);
   const [viewerMembers, setViewerMembers] = useState(200);
-  const [memberPrice, setMemberPrice] = useState(4.99);
+  const [memberPrice, setMemberPrice] = useState(9.99);
   const [tips, setTips] = useState(100);
 
   const salesNet = viewerSales * viewerPrice * 0.85;
@@ -138,7 +138,7 @@ export default function PricingPage({ onNavigate }: Props) {
                     <span className="px-3 py-0.5 bg-cyan-600 text-white text-xs font-medium rounded-full">Populaire</span>
                   </div>
                   <h3 className="font-bold text-white mb-1 mt-1">Goroti Premium</h3>
-                  <div className="text-2xl font-bold text-white mb-3">6,99€ <span className="text-sm text-gray-400 font-normal">/ mois</span></div>
+                  <div className="text-2xl font-bold text-white mb-3">9,99€ <span className="text-sm text-gray-400 font-normal">/ mois</span></div>
                   <ul className="space-y-1.5">
                     {['Aucune publicité', 'Qualité jusqu\'à 4K HDR', 'Téléchargement hors-ligne', 'Accès prioritaire aux lives', 'Badge Premium sur le profil', 'Accès anticipé aux nouvelles fonctionnalités'].map(f => (
                       <li key={f} className="flex items-center gap-2 text-xs text-gray-300">
@@ -146,7 +146,7 @@ export default function PricingPage({ onNavigate }: Props) {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-3 text-xs text-gray-500">Annuel : 59,99€/an (30% d'économie)</div>
+                  <div className="mt-3 text-xs text-gray-500">Annuel : 99,99€/an (16% d'économie)</div>
                 </div>
               </div>
             </div>

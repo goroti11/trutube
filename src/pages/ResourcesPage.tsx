@@ -764,20 +764,20 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       content: {
         description: 'Système d\'abonnements Premium multi-niveaux pour utilisateurs et créateurs.',
         abonnementsUtilisateur: {
-          'Premium Basic (4,99€/mois)': {
-            avantages: ['Sans publicité', 'Qualité HD', 'Lecture hors ligne', 'Badge Premium']
+          'Premium (9,99€/mois)': {
+            avantages: ['Sans publicité', 'Qualité HD', 'Lecture hors ligne', 'Badge Premium', 'Support prioritaire']
           },
-          'Premium Plus (9,99€/mois)': {
-            avantages: ['Tout Basic +', 'Qualité 4K', 'Téléchargements illimités', 'Accès anticipé', 'Support prioritaire']
+          'Platine (19,99€/mois)': {
+            avantages: ['Tout Premium +', 'Qualité 4K', 'Téléchargements illimités', 'Accès anticipé', 'Badge Platine animé']
           },
-          'Premium Ultimate (14,99€/mois)': {
-            avantages: ['Tout Plus +', 'Contenu exclusif', 'Événements VIP', 'Réductions store 20%', 'Badge Ultimate']
+          'Gold (29,99€/mois)': {
+            avantages: ['Tout Platine +', 'Contenu exclusif', 'Événements VIP', 'Réductions store 20%', 'Badge Gold']
           }
         },
         abonnementsAnnuels: {
-          'Basic Annual': '49,99€/an (2 mois gratuits)',
-          'Plus Annual': '99,99€/an (2 mois gratuits)',
-          'Ultimate Annual': '149,99€/an (2 mois gratuits)'
+          'Premium Annual': '99,99€/an (2 mois gratuits)',
+          'Platine Annual': '199,99€/an (2 mois gratuits)',
+          'Gold Annual': '299,99€/an (2 mois gratuits)'
         },
         essaiGratuit: {
           duree: '14 jours',

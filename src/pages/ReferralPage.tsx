@@ -96,7 +96,7 @@ export default function ReferralPage({ onNavigate }: ReferralPageProps) {
           <Gift className="w-12 h-12 text-red-400 mx-auto mb-4 relative" />
           <h2 className="text-2xl font-bold mb-2 relative">Parrainez vos amis</h2>
           <p className="text-gray-300 max-w-md mx-auto mb-2 relative">
-            Invitez vos amis sur GOROTI et gagnez <span className="text-yellow-400 font-bold">{referralService.REWARD_PER_REFERRAL} TruCoins</span> pour chaque parrainage réussi.
+            Invitez vos amis sur GOROTI et gagnez <span className="text-yellow-400 font-bold">{referralService.REWARD_PER_REFERRAL} TC</span> pour chaque parrainage réussi.
           </p>
           <p className="text-sm text-gray-500 relative">Votre ami reçoit aussi un bonus de bienvenue !</p>
         </div>
@@ -181,7 +181,7 @@ export default function ReferralPage({ onNavigate }: ReferralPageProps) {
             {[
               { step: '1', title: 'Partagez votre lien', desc: 'Envoyez votre lien de parrainage unique à vos amis.' },
               { step: '2', title: "Votre ami s'inscrit", desc: "Votre ami crée un compte GOROTI avec votre lien ou code." },
-              { step: '3', title: 'Gagnez des TruCoins', desc: `Vous recevez automatiquement ${referralService.REWARD_PER_REFERRAL} TruCoins dès que votre ami s'inscrit.` },
+              { step: '3', title: 'Gagnez des TruCoins', desc: `Vous recevez automatiquement ${referralService.REWARD_PER_REFERRAL} TC dès que votre ami s'inscrit.` },
             ].map(s => (
               <div key={s.step} className="flex items-start gap-4">
                 <div className="w-8 h-8 bg-red-600/20 rounded-full flex items-center justify-center shrink-0">

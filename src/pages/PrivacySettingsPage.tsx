@@ -111,6 +111,7 @@ export default function PrivacySettingsPage({ onNavigate }: Props) {
 
   const handleResetCookies = () => {
     localStorage.removeItem('goroti_cookie_consent');
+    sessionStorage.removeItem('goroti_cookie_banner_shown');
     setCookiePrefs({ essential: true, functional: true, analytics: false, marketing: false });
     showSuccess('Préférences réinitialisées — le bandeau réapparaîtra au prochain chargement');
   };

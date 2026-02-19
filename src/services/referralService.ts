@@ -20,7 +20,7 @@ export interface Referral {
   completed_at: string | null;
 }
 
-const REWARD_PER_REFERRAL = 50;
+const REWARD_PER_REFERRAL = 0.50;
 
 function generateCode(userId: string): string {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';

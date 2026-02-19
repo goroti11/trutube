@@ -193,7 +193,7 @@ export default function ShareVideoModal({ videoId, videoTitle, onClose }: ShareV
 
           {user && refCode && includeRef && (
             <div className="bg-yellow-900/20 border border-yellow-800/30 rounded-xl p-3 text-sm text-yellow-300">
-              Chaque ami qui s'inscrit via votre lien vous rapporte <strong>{referralService.REWARD_PER_REFERRAL} TruCoins</strong> !
+              Chaque ami qui s'inscrit via votre lien vous rapporte <strong>{referralService.REWARD_PER_REFERRAL} TC</strong> !
             </div>
           )}
         </div>

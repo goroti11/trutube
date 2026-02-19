@@ -14,7 +14,7 @@ export default function CreateCommunityPage() {
   const [description, setDescription] = useState('');
   const [type, setType] = useState<CommunityType>('creator');
   const [isPremium, setIsPremium] = useState(false);
-  const [premiumPrice, setPremiumPrice] = useState(4.99);
+  const [premiumPrice, setPremiumPrice] = useState(9.99);
   const [rules, setRules] = useState(['Soyez respectueux', 'Pas de spam', 'Contenu approprié uniquement']);
 
   const communityTypes = [
@@ -241,7 +241,7 @@ export default function CreateCommunityPage() {
                     id="price"
                     value={premiumPrice}
                     onChange={(e) => setPremiumPrice(parseFloat(e.target.value))}
-                    min="0.99"
+                    min="9.99"
                     max="99.99"
                     step="0.01"
                     className="w-full max-w-xs px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
