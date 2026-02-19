@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Upload, LogIn, Compass, Settings, Sparkles, User, LogOut, ChevronDown, HelpCircle, Play, Users, Wallet, Crown, Shield } from 'lucide-react';
+import { Upload, LogIn, Compass, Settings, Sparkles, User, LogOut, ChevronDown, HelpCircle, Play, Users, Wallet, Crown, Shield, Bookmark, Gift } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import Logo from './Logo';
 
@@ -161,6 +161,26 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                         >
                           <Wallet className="w-4 h-4" />
                           TruCoin Wallet
+                        </button>
+                        <button
+                          onClick={() => {
+                            onNavigate?.('saved-videos');
+                            setShowUserMenu(false);
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
+                        >
+                          <Bookmark className="w-4 h-4" />
+                          Vidéos sauvegardées
+                        </button>
+                        <button
+                          onClick={() => {
+                            onNavigate?.('referral');
+                            setShowUserMenu(false);
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-green-400 hover:bg-gray-700 flex items-center gap-2 font-semibold"
+                        >
+                          <Gift className="w-4 h-4" />
+                          Parrainage
                         </button>
                         <button
                           onClick={() => {
