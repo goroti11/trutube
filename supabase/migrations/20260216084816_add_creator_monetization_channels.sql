@@ -301,7 +301,7 @@ CREATE TABLE IF NOT EXISTS music_streams (
   stream_duration integer NOT NULL, -- Secondes écoutées
   is_complete boolean DEFAULT false, -- >30s = complete
   
-  platform text DEFAULT 'trutube', -- 'trutube', 'spotify', 'apple_music'
+  platform text DEFAULT 'goroti', -- 'goroti', 'spotify', 'apple_music'
   device_type text, -- 'web', 'mobile', 'tablet'
   
   streamed_at timestamptz DEFAULT now()
@@ -319,7 +319,7 @@ CREATE TABLE IF NOT EXISTS music_royalties (
   rate_per_stream numeric(10,6), -- Ex: 0.004 USD par stream
   
   gross_amount numeric(10,2) NOT NULL,
-  platform_fee numeric(10,2) DEFAULT 0, -- Commission TruTube (10%)
+  platform_fee numeric(10,2) DEFAULT 0, -- Commission Goroti (10%)
   net_amount numeric(10,2) NOT NULL,
   
   currency text DEFAULT 'USD',

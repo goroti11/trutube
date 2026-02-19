@@ -1,4 +1,4 @@
-# Système de Lecture Vidéo Avancé TruTube
+# Système de Lecture Vidéo Avancé Goroti
 
 ## Vue d'ensemble
 
@@ -646,7 +646,7 @@ ffmpeg -i input.mp4 -s 854x480 -b:v 1400k output_480p.m3u8
 
 ## Résumé
 
-Le système de lecture vidéo TruTube offre:
+Le système de lecture vidéo Goroti offre:
 
 **Points forts**:
 - Support HLS adaptatif professionnel

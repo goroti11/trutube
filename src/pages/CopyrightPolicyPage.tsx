@@ -173,8 +173,8 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
           <div className="p-4 bg-gray-900/30 border border-gray-800 rounded-xl">
             <h3 className="font-semibold text-white text-sm mb-2">Contact direct équipe droits</h3>
             <p className="text-gray-400 text-xs mb-2">Pour les signalements urgents ou les demandes de labels/éditeurs :</p>
-            <a href="mailto:copyright@trutube.tv" className="text-cyan-400 text-sm hover:text-cyan-300 transition-colors">
-              copyright@trutube.tv
+            <a href="mailto:copyright@goroti.tv" className="text-cyan-400 text-sm hover:text-cyan-300 transition-colors">
+              copyright@goroti.tv
             </a>
           </div>
         </Section>
@@ -211,7 +211,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
               <p>Notre équipe juridique examine la contre-notification sous <strong className="text-white">72h ouvrées</strong>. Le plaignant original est notifié et dispose de 10 jours pour saisir la justice. Si aucune action judiciaire n'est engagée dans ce délai, le contenu peut être rétabli.</p>
             </AccordionItem>
             <AccordionItem title="Médiation externe">
-              <p>Si la décision de Goroti ne vous satisfait pas, vous pouvez faire appel à un organisme de résolution des litiges externe. Goroti coopère avec les ORL accrédités sous le Digital Services Act (DSA). Contact : <span className="text-cyan-400">mediation@trutube.tv</span></p>
+              <p>Si la décision de Goroti ne vous satisfait pas, vous pouvez faire appel à un organisme de résolution des litiges externe. Goroti coopère avec les ORL accrédités sous le Digital Services Act (DSA). Contact : <span className="text-cyan-400">mediation@goroti.tv</span></p>
             </AccordionItem>
           </div>
 
@@ -265,7 +265,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
               <p>Labels musicaux, studios de cinéma, distributeurs et tout détenteur de droits disposant d'une licence territoriale limitée. La demande doit être accompagnée d'une preuve documentaire de la restriction territoriale (contrat de licence, accord de distribution).</p>
             </AccordionItem>
             <AccordionItem title="Comment faire une demande ?">
-              <p>Contacter <span className="text-cyan-400">rights@trutube.tv</span> avec :</p>
+              <p>Contacter <span className="text-cyan-400">rights@goroti.tv</span> avec :</p>
               <ul className="mt-2 space-y-1">
                 {['URL du contenu concerné', 'Pays à bloquer (liste ISO 3166)', 'Preuve de la restriction territoriale', 'Coordonnées du détenteur de droits'].map(item => (
                   <li key={item} className="flex gap-2 text-xs">
@@ -275,7 +275,7 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
               </ul>
             </AccordionItem>
             <AccordionItem title="Délais d'application">
-              <p>Les blocages territoriaux validés sont appliqués sous <strong className="text-white">48h ouvrées</strong>. Pour les demandes urgentes (ex : contenu diffusé avant sortie officielle), un traitement prioritaire est disponible via <span className="text-cyan-400">urgent-rights@trutube.tv</span>.</p>
+              <p>Les blocages territoriaux validés sont appliqués sous <strong className="text-white">48h ouvrées</strong>. Pour les demandes urgentes (ex : contenu diffusé avant sortie officielle), un traitement prioritaire est disponible via <span className="text-cyan-400">urgent-rights@goroti.tv</span>.</p>
             </AccordionItem>
           </div>
         </Section>
@@ -341,9 +341,9 @@ export default function CopyrightPolicyPage({ onNavigate }: Props) {
           <h2 className="text-xl font-bold text-white mb-5">Contacts droits d'auteur</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {[
-              { label: 'Signalements copyright', email: 'copyright@trutube.tv', desc: 'Violations de droits d\'auteur' },
-              { label: 'Blocage territorial', email: 'rights@trutube.tv', desc: 'Restrictions géographiques' },
-              { label: 'Médiation & litiges', email: 'mediation@trutube.tv', desc: 'Contestations et arbitrage' },
+              { label: 'Signalements copyright', email: 'copyright@goroti.tv', desc: 'Violations de droits d\'auteur' },
+              { label: 'Blocage territorial', email: 'rights@goroti.tv', desc: 'Restrictions géographiques' },
+              { label: 'Médiation & litiges', email: 'mediation@goroti.tv', desc: 'Contestations et arbitrage' },
             ].map(({ label, email, desc }) => (
               <div key={label} className="p-4 bg-gray-900/50 border border-gray-800 rounded-xl">
                 <Mail className="w-4 h-4 text-gray-500 mb-2" />

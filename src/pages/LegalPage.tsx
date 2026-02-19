@@ -111,14 +111,14 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
                 <Mail className="w-4 h-4 text-sky-400 flex-shrink-0" />
                 <div>
                   <p className="text-gray-500 text-xs">Contact général</p>
-                  <a href="mailto:contact@trutube.com" className="text-white text-sm font-medium hover:text-sky-400 transition-colors">contact@trutube.com</a>
+                  <a href="mailto:contact@goroti.com" className="text-white text-sm font-medium hover:text-sky-400 transition-colors">contact@goroti.com</a>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/6">
                 <Mail className="w-4 h-4 text-sky-400 flex-shrink-0" />
                 <div>
                   <p className="text-gray-500 text-xs">Service juridique</p>
-                  <a href="mailto:legal@trutube.com" className="text-white text-sm font-medium hover:text-sky-400 transition-colors">legal@trutube.com</a>
+                  <a href="mailto:legal@goroti.com" className="text-white text-sm font-medium hover:text-sky-400 transition-colors">legal@goroti.com</a>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/6">
@@ -223,7 +223,7 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
               et à la loi n° 78-17 du 6 janvier 1978 modifiée (loi Informatique et Libertés).
             </p>
             <div className="mt-3 p-4 rounded-xl bg-white/[0.03] border border-white/6 space-y-1.5 text-sm">
-              <InfoRow label="DPO (Délégué à la Protection des Données)" value="privacy@trutube.com" href="mailto:privacy@trutube.com" />
+              <InfoRow label="DPO (Délégué à la Protection des Données)" value="privacy@goroti.com" href="mailto:privacy@goroti.com" />
               <InfoRow label="Finalité principale" value="Fourniture et amélioration du service de plateforme vidéo" />
               <InfoRow label="Base légale principale" value="Exécution du contrat d'utilisation" />
             </div>
@@ -303,7 +303,7 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
           <Section icon={FileText} title="7. Liens hypertextes" accent="text-gray-400">
             <p>
               La création de liens hypertextes pointant vers la plateforme Goroti est soumise à autorisation
-              préalable de Goroti SAS. Pour toute demande, contactez : <a href="mailto:contact@trutube.com" className="text-sky-400 hover:text-sky-300">contact@trutube.com</a>
+              préalable de Goroti SAS. Pour toute demande, contactez : <a href="mailto:contact@goroti.com" className="text-sky-400 hover:text-sky-300">contact@goroti.com</a>
             </p>
             <p className="mt-2">
               Goroti décline toute responsabilité concernant le contenu des sites tiers vers lesquels
@@ -353,11 +353,11 @@ export function LegalPage({ onNavigate }: LegalPageProps) {
             </div>
             <div className="flex items-center gap-3 flex-shrink-0">
               <a
-                href="mailto:legal@trutube.com"
+                href="mailto:legal@goroti.com"
                 className="flex items-center gap-1.5 px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-xl text-sm font-medium transition-colors border border-white/10"
               >
                 <Mail className="w-4 h-4" />
-                legal@trutube.com
+                legal@goroti.com
               </a>
               <button
                 onClick={() => onNavigate('support')}

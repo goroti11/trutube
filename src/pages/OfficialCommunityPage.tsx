@@ -29,7 +29,7 @@ const NETWORKS: SocialNetwork[] = [
     id: 'x',
     name: 'X / Twitter',
     handle: '@GorotiOfficial',
-    url: 'https://x.com/trutube',
+    url: 'https://x.com/goroti',
     icon: Twitter,
     iconColor: 'text-white',
     bgColor: 'bg-black/60',
@@ -41,8 +41,8 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'instagram',
     name: 'Instagram',
-    handle: '@trutube.official',
-    url: 'https://instagram.com/trutube.official',
+    handle: '@goroti.official',
+    url: 'https://instagram.com/goroti.official',
     icon: Instagram,
     iconColor: 'text-pink-400',
     bgColor: 'bg-pink-950/20',
@@ -53,8 +53,8 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'tiktok',
     name: 'TikTok',
-    handle: '@trutube',
-    url: 'https://tiktok.com/@trutube',
+    handle: '@goroti',
+    url: 'https://tiktok.com/@goroti',
     icon: Tv,
     iconColor: 'text-cyan-400',
     bgColor: 'bg-cyan-950/20',
@@ -66,7 +66,7 @@ const NETWORKS: SocialNetwork[] = [
     id: 'youtube',
     name: 'YouTube',
     handle: 'Goroti Officiel',
-    url: 'https://youtube.com/@trutube',
+    url: 'https://youtube.com/@goroti',
     icon: Youtube,
     iconColor: 'text-red-400',
     bgColor: 'bg-red-950/20',
@@ -78,7 +78,7 @@ const NETWORKS: SocialNetwork[] = [
     id: 'linkedin',
     name: 'LinkedIn',
     handle: 'Goroti',
-    url: 'https://linkedin.com/company/trutube',
+    url: 'https://linkedin.com/company/goroti',
     icon: Linkedin,
     iconColor: 'text-blue-400',
     bgColor: 'bg-blue-950/20',
@@ -89,8 +89,8 @@ const NETWORKS: SocialNetwork[] = [
   {
     id: 'discord',
     name: 'Discord',
-    handle: 'discord.gg/trutube',
-    url: 'https://discord.gg/trutube',
+    handle: 'discord.gg/goroti',
+    url: 'https://discord.gg/goroti',
     icon: MessageSquare,
     iconColor: 'text-blue-400',
     bgColor: 'bg-blue-950/20',
@@ -103,7 +103,7 @@ const NETWORKS: SocialNetwork[] = [
     id: 'telegram',
     name: 'Telegram',
     handle: '@GorotiAlerts',
-    url: 'https://t.me/trutubealerts',
+    url: 'https://t.me/gorotialerts',
     icon: Send,
     iconColor: 'text-sky-400',
     bgColor: 'bg-sky-950/20',
@@ -115,7 +115,7 @@ const NETWORKS: SocialNetwork[] = [
     id: 'facebook',
     name: 'Facebook',
     handle: 'Goroti',
-    url: 'https://facebook.com/trutube',
+    url: 'https://facebook.com/goroti',
     icon: Facebook,
     iconColor: 'text-blue-500',
     bgColor: 'bg-blue-950/20',
@@ -269,13 +269,13 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
                     Goroti ne vous demandera <strong className="text-white">jamais</strong> vos identifiants, votre mot de passe, ou un paiement via les réseaux sociaux.
                   </p>
                   <p>
-                    Tout compte prétendant être Goroti et non listé sur cette page est un faux compte. Signalez-le directement à la plateforme concernée et à <span className="text-red-400">security@trutube.tv</span>.
+                    Tout compte prétendant être Goroti et non listé sur cette page est un faux compte. Signalez-le directement à la plateforme concernée et à <span className="text-red-400">security@goroti.tv</span>.
                   </p>
                   <ul className="space-y-1 mt-2">
                     {[
                       'Ne jamais cliquer sur des liens reçus en DM d\'un compte Goroti non vérifié',
                       'Ne jamais envoyer de fonds suite à une demande sur les réseaux sociaux',
-                      'Vérifier l\'URL officielle : trutube.tv (pas de variantes)',
+                      'Vérifier l\'URL officielle : goroti.tv (pas de variantes)',
                     ].map(item => (
                       <li key={item} className="flex gap-2">
                         <span className="text-red-500 shrink-0">✕</span>
@@ -302,7 +302,7 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="https://discord.gg/trutube"
+                href="https://discord.gg/goroti"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
@@ -311,7 +311,7 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
                 <ExternalLink className="w-4 h-4" />
               </a>
               <a
-                href="https://t.me/trutubealerts"
+                href="https://t.me/gorotialerts"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-medium transition-colors"
@@ -328,9 +328,9 @@ export default function OfficialCommunityPage({ onNavigate }: Props) {
           <h2 className="text-xl font-bold text-white mb-5">Contact corporate & presse</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {[
-              { icon: Globe, color: 'text-cyan-400', label: 'Relations presse', contact: 'press@trutube.tv', desc: 'Demandes médias, interviews, kit presse' },
-              { icon: Briefcase, color: 'text-yellow-400', label: 'Partenariats', contact: 'partnerships@trutube.tv', desc: 'Collaborations marques, labels, B2B' },
-              { icon: Users, color: 'text-green-400', label: 'Community', contact: 'community@trutube.tv', desc: 'Créateurs, ambassadeurs, évènements' },
+              { icon: Globe, color: 'text-cyan-400', label: 'Relations presse', contact: 'press@goroti.tv', desc: 'Demandes médias, interviews, kit presse' },
+              { icon: Briefcase, color: 'text-yellow-400', label: 'Partenariats', contact: 'partnerships@goroti.tv', desc: 'Collaborations marques, labels, B2B' },
+              { icon: Users, color: 'text-green-400', label: 'Community', contact: 'community@goroti.tv', desc: 'Créateurs, ambassadeurs, évènements' },
             ].map(({ icon: Icon, color, label, contact, desc }) => (
               <div key={label} className="p-5 bg-gray-900/50 border border-gray-800 rounded-xl">
                 <Icon className={`w-5 h-5 ${color} mb-3`} />

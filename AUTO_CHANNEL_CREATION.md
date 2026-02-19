@@ -11,7 +11,7 @@ La plateforme Goroti crée automatiquement une chaîne créateur pour chaque nou
 
 ### Principe Fondamental
 
-> **Un compte TruTube possède toujours au moins une chaîne**
+> **Un compte Goroti possède toujours au moins une chaîne**
 
 ---
 
@@ -50,7 +50,7 @@ L'utilisateur n'a **rien à faire**. La chaîne est créée automatiquement en a
 | **Catégorie** | "Créateur" (general) |
 | **Visibilité** | Publique |
 | **URL chaîne** | `channel-{user_id}` (unique) |
-| **Description** | "Bienvenue sur ma chaîne TruTube!" |
+| **Description** | "Bienvenue sur ma chaîne Goroti!" |
 
 ### Exemple Concret
 
@@ -239,7 +239,7 @@ BEGIN
     monetization_enabled, premium_sales_enabled
   ) VALUES (
     NEW.id, v_channel_url, v_display_name,
-    'individual', 'Bienvenue sur ma chaîne TruTube!',
+    'individual', 'Bienvenue sur ma chaîne Goroti!',
     COALESCE(NEW.avatar_url, 'default-avatar.jpg'),
     COALESCE(NEW.banner_url, 'default-banner.jpg'),
     'general', 'public', true, false, false

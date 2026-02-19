@@ -1,14 +1,14 @@
-# TruTube Communauté - Système Social Structuré
+# Goroti Communauté - Système Social Structuré
 
 ## Vision
 
-**TruTube Communauté** est un espace social structuré par univers, permettant de créer de vraies relations créateur ↔ fan et fan ↔ fan. Ce n'est pas juste des commentaires sous vidéos, c'est un véritable écosystème social intégré.
+**Goroti Communauté** est un espace social structuré par univers, permettant de créer de vraies relations créateur ↔ fan et fan ↔ fan. Ce n'est pas juste des commentaires sous vidéos, c'est un véritable écosystème social intégré.
 
 ## Positionnement
 
-- **TruTube** = Diffusion vidéo
-- **TruTube Studio** = Gestion créateur
-- **TruTube Communauté** = Interaction sociale structurée
+- **Goroti** = Diffusion vidéo
+- **Goroti Studio** = Gestion créateur
+- **Goroti Communauté** = Interaction sociale structurée
 
 C'est l'espace vivant de la plateforme.
 
@@ -51,7 +51,7 @@ Avantages :
 
 ## Types de publications
 
-Dans TruTube Communauté, on peut publier :
+Dans Goroti Communauté, on peut publier :
 
 ### 1. Texte
 Post classique avec formatage Markdown
@@ -133,7 +133,7 @@ Utilisateurs avec réputation 500+ peuvent :
 - Voter sur signalements
 - Masquer temporairement (révision obligatoire)
 
-### Niveau 4 : Staff TruTube
+### Niveau 4 : Staff Goroti
 Décision finale avec :
 - Justification écrite obligatoire
 - Preuve du contenu violé
@@ -309,7 +309,7 @@ Profil utilisateur affiche :
 - Digest quotidien/hebdomadaire
 - Notifications en temps réel pour mentions
 
-## Identité numérique TruTube
+## Identité numérique Goroti
 
 ### Profil structuré
 
@@ -369,7 +369,7 @@ Premiers créateurs majeurs (500-50k abonnés ailleurs)
 3. **Mise en avant prioritaire** : Homepage + recommandations
 4. **Accès bêta** : Nouvelles fonctionnalités en avant-première
 5. **Support VIP** : Ligne directe + account manager
-6. **Événements exclusifs** : Rencontres TruTube team
+6. **Événements exclusifs** : Rencontres Goroti team
 7. **Revenue garanti** : 500€/mois garanti 6 premiers mois
 
 ### Conditions
@@ -380,14 +380,14 @@ Premiers créateurs majeurs (500-50k abonnés ailleurs)
 
 ### Sélection
 - **100 ambassadeurs maximum** pour phase 1
-- Sélection manuelle par TruTube team
+- Sélection manuelle par Goroti team
 - Diversité univers (Music, Game, Know, etc.)
 - Mix tailles (500, 5k, 50k abonnés)
 
 ## Différenciation vs concurrents
 
 ### vs YouTube Comments
-| Critère | YouTube | TruTube Communauté |
+| Critère | YouTube | Goroti Communauté |
 |---------|---------|-------------------|
 | Format | Commentaires sous vidéo | Espace social structuré |
 | Organisation | Chronologique/Top | Par univers/thèmes |
@@ -396,7 +396,7 @@ Premiers créateurs majeurs (500-50k abonnés ailleurs)
 | Gouvernance | Aucune | Vote communautaire |
 
 ### vs Reddit
-| Critère | Reddit | TruTube Communauté |
+| Critère | Reddit | Goroti Communauté |
 |---------|--------|-------------------|
 | Lien vidéo | Externe | Intégré natif |
 | Créateurs | Anonymes souvent | Identité créateur forte |
@@ -405,7 +405,7 @@ Premiers créateurs majeurs (500-50k abonnés ailleurs)
 | Vidéo | Pas prioritaire | Cœur de l'écosystème |
 
 ### vs Discord
-| Critère | Discord | TruTube Communauté |
+| Critère | Discord | Goroti Communauté |
 |---------|---------|-------------------|
 | Découverte | Difficile | Algorithme natif |
 | Temporalité | Temps réel uniquement | Permanent + temps réel |
@@ -528,7 +528,7 @@ Premiers créateurs majeurs (500-50k abonnés ailleurs)
 
 ## Conclusion
 
-TruTube Communauté transforme TruTube d'une simple plateforme vidéo en un véritable écosystème social. Ce n'est pas un ajout, c'est un pilier fondamental qui :
+Goroti Communauté transforme Goroti d'une simple plateforme vidéo en un véritable écosystème social. Ce n'est pas un ajout, c'est un pilier fondamental qui :
 
 1. **Fidélise** les créateurs et audiences
 2. **Monétise** au-delà de la publicité
@@ -536,6 +536,6 @@ TruTube Communauté transforme TruTube d'une simple plateforme vidéo en un vér
 4. **Crée de la valeur** pour tous les acteurs
 5. **Construit une communauté** engagée long terme
 
-**Message clé** : TruTube = Vidéo + Social + Transparence + Monétisation équitable
+**Message clé** : Goroti = Vidéo + Social + Transparence + Monétisation équitable
 
 C'est une vision à 360° de la création de contenu moderne.

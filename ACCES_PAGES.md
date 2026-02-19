@@ -36,8 +36,8 @@ Le footer contient 4 colonnes:
 - Mentions légales
 
 **Colonne 3: Contact**
-- support@trutube.com
-- creators@trutube.com
+- support@goroti.com
+- creators@goroti.com
 - Newsletter
 
 ---

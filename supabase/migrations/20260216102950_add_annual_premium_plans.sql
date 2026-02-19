@@ -115,9 +115,9 @@ INSERT INTO premium_pricing (tier, billing_period, price, discount_percentage, f
   '2 mois gratuits (16% de réduction)',
   'Badge Gold exclusif animé',
   'Ligne directe support VIP',
-  'Conseil consultatif TruTube',
+  'Conseil consultatif Goroti',
   'Rencontres trimestrielles créateurs',
-  'Accès coulisses TruTube',
+  'Accès coulisses Goroti',
   'Événements VIP en personne',
   'Influence sur roadmap'
 ))

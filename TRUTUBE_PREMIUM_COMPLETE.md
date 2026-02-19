@@ -1,14 +1,14 @@
-# TruTube Premium - Système d'Abonnement Complet ✅
+# Goroti Premium - Système d'Abonnement Complet ✅
 
 ## Statut : FINALISÉ ET OPÉRATIONNEL
 
-**TruTube Premium** est maintenant complètement implémenté avec des plans mensuels ET annuels!
+**Goroti Premium** est maintenant complètement implémenté avec des plans mensuels ET annuels!
 
 ---
 
 ## Vue d'ensemble
 
-TruTube Premium offre **3 niveaux d'abonnement** avec des fonctionnalités progressives, disponibles en **paiement mensuel ou annuel avec 16% de réduction** (équivalent à 2 mois gratuits).
+Goroti Premium offre **3 niveaux d'abonnement** avec des fonctionnalités progressives, disponibles en **paiement mensuel ou annuel avec 16% de réduction** (équivalent à 2 mois gratuits).
 
 ---
 
@@ -66,7 +66,7 @@ Fans engagés qui veulent la meilleure qualité et des fonctionnalités avancée
 - ✅ Rencontres créateurs exclusives
 
 #### Idéal pour
-Super-fans et supporters VIP qui veulent l'expérience ultime et influencer l'avenir de TruTube.
+Super-fans et supporters VIP qui veulent l'expérience ultime et influencer l'avenir de Goroti.
 
 ---
 
@@ -120,7 +120,7 @@ Affichez votre statut premium avec un badge unique et animé visible par toute l
 └─────────────────────────────────────┘
 ```
 
-**TruTube prend seulement 30% pour maintenir la plateforme**
+**Goroti prend seulement 30% pour maintenir la plateforme**
 - 25% Infrastructure, serveurs, CDN, bande passante, support utilisateurs
 - 5% Développement, nouvelles fonctionnalités, améliorations
 
@@ -128,7 +128,7 @@ Affichez votre statut premium avec un badge unique et animé visible par toute l
 - YouTube : ~45% pour la plateforme
 - Twitch : ~50% pour la plateforme
 - Patreon : ~12% (mais nécessite autres plateformes)
-- **TruTube : 30%** (tout-en-un)
+- **Goroti : 30%** (tout-en-un)
 
 ---
 
@@ -317,7 +317,7 @@ Page complète de présentation Premium avec :
 
 ### vs YouTube Premium (11.99€/mois)
 
-| Critère | YouTube Premium | TruTube Premium |
+| Critère | YouTube Premium | Goroti Premium |
 |---------|----------------|-----------------|
 | Prix entrée | 11.99€ | **9.99€** (-17%) |
 | Options | 1 seul tier | **3 tiers progressifs** |
@@ -327,11 +327,11 @@ Page complète de présentation Premium avec :
 | Influence | Non | **Oui (Gold)** |
 | Plan annuel | 119.99€ | **99.99€** (-17%) |
 
-**TruTube gagne sur : Prix, Transparence, Variété, Engagement communauté**
+**Goroti gagne sur : Prix, Transparence, Variété, Engagement communauté**
 
 ### vs Twitch Turbo (8.99€/mois)
 
-| Critère | Twitch Turbo | TruTube Premium |
+| Critère | Twitch Turbo | Goroti Premium |
 |---------|--------------|-----------------|
 | Publicités | Enlevées | **Enlevées** |
 | Qualité | 1080p60 | **1080p HD / 4K** |
@@ -341,20 +341,20 @@ Page complète de présentation Premium avec :
 | Badges | Non | **Oui** |
 | Plan annuel | Non disponible | **Disponible -16%** |
 
-**TruTube gagne sur : Qualité, Fonctionnalités, Support créateurs, Options**
+**Goroti gagne sur : Qualité, Fonctionnalités, Support créateurs, Options**
 
 ### vs Patreon (12% commission)
 
-| Critère | Patreon | TruTube Premium |
+| Critère | Patreon | Goroti Premium |
 |---------|---------|-----------------|
 | Plateforme vidéo | **Non (externe)** | Oui intégrée |
 | Commission | 12% | **30%** (mais tout-en-un) |
 | Découvrabilité | Faible | **Algorithme + feed** |
 | Streaming live | Non | **Oui (Platine/Gold)** |
-| Community | Basique | **Avancée (TruTube Communauté)** |
+| Community | Basique | **Avancée (Goroti Communauté)** |
 | Paiements | Direct | **Via TruCoin aussi** |
 
-**TruTube gagne sur : Tout-en-un, Découvrabilité, Fonctionnalités live**
+**Goroti gagne sur : Tout-en-un, Découvrabilité, Fonctionnalités live**
 
 ---
 
@@ -377,7 +377,7 @@ Revenu mensuel : 9.99€
 - Infrastructure base : ~0.20€/mois
 **Total : ~2.40€/mois**
 
-**Marge pour TruTube : 2.50€ - 2.40€ = 0.10€/mois + 0.50€ dev = 0.60€/mois**
+**Marge pour Goroti : 2.50€ - 2.40€ = 0.10€/mois + 0.50€ dev = 0.60€/mois**
 
 #### Scénario 2 : Utilisateur Platine (19.99€/mois)
 ```
@@ -394,7 +394,7 @@ Revenu mensuel : 19.99€
 - Support + stats : ~0.40€/mois
 **Total : ~4.70€/mois**
 
-**Marge pour TruTube : 5.00€ - 4.70€ = 0.30€/mois + 1.00€ dev = 1.30€/mois**
+**Marge pour Goroti : 5.00€ - 4.70€ = 0.30€/mois + 1.00€ dev = 1.30€/mois**
 
 #### Scénario 3 : Utilisateur Gold (29.99€/mois)
 ```
@@ -411,7 +411,7 @@ Revenu mensuel : 29.99€
 - Accès VIP + événements : ~0.20€/mois
 **Total : ~7.20€/mois**
 
-**Marge pour TruTube : 7.50€ - 7.20€ = 0.30€/mois + 1.50€ dev = 1.80€/mois**
+**Marge pour Goroti : 7.50€ - 7.20€ = 0.30€/mois + 1.50€ dev = 1.80€/mois**
 
 ### Projection de revenus
 
@@ -429,7 +429,7 @@ Revenu mensuel : 29.99€
 - Revenu mensuel : ~180k€
 - Revenu annuel : ~2.16M€
 - Part créateurs : ~1.51M€ (70%)
-- Part TruTube : ~650k€ (30%)
+- Part Goroti : ~650k€ (30%)
 
 ---
 
@@ -475,7 +475,7 @@ Revenu mensuel : 29.99€
 
 > **"Soutenez ce que vous aimez. Obtenez l'expérience ultime."**
 
-TruTube Premium n'est pas juste un abonnement pour enlever les pubs.
+Goroti Premium n'est pas juste un abonnement pour enlever les pubs.
 
 C'est :
 - ✅ Un moyen direct de soutenir vos créateurs (70%)
@@ -484,7 +484,7 @@ C'est :
 - ✅ Une voix dans l'avenir de la plateforme (Gold)
 - ✅ Une communauté VIP engagée
 
-**Transparence + Valeur + Impact = TruTube Premium**
+**Transparence + Valeur + Impact = Goroti Premium**
 
 ---
 
@@ -521,7 +521,7 @@ C'est :
 
 ## Résultat final
 
-**TruTube dispose maintenant d'un système Premium complet** avec :
+**Goroti dispose maintenant d'un système Premium complet** avec :
 - 💎 3 tiers progressifs (Premium, Platine, Gold)
 - 📅 Plans mensuels ET annuels (-16%)
 - 🎨 Page Premium complète et engageante

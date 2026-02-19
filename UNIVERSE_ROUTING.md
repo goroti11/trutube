@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble
 
-TruTube utilise un système de navigation hiérarchique basé sur les univers et sous-univers. Ce document explique comment fonctionnent les redirections et la navigation entre les différents espaces de contenu.
+Goroti utilise un système de navigation hiérarchique basé sur les univers et sous-univers. Ce document explique comment fonctionnent les redirections et la navigation entre les différents espaces de contenu.
 
 ---
 
@@ -11,7 +11,7 @@ TruTube utilise un système de navigation hiérarchique basé sur les univers et
 ### Niveaux de navigation
 
 ```
-TruTube (Plateforme principale)
+Goroti (Plateforme principale)
 ├── Univers Principaux (Domaines)
 │   ├── Gaming
 │   ├── Education
@@ -76,24 +76,24 @@ Filtré par: Sous-catégorie spécifique
 
 #### Univers comme sous-domaines
 ```
-gaming.trutube.com       → Univers Gaming
-education.trutube.com    → Univers Education
-music.trutube.com        → Univers Music
-tech.trutube.com         → Univers Tech
+gaming.goroti.com       → Univers Gaming
+education.goroti.com    → Univers Education
+music.goroti.com        → Univers Music
+tech.goroti.com         → Univers Tech
 ```
 
 #### Sous-univers comme chemins
 ```
-gaming.trutube.com/fps       → Sous-univers FPS
-gaming.trutube.com/rpg       → Sous-univers RPG
-gaming.trutube.com/streaming → Sous-univers Streaming
+gaming.goroti.com/fps       → Sous-univers FPS
+gaming.goroti.com/rpg       → Sous-univers RPG
+gaming.goroti.com/streaming → Sous-univers Streaming
 ```
 
 #### Créateurs avec univers personnalisés
 ```
-@username.trutube.com           → Univers d'un créateur
-@username.trutube.com/series    → Série spécifique
-@username.trutube.com/live      → Lives du créateur
+@username.goroti.com           → Univers d'un créateur
+@username.goroti.com/series    → Série spécifique
+@username.goroti.com/live      → Lives du créateur
 ```
 
 ---
@@ -239,11 +239,11 @@ onUniverseHover(universeId) {
 ```html
 <!-- Exemple pour l'univers Gaming -->
 <head>
-  <title>Gaming Universe - TruTube</title>
-  <meta name="description" content="Découvrez les meilleures vidéos gaming sur TruTube" />
-  <meta property="og:title" content="Gaming Universe - TruTube" />
-  <meta property="og:url" content="https://trutube.com/universe/gaming" />
-  <link rel="canonical" href="https://trutube.com/universe/gaming" />
+  <title>Gaming Universe - Goroti</title>
+  <meta name="description" content="Découvrez les meilleures vidéos gaming sur Goroti" />
+  <meta property="og:title" content="Gaming Universe - Goroti" />
+  <meta property="og:url" content="https://goroti.com/universe/gaming" />
+  <link rel="canonical" href="https://goroti.com/universe/gaming" />
 </head>
 ```
 
@@ -405,6 +405,6 @@ Response: { history: [{ universe, timestamp, duration }] }
 
 ## Conclusion
 
-Le système de navigation et redirection de TruTube est conçu pour offrir une expérience fluide et intuitive tout en maintenant une structure organisée et évolutive. L'implémentation future des sous-domaines permettra une séparation encore plus claire entre les différents univers de contenu.
+Le système de navigation et redirection de Goroti est conçu pour offrir une expérience fluide et intuitive tout en maintenant une structure organisée et évolutive. L'implémentation future des sous-domaines permettra une séparation encore plus claire entre les différents univers de contenu.
 
-Pour toute question ou suggestion sur ce système, contactez l'équipe technique via support@trutube.com.
+Pour toute question ou suggestion sur ce système, contactez l'équipe technique via support@goroti.com.

@@ -1,7 +1,7 @@
-# TruTube - Features Implementation
+# Goroti - Features Implementation
 
 ## Overview
-TruTube is a next-generation video platform designed to be fairer, more transparent, and more creator-friendly than traditional platforms like YouTube.
+Goroti is a next-generation video platform designed to be fairer, more transparent, and more creator-friendly than traditional platforms like YouTube.
 
 ## Core Philosophy
 - **Transparent Algorithm**: Explainable scoring system
@@ -191,7 +191,7 @@ Comprehensive TypeScript interfaces for:
 
 ## Key Differentiators from YouTube
 
-| Feature | YouTube | TruTube |
+| Feature | YouTube | Goroti |
 |---------|---------|---------|
 | Algorithm | Opaque black box | Transparent, explainable scoring |
 | Monetization | Primarily ads | 7+ revenue streams |
@@ -237,4 +237,4 @@ Comprehensive TypeScript interfaces for:
 
 ## Conclusion
 
-TruTube reimagines video platforms by prioritizing transparency, fairness, and creator success. The explainable algorithm, diverse monetization options, and direct creator-supporter relationships create a healthier ecosystem for everyone involved.
+Goroti reimagines video platforms by prioritizing transparency, fairness, and creator success. The explainable algorithm, diverse monetization options, and direct creator-supporter relationships create a healthier ecosystem for everyone involved.

@@ -110,7 +110,7 @@ export default function PrivacySettingsPage({ onNavigate }: Props) {
   };
 
   const handleResetCookies = () => {
-    localStorage.removeItem('trutube_cookie_consent');
+    localStorage.removeItem('goroti_cookie_consent');
     setCookiePrefs({ essential: true, functional: true, analytics: false, marketing: false });
     showSuccess('Préférences réinitialisées — le bandeau réapparaîtra au prochain chargement');
   };
@@ -500,8 +500,8 @@ export default function PrivacySettingsPage({ onNavigate }: Props) {
             <div className="bg-gray-900 border border-gray-800 rounded-xl p-4">
               <p className="text-xs text-gray-400 mb-2 font-medium text-white">Contact DPO</p>
               <p className="text-xs text-gray-500 mb-1">Pour exercer vos droits ou poser des questions sur vos données :</p>
-              <a href="mailto:privacy@trutube.com" className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 transition-colors">
-                privacy@trutube.com <ExternalLink className="w-3 h-3" />
+              <a href="mailto:privacy@goroti.com" className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 transition-colors">
+                privacy@goroti.com <ExternalLink className="w-3 h-3" />
               </a>
               <p className="text-xs text-gray-600 mt-2">Délai de réponse : 30 jours maximum (RGPD Art. 12)</p>
             </div>

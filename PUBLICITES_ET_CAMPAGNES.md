@@ -1,4 +1,4 @@
-# 🎯 Système de Publicités et Campagnes - TruTube
+# 🎯 Système de Publicités et Campagnes - Goroti
 
 ## ✅ Implémentation Complète
 
@@ -191,7 +191,7 @@ npm run dev
 ### Publicités
 
 **Google AdSense :**
-- 70% des revenus vont à TruTube
+- 70% des revenus vont à Goroti
 - 30% vont au créateur du contenu (optionnel)
 
 **Campagnes créateurs :**
@@ -320,6 +320,6 @@ Pour plus de détails, consultez :
 
 ---
 
-**Questions ? Consultez `GOOGLE_ADS_INTEGRATION.md` ou contactez support@trutube.com**
+**Questions ? Consultez `GOOGLE_ADS_INTEGRATION.md` ou contactez support@goroti.com**
 
 *Dernière mise à jour : Février 2026*

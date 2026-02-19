@@ -97,7 +97,7 @@ async function performAISearch(
   //     messages: [
   //       {
   //         role: 'system',
-  //         content: 'Tu es un assistant de recherche avancé pour TruTube...'
+  //         content: 'Tu es un assistant de recherche avancé pour Goroti...'
   //       },
   //       {
   //         role: 'user',

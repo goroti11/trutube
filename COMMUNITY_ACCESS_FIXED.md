@@ -1,4 +1,4 @@
-# Système de Communautés TruTube - Accès et Premium Corrigés ✅
+# Système de Communautés Goroti - Accès et Premium Corrigés ✅
 
 ## Problèmes résolus
 
@@ -330,7 +330,7 @@ const community = await communityService.createCommunity({
 ```
 Interface:
 ┌─────────────────────────────────────────┐
-│ TruTube Communauté                      │
+│ Goroti Communauté                      │
 │ [Créer une communauté]                  │
 ├─────────────────────────────────────────┤
 │ Filtres:                                │

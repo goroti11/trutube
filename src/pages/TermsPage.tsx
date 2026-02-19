@@ -326,7 +326,7 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
                 Goroti traite vos données dans le respect du Règlement Général sur la Protection des Données
                 (RGPD) et de la loi Informatique et Libertés. Vous disposez d'un droit d'accès, de rectification,
                 de suppression, de portabilité, et d'opposition sur vos données personnelles, exerceable via
-                les paramètres de votre compte ou en contactant privacy@trutube.com.
+                les paramètres de votre compte ou en contactant privacy@goroti.com.
               </p>
             </Sub>
           </Section>
@@ -461,10 +461,10 @@ export const TermsPage = ({ onNavigate }: TermsPageProps) => {
                 Contacter le support
               </button>
               <a
-                href="mailto:legal@trutube.com"
+                href="mailto:legal@goroti.com"
                 className="flex items-center gap-1.5 px-5 py-2.5 border border-white/10 hover:border-white/20 text-gray-300 hover:text-white rounded-xl text-sm font-medium transition-colors"
               >
-                legal@trutube.com
+                legal@goroti.com
                 <ExternalLink className="w-3 h-3" />
               </a>
             </div>

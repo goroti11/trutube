@@ -1,8 +1,8 @@
-# Guide des Fonctionnalités de Profil TruTube
+# Guide des Fonctionnalités de Profil Goroti
 
 ## Vue d'ensemble
 
-Ce guide documente toutes les nouvelles fonctionnalités de gestion de profil utilisateur implémentées dans TruTube.
+Ce guide documente toutes les nouvelles fonctionnalités de gestion de profil utilisateur implémentées dans Goroti.
 
 ## Fonctionnalités Principales
 
@@ -22,7 +22,7 @@ La page d'édition de profil (`EditProfilePage`) permet de modifier :
 
 - **Nom d'affichage** : Nom public visible
 - **Nom d'utilisateur** : Identifiant unique (@username)
-- **URL de chaîne personnalisée** : URL conviviale (ex: trutube.com/channel/mon-url)
+- **URL de chaîne personnalisée** : URL conviviale (ex: goroti.com/channel/mon-url)
   - Génération automatique basée sur le nom d'utilisateur
   - Possibilité de copier l'URL complète
 - **Bio** : Description courte (150 caractères max)

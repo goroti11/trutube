@@ -91,7 +91,7 @@ export default function BlogPage({ onNavigate }: BlogPageProps) {
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="text-center mb-8">
             <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
-              TruTube Blog Officiel
+              Goroti Blog Officiel
             </h1>
             <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
               Découvrez les dernières actualités, guides et mises à jour de la plateforme

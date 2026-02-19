@@ -1,8 +1,8 @@
-# Système de Communauté TruTube - Complet et Opérationnel ✅
+# Système de Communauté Goroti - Complet et Opérationnel ✅
 
 ## Statut : FINALISÉ - Authentification intégrée
 
-Le système de communauté TruTube est maintenant **100% fonctionnel** avec authentification complète, création de communautés, gestion des membres et modération!
+Le système de communauté Goroti est maintenant **100% fonctionnel** avec authentification complète, création de communautés, gestion des membres et modération!
 
 ---
 
@@ -116,7 +116,7 @@ Le système de communauté permet aux utilisateurs de:
 
 2. **Univers**
    - Communauté thématique
-   - Basée sur un univers TruTube
+   - Basée sur un univers Goroti
    - Ouverte à tous
 
 3. **Premium**
@@ -197,7 +197,7 @@ const slug = name
 - 📋 Règles de la communauté
   - Affichage des règles actuelles
 - 🤖 Modération automatique
-  - Info sur le système TruTube
+  - Info sur le système Goroti
   - Modération des contenus signalés
 - 📊 Statistiques de modération
   - Posts signalés
@@ -297,7 +297,7 @@ if (hash.startsWith('community/')) {
     - Découvertes gastronomiques
 
 ### Premium
-11. **TruTube VIP** (1,234 membres) - 💎 Premium 9.99€/mois
+11. **Goroti VIP** (1,234 membres) - 💎 Premium 9.99€/mois
     - Communauté exclusive Premium/Gold
     - Événements spéciaux
     - Accès anticipé
@@ -903,7 +903,7 @@ npm run lint
 - Gaming Pro: `http://localhost:5173/#community/gaming-pro`
 - Afrobeat: `http://localhost:5173/#community/afrobeat-global`
 - Dev & Code: `http://localhost:5173/#community/dev-code`
-- TruTube VIP: `http://localhost:5173/#community/trutube-vip`
+- Goroti VIP: `http://localhost:5173/#community/goroti-vip`
 
 ### Actions
 - Post Gaming Pro: `http://localhost:5173/#create-post/gaming-pro`
@@ -913,7 +913,7 @@ npm run lint
 
 ## Résultat final
 
-Le système de communauté TruTube est maintenant **production-ready** avec:
+Le système de communauté Goroti est maintenant **production-ready** avec:
 
 ✅ **Authentification complète** intégrée
 ✅ **12 communautés** de test pré-créées

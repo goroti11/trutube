@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble
 
-Système complet d'upload de vidéos pour créateurs TruTube avec gestion des univers, descriptions, transcriptions et métadonnées enrichies.
+Système complet d'upload de vidéos pour créateurs Goroti avec gestion des univers, descriptions, transcriptions et métadonnées enrichies.
 
 ## Composants Créés
 
@@ -439,7 +439,7 @@ video-content/
 
 ## Résumé
 
-Le système d'upload de vidéos TruTube offre une solution complète pour les créateurs:
+Le système d'upload de vidéos Goroti offre une solution complète pour les créateurs:
 
 **Points forts**:
 - Interface intuitive

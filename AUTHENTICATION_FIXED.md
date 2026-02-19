@@ -1,4 +1,4 @@
-# Système d'authentification TruTube - Corrigé et fonctionnel ✅
+# Système d'authentification Goroti - Corrigé et fonctionnel ✅
 
 ## Problème identifié et résolu
 
@@ -561,7 +561,7 @@ CREATE POLICY "Users can update their own profile"
 
 ### Problème: Email confirmation demandé
 
-**Par défaut, la confirmation d'email est DÉSACTIVÉE sur TruTube.**
+**Par défaut, la confirmation d'email est DÉSACTIVÉE sur Goroti.**
 
 Si activée par erreur:
 1. Aller dans Supabase Dashboard
@@ -668,7 +668,7 @@ DELETE FROM profiles WHERE id = 'user-uuid';
 ## Documentation associée
 
 - `COMMUNITY_SYSTEM_COMPLETE.md` - Système de communauté
-- `TRUTUBE_FEATURES.md` - Fonctionnalités générales
+- `GOROTI_FEATURES.md` - Fonctionnalités générales
 - `DATABASE_SERVICES.md` - Services de base de données
 
 ---

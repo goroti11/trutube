@@ -1,8 +1,8 @@
-# TruTube Universe System
+# Goroti Universe System
 
 ## Core Concept
 
-TruTube uses a structured **Universe → Sub-Universe** system to organize content and personalize feeds. This is what fundamentally differentiates TruTube from platforms like YouTube.
+Goroti uses a structured **Universe → Sub-Universe** system to organize content and personalize feeds. This is what fundamentally differentiates Goroti from platforms like YouTube.
 
 ## Structure
 
@@ -22,7 +22,7 @@ Each universe has its own color scheme and identity.
 
 ### For Creators
 
-When a creator joins TruTube, they **must**:
+When a creator joins Goroti, they **must**:
 
 1. Choose **1 main universe** (e.g., Music, Game, Learn)
 2. Select **1+ sub-universes** within that universe (e.g., Freestyle, Clips)
@@ -200,7 +200,7 @@ Their feed shows **ONLY** content from their selected preferences.
 - Random vlog
 ```
 
-### TruTube Approach
+### Goroti Approach
 ```
 Navigation Bar:
 [Music] [Game] [Learn] [Culture] [Life] [Mind] [Lean]
@@ -340,4 +340,4 @@ Onboarding screen for creators:
 
 ---
 
-**This system is the core differentiator for TruTube. It solves the "everything mixed together" problem of traditional platforms.**
+**This system is the core differentiator for Goroti. It solves the "everything mixed together" problem of traditional platforms.**

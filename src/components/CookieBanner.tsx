@@ -8,7 +8,7 @@ export interface CookiePreferences {
   marketing: boolean;
 }
 
-const STORAGE_KEY = 'trutube_cookie_consent';
+const STORAGE_KEY = 'goroti_cookie_consent';
 
 export function getCookieConsent(): (CookiePreferences & { decided: boolean }) | null {
   try {

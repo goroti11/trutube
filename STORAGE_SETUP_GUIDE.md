@@ -394,4 +394,4 @@ WHERE id = 'video-content';
 Pour plus d'aide:
 - Documentation Supabase Storage: https://supabase.com/docs/guides/storage
 - Issues GitHub du projet
-- Email: support@trutube.com
+- Email: support@goroti.com

@@ -17,14 +17,14 @@ const articleContent: Record<string, any> = {
   'quick-start-guide': {
     sections: [
       {
-        title: 'Bienvenue sur TruTube',
-        content: `TruTube est une plateforme de partage vidéo qui valorise l'authenticité et récompense les vrais créateurs.
+        title: 'Bienvenue sur Goroti',
+        content: `Goroti est une plateforme de partage vidéo qui valorise l'authenticité et récompense les vrais créateurs.
         Ce guide vous accompagnera dans vos premiers pas sur la plateforme.`,
         type: 'intro'
       },
       {
         title: '1. Créer votre compte',
-        content: `Pour commencer votre aventure sur TruTube, vous devez d'abord créer un compte.`,
+        content: `Pour commencer votre aventure sur Goroti, vous devez d'abord créer un compte.`,
         steps: [
           {
             title: 'Accéder à la page d\'inscription',
@@ -73,7 +73,7 @@ const articleContent: Record<string, any> = {
       },
       {
         title: '3. Explorer le contenu',
-        content: 'Découvrez les 15 univers thématiques de TruTube.',
+        content: 'Découvrez les 15 univers thématiques de Goroti.',
         steps: [
           {
             title: 'Page d\'accueil',
@@ -91,7 +91,7 @@ const articleContent: Record<string, any> = {
       },
       {
         title: '4. Interagir avec le contenu',
-        content: 'Engagez-vous avec la communauté TruTube.',
+        content: 'Engagez-vous avec la communauté Goroti.',
         actions: [
           { icon: 'ThumbsUp', label: 'Like', description: 'Soutenez les créateurs que vous aimez' },
           { icon: 'MessageCircle', label: 'Commenter', description: 'Partagez votre avis constructif' },
@@ -277,7 +277,7 @@ const articleContent: Record<string, any> = {
     sections: [
       {
         title: 'SEO Vidéo 101',
-        content: 'Le référencement vidéo est crucial pour être découvert sur TruTube. 50% des vues proviennent de la recherche et des recommandations.',
+        content: 'Le référencement vidéo est crucial pour être découvert sur Goroti. 50% des vues proviennent de la recherche et des recommandations.',
         type: 'intro',
         stats: [
           { label: 'Vues depuis recherche', value: '35%' },
@@ -365,7 +365,7 @@ const articleContent: Record<string, any> = {
           {
             type: 'Tags spécifiques',
             count: '5-7 tags',
-            examples: ['seo youtube 2026', 'optimisation vidéo', 'référencement trutube'],
+            examples: ['seo youtube 2026', 'optimisation vidéo', 'référencement goroti'],
             purpose: 'Ciblage précis'
           },
           {

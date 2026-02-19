@@ -5,7 +5,7 @@
     - Création automatique d'une chaîne créateur pour chaque nouveau compte
     - La chaîne utilise les données du profil utilisateur (pseudo, avatar)
     - Chaîne publique par défaut avec monétisation désactivée jusqu'au KYC
-    - Un compte TruTube possède toujours au moins une chaîne
+    - Un compte Goroti possède toujours au moins une chaîne
 
   2. Trigger
     - Déclenché automatiquement après création du profiles
@@ -69,7 +69,7 @@ BEGIN
     v_channel_url,
     v_display_name,
     'individual',
-    'Bienvenue sur ma chaîne TruTube!',
+    'Bienvenue sur ma chaîne Goroti!',
     COALESCE(NEW.avatar_url, 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg'),
     COALESCE(NEW.banner_url, 'https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg'),
     'general',

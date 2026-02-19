@@ -1,5 +1,5 @@
 /*
-  # Create TruTube Official Blog System
+  # Create Goroti Official Blog System
 
   1. New Tables
     - `blog_categories`

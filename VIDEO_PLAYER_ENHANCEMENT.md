@@ -1,4 +1,4 @@
-# Interface Vidéo Complète - TruTube
+# Interface Vidéo Complète - Goroti
 
 ## Vue d'ensemble
 

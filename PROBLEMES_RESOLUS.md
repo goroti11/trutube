@@ -1,4 +1,4 @@
-# Problèmes Résolus - Système de Lecture Vidéo TruTube
+# Problèmes Résolus - Système de Lecture Vidéo Goroti
 
 ## Vue d'ensemble
 
@@ -466,4 +466,4 @@ npm run lint
 5. Ajouter raccourcis clavier
 6. Optimiser bundle size (code splitting)
 
-**Le système de lecture vidéo TruTube est maintenant complètement fonctionnel et déblocé!** 🎉
+**Le système de lecture vidéo Goroti est maintenant complètement fonctionnel et déblocé!** 🎉

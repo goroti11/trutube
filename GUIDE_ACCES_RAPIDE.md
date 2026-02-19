@@ -1,4 +1,4 @@
-# 🚀 GUIDE D'ACCÈS RAPIDE - TRUTUBE V7.0
+# 🚀 GUIDE D'ACCÈS RAPIDE - GOROTI V7.0
 ## Navigation Fluide et Accès Direct à Toutes les Fonctionnalités
 
 ---
@@ -54,7 +54,7 @@
    - Revenus et analytics
    - Statistiques vidéos
 
-4. **TruTube Studio** (⭐ En rouge)
+4. **Goroti Studio** (⭐ En rouge)
    - Studio complet 11 sections
    - Gestion professionnelle
    - Tous les outils créateur
@@ -190,7 +190,7 @@ http://localhost:5173/#premium-offers
 
 **Méthode 1: Menu Utilisateur**
 ```
-Avatar → TruTube Studio
+Avatar → Goroti Studio
 → Studio complet
 ```
 
@@ -332,7 +332,7 @@ Toutes les pages utilisent des URL avec hash `#` pour une **navigation sans rech
 
 ### Onglets Multiples
 
-- Ouvrir plusieurs sections TruTube
+- Ouvrir plusieurs sections Goroti
 - Indépendance totale
 - Session synchronisée
 
@@ -361,7 +361,7 @@ Créer → Activer Premium (5€-50€/mois)
 
 **8 Canaux de Revenus:**
 
-1. **Publicités TruTube**
+1. **Publicités Goroti**
    - Revenus par vue
    - CPM optimisé
 
@@ -515,7 +515,7 @@ Footer → Confidentialité
 
 ### Easter Eggs
 ```
-Logo TruTube (cliquer 5x rapide) → Animation secrète
+Logo Goroti (cliquer 5x rapide) → Animation secrète
 ```
 
 ### Modes Spéciaux
@@ -526,7 +526,7 @@ Logo TruTube (cliquer 5x rapide) → Animation secrète
 
 ### Debug
 ```
-Console: window.__TRUTUBE_VERSION__
+Console: window.__GOROTI_VERSION__
 → Affiche version et features actives
 ```
 
@@ -536,17 +536,17 @@ Console: window.__TRUTUBE_VERSION__
 
 **Support Email:**
 ```
-support@trutube.com
+support@goroti.com
 ```
 
 **Partenariats:**
 ```
-partners@trutube.com
+partners@goroti.com
 ```
 
 **Presse:**
 ```
-press@trutube.com
+press@goroti.com
 ```
 
 **Bug Report:**
@@ -558,7 +558,7 @@ Dashboard Sécurité → Signaler problème
 
 ## 🎯 CHECKLIST NOUVEAU CRÉATEUR
 
-**Pour bien démarrer sur TruTube:**
+**Pour bien démarrer sur Goroti:**
 
 1. ✅ Créer compte et compléter profil
 2. ✅ Ajouter avatar et bannière
@@ -625,7 +625,7 @@ Dashboard Sécurité → Signaler problème
 
 ## 🎊 CONCLUSION
 
-**TruTube V7.0 offre une navigation fluide et intuitive!**
+**Goroti V7.0 offre une navigation fluide et intuitive!**
 
 **3 Points Clés:**
 
@@ -654,4 +654,4 @@ Chaque fonction est à maximum 3 clics!
 **Date:** 16 février 2026
 **Guide:** Navigation Fluide
 
-**TRUTUBE - L'expérience vidéo réinventée! 🚀**
+**GOROTI - L'expérience vidéo réinventée! 🚀**

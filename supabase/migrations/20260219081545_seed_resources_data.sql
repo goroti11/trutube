@@ -6,7 +6,7 @@
 
 -- Insert resource categories
 INSERT INTO resource_categories (name, slug, description, icon, color, order_index) VALUES
-  ('Démarrage', 'getting-started', 'Guides pour bien démarrer sur TruTube', '🚀', '#10b981', 1),
+  ('Démarrage', 'getting-started', 'Guides pour bien démarrer sur Goroti', '🚀', '#10b981', 1),
   ('Créateurs', 'creators', 'Ressources pour créateurs de contenu', '🎬', '#3b82f6', 2),
   ('Monétisation', 'monetization', 'Guides de monétisation et revenus', '💰', '#f59e0b', 3),
   ('Technique', 'technical', 'Documentation technique et API', '⚙️', '#8b5cf6', 4),
@@ -33,8 +33,8 @@ BEGIN
 
   -- Getting Started Resources
   INSERT INTO resources (category_id, title, slug, description, content, type, difficulty, estimated_time, status, published_at, tags) VALUES
-  (cat_start, 'Guide de Démarrage Rapide', 'quick-start-guide', 'Tout ce qu''il faut savoir pour commencer sur TruTube en 10 minutes', 
-  '<h2>Bienvenue sur TruTube!</h2><p>Ce guide vous accompagne dans vos premiers pas.</p><h3>Étape 1: Créer votre compte</h3><p>Inscrivez-vous avec votre email...</p>',
+  (cat_start, 'Guide de Démarrage Rapide', 'quick-start-guide', 'Tout ce qu''il faut savoir pour commencer sur Goroti en 10 minutes', 
+  '<h2>Bienvenue sur Goroti!</h2><p>Ce guide vous accompagne dans vos premiers pas.</p><h3>Étape 1: Créer votre compte</h3><p>Inscrivez-vous avec votre email...</p>',
   'guide', 'beginner', 10, 'published', now(), ARRAY['démarrage', 'tutoriel', 'basique']),
   
   (cat_start, 'Configuration de votre Profil', 'setup-profile', 'Personnalisez votre profil pour attirer plus d''abonnés',
@@ -50,13 +50,13 @@ BEGIN
   '<h2>SEO Vidéo 101</h2><p>Le référencement vidéo est crucial...</p>',
   'guide', 'intermediate', 25, 'published', now(), ARRAY['seo', 'référencement', 'découverte']),
 
-  (cat_creators, 'Streaming Live: Guide Complet', 'live-streaming-guide', 'Tout savoir sur le streaming en direct sur TruTube',
+  (cat_creators, 'Streaming Live: Guide Complet', 'live-streaming-guide', 'Tout savoir sur le streaming en direct sur Goroti',
   '<h2>Maîtriser le Live</h2><p>Le streaming live crée une connexion unique...</p>',
   'guide', 'advanced', 45, 'published', now(), ARRAY['live', 'streaming', 'direct']),
 
   -- Monetization Resources
   (cat_monetization, 'Programme Partenaire: Éligibilité', 'partner-program-eligibility', 'Critères et processus pour rejoindre le programme partenaire',
-  '<h2>Devenir Partenaire TruTube</h2><p>Le programme partenaire offre...</p>',
+  '<h2>Devenir Partenaire Goroti</h2><p>Le programme partenaire offre...</p>',
   'guide', 'beginner', 15, 'published', now(), ARRAY['partenaire', 'monétisation', 'revenus']),
 
   (cat_monetization, 'Maximiser vos Revenus Publicitaires', 'maximize-ad-revenue', 'Stratégies pour optimiser vos revenus publicitaires',
@@ -68,8 +68,8 @@ BEGIN
   'tutorial', 'intermediate', 35, 'published', now(), ARRAY['premium', 'vente', 'abonnements']),
 
   -- Technical Resources
-  (cat_technical, 'API TruTube: Documentation', 'api-documentation', 'Documentation complète de l''API TruTube pour développeurs',
-  '<h2>API Overview</h2><p>L''API TruTube permet d''intégrer...</p>',
+  (cat_technical, 'API Goroti: Documentation', 'api-documentation', 'Documentation complète de l''API Goroti pour développeurs',
+  '<h2>API Overview</h2><p>L''API Goroti permet d''intégrer...</p>',
   'documentation', 'advanced', 60, 'published', now(), ARRAY['api', 'développeurs', 'intégration']),
 
   (cat_technical, 'Encodage Vidéo: Meilleures Pratiques', 'video-encoding-best-practices', 'Formats, codecs et paramètres recommandés',
@@ -107,7 +107,7 @@ INSERT INTO community_announcements (title, content, type, severity, published_a
 '⚠️ Maintenance programmée le 25 janvier de 2h à 4h (heure de Paris).\n\nServices affectés:\n- Upload de vidéos (temporairement indisponible)\n- Streaming live (peut être instable)\n\nLes vidéos existantes restent accessibles normalement.',
 'maintenance', 'warning', now() - interval '1 day', true, 'active'),
 
-('TruTube atteint 1 million de créateurs!', 
+('Goroti atteint 1 million de créateurs!', 
 '🎊 Merci à tous! Nous venons de franchir le cap du million de créateurs actifs sur la plateforme.\n\nPour célébrer, nous doublons les revenus de tous les créateurs pendant les 7 prochains jours!',
 'general', 'info', now() - interval '5 days', false, 'active'),
 
@@ -117,8 +117,8 @@ INSERT INTO community_announcements (title, content, type, severity, published_a
 
 -- Insert knowledge base
 INSERT INTO knowledge_base (category, question, answer, keywords, order_index, status) VALUES
-('Compte', 'Comment créer un compte TruTube?', 
-'Pour créer un compte TruTube:\n1. Cliquez sur "Connexion" en haut à droite\n2. Sélectionnez "Créer un compte"\n3. Entrez votre email et choisissez un mot de passe\n4. Validez votre email\n5. Complétez votre profil\n\nVotre compte est créé et vous avez automatiquement une chaîne!',
+('Compte', 'Comment créer un compte Goroti?', 
+'Pour créer un compte Goroti:\n1. Cliquez sur "Connexion" en haut à droite\n2. Sélectionnez "Créer un compte"\n3. Entrez votre email et choisissez un mot de passe\n4. Validez votre email\n5. Complétez votre profil\n\nVotre compte est créé et vous avez automatiquement une chaîne!',
 ARRAY['compte', 'inscription', 'créer', 'nouveau'], 1, 'published'),
 
 ('Compte', 'J''ai oublié mon mot de passe, que faire?',
@@ -126,7 +126,7 @@ ARRAY['compte', 'inscription', 'créer', 'nouveau'], 1, 'published'),
 ARRAY['mot de passe', 'oublié', 'réinitialiser', 'récupération'], 2, 'published'),
 
 ('Upload', 'Quels formats vidéo sont acceptés?',
-'TruTube accepte la plupart des formats vidéo courants:\n- MP4 (recommandé)\n- MOV\n- AVI\n- MKV\n- WebM\n\nRecommandations:\n- Codec: H.264 ou H.265\n- Résolution: jusqu''à 4K (3840x2160)\n- Framerate: 24-60 fps\n- Bitrate: 8-50 Mbps selon résolution',
+'Goroti accepte la plupart des formats vidéo courants:\n- MP4 (recommandé)\n- MOV\n- AVI\n- MKV\n- WebM\n\nRecommandations:\n- Codec: H.264 ou H.265\n- Résolution: jusqu''à 4K (3840x2160)\n- Framerate: 24-60 fps\n- Bitrate: 8-50 Mbps selon résolution',
 ARRAY['format', 'vidéo', 'upload', 'codec'], 1, 'published'),
 
 ('Upload', 'Quelle est la taille maximale de fichier?',

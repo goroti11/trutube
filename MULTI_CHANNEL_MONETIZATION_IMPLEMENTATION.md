@@ -1,4 +1,4 @@
-# Implémentation Système Multi-Canaux de Monétisation TruTube
+# Implémentation Système Multi-Canaux de Monétisation Goroti
 
 ## Vue d'ensemble
 
@@ -617,7 +617,7 @@ const breakdown = {
 ### Taux appliqués
 ```typescript
 const PLATFORM_FEES = {
-  affiliation: 0,      // 0% - TruTube ne prend rien
+  affiliation: 0,      // 0% - Goroti ne prend rien
   merchandising: 0.05, // 5%
   brandDeals: 0,       // 0% - Deals directs
   musicStreaming: 0.10,// 10%
@@ -657,13 +657,13 @@ const creatorReceives = grossRevenue - platformFee; // 3.60
 ### Moyen Terme (3-6 mois)
 - [ ] Distribution musique externe (Spotify, Apple Music API)
 - [ ] Intégrations Print-on-Demand (Printful API)
-- [ ] Marketplace TruTube (découverte produits/cours)
-- [ ] Programme affiliation TruTube (creators promote creators)
+- [ ] Marketplace Goroti (découverte produits/cours)
+- [ ] Programme affiliation Goroti (creators promote creators)
 - [ ] Subscription boxes (merchandising récurrent)
 - [ ] Bundles cours (acheter plusieurs ensemble)
 
 ### Long Terme (6-12 mois)
-- [ ] TruTube Payments (alternative Stripe)
+- [ ] Goroti Payments (alternative Stripe)
 - [ ] Crypto payments (USDC, ETH)
 - [ ] NFT merchandising (limited editions)
 - [ ] Livestream shopping (like TikTok Shop)
@@ -743,8 +743,8 @@ STRIPE_CONNECT_CLIENT_ID=ca_xxx
 ### Pour les créateurs
 - 📖 Guide complet: `MULTI_CHANNEL_MONETIZATION_GUIDE.md`
 - 🎥 Tutoriels vidéo: À créer
-- 💬 Discord TruTube Creators: À créer
-- 📧 Support: support@trutube.com
+- 💬 Discord Goroti Creators: À créer
+- 📧 Support: support@goroti.com
 
 ### Pour les développeurs
 - 📖 Doc technique: Ce fichier
@@ -775,4 +775,4 @@ STRIPE_CONNECT_CLIENT_ID=ca_xxx
 - Contrôle total pricing
 - Analytics détaillés
 
-**Le système de monétisation multi-canaux TruTube est maintenant complet et opérationnel!** 🚀
+**Le système de monétisation multi-canaux Goroti est maintenant complet et opérationnel!** 🚀

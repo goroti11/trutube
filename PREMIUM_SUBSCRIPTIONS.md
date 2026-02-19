@@ -1,8 +1,8 @@
-# Système d'Abonnements Premium TruTube
+# Système d'Abonnements Premium Goroti
 
 ## Vue d'ensemble
 
-TruTube propose trois niveaux d'abonnements premium pour offrir une expérience améliorée aux utilisateurs :
+Goroti propose trois niveaux d'abonnements premium pour offrir une expérience améliorée aux utilisateurs :
 
 ### 🌟 Premium - 9.99€/mois
 Niveau d'entrée pour une expérience sans publicité et des fonctionnalités essentielles.

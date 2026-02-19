@@ -215,7 +215,7 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
                       URL du serveur RTMP
                     </label>
                     <div className="bg-gray-800 rounded-lg px-4 py-3 font-mono text-sm">
-                      rtmp://stream.trutube.com/live
+                      rtmp://stream.goroti.com/live
                     </div>
                   </div>
                 </div>

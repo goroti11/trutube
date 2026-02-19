@@ -2,7 +2,7 @@
 
 ## ✅ Implémentation Complète
 
-Système complet de paiements et tips intégré avec succès dans TruTube.
+Système complet de paiements et tips intégré avec succès dans Goroti.
 
 ---
 

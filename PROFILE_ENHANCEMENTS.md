@@ -1,8 +1,8 @@
-# TruTube - Améliorations Profil Style YouTube
+# Goroti - Améliorations Profil Style YouTube
 
 ## Vue d'ensemble
 
-Le système de profil de TruTube a été entièrement repensé pour offrir une expérience similaire à YouTube, avec des fonctionnalités avancées pour créateurs et utilisateurs.
+Le système de profil de Goroti a été entièrement repensé pour offrir une expérience similaire à YouTube, avec des fonctionnalités avancées pour créateurs et utilisateurs.
 
 ---
 
@@ -683,4 +683,4 @@ Tout est construit avec les packages existants:
 **Statut**: ✅ TOUTES LES FONCTIONNALITÉS AJOUTÉES
 **Build**: ✅ RÉUSSI
 
-🎉 **Le système de profil TruTube est maintenant au niveau de YouTube et au-delà!**
+🎉 **Le système de profil Goroti est maintenant au niveau de YouTube et au-delà!**

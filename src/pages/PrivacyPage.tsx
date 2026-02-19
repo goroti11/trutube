@@ -10,7 +10,7 @@ interface PrivacyPageProps {
 
 const LAST_UPDATED = '18 février 2026';
 const VERSION = '2.1';
-const DPO_EMAIL = 'privacy@trutube.com';
+const DPO_EMAIL = 'privacy@goroti.com';
 
 function Section({
   icon: Icon,

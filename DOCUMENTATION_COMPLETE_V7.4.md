@@ -611,8 +611,8 @@ Style: Icônes grises sur fond gris 800, hover cyan
 **Titre**: "Contact"
 
 **Emails**:
-- 📧 support@trutube.com (Support général)
-- 📧 creators@trutube.com (Support créateurs)
+- 📧 support@goroti.com (Support général)
+- 📧 creators@goroti.com (Support créateurs)
 
 **Newsletter**:
 ```
@@ -917,4 +917,4 @@ Ce document contient **24 sections** couvrant **TOUTES** les fonctionnalités de
 ---
 
 **Goroti Platform © 2026** - Documentation Version 7.4
-**Support**: support@trutube.com
+**Support**: support@goroti.com

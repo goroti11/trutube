@@ -1,8 +1,8 @@
-# TruTube - Implémentation Complète ✅
+# Goroti - Implémentation Complète ✅
 
 ## Vue d'ensemble
 
-TruTube est maintenant une plateforme vidéo complète avec un système d'univers structuré, un algorithme transparent, et des fonctionnalités de monétisation avancées.
+Goroti est maintenant une plateforme vidéo complète avec un système d'univers structuré, un algorithme transparent, et des fonctionnalités de monétisation avancées.
 
 ## 🎯 Fonctionnalités Principales Implémentées
 
@@ -179,7 +179,7 @@ Score = max(0, 100 - Hours Since Upload)
 
 ## 🎯 Différenciateurs vs YouTube
 
-| Feature | YouTube | TruTube |
+| Feature | YouTube | Goroti |
 |---------|---------|---------|
 | Organisation | Tout mélangé | Univers → Sous-univers |
 | Algorithme | Opaque | Transparent et explicable |
@@ -193,7 +193,7 @@ Score = max(0, 100 - Hours Since Upload)
 ## 📝 Documentation
 
 **3 documents complets:**
-1. `TRUTUBE_FEATURES.md` - Features et philosophie
+1. `GOROTI_FEATURES.md` - Features et philosophie
 2. `UNIVERSE_SYSTEM.md` - Système d'univers détaillé
 3. `IMPLEMENTATION_COMPLETE.md` - Ce fichier
 
@@ -264,7 +264,7 @@ Score = max(0, 100 - Hours Since Upload)
 
 ## 🎉 Conclusion
 
-TruTube n'est pas un clone de YouTube. C'est une nouvelle génération de plateforme vidéo qui résout les problèmes fondamentaux:
+Goroti n'est pas un clone de YouTube. C'est une nouvelle génération de plateforme vidéo qui résout les problèmes fondamentaux:
 
 1. **Algorithme transparent** - Les créateurs comprennent les règles
 2. **Distribution équitable** - Les petits ont leur chance

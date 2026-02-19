@@ -185,7 +185,7 @@ export default function BlogArticlePage({ slug, onNavigate }: BlogArticlePagePro
               )}
               <div>
                 <p className="font-medium text-white">{article.author.username}</p>
-                <p className="text-sm text-neutral-400">Équipe TruTube</p>
+                <p className="text-sm text-neutral-400">Équipe Goroti</p>
               </div>
             </div>
           )}

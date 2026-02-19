@@ -1,5 +1,5 @@
 /*
-  # Add Sub-Universes System to TruTube
+  # Add Sub-Universes System to Goroti
 
   ## 1. New Tables
   

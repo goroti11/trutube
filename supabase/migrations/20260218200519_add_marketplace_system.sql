@@ -1,5 +1,5 @@
 /*
-  # TruTube Marketplace System
+  # Goroti Marketplace System
 
   ## Overview
   Professional services marketplace connecting creators with specialized providers.

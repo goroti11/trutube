@@ -1,8 +1,8 @@
-# TruTube Communauté - Implémentation Complète
+# Goroti Communauté - Implémentation Complète
 
 ## Vue d'ensemble
 
-**TruTube Communauté** a été implémenté comme un système social structuré complet, transformant TruTube en un véritable écosystème social au-delà de la simple diffusion vidéo.
+**Goroti Communauté** a été implémenté comme un système social structuré complet, transformant Goroti en un véritable écosystème social au-delà de la simple diffusion vidéo.
 
 ## Ce qui a été créé
 
@@ -195,7 +195,7 @@ Toutes les tables ont RLS activé avec politiques selon :
 ## Différenciation vs concurrents
 
 ### vs YouTube
-| Fonctionnalité | YouTube | TruTube Communauté |
+| Fonctionnalité | YouTube | Goroti Communauté |
 |----------------|---------|-------------------|
 | Format social | Commentaires uniquement | Espace social complet |
 | Organisation | Sous vidéos | Par univers/thèmes |
@@ -205,7 +205,7 @@ Toutes les tables ont RLS activé avec politiques selon :
 | Réputation | Cachée | Visible et gamifiée |
 
 ### vs Reddit
-| Fonctionnalité | Reddit | TruTube Communauté |
+| Fonctionnalité | Reddit | Goroti Communauté |
 |----------------|--------|-------------------|
 | Vidéo | Externe | Intégré natif |
 | Créateurs | Anonymes | Identité forte |
@@ -213,7 +213,7 @@ Toutes les tables ont RLS activé avec politiques selon :
 | Découverte | Difficile | Algorithme + univers |
 
 ### vs Discord
-| Fonctionnalité | Discord | TruTube Communauté |
+| Fonctionnalité | Discord | Goroti Communauté |
 |----------------|---------|-------------------|
 | Temporalité | Temps réel uniquement | Permanent + temps réel |
 | Découverte | Serveurs privés | Publique algorithme |
@@ -223,8 +223,8 @@ Toutes les tables ont RLS activé avec politiques selon :
 ## Points forts stratégiques
 
 ### 1. Intégration native
-Contrairement à Discord/Reddit, TruTube Communauté est intégré nativement avec :
-- Vidéos TruTube
+Contrairement à Discord/Reddit, Goroti Communauté est intégré nativement avec :
+- Vidéos Goroti
 - Profils créateurs
 - Système monétisation
 - Analytics créateurs
@@ -265,7 +265,7 @@ Créer noyau solide de créateurs avant expansion massive
 3. Mise en avant prioritaire
 4. Accès bêta fonctionnalités
 5. Support VIP + account manager
-6. Événements exclusifs TruTube
+6. Événements exclusifs Goroti
 7. Revenue garanti 500€/mois pendant 6 mois
 
 ### Sélection
@@ -340,7 +340,7 @@ Créer noyau solide de créateurs avant expansion massive
 ### Pour les utilisateurs
 
 #### Rejoindre une communauté
-1. Se connecter à TruTube
+1. Se connecter à Goroti
 2. Accéder à "Communauté" (navigation principale)
 3. Explorer par univers ou chercher
 4. Cliquer "Rejoindre"
@@ -367,7 +367,7 @@ Créer noyau solide de créateurs avant expansion massive
 ### Pour les créateurs
 
 #### Créer sa communauté
-1. Accéder à TruTube Studio
+1. Accéder à Goroti Studio
 2. Section "Communauté"
 3. "Créer communauté créateur"
 4. Configurer (nom, description, règles, tarifs)
@@ -399,7 +399,7 @@ Créer noyau solide de créateurs avant expansion massive
 ### 🚧 En cours / À finaliser
 - Pages interface utilisateur (liste communautés, vue communauté, création post)
 - Composants UI (post card, comment thread, reaction buttons)
-- Intégration TruTube Studio
+- Intégration Goroti Studio
 - Notifications temps réel (WebSocket)
 - Modération IA (OpenAI Moderation API)
 
@@ -414,7 +414,7 @@ Créer noyau solide de créateurs avant expansion massive
 
 ## Conclusion
 
-**TruTube Communauté** transforme TruTube en un écosystème social complet, pas juste une plateforme vidéo.
+**Goroti Communauté** transforme Goroti en un écosystème social complet, pas juste une plateforme vidéo.
 
 ### Valeur ajoutée
 1. **Fidélisation** : Créateurs et audiences restent dans l'écosystème
@@ -425,7 +425,7 @@ Créer noyau solide de créateurs avant expansion massive
 
 ### Message clé
 
-> **"TruTube = Vidéo + Social + Transparence + Monétisation équitable"**
+> **"Goroti = Vidéo + Social + Transparence + Monétisation équitable"**
 
 Ce n'est pas YouTube avec des commentaires améliorés. C'est une vision complète de la création de contenu moderne où chaque acteur (créateur, fan, marque) trouve sa valeur.
 

@@ -1,4 +1,4 @@
-# 🎥 GUIDE COMPLET STUDIO & LIVE STREAMING - TRUTUBE V7.3
+# 🎥 GUIDE COMPLET STUDIO & LIVE STREAMING - GOROTI V7.3
 ## Guide de Contenu + Système de Live Streaming Complet
 
 **Date:** 17 février 2026
@@ -327,7 +327,7 @@ type Page = ... | 'live-streaming';
 
 **1. Accès au Live**
 ```
-TruTube Studio → Section Live → [Démarrer un live]
+Goroti Studio → Section Live → [Démarrer un live]
 ```
 
 **2. Création du Live**
@@ -390,7 +390,7 @@ Lives précédents affichés:
 
 **1. Accès au Guide**
 ```
-TruTube Studio → Section Contenus
+Goroti Studio → Section Contenus
 → Guide automatiquement visible
 ```
 
@@ -803,7 +803,7 @@ Policies: 11 created
 
 ### ✅ Objectif 1: Guide de Contenu Studio
 
-**Demande:** "Pareils pour le reste dans le guide du contenus dans trutube studio"
+**Demande:** "Pareils pour le reste dans le guide du contenus dans goroti studio"
 
 **Réalisé:**
 - ✅ Guide complet interactif
@@ -825,7 +825,7 @@ Policies: 11 created
 
 ### ✅ Objectif 2: Live Streaming Fonctionnel
 
-**Demande:** "Coté live dans trutube studio quand t'on clic sur démarrer un live que ça marche qu'on puisse avoir accès de consulter sur le nombre de spectateur totaux, spectateurs moyens, durée pas lives accès de consulter toutes les résultats du live précédent"
+**Demande:** "Coté live dans goroti studio quand t'on clic sur démarrer un live que ça marche qu'on puisse avoir accès de consulter sur le nombre de spectateur totaux, spectateurs moyens, durée pas lives accès de consulter toutes les résultats du live précédent"
 
 **Réalisé:**
 
@@ -866,7 +866,7 @@ Policies: 11 created
 
 ### vs YouTube Live
 
-| Feature | YouTube | **TruTube** |
+| Feature | YouTube | **Goroti** |
 |---------|---------|-------------|
 | Guide contenu créateurs | Externe | **Intégré** ✅ |
 | Exemples par catégorie | ❌ | **70+** ✅ |
@@ -876,7 +876,7 @@ Policies: 11 created
 
 ### vs Twitch
 
-| Feature | Twitch | **TruTube** |
+| Feature | Twitch | **Goroti** |
 |---------|---------|-------------|
 | Guide de contenu | ❌ | **Complet** ✅ |
 | Stats spectateurs | Basique | **Avancé** ✅ |
@@ -885,7 +885,7 @@ Policies: 11 created
 
 ### vs TikTok Live
 
-| Feature | TikTok | **TruTube** |
+| Feature | TikTok | **Goroti** |
 |---------|---------|-------------|
 | Guide création | ❌ | **Oui** ✅ |
 | Stats détaillées | Minimal | **Complet** ✅ |
@@ -912,7 +912,7 @@ Policies: 11 created
 - Contrôles avancés
 - **Valeur estimée: €100/mois**
 
-### Pour TruTube
+### Pour Goroti
 
 **Différenciation:**
 - Seule plateforme avec guide intégré
@@ -954,7 +954,7 @@ Policies: 11 created
 
 **1. Multi-Streaming**
 - Stream vers plusieurs plateformes
-- TruTube + YouTube + Twitch
+- Goroti + YouTube + Twitch
 - Gestion centralisée
 - Stats consolidées
 
@@ -1015,7 +1015,7 @@ const history = await liveStreamService.getCreatorLiveStreams(userId);
 
 ## 🎊 CONCLUSION
 
-**TruTube V7.3 apporte une transformation majeure du Creator Studio!**
+**Goroti V7.3 apporte une transformation majeure du Creator Studio!**
 
 ### Réalisations
 
@@ -1069,4 +1069,4 @@ const history = await liveStreamService.getCreatorLiveStreams(userId);
 **Database:** 3 tables, 11 policies
 **Build:** SUCCESS ✅
 
-**TruTube - Créer avec confiance! 🎥📊**
+**Goroti - Créer avec confiance! 🎥📊**

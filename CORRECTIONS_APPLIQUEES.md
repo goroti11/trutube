@@ -321,12 +321,12 @@ npm run build
 ### Guides complets
 - `GUIDE_COMPLET_STUDIO_LIVE_V7.3.md` - Studio créateur
 - `GUIDE_UPLOAD_INTERACTIF.md` - Upload vidéo
-- `TRUTUBE_FEATURES.md` - Fonctionnalités
+- `GOROTI_FEATURES.md` - Fonctionnalités
 - `DEPLOYMENT_CHECKLIST.md` - Déploiement
 
 ### Contact
-- Email support: support@trutube.com
-- Email créateurs: creators@trutube.com
+- Email support: support@goroti.com
+- Email créateurs: creators@goroti.com
 
 ---
 

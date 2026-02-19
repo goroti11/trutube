@@ -1,8 +1,8 @@
-# Guide de Démarrage Rapide - TruTube
+# Guide de Démarrage Rapide - Goroti
 
-## Bienvenue sur TruTube!
+## Bienvenue sur Goroti!
 
-Ce guide vous aidera à démarrer rapidement avec toutes les fonctionnalités de TruTube.
+Ce guide vous aidera à démarrer rapidement avec toutes les fonctionnalités de Goroti.
 
 ---
 
@@ -402,7 +402,7 @@ await supabase.from('support_tickets').insert({
 ### Pages Publiques
 - `/` - Accueil
 - `/auth` - Connexion/Inscription
-- `/about` - À propos de TruTube
+- `/about` - À propos de Goroti
 - `/terms` - CGU
 - `/privacy` - Confidentialité
 - `/support` - Support
@@ -459,7 +459,7 @@ npm run typecheck
 ## Architecture du Projet
 
 ```
-trutube/
+goroti/
 ├── src/
 │   ├── components/         # Composants React
 │   │   ├── Header.tsx
@@ -533,7 +533,7 @@ trutube/
 
 4. **Contacter le support**
    - Page interne : `/support`
-   - Email : support@trutube.com
+   - Email : support@goroti.com
 
 ---
 
@@ -653,4 +653,4 @@ Vous avez maintenant accès à une plateforme complète avec :
 
 ---
 
-Pour toute question : support@trutube.com
+Pour toute question : support@goroti.com

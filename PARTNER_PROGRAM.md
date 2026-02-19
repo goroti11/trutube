@@ -1,10 +1,10 @@
-# Programme Partenaire TruTube - Guide Complet
+# Programme Partenaire Goroti - Guide Complet
 
 ## Philosophie
 
 > **"Vous êtes partenaire, pas dépendant."**
 
-TruTube considère les créateurs comme de véritables partenaires business, pas comme de simples utilisateurs à la merci d'algorithmes opaques.
+Goroti considère les créateurs comme de véritables partenaires business, pas comme de simples utilisateurs à la merci d'algorithmes opaques.
 
 ## Conditions d'éligibilité
 
@@ -154,7 +154,7 @@ Le créateur certifie :
 ### 5. Sponsoring direct (90% / 10%)
 
 **Fonctionnement** :
-- Marques proposent sponsoring via TruTube Studio
+- Marques proposent sponsoring via Goroti Studio
 - Négociation transparente
 - Contrats générés automatiquement
 - Paiement garanti
@@ -171,7 +171,7 @@ Le créateur certifie :
 **Fonctionnement** :
 - Créateurs définissent % entre eux
 - Ex : 50/50, 60/40, 70/30
-- Contrat interne TruTube
+- Contrat interne Goroti
 - Revenus partagés automatiquement
 
 **Avantages** :
@@ -225,7 +225,7 @@ Le créateur certifie :
 - Accès bêta nouvelles fonctionnalités
 - Promotion prioritaire homepage
 - Support VIP 24/7
-- Invitation événements TruTube
+- Invitation événements Goroti
 - Possibilité de négocier contrat personnalisé
 
 **Badge** : Or couronne
@@ -322,13 +322,13 @@ Le créateur certifie :
 
 ### Fiscalité
 - Déclaration fiscale sous sa responsabilité
-- TruTube fournit documents (factures, récapitulatifs)
+- Goroti fournit documents (factures, récapitulatifs)
 - Statut recommandé : auto-entrepreneur, société
 
 ### Droits d'auteur
 - Doit détenir droits ou licences
 - Responsable en cas de violation
-- TruTube applique DMCA (retrait si plainte fondée)
+- Goroti applique DMCA (retrait si plainte fondée)
 
 ### Obligations légales
 - Conformité RGPD si données personnelles
@@ -355,7 +355,7 @@ Le créateur certifie :
 - Revenus acquis payés intégralement
 - Données exportables
 
-### Par TruTube
+### Par Goroti
 - Uniquement si violations graves répétées
 - Notification 30 jours à l'avance (sauf cas extrême)
 - Revenus légitimes payés
@@ -381,9 +381,9 @@ Le créateur certifie :
 - Hotline directe
 - Coaching personnalisé
 
-## Avantages compétitifs TruTube
+## Avantages compétitifs Goroti
 
-| Critère | YouTube | TruTube |
+| Critère | YouTube | Goroti |
 |---------|---------|---------|
 | Part pub créateur | 55% | **65%** |
 | Part abonnements | 70% | **80%** |
@@ -396,7 +396,7 @@ Le créateur certifie :
 
 ## Conclusion
 
-Le Programme Partenaire TruTube offre :
+Le Programme Partenaire Goroti offre :
 - **Transparence absolue**
 - **Revenus équitables**
 - **Protection juridique claire**
@@ -406,4 +406,4 @@ Notre engagement : Vous traiter comme un partenaire, pas comme un produit.
 
 ---
 
-**Pour rejoindre** : Connectez-vous et acceptez les conditions dans TruTube Studio → Monétisation
+**Pour rejoindre** : Connectez-vous et acceptez les conditions dans Goroti Studio → Monétisation

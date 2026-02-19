@@ -1,4 +1,4 @@
-# Intégration Complète de la Base de Données TruTube
+# Intégration Complète de la Base de Données Goroti
 
 ## Statut : ✅ COMPLÉTÉ
 
@@ -211,7 +211,7 @@ src/
     └── supabase.ts             ✅ Client Supabase configuré
 
 supabase/migrations/
-├── 20260209115532_create_trutube_schema_v2.sql              ✅
+├── 20260209115532_create_goroti_schema_v2.sql              ✅
 ├── 20260209120240_add_sub_universes_system.sql              ✅
 ├── 20260209120836_add_anti_fake_views_and_moderation.sql    ✅
 ├── 20260213134936_create_user_profiles.sql                  ✅
@@ -441,7 +441,7 @@ Ces variables sont utilisées par `src/lib/supabase.ts` pour initialiser le clie
    ```
 
 4. **Contacter le support**
-   - Email : support@trutube.com
+   - Email : support@goroti.com
    - Page interne : `/support`
 
 ---

@@ -1,4 +1,4 @@
-# 📱 TruTube Mobile Application
+# 📱 Goroti Mobile Application
 
 Une application mobile moderne avec toutes les fonctionnalités d'une app native, construite avec React et optimisée pour mobile.
 

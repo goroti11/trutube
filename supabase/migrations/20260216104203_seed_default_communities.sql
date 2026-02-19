@@ -1,5 +1,5 @@
 /*
-  # Ajout de communautés par défaut pour TruTube
+  # Ajout de communautés par défaut pour Goroti
 
   1. Communautés créées
     - Communautés d'univers populaires (Gaming, Musique, Tech, etc.)
@@ -66,7 +66,7 @@ VALUES
  NULL, NULL, 6543, 4892, true),
 
 -- Communauté Premium Exclusive
-('TruTube VIP', 'trutube-vip', 'Communauté exclusive pour les membres Premium et Gold. Événements spéciaux, accès anticipé et rencontres créateurs.', 'premium', true, 9.99,
+('Goroti VIP', 'goroti-vip', 'Communauté exclusive pour les membres Premium et Gold. Événements spéciaux, accès anticipé et rencontres créateurs.', 'premium', true, 9.99,
  to_jsonb(ARRAY['Réservé aux membres Premium+', 'Confidentialité respectée', 'Networking professionnel', 'Pas de spam']),
  NULL, NULL, 1234, 456, true),
 

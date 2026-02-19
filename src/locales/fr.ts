@@ -1,5 +1,5 @@
 export default {
-  'app.name': 'TruTube',
+  'app.name': 'Goroti',
   'app.tagline': 'La Plateforme Vérité',
 
   'nav.home': 'Accueil',

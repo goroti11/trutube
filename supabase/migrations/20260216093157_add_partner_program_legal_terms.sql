@@ -1,8 +1,8 @@
 /*
-  # Conditions légales Programme Partenaire TruTube
+  # Conditions légales Programme Partenaire Goroti
 
   ## Vue d'ensemble
-  Ce système gère les conditions légales et contractuelles du Programme Partenaire TruTube :
+  Ce système gère les conditions légales et contractuelles du Programme Partenaire Goroti :
   - Statut de partenaire et engagement
   - Conditions d'éligibilité légales
   - Règles de paiement et seuils
@@ -164,12 +164,12 @@ ON CONFLICT (currency) DO NOTHING;
 
 -- Insertion des conditions actuelles du programme partenaire
 INSERT INTO partner_program_terms (version, title, content, effective_date, is_current, terms_type) VALUES
-('1.0', 'Conditions du Programme Partenaire TruTube', 
-'# Conditions légales officielles – Monétisation TruTube
+('1.0', 'Conditions du Programme Partenaire Goroti', 
+'# Conditions légales officielles – Monétisation Goroti
 
 ## Statut de partenaire
 
-En rejoignant le Programme Partenaire TruTube, le créateur accepte :
+En rejoignant le Programme Partenaire Goroti, le créateur accepte :
 - Respect intégral des Conditions Générales
 - Respect des règles communautaires
 - Fourniture d''informations exactes (identité, fiscalité, paiement)
@@ -221,11 +221,11 @@ Le créateur est seul responsable de :
 - Les droits d''auteur et licences
 - Les obligations légales liées à son activité
 
-TruTube agit comme plateforme d''hébergement et d''intermédiation.
+Goroti agit comme plateforme d''hébergement et d''intermédiation.
 
 ## Modification des termes
 
-TruTube se réserve le droit de modifier ces conditions avec :
+Goroti se réserve le droit de modifier ces conditions avec :
 - Préavis de 30 jours minimum
 - Notification par email
 - Acceptation requise pour continuer
@@ -233,11 +233,11 @@ TruTube se réserve le droit de modifier ces conditions avec :
 ## Résiliation
 
 Le créateur peut quitter le programme à tout moment.
-TruTube peut résilier le partenariat en cas de violations graves répétées.
+Goroti peut résilier le partenariat en cas de violations graves répétées.
 
 ---
 
-En acceptant ces conditions, vous reconnaissez avoir lu, compris et accepté l''ensemble des termes du Programme Partenaire TruTube.', 
+En acceptant ces conditions, vous reconnaissez avoir lu, compris et accepté l''ensemble des termes du Programme Partenaire Goroti.', 
 '2026-02-16', 
 true,
 'partner_program')

@@ -1,4 +1,4 @@
-# TruTube V6.1 - Mise à Jour Finale
+# Goroti V6.1 - Mise à Jour Finale
 ## Toutes les Fonctionnalités Complètes + Optimisations UI
 
 **Date:** 16 février 2026
@@ -846,7 +846,7 @@
 - `MULTI_CHANNEL_MONETIZATION_GUIDE.md` - Monétisation
 - `COMMUNITY_SYSTEM_COMPLETE.md` - Système communautés
 - `PROFILE_FEATURES_GUIDE.md` - Fonctionnalités profil
-- `TRANSPARENCE_TRUTUBE.md` - Transparence et éthique
+- `TRANSPARENCE_GOROTI.md` - Transparence et éthique
 
 ### Support et Aide
 
@@ -860,7 +860,7 @@
 
 ## CONCLUSION
 
-**TruTube V6.1 est la version la plus complète et la plus aboutie à ce jour!**
+**Goroti V6.1 est la version la plus complète et la plus aboutie à ce jour!**
 
 ### ✅ Toutes les Fonctionnalités Implémentées
 
@@ -947,7 +947,7 @@
 **Tests:** ALL PASS ✅
 **Status:** PRODUCTION READY 🚀
 
-**TruTube - La Plateforme Vidéo Transparente et Équitable du Futur!**
+**Goroti - La Plateforme Vidéo Transparente et Équitable du Futur!**
 
 ---
 
@@ -997,4 +997,4 @@ http://localhost:5173/#watch-history
 
 ---
 
-**Tout est prêt! Commencez à utiliser TruTube dès maintenant! 🚀**
+**Tout est prêt! Commencez à utiliser Goroti dès maintenant! 🚀**

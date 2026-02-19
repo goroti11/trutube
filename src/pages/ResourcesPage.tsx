@@ -386,8 +386,8 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
           {
             nom: 'Contact',
             contenu: [
-              'Email support: support@trutube.com',
-              'Email créateurs: creators@trutube.com',
+              'Email support: support@goroti.com',
+              'Email créateurs: creators@goroti.com',
               'Newsletter (formulaire inscription)'
             ]
           }
@@ -573,7 +573,7 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       content: {
         description: 'Module complet de création et gestion de chaînes créateur professionnelles.',
         creationAutomatique: {
-          principe: 'Chaque compte TruTube possède toujours au moins une chaîne',
+          principe: 'Chaque compte Goroti possède toujours au moins une chaîne',
           declenchement: 'Création automatique lors de l\'inscription',
           flux: ['Inscription utilisateur', 'Validation email', 'Création profil', 'Génération automatique chaîne', 'Aucune action manuelle requise'],
           donneesUtilisees: {

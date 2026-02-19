@@ -1,8 +1,8 @@
 /*
-  # Système de Monétisation TruTube
+  # Système de Monétisation Goroti
 
   ## Vue d'ensemble
-  Ce système gère la monétisation complète des créateurs sur TruTube avec :
+  Ce système gère la monétisation complète des créateurs sur Goroti avec :
   - Conditions d'éligibilité (KYC, seuils, score authenticité)
   - Types de revenus (publicité, abonnements, tips, marketplace, collabs)
   - Paliers créateurs (Basic, Pro, Elite)

@@ -681,7 +681,7 @@ Errors: 0
 
 ### Liste Complète (30 migrations)
 
-1. `20260209115532_create_trutube_schema_v2.sql`
+1. `20260209115532_create_goroti_schema_v2.sql`
 2. `20260209120240_add_sub_universes_system.sql`
 3. `20260209120836_add_anti_fake_views_and_moderation.sql`
 4. `20260213134936_create_user_profiles.sql`

@@ -1,12 +1,12 @@
-# Système de Monétisation TruTube
+# Système de Monétisation Goroti
 
 ## Vue d'ensemble
 
-Le système de monétisation TruTube offre une transparence totale et des conditions équitables pour tous les créateurs. Il se différencie de YouTube par sa clarté absolue et son approche "human-first".
+Le système de monétisation Goroti offre une transparence totale et des conditions équitables pour tous les créateurs. Il se différencie de YouTube par sa clarté absolue et son approche "human-first".
 
 ## Conditions d'éligibilité
 
-Pour être monétisé sur TruTube, un créateur doit remplir **TOUTES** les conditions suivantes :
+Pour être monétisé sur Goroti, un créateur doit remplir **TOUTES** les conditions suivantes :
 
 ### 1. Identité vérifiée (KYC)
 - ✅ Vérification d'identité obligatoire (pièce d'identité)
@@ -55,7 +55,7 @@ Minimum requis :
 
 ## Partage des revenus
 
-TruTube offre des partages plus favorables que YouTube :
+Goroti offre des partages plus favorables que YouTube :
 
 | Type de revenu | Créateur | Plateforme |
 |---|---|---|
@@ -67,9 +67,9 @@ TruTube offre des partages plus favorables que YouTube :
 | **Sponsoring direct** | 90% | 10% |
 
 ### Comparaison avec YouTube
-- YouTube Ads : 55% créateur vs **TruTube : 65%**
-- YouTube Membership : 70% créateur vs **TruTube : 80%**
-- YouTube Super Chat : 70% créateur vs **TruTube : 95%**
+- YouTube Ads : 55% créateur vs **Goroti : 65%**
+- YouTube Membership : 70% créateur vs **Goroti : 80%**
+- YouTube Super Chat : 70% créateur vs **Goroti : 95%**
 
 ## Types de monétisation
 
@@ -95,7 +95,7 @@ Paliers personnalisés (Silver / Gold / VIP)
 - 95% pour le créateur
 
 ### D. Sponsoring direct intégré
-- Marques peuvent sponsoriser via TruTube Studio
+- Marques peuvent sponsoriser via Goroti Studio
 - Contrats transparents
 - Gestion simplifiée
 
@@ -148,7 +148,7 @@ Paliers personnalisés (Silver / Gold / VIP)
 
 ## Clause anti-abus
 
-TruTube se réserve le droit de :
+Goroti se réserve le droit de :
 - ⚠️ Suspendre la monétisation en cas d'activité suspecte
 - ⚠️ Retenir les revenus générés frauduleusement
 - ⚠️ Supprimer le partenariat en cas de violation grave
@@ -188,14 +188,14 @@ TruTube se réserve le droit de :
 - Pas besoin d'outils externes
 - Tout dans l'écosystème
 
-## Interface TruTube Studio
+## Interface Goroti Studio
 
 Le dashboard de monétisation affiche :
 
 ### Vue principale
 - 💰 Revenus estimés du mois
 - ✅ Revenus validés (prêts au retrait)
-- 📊 Commission TruTube transparente
+- 📊 Commission Goroti transparente
 - 📈 Répartition par type de revenu
 
 ### Conditions d'éligibilité
@@ -242,4 +242,4 @@ Checklist visible en temps réel :
 
 > **"Vous êtes partenaire, pas dépendant."**
 
-TruTube positionne le créateur comme un vrai partenaire business, pas un simple utilisateur à la merci d'algorithmes opaques.
+Goroti positionne le créateur comme un vrai partenaire business, pas un simple utilisateur à la merci d'algorithmes opaques.

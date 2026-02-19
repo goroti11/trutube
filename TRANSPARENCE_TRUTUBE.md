@@ -1,10 +1,10 @@
-# Transparence TruTube - Avantage Concurrentiel Durable
+# Transparence Goroti - Avantage Concurrentiel Durable
 
 ## Philosophie fondamentale
 
 > **"La transparence n'est pas une fonctionnalité, c'est notre ADN."**
 
-YouTube est critiqué pour son opacité. TruTube fait le choix inverse : **transparence radicale sur tout**.
+YouTube est critiqué pour son opacité. Goroti fait le choix inverse : **transparence radicale sur tout**.
 
 ## Pourquoi la transparence est stratégique
 
@@ -17,7 +17,7 @@ YouTube est critiqué pour son opacité. TruTube fait le choix inverse : **trans
 - Revenus incompréhensibles
 - Suppressions arbitraires
 
-**Opportunité TruTube** : Être l'anti-YouTube transparent
+**Opportunité Goroti** : Être l'anti-YouTube transparent
 
 ### 2. Confiance = valeur long terme
 
@@ -35,13 +35,13 @@ YouTube ne peut pas copier facilement :
 - Leur modèle économique est opaque par design
 - Leur culture interne est fermée
 
-TruTube peut construire un avantage structurel imbattable.
+Goroti peut construire un avantage structurel imbattable.
 
 ## Transparence algorithmique
 
 ### Facteurs de classement publics
 
-**TruTube publie les facteurs** de son algorithme de recommandation :
+**Goroti publie les facteurs** de son algorithme de recommandation :
 
 #### Poids indicatifs (total 100%)
 
@@ -89,7 +89,7 @@ TruTube peut construire un avantage structurel imbattable.
 
 ### Aucune pénalité cachée
 
-**Engagement TruTube** :
+**Engagement Goroti** :
 - Pas de shadow ban
 - Pas de déclassement secret
 - Toute pénalité = notification écrite
@@ -98,7 +98,7 @@ TruTube peut construire un avantage structurel imbattable.
 
 ### Dashboard explicatif créateur
 
-Dans **TruTube Studio → Analytics → Algorithme** :
+Dans **Goroti Studio → Analytics → Algorithme** :
 
 Chaque vidéo affiche :
 - **Pourquoi performante** : "Excellent watch time (85%), engagement fort (12%), boost nouveauté"
@@ -137,11 +137,11 @@ Pour chaque vidéo :
 - Publicité : 437.50€
 - Abonnements : 59.80€
 - Tips : 9.00€
-- **Total TruTube** : 506.30€
+- **Total Goroti** : 506.30€
 
 ### Aucune démonétisation silencieuse
 
-**Engagement TruTube** :
+**Engagement Goroti** :
 - Toute restriction = notification immédiate
 - Raison précise indiquée
 - Preuve du contenu violé
@@ -162,7 +162,7 @@ Si revenus retenus (enquête fraude) :
 
 ### Règles publiques structurées
 
-**TruTube Legal Center** accessible à tous :
+**Goroti Legal Center** accessible à tous :
 
 #### Catégories claires
 1. **Contenus interdits** (avec exemples)
@@ -261,7 +261,7 @@ Chaque proposition affiche :
 
 ### Code open source (partiel)
 
-**TruTube s'engage** à open sourcer :
+**Goroti s'engage** à open sourcer :
 
 #### Composants publics
 - ✅ Algorithme anti-bot (detection logic)
@@ -280,7 +280,7 @@ Chaque proposition affiche :
 
 ### API publique documentée
 
-**TruTube API** disponible pour développeurs :
+**Goroti API** disponible pour développeurs :
 
 #### Endpoints publics
 - `/api/videos/{id}` : Métadonnées vidéo
@@ -296,7 +296,7 @@ Chaque proposition affiche :
 
 ### Status page public
 
-**status.trutube.com** affiche :
+**status.goroti.com** affiche :
 - Uptime services (99.9% SLA)
 - Incidents en cours
 - Maintenances planifiées
@@ -309,7 +309,7 @@ Chaque proposition affiche :
 
 ### Métriques clés publiques
 
-**TruTube partage publiquement** :
+**Goroti partage publiquement** :
 
 #### Croissance
 - MAU (Monthly Active Users)
@@ -346,7 +346,7 @@ Consultable : `INVESTOR_MODEL.md`
 
 ### 1. Confiance créateurs
 
-**Créateurs préfèrent TruTube** car :
+**Créateurs préfèrent Goroti** car :
 - Comprennent pourquoi vidéos performent ou non
 - Voient exactement leurs revenus
 - Savent quand/pourquoi sanctions
@@ -356,7 +356,7 @@ Consultable : `INVESTOR_MODEL.md`
 
 ### 2. Confiance audiences
 
-**Spectateurs préfèrent TruTube** car :
+**Spectateurs préfèrent Goroti** car :
 - Savent ce qui influence leurs recommandations
 - Comprennent système modération
 - Participent gouvernance
@@ -366,7 +366,7 @@ Consultable : `INVESTOR_MODEL.md`
 
 ### 3. Confiance marques
 
-**Annonceurs préfèrent TruTube** car :
+**Annonceurs préfèrent Goroti** car :
 - Garantie trafic réel (anti-bot natif)
 - Transparence placement pub
 - Métriques fiables
@@ -376,7 +376,7 @@ Consultable : `INVESTOR_MODEL.md`
 
 ### 4. Confiance investisseurs
 
-**Investisseurs préfèrent TruTube** car :
+**Investisseurs préfèrent Goroti** car :
 - Métriques publiques vérifiables
 - Business model clair
 - Risques identifiés
@@ -396,7 +396,7 @@ En cas de crise (bug, controverse, etc.) :
 
 ## Comparaison concurrents
 
-| Critère | YouTube | TruTube |
+| Critère | YouTube | Goroti |
 |---------|---------|---------|
 | **Algorithme** | Secret total | Facteurs publics |
 | **Pénalités** | Shadow ban | Notification écrite |
@@ -408,7 +408,7 @@ En cas de crise (bug, controverse, etc.) :
 | **Métriques** | Privées | Dashboard public |
 | **Gouvernance** | Aucune | Vote communautaire |
 
-**Avantage TruTube** : Systématiquement plus transparent
+**Avantage Goroti** : Systématiquement plus transparent
 
 ## Risques et mitigation
 
@@ -428,9 +428,9 @@ En cas de crise (bug, controverse, etc.) :
 
 **Mitigation** :
 - Culture d'entreprise différente (impossible à copier vite)
-- Avantage premier entrant (TruTube déjà positionné)
+- Avantage premier entrant (Goroti déjà positionné)
 - Complexité migration (secrets industriels YouTube)
-- TruTube = ADN transparent, pas feature isolée
+- Goroti = ADN transparent, pas feature isolée
 
 ### Risque 3 : Overhead communication
 
@@ -454,14 +454,14 @@ En cas de crise (bug, controverse, etc.) :
 
 ## Message clé
 
-> **"Sur TruTube, vous savez toujours pourquoi."**
+> **"Sur Goroti, vous savez toujours pourquoi."**
 
 - Pourquoi cette vidéo recommandée
 - Pourquoi ces revenus
 - Pourquoi cette sanction
 - Pourquoi cette décision
 
-**Transparence = ADN TruTube = avantage concurrentiel durable**
+**Transparence = ADN Goroti = avantage concurrentiel durable**
 
 ## Prochaines étapes
 
@@ -487,4 +487,4 @@ En cas de crise (bug, controverse, etc.) :
 
 **La transparence n'est pas un risque, c'est notre force.**
 
-TruTube = La plateforme vidéo la plus transparente du marché.
+Goroti = La plateforme vidéo la plus transparente du marché.

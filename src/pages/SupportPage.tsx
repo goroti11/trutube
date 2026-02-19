@@ -258,7 +258,7 @@ export const SupportPage = ({ onNavigate }: SupportPageProps) => {
                 <div>
                   <h3 className="text-white font-medium mb-1">Email de support</h3>
                   <p className="text-gray-400 text-sm">
-                    Pour les demandes urgentes: <span className="text-cyan-400">support@trutube.com</span>
+                    Pour les demandes urgentes: <span className="text-cyan-400">support@goroti.com</span>
                   </p>
                 </div>
               </div>

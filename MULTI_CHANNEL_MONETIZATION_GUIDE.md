@@ -1,8 +1,8 @@
-# Guide Complet : Monétisation Multi-Canaux sur TruTube
+# Guide Complet : Monétisation Multi-Canaux sur Goroti
 
 ## Vue d'ensemble
 
-TruTube offre **5 canaux de monétisation principaux** pour les créateurs, permettant de diversifier les revenus bien au-delà de la simple publicité YouTube. Les créateurs qui utilisent plusieurs canaux gagnent en moyenne **3x plus** que ceux qui dépendent uniquement des revenus publicitaires.
+Goroti offre **5 canaux de monétisation principaux** pour les créateurs, permettant de diversifier les revenus bien au-delà de la simple publicité YouTube. Les créateurs qui utilisent plusieurs canaux gagnent en moyenne **3x plus** que ceux qui dépendent uniquement des revenus publicitaires.
 
 ## Pourquoi diversifier ses revenus ?
 
@@ -104,7 +104,7 @@ import { merchandisingService } from './services/merchandisingService';
 
 const product = await merchandisingService.createProduct({
   creator_id: userId,
-  name: "T-Shirt Logo TruTube",
+  name: "T-Shirt Logo Goroti",
   description: "T-shirt premium 100% coton avec logo brodé",
   category: "tshirt",
   images: [
@@ -256,7 +256,7 @@ Objet: Collaboration [VotreNom] × [Marque]
 
 Bonjour [Nom],
 
-Je m'appelle [Nom] et je crée du contenu [niche] sur TruTube avec [X] abonnés
+Je m'appelle [Nom] et je crée du contenu [niche] sur Goroti avec [X] abonnés
 engagés et [Y] vues/mois.
 
 Mon audience correspond parfaitement à [Produit Marque] car [raison].
@@ -316,7 +316,7 @@ Prix = (50,000 × 30 / 1000) × 2
 ## 4. STREAMING MUSIQUE & ROYALTIES
 
 ### Concept
-Publiez votre musique sur TruTube et gagnez des royalties par stream (comme Spotify).
+Publiez votre musique sur Goroti et gagnez des royalties par stream (comme Spotify).
 
 ### Comment ça marche
 
@@ -400,13 +400,13 @@ const royalties = await musicStreamingService.calculateRoyalties(
 
 | Plateforme | Taux par stream |
 |-----------|----------------|
-| **TruTube** | **$0.004** |
+| **Goroti** | **$0.004** |
 | Spotify | $0.003 - $0.005 |
 | Apple Music | $0.007 - $0.01 |
 | YouTube Music | $0.002 |
 | Deezer | $0.0064 |
 
-**Commission TruTube: 10%** (vs 30% Spotify, 30% Apple)
+**Commission Goroti: 10%** (vs 30% Spotify, 30% Apple)
 
 ### Fonctionnalités avancées
 
@@ -440,7 +440,7 @@ const track = await musicStreamingService.createTrack({
 ✅ **Régularité**: Sortez de nouveaux tracks régulièrement
 
 ### Revenus typiques
-- **1000 streams**: ~4$ (TruTube) vs ~3$ (Spotify)
+- **1000 streams**: ~4$ (Goroti) vs ~3$ (Spotify)
 - **10K streams**: ~40$
 - **100K streams**: ~400$
 - **1M streams**: ~4000$
@@ -713,9 +713,9 @@ await merchandisingService.updateOrderStatus(
 
 ## COMMISSIONS PLATEFORME
 
-TruTube prélève une commission pour couvrir les coûts:
+Goroti prélève une commission pour couvrir les coûts:
 
-| Canal | Commission TruTube | Créateur reçoit |
+| Canal | Commission Goroti | Créateur reçoit |
 |-------|-------------------|-----------------|
 | Affiliation | 0% | 100% |
 | Merchandising | 5% | 95% |
@@ -776,7 +776,7 @@ Music/Autres:      500$ (5%)
 
 ### Tracking
 - **Google Sheets**: Template tracking revenus multi-canaux
-- **TruTube Dashboard**: Stats en temps réel tous canaux
+- **Goroti Dashboard**: Stats en temps réel tous canaux
 
 ### Outils merchandising
 - **Printful**: POD premium
@@ -786,7 +786,7 @@ Music/Autres:      500$ (5%)
 ### Outils cours
 - **Loom**: Enregistrer écran facilement
 - **Notion**: Organiser curriculum
-- **Teachable Alternative**: TruTube (intégré!)
+- **Teachable Alternative**: Goroti (intégré!)
 
 ### Outils musique
 - **Audacity**: Édition audio gratuite
@@ -803,7 +803,7 @@ Music/Autres:      500$ (5%)
 ## FAQ
 
 ### Q: Dois-je avoir 1000 abonnés pour monétiser?
-**R**: Non! Tous les canaux TruTube sont accessibles dès le premier jour. Vous pouvez vendre un cours avec 50 abonnés.
+**R**: Non! Tous les canaux Goroti sont accessibles dès le premier jour. Vous pouvez vendre un cours avec 50 abonnés.
 
 ### Q: Comment recevoir les paiements?
 **R**: Via Stripe → votre compte bancaire. Délai: 2-7 jours selon pays.
@@ -835,7 +835,7 @@ Music/Autres:      500$ (5%)
 La monétisation multi-canaux transforme votre chaîne YouTube d'un **hobby** en **véritable business**.
 
 **Action Steps:**
-1. ✅ Complétez votre profil TruTube
+1. ✅ Complétez votre profil Goroti
 2. ✅ Choisissez 1-2 canaux pour commencer
 3. ✅ Créez votre premier produit/lien cette semaine
 4. ✅ Promouvez dans votre prochaine vidéo
@@ -848,8 +848,8 @@ Vous avez le contrôle. Commencez maintenant!
 
 ---
 
-**Support TruTube:**
+**Support Goroti:**
 - Dashboard: `/monetization-dashboard`
 - Documentation: `/help`
 - Support: `/support`
-- Community: Discord TruTube Creators
+- Community: Discord Goroti Creators

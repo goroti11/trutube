@@ -1,5 +1,5 @@
 export default {
-  'app.name': 'TruTube',
+  'app.name': 'Goroti',
   'app.tagline': '真相平台',
   'nav.home': '首页',
   'nav.trending': '热门',

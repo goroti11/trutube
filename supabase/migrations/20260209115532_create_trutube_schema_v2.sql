@@ -1,5 +1,5 @@
 /*
-  # TruTube Complete Database Schema
+  # Goroti Complete Database Schema
 
   ## 1. New Tables
   

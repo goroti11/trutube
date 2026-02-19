@@ -1,7 +1,7 @@
-# Nouvelles Fonctionnalités TruTube
+# Nouvelles Fonctionnalités Goroti
 
 ## Vue d'ensemble
-Ce document décrit toutes les nouvelles fonctionnalités ajoutées à TruTube, incluant les pages de paramètres, support, CGU, et plus encore.
+Ce document décrit toutes les nouvelles fonctionnalités ajoutées à Goroti, incluant les pages de paramètres, support, CGU, et plus encore.
 
 ---
 
@@ -41,7 +41,7 @@ Ce document décrit toutes les nouvelles fonctionnalités ajoutées à TruTube, 
 
 ### Contenu
 1. **Présentation du service**
-   - Mission de TruTube
+   - Mission de Goroti
    - Acceptation des conditions
 
 2. **Compte utilisateur**
@@ -114,7 +114,7 @@ Ce document décrit toutes les nouvelles fonctionnalités ajoutées à TruTube, 
 
 #### Mission et Vision
 - Explication du problème résolu
-- Solution proposée par TruTube
+- Solution proposée par Goroti
 - Vision pour l'avenir
 
 #### Valeurs fondamentales
@@ -138,7 +138,7 @@ Ce document décrit toutes les nouvelles fonctionnalités ajoutées à TruTube, 
   - Transparence des revenus
 
 ### Call-to-Action
-- Rejoindre TruTube
+- Rejoindre Goroti
 - Devenir créateur
 - Contacter le support
 
@@ -185,7 +185,7 @@ Ce document décrit toutes les nouvelles fonctionnalités ajoutées à TruTube, 
 Divisé en 4 colonnes :
 
 #### Colonne 1 : Branding
-- Logo TruTube
+- Logo Goroti
 - Slogan
 - Liens réseaux sociaux
 
@@ -359,5 +359,5 @@ Divisé en 4 colonnes :
 
 Pour toute question sur ces fonctionnalités :
 - Page de support : `/support`
-- Email : support@trutube.com
+- Email : support@goroti.com
 - Documentation : Section FAQ

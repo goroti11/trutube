@@ -1,8 +1,8 @@
-# Guide d'Upload de Vidéos TruTube
+# Guide d'Upload de Vidéos Goroti
 
 ## Vue d'ensemble
 
-Le système d'upload de vidéos TruTube permet aux créateurs de publier leur contenu directement dans leurs univers avec description, transcription et métadonnées complètes.
+Le système d'upload de vidéos Goroti permet aux créateurs de publier leur contenu directement dans leurs univers avec description, transcription et métadonnées complètes.
 
 ## Fonctionnalités Principales
 
@@ -529,9 +529,9 @@ CREATE POLICY "Creators can view own unpublished videos"
 
 Pour toute question ou problème:
 - FAQ: /help/upload
-- Email: upload@trutube.com
+- Email: upload@goroti.com
 - Discord: #help-upload
-- Documentation: docs.trutube.com/upload
+- Documentation: docs.goroti.com/upload
 
 ## Changelog
 

@@ -1,5 +1,5 @@
 /*
-  # Système de Live Streaming TruTube
+  # Système de Live Streaming Goroti
 
   1. Tables
     - live_streams: Sessions de live

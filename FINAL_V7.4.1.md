@@ -326,8 +326,8 @@ pages.forEach(p => window.location.hash = p);
 8. `CORRECTIONS_APPLIQUEES.md` - Historique corrections
 
 ### Documentation Spécialisée
-9. `TRUTUBE_COMMUNITY_COMPLETE.md` - Système communauté
-10. `TRUTUBE_PREMIUM_COMPLETE.md` - Abonnements Premium
+9. `GOROTI_COMMUNITY_COMPLETE.md` - Système communauté
+10. `GOROTI_PREMIUM_COMPLETE.md` - Abonnements Premium
 11. `VIDEO_PLAYER_SYSTEM.md` - Lecteur vidéo
 12. `MONETIZATION_SYSTEM.md` - Monétisation
 13. `TROUBLESHOOTING.md` - Dépannage
@@ -477,9 +477,9 @@ https://goroti.com/#resources
 ## Support & Contact
 
 ### Email
-- **Support général**: support@trutube.com
-- **Créateurs**: creators@trutube.com
-- **Entreprise**: enterprise@trutube.com
+- **Support général**: support@goroti.com
+- **Créateurs**: creators@goroti.com
+- **Entreprise**: enterprise@goroti.com
 - **Presse**: press@goroti.com
 
 ### Pages Utiles

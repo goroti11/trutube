@@ -430,8 +430,8 @@ export default function EnterprisePage({ onNavigate }: Props) {
             <p className="text-gray-500 text-xs mb-3 leading-relaxed">
               Demandes d'interview, d'accréditation ou d'information.
             </p>
-            <a href="mailto:press@trutube.tv" className="block text-cyan-400 text-sm hover:text-cyan-300 transition-colors">
-              press@trutube.tv
+            <a href="mailto:press@goroti.tv" className="block text-cyan-400 text-sm hover:text-cyan-300 transition-colors">
+              press@goroti.tv
             </a>
             <p className="text-gray-600 text-xs mt-1">Réponse sous 24h ouvrées</p>
           </div>
@@ -480,10 +480,10 @@ export default function EnterprisePage({ onNavigate }: Props) {
             <ArrowRight className="w-4 h-4" />
           </button>
           <a
-            href="mailto:partnerships@trutube.tv"
+            href="mailto:partnerships@goroti.tv"
             className="flex items-center gap-2 px-5 py-2.5 bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-sm transition-colors"
           >
-            partnerships@trutube.tv
+            partnerships@goroti.tv
           </a>
         </div>
       </SectionBlock>
@@ -514,10 +514,10 @@ export default function EnterprisePage({ onNavigate }: Props) {
               Deck complet, métriques et roadmap disponibles sous NDA.
             </p>
             <a
-              href="mailto:investors@trutube.tv"
+              href="mailto:investors@goroti.tv"
               className="text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
             >
-              investors@trutube.tv
+              investors@goroti.tv
             </a>
           </div>
         </div>

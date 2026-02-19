@@ -42,7 +42,7 @@ export function HelpCenterPage({ onNavigate }: HelpCenterPageProps) {
         },
         {
           question: "Comment puis-je contacter le support ?",
-          answer: "Vous pouvez nous contacter par email à support@trutube.com, via notre chat en direct, ou en utilisant le formulaire de contact disponible sur la page Support."
+          answer: "Vous pouvez nous contacter par email à support@goroti.com, via notre chat en direct, ou en utilisant le formulaire de contact disponible sur la page Support."
         }
       ]
     },

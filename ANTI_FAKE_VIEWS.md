@@ -1,4 +1,4 @@
-# TruTube Anti-Fake Views & Community Moderation System
+# Goroti Anti-Fake Views & Community Moderation System
 
 ## Problem Statement
 
@@ -9,7 +9,7 @@ YouTube suffers from:
 - Arbitrary content strikes
 - Opaque moderation decisions
 
-## TruTube Solution
+## Goroti Solution
 
 ### Part 1: Anti-Fake Views System
 
@@ -211,14 +211,14 @@ suspicionPenalty = min(0.5, suspiciousPatternCount * 0.1)
 - No appeal process
 - Central authority bias
 
-### TruTube's 3-Level System
+### Goroti's 3-Level System
 
 ```
 Level 1: Community Reports
     ↓
 Level 2: Peer Creator Voting
     ↓
-Level 3: TruTube Team (last resort)
+Level 3: Goroti Team (last resort)
 ```
 
 ## Level 1: Community Reports
@@ -301,7 +301,7 @@ weightedRemoveVotes / totalWeightedVotes > 0.6
 
 Requires 60% weighted majority to take action.
 
-## Level 3: TruTube Team Review
+## Level 3: Goroti Team Review
 
 Only for:
 - Clear legal violations (copyright, illegal content)
@@ -518,4 +518,4 @@ Tracks moderation state:
 
 ---
 
-**This system makes TruTube fundamentally different from YouTube: real views, transparent moderation, and community-driven decisions.**
+**This system makes Goroti fundamentally different from YouTube: real views, transparent moderation, and community-driven decisions.**

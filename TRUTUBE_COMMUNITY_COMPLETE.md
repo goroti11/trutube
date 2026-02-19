@@ -1,8 +1,8 @@
-# TruTube Communauté - Implémentation Finale Complète ✅
+# Goroti Communauté - Implémentation Finale Complète ✅
 
 ## Statut : TERMINÉ ET FONCTIONNEL
 
-**TruTube Communauté** est maintenant entièrement implémenté et intégré dans TruTube!
+**Goroti Communauté** est maintenant entièrement implémenté et intégré dans Goroti!
 
 ## Ce qui a été créé
 
@@ -140,7 +140,7 @@
 1. **IA préventive** - Détection auto toxicité
 2. **Score réputation** - Limitations automatiques
 3. **Communautaire** - Signalements membres
-4. **Staff TruTube** - Décision finale avec justification
+4. **Staff Goroti** - Décision finale avec justification
 
 ### Badges disponibles
 - 👑 **Fondateur** - Membres fondateurs
@@ -192,7 +192,7 @@
 ## Différenciation vs concurrents
 
 ### vs YouTube
-| Fonctionnalité | YouTube | TruTube Communauté |
+| Fonctionnalité | YouTube | Goroti Communauté |
 |----------------|---------|-------------------|
 | Format social | Commentaires uniquement | Espace social structuré |
 | Organisation | Sous vidéos | Par univers/thèmes |
@@ -201,7 +201,7 @@
 | Modération | Opaque | Transparente 4 niveaux |
 
 ### vs Reddit
-| Fonctionnalité | Reddit | TruTube Communauté |
+| Fonctionnalité | Reddit | Goroti Communauté |
 |----------------|--------|-------------------|
 | Vidéo | Externe | Intégré natif |
 | Créateurs | Anonymes | Identité forte |
@@ -209,7 +209,7 @@
 | Découverte | Difficile | Algorithme + univers |
 
 ### vs Discord
-| Fonctionnalité | Discord | TruTube Communauté |
+| Fonctionnalité | Discord | Goroti Communauté |
 |----------------|---------|-------------------|
 | Temporalité | Temps réel uniquement | Permanent + temps réel |
 | Découverte | Serveurs privés | Publique algorithme |
@@ -251,13 +251,13 @@
 - 🚀 Mise en avant prioritaire
 - 🔧 Accès bêta fonctionnalités
 - 💼 Support VIP + account manager
-- 🎉 Événements exclusifs TruTube
+- 🎉 Événements exclusifs Goroti
 - 💵 Revenue garanti 500€/mois pendant 6 mois
 
 **Sélection** :
 - Mix tailles (500, 5k, 50k abonnés)
 - Diversité univers (Music, Game, Sport, Know, Life)
-- Sélection manuelle par TruTube team
+- Sélection manuelle par Goroti team
 
 ## Roadmap
 
@@ -325,14 +325,14 @@
 - Documentation exhaustive
 
 ### 📄 Documentation créée
-1. **TRUTUBE_COMMUNITY_SYSTEM.md** - Vision et architecture complète
-2. **TRUTUBE_COMMUNITY_IMPLEMENTATION.md** - Guide technique détaillé
-3. **TRANSPARENCE_TRUTUBE.md** - Stratégie différenciation
-4. **TRUTUBE_COMMUNITY_COMPLETE.md** - Ce fichier récapitulatif
+1. **GOROTI_COMMUNITY_SYSTEM.md** - Vision et architecture complète
+2. **GOROTI_COMMUNITY_IMPLEMENTATION.md** - Guide technique détaillé
+3. **TRANSPARENCE_GOROTI.md** - Stratégie différenciation
+4. **GOROTI_COMMUNITY_COMPLETE.md** - Ce fichier récapitulatif
 
 ## Message clé
 
-> **"TruTube Communauté = Vidéo + Social + Transparence + Monétisation équitable"**
+> **"Goroti Communauté = Vidéo + Social + Transparence + Monétisation équitable"**
 
 Ce n'est pas YouTube avec des commentaires améliorés.
 C'est une vision complète de la création de contenu moderne.
@@ -348,7 +348,7 @@ C'est une vision complète de la création de contenu moderne.
 
 ## Résultat final
 
-**TruTube est maintenant une plateforme vidéo + sociale complète** avec :
+**Goroti est maintenant une plateforme vidéo + sociale complète** avec :
 - 💬 Vraies relations créateur ↔ fan
 - 💰 Monétisation multiple et équitable
 - 🔒 Transparence radicale

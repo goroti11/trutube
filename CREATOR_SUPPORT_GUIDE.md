@@ -1,4 +1,4 @@
-# Guide du Système de Support aux Créateurs TruTube
+# Guide du Système de Support aux Créateurs Goroti
 
 ## Vue d'ensemble
 
@@ -516,9 +516,9 @@ Les créateurs peuvent :
 
 Pour toute question ou problème :
 - FAQ : /help/support
-- Email : support@trutube.com
+- Email : support@goroti.com
 - Chat en direct : disponible 24/7
 
 ## Résumé
 
-Le système de support aux créateurs TruTube offre une solution complète et sécurisée pour monétiser le contenu. Avec des pourboires instantanés, des abonnements mensuels à plusieurs niveaux, et un système de classement motivant, les créateurs peuvent générer des revenus stables tout en récompensant leurs fans les plus fidèles.
+Le système de support aux créateurs Goroti offre une solution complète et sécurisée pour monétiser le contenu. Avec des pourboires instantanés, des abonnements mensuels à plusieurs niveaux, et un système de classement motivant, les créateurs peuvent générer des revenus stables tout en récompensant leurs fans les plus fidèles.

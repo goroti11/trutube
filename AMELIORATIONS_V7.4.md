@@ -460,9 +460,9 @@ location.reload();
 - `TROUBLESHOOTING.md` - Dépannage
 
 **Contact**:
-- Support: support@trutube.com
-- Créateurs: creators@trutube.com
-- Entreprise: enterprise@trutube.com
+- Support: support@goroti.com
+- Créateurs: creators@goroti.com
+- Entreprise: enterprise@goroti.com
 
 **Liens Utiles**:
 - Statut services: `/#status`

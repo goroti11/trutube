@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble
 
-Le système de ressources de TruTube est une plateforme complète de documentation, guides pratiques, annonces communautaires et base de connaissance. Il comprend:
+Le système de ressources de Goroti est une plateforme complète de documentation, guides pratiques, annonces communautaires et base de connaissance. Il comprend:
 
 - **50+ Articles détaillés** avec contenu enrichi
 - **Base de données complète** avec 8 tables
@@ -73,7 +73,7 @@ Chaque article majeur contient:
 
 #### 1. Guide de Démarrage Rapide
 **Sections:**
-- Bienvenue sur TruTube (intro avec contexte)
+- Bienvenue sur Goroti (intro avec contexte)
 - Créer votre compte (4 étapes détaillées)
 - Configurer votre profil (4 aspects)
 - Explorer le contenu (3 méthodes)
@@ -586,7 +586,7 @@ const allFAQ = await resourceService.getAllKnowledge();
 8. Vendre du Contenu Premium
 
 **Technique:**
-9. API TruTube: Documentation
+9. API Goroti: Documentation
 10. Encodage Vidéo: Meilleures Pratiques
 
 **Communauté:**
@@ -603,13 +603,13 @@ const allFAQ = await resourceService.getAllKnowledge();
 
 1. Nouvelles Fonctionnalités: Janvier 2026 (pinned)
 2. Maintenance Programmée - 25 Janvier (warning, pinned)
-3. TruTube atteint 1 million de créateurs!
+3. Goroti atteint 1 million de créateurs!
 4. Nouveau Programme d'Ambassadeurs (pinned)
 
 ### Knowledge Base (9+)
 
 **Compte:**
-- Comment créer un compte TruTube?
+- Comment créer un compte Goroti?
 - J'ai oublié mon mot de passe, que faire?
 
 **Upload:**
@@ -683,14 +683,14 @@ const allFAQ = await resourceService.getAllKnowledge();
 
 ## Support
 
-**Email:** support@trutube.tv
-**Discord:** discord.gg/trutube
-**Docs:** trutube.tv/#resources
-**Status:** trutube.tv/#status
+**Email:** support@goroti.tv
+**Discord:** discord.gg/goroti
+**Docs:** goroti.tv/#resources
+**Status:** goroti.tv/#status
 
 ---
 
 **Version:** 1.0.0
 **Date:** 19 Février 2026
-**Auteur:** TruTube Platform Team
+**Auteur:** Goroti Platform Team
 **License:** Proprietary

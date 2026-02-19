@@ -61,7 +61,7 @@ const detectLanguageFromRegion = (): Language => {
 
 export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const [language, setLanguageState] = useState<Language>(() => {
-    const saved = localStorage.getItem('trutube_language');
+    const saved = localStorage.getItem('goroti_language');
     if (saved) return saved as Language;
 
     return detectLanguageFromRegion();
@@ -153,7 +153,7 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
 
           if (data?.language_preference && data.language_preference !== language) {
             setLanguageState(data.language_preference as Language);
-            localStorage.setItem('trutube_language', data.language_preference);
+            localStorage.setItem('goroti_language', data.language_preference);
           }
         } catch (error) {
           console.error('Failed to load user language preference:', error);
@@ -166,7 +166,7 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('trutube_language', lang);
+    localStorage.setItem('goroti_language', lang);
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' || lang === 'he' ? 'rtl' : 'ltr';
   };

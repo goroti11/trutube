@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble
 
-Le système de langue de TruTube a été optimisé pour:
+Le système de langue de Goroti a été optimisé pour:
 1. **Détection automatique** basée sur la région du navigateur
 2. **Sélecteur masqué** du header pour une interface plus épurée
 3. **Synchronisation base de données** automatique
@@ -45,7 +45,7 @@ const detectLanguageFromRegion = (): Language => {
 
 **Exemples de détection:**
 
-| Navigateur | Région Détectée | Langue TruTube |
+| Navigateur | Région Détectée | Langue Goroti |
 |-----------|----------------|---------------|
 | fr-FR     | France         | Français (fr) |
 | fr-CA     | Canada         | Français (fr) |
@@ -137,7 +137,7 @@ useEffect(() => {
 
       if (data?.language_preference && data.language_preference !== language) {
         setLanguageState(data.language_preference);
-        localStorage.setItem('trutube_language', data.language_preference);
+        localStorage.setItem('goroti_language', data.language_preference);
       }
     }
   };
@@ -329,9 +329,9 @@ Profil → Paramètres → Section "Langue"
    - Reset: Refresh page
 
 2. **LocalStorage**
-   - Key: `trutube_language`
+   - Key: `goroti_language`
    - Durée: Permanent (jusqu'à clear)
-   - Scope: Domaine trutube.tv
+   - Scope: Domaine goroti.tv
    - Reset: Clear storage
 
 3. **Base de Données**
@@ -372,7 +372,7 @@ CREATE TABLE IF NOT EXISTS user_profiles (
    ```
    - Ouvrir navigateur en mode incognito
    - Changer langue navigateur (chrome://settings/languages)
-   - Visiter TruTube
+   - Visiter Goroti
    - Vérifier langue interface correspond
    ```
 
@@ -527,8 +527,8 @@ CREATE TABLE IF NOT EXISTS user_profiles (
 - Développeurs: Ce document
 
 **Contact:**
-- Support: support@trutube.tv
-- Tech: dev@trutube.tv
+- Support: support@goroti.tv
+- Tech: dev@goroti.tv
 - Discord: #support-technique
 
 ---
@@ -558,5 +558,5 @@ CREATE TABLE IF NOT EXISTS user_profiles (
 
 **Version:** 1.0.0
 **Date:** 19 Février 2026
-**Auteur:** TruTube Platform Team
+**Auteur:** Goroti Platform Team
 **Status:** ✅ Production Ready

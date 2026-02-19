@@ -1,8 +1,8 @@
-# Modèle Financier TruTube - Investisseurs
+# Modèle Financier Goroti - Investisseurs
 
 ## Vue d'ensemble stratégique
 
-TruTube se positionne comme une alternative éthique et transparente à YouTube, avec un modèle économique diversifié et un positionnement "human-first" qui attire créateurs et audiences qualifiées.
+Goroti se positionne comme une alternative éthique et transparente à YouTube, avec un modèle économique diversifié et un positionnement "human-first" qui attire créateurs et audiences qualifiées.
 
 ## Sources de revenus plateforme
 
@@ -97,7 +97,7 @@ TruTube se positionne comme une alternative éthique et transparente à YouTube,
 
 ## Comparaison YouTube
 
-| Métrique | YouTube | TruTube |
+| Métrique | YouTube | Goroti |
 |----------|---------|---------|
 | Part créateur (pub) | 55% | **65%** |
 | Part créateur (membres) | 70% | **80%** |
@@ -238,7 +238,7 @@ TruTube se positionne comme une alternative éthique et transparente à YouTube,
 
 ## Conclusion
 
-TruTube présente un modèle économique viable avec :
+Goroti présente un modèle économique viable avec :
 - **Différenciation claire** vs YouTube
 - **Mix revenu diversifié** et récurrent
 - **Marché prouvé** (créateurs frustrés)

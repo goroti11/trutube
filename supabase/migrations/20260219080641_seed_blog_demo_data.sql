@@ -6,7 +6,7 @@
 
 -- Insert demo categories
 INSERT INTO blog_categories (name, slug, description, icon, color) VALUES
-  ('Actualités', 'actualites', 'Dernières nouvelles et mises à jour de TruTube', '📰', '#ef4444'),
+  ('Actualités', 'actualites', 'Dernières nouvelles et mises à jour de Goroti', '📰', '#ef4444'),
   ('Guides', 'guides', 'Tutoriels et guides pratiques', '📚', '#3b82f6'),
   ('Fonctionnalités', 'fonctionnalites', 'Nouvelles fonctionnalités et améliorations', '✨', '#8b5cf6'),
   ('Communauté', 'communaute', 'Histoires et témoignages de la communauté', '👥', '#10b981'),
@@ -29,18 +29,18 @@ BEGIN
   SELECT id INTO cat_communaute FROM blog_categories WHERE slug = 'communaute';
   SELECT id INTO cat_createurs FROM blog_categories WHERE slug = 'createurs';
 
-  -- Article 1: Bienvenue sur TruTube
+  -- Article 1: Bienvenue sur Goroti
   INSERT INTO blog_articles (
     title, slug, excerpt, content, category_id, status, published_at, tags, cover_image
   ) VALUES (
-    'Bienvenue sur TruTube : La Révolution du Contenu Authentique',
-    'bienvenue-trutube-revolution-contenu',
-    'Découvrez TruTube, la plateforme qui place la vérité et l''authenticité au cœur du partage de contenu. Une nouvelle ère commence aujourd''hui.',
+    'Bienvenue sur Goroti : La Révolution du Contenu Authentique',
+    'bienvenue-goroti-revolution-contenu',
+    'Découvrez Goroti, la plateforme qui place la vérité et l''authenticité au cœur du partage de contenu. Une nouvelle ère commence aujourd''hui.',
     '<h2>Une Nouvelle Vision du Partage Vidéo</h2>
-<p>TruTube est né d''une vision simple mais puissante : créer une plateforme où le contenu authentique prime sur tout le reste. Dans un monde numérique saturé de désinformation et de contenu superficiel, nous avons décidé de construire quelque chose de différent.</p>
+<p>Goroti est né d''une vision simple mais puissante : créer une plateforme où le contenu authentique prime sur tout le reste. Dans un monde numérique saturé de désinformation et de contenu superficiel, nous avons décidé de construire quelque chose de différent.</p>
 
 <h3>Nos Valeurs Fondamentales</h3>
-<p>Chez TruTube, nous croyons en trois piliers essentiels :</p>
+<p>Chez Goroti, nous croyons en trois piliers essentiels :</p>
 <ul>
   <li><strong>Authenticité</strong> - Tout contenu doit être vérifié et transparent</li>
   <li><strong>Communauté</strong> - Les créateurs et spectateurs forment une famille</li>
@@ -48,12 +48,12 @@ BEGIN
 </ul>
 
 <h3>Un Système de Monétisation Équitable</h3>
-<p>Contrairement aux autres plateformes, TruTube offre aux créateurs jusqu''à 80% des revenus générés. Nous croyons que les créateurs méritent d''être rémunérés équitablement pour leur travail acharné.</p>
+<p>Contrairement aux autres plateformes, Goroti offre aux créateurs jusqu''à 80% des revenus générés. Nous croyons que les créateurs méritent d''être rémunérés équitablement pour leur travail acharné.</p>
 
 <h3>Rejoignez la Révolution</h3>
-<p>Que vous soyez créateur de contenu ou simple spectateur, TruTube vous accueille à bras ouverts. Ensemble, construisons une plateforme qui respecte les créateurs et valorise le contenu de qualité.</p>
+<p>Que vous soyez créateur de contenu ou simple spectateur, Goroti vous accueille à bras ouverts. Ensemble, construisons une plateforme qui respecte les créateurs et valorise le contenu de qualité.</p>
 
-<p>Bienvenue dans la famille TruTube ! 🎉</p>',
+<p>Bienvenue dans la famille Goroti ! 🎉</p>',
     cat_actualites,
     'published',
     now() - interval '2 days',
@@ -65,26 +65,26 @@ BEGIN
   INSERT INTO blog_articles (
     title, slug, excerpt, content, category_id, status, published_at, tags, cover_image
   ) VALUES (
-    'Guide Complet : Comment Démarrer sur TruTube en 5 Étapes',
-    'guide-demarrage-trutube-5-etapes',
-    'Un guide pas à pas pour créer votre compte, configurer votre chaîne et publier votre première vidéo sur TruTube.',
-    '<h2>Votre Premier Pas sur TruTube</h2>
-<p>Vous venez de rejoindre TruTube et vous vous demandez par où commencer ? Ce guide vous accompagne étape par étape pour bien démarrer votre aventure.</p>
+    'Guide Complet : Comment Démarrer sur Goroti en 5 Étapes',
+    'guide-demarrage-goroti-5-etapes',
+    'Un guide pas à pas pour créer votre compte, configurer votre chaîne et publier votre première vidéo sur Goroti.',
+    '<h2>Votre Premier Pas sur Goroti</h2>
+<p>Vous venez de rejoindre Goroti et vous vous demandez par où commencer ? Ce guide vous accompagne étape par étape pour bien démarrer votre aventure.</p>
 
 <h3>Étape 1 : Créer Votre Compte</h3>
-<p>L''inscription sur TruTube est simple et rapide. Il vous suffit d''une adresse email valide. Nous ne demandons que les informations essentielles pour protéger votre vie privée.</p>
+<p>L''inscription sur Goroti est simple et rapide. Il vous suffit d''une adresse email valide. Nous ne demandons que les informations essentielles pour protéger votre vie privée.</p>
 
 <h3>Étape 2 : Configurer Votre Profil</h3>
 <p>Un bon profil attire les spectateurs ! Ajoutez une photo de profil professionnelle, rédigez une bio accrocheuse et ajoutez vos liens sociaux pour que votre communauté puisse vous suivre partout.</p>
 
 <h3>Étape 3 : Créer Votre Première Chaîne</h3>
-<p>Sur TruTube, chaque créateur peut gérer plusieurs chaînes. Créez votre première chaîne en définissant sa thématique et son univers. Choisissez un nom mémorable et une bannière attrayante.</p>
+<p>Sur Goroti, chaque créateur peut gérer plusieurs chaînes. Créez votre première chaîne en définissant sa thématique et son univers. Choisissez un nom mémorable et une bannière attrayante.</p>
 
 <h3>Étape 4 : Uploader Votre Première Vidéo</h3>
 <p>Le moment tant attendu ! Notre système d''upload accepte tous les formats vidéo courants. Ajoutez un titre accrocheur, une description détaillée et des tags pertinents pour améliorer la découvrabilité.</p>
 
 <h3>Étape 5 : Promouvoir Votre Contenu</h3>
-<p>Partagez votre vidéo sur vos réseaux sociaux, rejoignez les communautés TruTube pertinentes et engagez-vous avec d''autres créateurs. La croissance vient de l''authenticité et de la constance.</p>
+<p>Partagez votre vidéo sur vos réseaux sociaux, rejoignez les communautés Goroti pertinentes et engagez-vous avec d''autres créateurs. La croissance vient de l''authenticité et de la constance.</p>
 
 <h3>Conseils Bonus</h3>
 <ul>
@@ -94,7 +94,7 @@ BEGIN
   <li>Rejoignez le programme partenaire dès que possible</li>
 </ul>
 
-<p>Bonne chance dans votre aventure TruTube ! 🚀</p>',
+<p>Bonne chance dans votre aventure Goroti ! 🚀</p>',
     cat_guides,
     'published',
     now() - interval '5 days',
@@ -110,7 +110,7 @@ BEGIN
     'nouveaute-systeme-univers-thematiques',
     'Découvrez notre nouvelle fonctionnalité révolutionnaire : les Univers. Organisez et découvrez du contenu comme jamais auparavant.',
     '<h2>Une Nouvelle Façon de Découvrir du Contenu</h2>
-<p>Nous sommes ravis d''annoncer le lancement de notre système d''Univers thématiques ! Cette fonctionnalité transforme complètement la manière dont vous découvrez et consommez du contenu sur TruTube.</p>
+<p>Nous sommes ravis d''annoncer le lancement de notre système d''Univers thématiques ! Cette fonctionnalité transforme complètement la manière dont vous découvrez et consommez du contenu sur Goroti.</p>
 
 <h3>Qu''est-ce qu''un Univers ?</h3>
 <p>Un Univers est un espace thématique dédié à un sujet spécifique. Imaginez des mondes parallèles où chaque passion a son propre écosystème :</p>
@@ -143,7 +143,7 @@ BEGIN
 <h3>Comment Ça Marche ?</h3>
 <p>C''est simple ! Lors de l''upload d''une vidéo, sélectionnez l''univers principal et jusqu''à 3 sous-univers. Notre algorithme intelligent fera le reste pour maximiser votre audience.</p>
 
-<p>Explorez les Univers dès maintenant et découvrez une nouvelle dimension de TruTube ! 🌌</p>',
+<p>Explorez les Univers dès maintenant et découvrez une nouvelle dimension de Goroti ! 🌌</p>',
     cat_fonctionnalites,
     'published',
     now() - interval '1 day',
@@ -157,12 +157,12 @@ BEGIN
   ) VALUES (
     'Success Story : Comment Marie a Atteint 100K Abonnés en 3 Mois',
     'success-story-marie-100k-abonnes',
-    'L''histoire inspirante de Marie, créatrice culinaire qui a explosé sur TruTube grâce à son authenticité et sa stratégie unique.',
+    'L''histoire inspirante de Marie, créatrice culinaire qui a explosé sur Goroti grâce à son authenticité et sa stratégie unique.',
     '<h2>De Zéro à Héroïne</h2>
-<p>Marie, 28 ans, passionnée de cuisine depuis toujours, a rejoint TruTube il y a seulement 3 mois. Aujourd''hui, elle compte plus de 100 000 abonnés et génère un revenu confortable grâce à sa chaîne "Cuisine du Cœur".</p>
+<p>Marie, 28 ans, passionnée de cuisine depuis toujours, a rejoint Goroti il y a seulement 3 mois. Aujourd''hui, elle compte plus de 100 000 abonnés et génère un revenu confortable grâce à sa chaîne "Cuisine du Cœur".</p>
 
 <h3>Le Déclic</h3>
-<p>"J''en avais marre des plateformes traditionnelles où mes vidéos étaient noyées dans la masse", confie Marie. "Sur TruTube, j''ai trouvé une communauté qui valorise vraiment l''authenticité et le contenu de qualité."</p>
+<p>"J''en avais marre des plateformes traditionnelles où mes vidéos étaient noyées dans la masse", confie Marie. "Sur Goroti, j''ai trouvé une communauté qui valorise vraiment l''authenticité et le contenu de qualité."</p>
 
 <h3>Sa Stratégie Gagnante</h3>
 <ol>
@@ -170,11 +170,11 @@ BEGIN
   <li><strong>Interaction constante</strong> - Elle répond à tous les commentaires</li>
   <li><strong>Régularité</strong> - 3 vidéos par semaine, sans exception</li>
   <li><strong>Exploitation des Univers</strong> - Présente dans "Cuisine", "Lifestyle" et "Éducation"</li>
-  <li><strong>Collaborations</strong> - Travaille avec d''autres créateurs TruTube</li>
+  <li><strong>Collaborations</strong> - Travaille avec d''autres créateurs Goroti</li>
 </ol>
 
 <h3>Les Revenus</h3>
-<p>Grâce au système de monétisation équitable de TruTube, Marie génère maintenant :</p>
+<p>Grâce au système de monétisation équitable de Goroti, Marie génère maintenant :</p>
 <ul>
   <li>Revenus publicitaires : 2 500€/mois</li>
   <li>Abonnements Premium : 1 800€/mois</li>
@@ -185,12 +185,12 @@ BEGIN
 
 <h3>Ses Conseils</h3>
 <blockquote>
-  <p>"Restez vous-même, publiez régulièrement et engagez-vous avec votre communauté. TruTube récompense l''authenticité, pas les vues factices. C''est la plateforme idéale pour les créateurs qui veulent construire quelque chose de réel."</p>
+  <p>"Restez vous-même, publiez régulièrement et engagez-vous avec votre communauté. Goroti récompense l''authenticité, pas les vues factices. C''est la plateforme idéale pour les créateurs qui veulent construire quelque chose de réel."</p>
   <footer>- Marie, @CuisineDuCoeur</footer>
 </blockquote>
 
 <h3>Et Vous ?</h3>
-<p>L''histoire de Marie n''est pas unique. Chaque jour, de nouveaux créateurs trouvent leur place sur TruTube. Quelle sera votre success story ?</p>
+<p>L''histoire de Marie n''est pas unique. Chaque jour, de nouveaux créateurs trouvent leur place sur Goroti. Quelle sera votre success story ?</p>
 
 <p>Commencez votre aventure aujourd''hui ! 💫</p>',
     cat_communaute,
@@ -204,14 +204,14 @@ BEGIN
   INSERT INTO blog_articles (
     title, slug, excerpt, content, category_id, status, published_at, tags, cover_image
   ) VALUES (
-    '7 Stratégies Avancées pour Maximiser Vos Revenus sur TruTube',
-    'strategies-maximiser-revenus-trutube',
-    'Un guide approfondi des meilleures techniques pour optimiser vos revenus en tant que créateur TruTube. De débutant à expert.',
+    '7 Stratégies Avancées pour Maximiser Vos Revenus sur Goroti',
+    'strategies-maximiser-revenus-goroti',
+    'Un guide approfondi des meilleures techniques pour optimiser vos revenus en tant que créateur Goroti. De débutant à expert.',
     '<h2>Transformez Votre Passion en Profit</h2>
-<p>Créer du contenu est votre passion, mais pourquoi ne pas en vivre confortablement ? Voici 7 stratégies éprouvées pour maximiser vos revenus sur TruTube.</p>
+<p>Créer du contenu est votre passion, mais pourquoi ne pas en vivre confortablement ? Voici 7 stratégies éprouvées pour maximiser vos revenus sur Goroti.</p>
 
 <h3>1. Diversifiez Vos Sources de Revenus</h3>
-<p>Ne comptez pas uniquement sur la publicité. Sur TruTube, vous avez accès à :</p>
+<p>Ne comptez pas uniquement sur la publicité. Sur Goroti, vous avez accès à :</p>
 <ul>
   <li>Revenus publicitaires (jusqu''à 80% pour vous)</li>
   <li>Abonnements premium à votre chaîne</li>
@@ -223,7 +223,7 @@ BEGIN
 </ul>
 
 <h3>2. Optimisez Pour le Programme Partenaire</h3>
-<p>Le programme partenaire TruTube offre des avantages exceptionnels :</p>
+<p>Le programme partenaire Goroti offre des avantages exceptionnels :</p>
 <ul>
   <li>Partage de revenus jusqu''à 80%</li>
   <li>Accès prioritaire aux nouvelles fonctionnalités</li>
@@ -260,7 +260,7 @@ BEGIN
 </ul>
 
 <h3>6. Analysez et Optimisez</h3>
-<p>Utilisez les analytics TruTube pour :</p>
+<p>Utilisez les analytics Goroti pour :</p>
 <ul>
   <li>Identifier vos vidéos les plus rentables</li>
   <li>Comprendre votre audience</li>

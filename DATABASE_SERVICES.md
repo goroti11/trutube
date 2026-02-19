@@ -1,8 +1,8 @@
-# Services de Base de Données TruTube
+# Services de Base de Données Goroti
 
 ## Vue d'ensemble
 
-Ce document décrit tous les services disponibles pour interagir avec la base de données Supabase de TruTube.
+Ce document décrit tous les services disponibles pour interagir avec la base de données Supabase de Goroti.
 
 ---
 
@@ -806,5 +806,5 @@ async function getVideosPaginated(page: number, pageSize: number) {
 
 Pour toute question sur les services de base de données :
 - Documentation Supabase : https://supabase.com/docs
-- Support TruTube : support@trutube.com
+- Support Goroti : support@goroti.com
 - Page support interne : `/support`

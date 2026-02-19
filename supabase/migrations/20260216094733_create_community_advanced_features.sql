@@ -1,5 +1,5 @@
 /*
-  # TruTube Communauté - Fonctionnalités avancées
+  # Goroti Communauté - Fonctionnalités avancées
 
   1. Nouvelles tables
     - polls (sondages)
@@ -248,7 +248,7 @@ CREATE POLICY "Users can view own premium access"
 
 -- BADGES INITIAUX
 INSERT INTO badge_types (name, description, category, icon, color) VALUES
-('Fondateur', 'Membre fondateur de TruTube', 'founder', 'crown', 'gold'),
+('Fondateur', 'Membre fondateur de Goroti', 'founder', 'crown', 'gold'),
 ('Créateur Vérifié', 'Créateur avec identité vérifiée', 'creator', 'check-circle', 'blue'),
 ('Expert Communauté', 'Contributeur actif et respecté', 'expert', 'star', 'purple'),
 ('Modérateur', 'Modérateur élu de la communauté', 'moderator', 'shield', 'green'),

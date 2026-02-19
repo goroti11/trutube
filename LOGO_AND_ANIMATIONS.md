@@ -1,8 +1,8 @@
-# Logo Personnalisé et Animations TruTube
+# Logo Personnalisé et Animations Goroti
 
 ## Vue d'ensemble
 
-Système complet de branding avec logo personnalisé SVG et animations d'entrée fluides pour TruTube.
+Système complet de branding avec logo personnalisé SVG et animations d'entrée fluides pour Goroti.
 
 ---
 
@@ -10,7 +10,7 @@ Système complet de branding avec logo personnalisé SVG et animations d'entrée
 
 ### Concept
 
-Le logo TruTube combine plusieurs éléments visuels :
+Le logo Goroti combine plusieurs éléments visuels :
 
 1. **Symbole Play**
    - Cercle rouge dégradé (du rouge foncé au rouge clair)
@@ -472,7 +472,7 @@ const sizes = {
 ```tsx
 <Logo size="md" showText={true} />
 ```
-Affiche : Icône + Texte "TruTube"
+Affiche : Icône + Texte "Goroti"
 
 ### Icône Seule
 
@@ -638,6 +638,6 @@ Peut être ajouté au SplashScreen :
 
 ---
 
-**L'identité visuelle de TruTube est maintenant complète et professionnelle !**
+**L'identité visuelle de Goroti est maintenant complète et professionnelle !**
 
 Dernière mise à jour : Février 2026

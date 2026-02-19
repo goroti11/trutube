@@ -1,8 +1,8 @@
-# Guide d'Intégration Google Ads pour TruTube
+# Guide d'Intégration Google Ads pour Goroti
 
 ## Vue d'ensemble
 
-Ce guide explique comment intégrer Google AdSense et le système de campagnes publicitaires dans TruTube.
+Ce guide explique comment intégrer Google AdSense et le système de campagnes publicitaires dans Goroti.
 
 ## 🎯 Fonctionnalités
 
@@ -58,19 +58,19 @@ VITE_GOOGLE_ADSENSE_CLIENT=ca-pub-XXXXXXXXXXXXXXXX
 #### Slot 1 : Bannière horizontale (HomePage)
 - **Type** : Display ad
 - **Format** : Horizontal (728x90 ou responsive)
-- **Nom** : TruTube - Home Banner
+- **Nom** : Goroti - Home Banner
 - Copiez le **Ad slot ID** (format: `1234567890`)
 
 #### Slot 2 : Bannière vidéo (VideoPlayerPage)
 - **Type** : Display ad
 - **Format** : Horizontal (728x90 ou responsive)
-- **Nom** : TruTube - Video Banner
+- **Nom** : Goroti - Video Banner
 - Copiez le **Ad slot ID**
 
 #### Slot 3 : Rectangle (Comments section)
 - **Type** : Display ad
 - **Format** : Rectangle (300x250 ou responsive)
-- **Nom** : TruTube - Comments Rectangle
+- **Nom** : Goroti - Comments Rectangle
 - Copiez le **Ad slot ID**
 
 ### Étape 3 : Mettre à jour les composants
@@ -404,9 +404,9 @@ VALUES (
 - [AdSense Policies](https://support.google.com/adsense/answer/48182)
 - [Supabase RLS](https://supabase.com/docs/guides/auth/row-level-security)
 
-### Support TruTube
+### Support Goroti
 
-- Email : support@trutube.com
+- Email : support@goroti.com
 - Page support : `/support` dans l'application
 
 ---

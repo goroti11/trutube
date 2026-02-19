@@ -184,20 +184,20 @@ export const Footer = ({ onNavigate }: FooterProps) => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="mailto:support@trutube.com"
+                  href="mailto:support@goroti.com"
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors flex items-center gap-2"
                 >
                   <Mail className="w-4 h-4" />
-                  support@trutube.com
+                  support@goroti.com
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:creators@trutube.com"
+                  href="mailto:creators@goroti.com"
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors flex items-center gap-2"
                 >
                   <Mail className="w-4 h-4" />
-                  creators@trutube.com
+                  creators@goroti.com
                 </a>
               </li>
             </ul>

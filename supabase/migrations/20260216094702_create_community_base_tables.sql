@@ -1,5 +1,5 @@
 /*
-  # TruTube Communauté - Tables de base
+  # Goroti Communauté - Tables de base
 
   1. Tables principales
     - communities (communautés)

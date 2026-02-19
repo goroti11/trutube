@@ -1,8 +1,8 @@
-# Guide des Paiements et Tips - TruTube
+# Guide des Paiements et Tips - Goroti
 
 ## Vue d'ensemble
 
-Ce guide explique le système complet de paiements et de tips (pourboires) implémenté dans TruTube, permettant aux utilisateurs de supporter financièrement les créateurs et de souscrire aux abonnements premium.
+Ce guide explique le système complet de paiements et de tips (pourboires) implémenté dans Goroti, permettant aux utilisateurs de supporter financièrement les créateurs et de souscrire aux abonnements premium.
 
 ---
 
@@ -614,6 +614,6 @@ Pour tester en mode développement :
 
 ---
 
-**Questions ? Besoin d'aide ? Consultez la documentation complète ou contactez support@trutube.com**
+**Questions ? Besoin d'aide ? Consultez la documentation complète ou contactez support@goroti.com**
 
 *Dernière mise à jour : Février 2026*

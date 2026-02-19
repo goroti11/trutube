@@ -1,4 +1,4 @@
-# 📤 GUIDE D'UPLOAD INTERACTIF - TRUTUBE V7.2
+# 📤 GUIDE D'UPLOAD INTERACTIF - GOROTI V7.2
 ## Détails Univers et Conseils Personnalisés
 
 **Date:** 17 février 2026
@@ -852,7 +852,7 @@ Sophie upload une transformation 90 jours.
 
 ## 🎊 CONCLUSION
 
-**TruTube V7.2 transforme l'upload en expérience guidée et éducative!**
+**Goroti V7.2 transforme l'upload en expérience guidée et éducative!**
 
 ### Points Forts
 
@@ -883,11 +883,11 @@ Sophie upload une transformation 90 jours.
 
 ### Impact Global
 
-**TruTube devient la plateforme qui forme ses créateurs!**
+**Goroti devient la plateforme qui forme ses créateurs!**
 
 **Comparaison Concurrents:**
 
-| Feature | YouTube | Twitch | TikTok | **TruTube** |
+| Feature | YouTube | Twitch | TikTok | **Goroti** |
 |---------|---------|--------|--------|-------------|
 | Guide upload | Basique | Basique | Minimal | **Complet** ✅ |
 | Meilleures pratiques | Externe | FAQ | ❌ | **Intégré** ✅ |
@@ -895,7 +895,7 @@ Sophie upload une transformation 90 jours.
 | Conseils monétisation | Générique | Basique | ❌ | **Personnalisé** ✅ |
 | Formation créateur | Payante | Payante | ❌ | **Gratuite** ✅ |
 
-**TruTube = La plateforme qui accompagne vraiment ses créateurs!**
+**Goroti = La plateforme qui accompagne vraiment ses créateurs!**
 
 ---
 
@@ -903,4 +903,4 @@ Sophie upload une transformation 90 jours.
 **Date:** 17 février 2026
 **Status:** PRODUCTION READY ✅
 
-**TruTube - Créer en confiance! 📤🎯**
+**Goroti - Créer en confiance! 📤🎯**

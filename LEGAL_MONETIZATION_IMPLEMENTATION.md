@@ -1,8 +1,8 @@
-# Implémentation Système Juridique et Monétisation TruTube
+# Implémentation Système Juridique et Monétisation Goroti
 
 ## Vue d'ensemble
 
-Le système complet de monétisation avec conditions légales officielles a été implémenté. TruTube dispose maintenant d'un programme partenaire transparent, équitable et conforme aux standards légaux.
+Le système complet de monétisation avec conditions légales officielles a été implémenté. Goroti dispose maintenant d'un programme partenaire transparent, équitable et conforme aux standards légaux.
 
 ## Ce qui a été créé
 
@@ -185,7 +185,7 @@ Le créateur est seul responsable de :
 - Ses déclarations fiscales
 - Les droits d'auteur
 
-TruTube = plateforme d'hébergement et intermédiation
+Goroti = plateforme d'hébergement et intermédiation
 
 ## Modèle financier
 
@@ -237,7 +237,7 @@ TruTube = plateforme d'hébergement et intermédiation
 
 ### vs YouTube
 
-| Métrique | YouTube | TruTube |
+| Métrique | YouTube | Goroti |
 |----------|---------|---------|
 | Part pub | 55% | **65%** |
 | Part membres | 70% | **80%** |
@@ -247,7 +247,7 @@ TruTube = plateforme d'hébergement et intermédiation
 | Démonétisation | Opaque | Justifiée |
 | Score visible | ❌ | ✅ |
 
-### Avantages TruTube
+### Avantages Goroti
 1. **Transparence totale** : Score authenticité visible, décisions justifiées
 2. **Moins dépendant pubs** : Mix diversifié avec abonnements et tips
 3. **Algorithme human-first** : Engagement réel > volume brut
@@ -259,7 +259,7 @@ TruTube = plateforme d'hébergement et intermédiation
 
 > **"Vous êtes partenaire, pas dépendant."**
 
-TruTube positionne le créateur comme un véritable partenaire business, avec :
+Goroti positionne le créateur comme un véritable partenaire business, avec :
 - Conditions claires et transparentes
 - Revenus équitables
 - Protection juridique
@@ -270,8 +270,8 @@ TruTube positionne le créateur comme un véritable partenaire business, avec :
 
 ### Pour les créateurs
 
-1. **Se connecter** à TruTube
-2. **Accéder à TruTube Studio** → Monétisation
+1. **Se connecter** à Goroti
+2. **Accéder à Goroti Studio** → Monétisation
 3. **Vérifier les conditions** d'éligibilité affichées
 4. **Accepter le Programme Partenaire** (bannière rouge)
 5. **Compléter le KYC** (identité, email, téléphone, banque)

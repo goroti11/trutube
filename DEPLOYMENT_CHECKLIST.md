@@ -1,4 +1,4 @@
-# TruTube - Checklist de Déploiement
+# Goroti - Checklist de Déploiement
 
 ## ✅ Version Finale Prête pour le Déploiement
 
@@ -142,7 +142,7 @@ VITE_GOOGLE_ADSENSE_CLIENT=ca-pub-xxxxxxxxxx
 ## 🗄️ Base de Données Supabase
 
 ### Migrations Disponibles
-1. ✅ `20260209115532_create_trutube_schema_v2.sql` - Schéma principal
+1. ✅ `20260209115532_create_goroti_schema_v2.sql` - Schéma principal
 2. ✅ `20260209120240_add_sub_universes_system.sql` - Système d'univers
 3. ✅ `20260209120836_add_anti_fake_views_and_moderation.sql` - Anti-fake + Modération
 4. ✅ `20260213134936_create_user_profiles.sql` - Profils utilisateurs
@@ -412,7 +412,7 @@ npm run build
 
 ## 🎉 Résumé
 
-**TruTube est prêt pour le déploiement production !**
+**Goroti est prêt pour le déploiement production !**
 
 - ✅ 0 erreur TypeScript
 - ✅ Build production réussi

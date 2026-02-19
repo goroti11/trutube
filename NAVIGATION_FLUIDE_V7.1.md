@@ -513,7 +513,7 @@ dist/assets/index-DYUO7RSu.js   1,349.23 kB │ gzip: 360.15 kB
    - Utile pour Studio (11 sections)
 
 4. **Navigation Vocale**
-   - "Hey TruTube, ouvrir Premium"
+   - "Hey Goroti, ouvrir Premium"
    - "Acheter TruCoins"
    - "Afficher mon portefeuille"
 
@@ -590,7 +590,7 @@ dist/assets/index-DYUO7RSu.js   1,349.23 kB │ gzip: 360.15 kB
 
 ## 🎊 CONCLUSION
 
-**TruTube V7.1 offre maintenant la navigation la plus fluide et intuitive du marché vidéo!**
+**Goroti V7.1 offre maintenant la navigation la plus fluide et intuitive du marché vidéo!**
 
 ### Points Forts
 
@@ -621,9 +621,9 @@ dist/assets/index-DYUO7RSu.js   1,349.23 kB │ gzip: 360.15 kB
 
 ### Différenciation
 
-**TruTube vs Concurrents:**
+**Goroti vs Concurrents:**
 
-| Fonction | YouTube | Twitch | TikTok | **TruTube** |
+| Fonction | YouTube | Twitch | TikTok | **Goroti** |
 |----------|---------|--------|--------|-------------|
 | Monnaie plateforme | ❌ | Bits (3 clics) | Coins (4 clics) | **2 clics** ✅ |
 | Premium visible | Caché menu | Header (petit) | InApp only | **Header large** ✅ |
@@ -631,7 +631,7 @@ dist/assets/index-DYUO7RSu.js   1,349.23 kB │ gzip: 360.15 kB
 | Navigation fluide | Rechargements | Rechargements | App native | **Hash routing** ✅ |
 | Réseaux sociaux | 5 max | 5 max | 1 | **30** ✅ |
 
-**TruTube = Meilleure navigation du marché!**
+**Goroti = Meilleure navigation du marché!**
 
 ---
 
@@ -639,4 +639,4 @@ dist/assets/index-DYUO7RSu.js   1,349.23 kB │ gzip: 360.15 kB
 **Date:** 16 février 2026
 **Status:** PRODUCTION READY ✅
 
-**TruTube - Navigation Sans Limites! 🚀**
+**Goroti - Navigation Sans Limites! 🚀**
