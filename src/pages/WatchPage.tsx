@@ -1,19 +1,26 @@
 import { useEffect, useState } from 'react';
-import { ArrowLeft, ThumbsUp, ThumbsDown, Share2, Save, Scissors, Flag, MessageCircle } from 'lucide-react';
+import { ArrowLeft, ThumbsUp, ThumbsDown, Share2, Save, Scissors, Flag, MessageCircle, Zap } from 'lucide-react';
 import { usePlayerStore } from '../store/playerStore';
 import { videoService } from '../services/videoService';
+import { flowService } from '../services/flowService';
+import { useAuth } from '../contexts/AuthContext';
 import EnhancedVideoPlayer from '../components/video/EnhancedVideoPlayer';
+import FlowPlayer from '../components/video/FlowPlayer';
 import VideoSettingsSheet from '../components/video/VideoSettingsSheet';
 import VideoMoreSheet from '../components/video/VideoMoreSheet';
 import RelatedVideos from '../components/video/RelatedVideos';
 import { convertSupabaseVideosToTypeVideos } from '../utils/videoConverters';
+import type { FlowInfo } from '../types/flow';
 
 interface WatchPageProps {
   videoId: string;
   onNavigate: (page: string, data?: any) => void;
+  initialFlowMode?: boolean;
+  initialFlowId?: string;
 }
 
-export default function WatchPage({ videoId, onNavigate }: WatchPageProps) {
+export default function WatchPage({ videoId, onNavigate, initialFlowMode = false, initialFlowId }: WatchPageProps) {
+  const { user } = useAuth();
   const [video, setVideo] = useState<any>(null);
   const [relatedVideos, setRelatedVideos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -22,6 +29,9 @@ export default function WatchPage({ videoId, onNavigate }: WatchPageProps) {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
+  const [flowInfo, setFlowInfo] = useState<FlowInfo | null>(null);
+  const [isFlowMode, setIsFlowMode] = useState(initialFlowMode);
+  const [lastFlowNodeId, setLastFlowNodeId] = useState<string | null>(null);
 
   const { setCurrentVideo, setIsMiniPlayer } = usePlayerStore();
 
@@ -29,6 +39,12 @@ export default function WatchPage({ videoId, onNavigate }: WatchPageProps) {
     loadVideo();
     setIsMiniPlayer(false);
   }, [videoId]);
+
+  useEffect(() => {
+    if (initialFlowId) {
+      setIsFlowMode(true);
+    }
+  }, [initialFlowId]);
 
   const loadVideo = async () => {
     setLoading(true);
@@ -38,7 +54,6 @@ export default function WatchPage({ videoId, onNavigate }: WatchPageProps) {
       setVideo(videoData);
 
       if (videoData) {
-        // Set in player store
         setCurrentVideo({
           id: videoData.id,
           title: videoData.title,
@@ -53,11 +68,15 @@ export default function WatchPage({ videoId, onNavigate }: WatchPageProps) {
           duration: videoData.duration || 0
         });
 
-        // Load related videos
         if (videoData.universe_id) {
           const related = await videoService.getVideos(12, videoData.universe_id);
           const convertedVideos = convertSupabaseVideosToTypeVideos(related);
           setRelatedVideos(convertedVideos.filter((v) => v.id !== videoId));
+        }
+
+        if (user) {
+          const flow = await flowService.checkFlowForVideo(videoId);
+          setFlowInfo(flow);
         }
       }
     } catch (error) {
@@ -89,6 +108,22 @@ export default function WatchPage({ videoId, onNavigate }: WatchPageProps) {
       navigator.clipboard.writeText(window.location.href);
       alert('Lien copié dans le presse-papiers!');
     }
+  };
+
+  const handleToggleFlowMode = () => {
+    setIsFlowMode(!isFlowMode);
+  };
+
+  const handleExitToFullVideo = (exitVideoId: string, timestamp: number) => {
+    setIsFlowMode(false);
+    if (exitVideoId !== videoId) {
+      onNavigate('watch', { videoId: exitVideoId, timestamp });
+    }
+  };
+
+  const handleBackToFlow = (nodeId: string) => {
+    setLastFlowNodeId(nodeId);
+    setIsFlowMode(false);
   };
 
   const formatNumber = (num: number): string => {
@@ -159,10 +194,21 @@ export default function WatchPage({ videoId, onNavigate }: WatchPageProps) {
           <div className="lg:col-span-2">
             {/* Video Player */}
             <div className="bg-black">
-              <EnhancedVideoPlayer
-                onSettingsClick={() => setShowSettings(true)}
-                className="aspect-video w-full"
-              />
+              {isFlowMode && (flowInfo || initialFlowId) ? (
+                <div className="aspect-video w-full">
+                  <FlowPlayer
+                    flowId={initialFlowId || flowInfo!.id}
+                    onExitToFullVideo={handleExitToFullVideo}
+                    onBackToLongVideo={lastFlowNodeId ? handleBackToFlow : undefined}
+                    userId={user?.id || null}
+                  />
+                </div>
+              ) : (
+                <EnhancedVideoPlayer
+                  onSettingsClick={() => setShowSettings(true)}
+                  className="aspect-video w-full"
+                />
+              )}
             </div>
 
             {/* Video Info */}
@@ -176,6 +222,26 @@ export default function WatchPage({ videoId, onNavigate }: WatchPageProps) {
 
               {/* Actions */}
               <div className="flex items-center gap-2 overflow-x-auto pb-2">
+                {flowInfo && !isFlowMode && (
+                  <button
+                    onClick={handleToggleFlowMode}
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-full transition-colors"
+                  >
+                    <Zap className="w-5 h-5" />
+                    <span>FLOW Mode ({flowInfo.total_nodes} clips)</span>
+                  </button>
+                )}
+
+                {isFlowMode && (
+                  <button
+                    onClick={handleToggleFlowMode}
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-full transition-colors"
+                  >
+                    <ArrowLeft className="w-5 h-5" />
+                    <span>Exit FLOW</span>
+                  </button>
+                )}
+
                 <button
                   onClick={handleLike}
                   className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${

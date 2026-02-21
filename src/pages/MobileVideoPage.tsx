@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MobileLayout from '../components/mobile/MobileLayout';
 import MobileVideoPlayer from '../components/mobile/MobileVideoPlayer';
+import FlowPlayer from '../components/video/FlowPlayer';
 import QualitySpeedSheet from '../components/mobile/QualitySpeedSheet';
 import VideoOptionsSheet from '../components/mobile/VideoOptionsSheet';
 import VideoActions from '../components/mobile/VideoActions';
 import CommentsPreview from '../components/mobile/CommentsPreview';
 import MiniPlayer from '../components/mobile/MiniPlayer';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Zap, ArrowLeft } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import { flowService } from '../services/flowService';
+import type { FlowInfo } from '../types/flow';
 
-export default function MobileVideoPage() {
+interface MobileVideoPageProps {
+  videoId?: string;
+  initialFlowMode?: boolean;
+  initialFlowId?: string;
+}
+
+export default function MobileVideoPage({ videoId, initialFlowMode = false, initialFlowId }: MobileVideoPageProps) {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('home');
   const [showQualitySheet, setShowQualitySheet] = useState(false);
   const [showOptionsSheet, setShowOptionsSheet] = useState(false);
@@ -17,6 +28,21 @@ export default function MobileVideoPage() {
   const [isLiked, setIsLiked] = useState(false);
   const [isDisliked, setIsDisliked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [flowInfo, setFlowInfo] = useState<FlowInfo | null>(null);
+  const [isFlowMode, setIsFlowMode] = useState(initialFlowMode);
+  const [lastFlowNodeId, setLastFlowNodeId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (user && videoId) {
+      flowService.checkFlowForVideo(videoId).then(setFlowInfo);
+    }
+  }, [user, videoId]);
+
+  useEffect(() => {
+    if (initialFlowId) {
+      setIsFlowMode(true);
+    }
+  }, [initialFlowId]);
 
   const videoData = {
     videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
@@ -59,17 +85,43 @@ export default function MobileVideoPage() {
     }
   ];
 
+  const handleToggleFlowMode = () => {
+    setIsFlowMode(!isFlowMode);
+  };
+
+  const handleExitToFullVideo = (exitVideoId: string, timestamp: number) => {
+    setIsFlowMode(false);
+  };
+
+  const handleBackToFlow = (nodeId: string) => {
+    setLastFlowNodeId(nodeId);
+    setIsFlowMode(false);
+  };
+
   return (
     <MobileLayout activeTab={activeTab} onTabChange={setActiveTab}>
       <div className="bg-[#0B0B0D] min-h-screen pb-20">
         {!isMinimized && (
-          <MobileVideoPlayer
-            videoUrl={videoData.videoUrl}
-            title={videoData.title}
-            onMinimize={() => setIsMinimized(true)}
-            onQualityClick={() => setShowQualitySheet(true)}
-            onSettingsClick={() => setShowOptionsSheet(true)}
-          />
+          <>
+            {isFlowMode && (flowInfo || initialFlowId) ? (
+              <div className="w-full aspect-video">
+                <FlowPlayer
+                  flowId={initialFlowId || flowInfo!.id}
+                  onExitToFullVideo={handleExitToFullVideo}
+                  onBackToLongVideo={lastFlowNodeId ? handleBackToFlow : undefined}
+                  userId={user?.id || null}
+                />
+              </div>
+            ) : (
+              <MobileVideoPlayer
+                videoUrl={videoData.videoUrl}
+                title={videoData.title}
+                onMinimize={() => setIsMinimized(true)}
+                onQualityClick={() => setShowQualitySheet(true)}
+                onSettingsClick={() => setShowOptionsSheet(true)}
+              />
+            )}
+          </>
         )}
 
         <div className="p-4 space-y-4">
@@ -81,6 +133,26 @@ export default function MobileVideoPage() {
               <span>{videoData.uploadDate}</span>
             </div>
           </div>
+
+          {flowInfo && !isFlowMode && (
+            <button
+              onClick={handleToggleFlowMode}
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-lg transition-colors font-semibold text-white"
+            >
+              <Zap className="w-5 h-5" />
+              <span>FLOW Mode ({flowInfo.total_nodes} clips)</span>
+            </button>
+          )}
+
+          {isFlowMode && (
+            <button
+              onClick={handleToggleFlowMode}
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors font-semibold text-white"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <span>Exit FLOW</span>
+            </button>
+          )}
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">

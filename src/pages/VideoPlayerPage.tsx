@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { ArrowLeft, Home } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowLeft, Home, Zap } from 'lucide-react';
 import { Video } from '../types';
 import { useAuth } from '../contexts/AuthContext';
+import { flowService } from '../services/flowService';
 import VideoPlayer from '../components/video/VideoPlayer';
+import FlowPlayer from '../components/video/FlowPlayer';
 import VideoInfo from '../components/video/VideoInfo';
 import VideoActions from '../components/video/VideoActions';
 import CreatorInfo from '../components/video/CreatorInfo';
@@ -11,6 +13,7 @@ import RelatedVideos from '../components/video/RelatedVideos';
 import TipModal from '../components/TipModal';
 import ReportContentModal from '../components/ReportContentModal';
 import AdUnit from '../components/AdUnit';
+import type { FlowInfo } from '../types/flow';
 
 interface VideoPlayerPageProps {
   video: Video;
@@ -18,6 +21,8 @@ interface VideoPlayerPageProps {
   onBack: () => void;
   onVideoClick: (videoId: string) => void;
   onNavigateHome: () => void;
+  initialFlowMode?: boolean;
+  initialFlowId?: string;
 }
 
 export default function VideoPlayerPage({
@@ -25,7 +30,9 @@ export default function VideoPlayerPage({
   relatedVideos,
   onBack,
   onVideoClick,
-  onNavigateHome
+  onNavigateHome,
+  initialFlowMode = false,
+  initialFlowId
 }: VideoPlayerPageProps) {
   const { user } = useAuth();
 
@@ -36,9 +43,24 @@ export default function VideoPlayerPage({
   const [hasNotifications, setHasNotifications] = useState(false);
   const [showTipModal, setShowTipModal] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [flowInfo, setFlowInfo] = useState<FlowInfo | null>(null);
+  const [isFlowMode, setIsFlowMode] = useState(initialFlowMode);
+  const [lastFlowNodeId, setLastFlowNodeId] = useState<string | null>(null);
 
   const [localVideo, setLocalVideo] = useState(video);
   const [comments, setComments] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (user && video.id) {
+      flowService.checkFlowForVideo(video.id).then(setFlowInfo);
+    }
+  }, [user, video.id]);
+
+  useEffect(() => {
+    if (initialFlowId) {
+      setIsFlowMode(true);
+    }
+  }, [initialFlowId]);
 
   const handleLike = () => {
     if (isLiked) {
@@ -170,6 +192,22 @@ export default function VideoPlayerPage({
     setComments(comments.filter((c) => c.id !== commentId));
   };
 
+  const handleToggleFlowMode = () => {
+    setIsFlowMode(!isFlowMode);
+  };
+
+  const handleExitToFullVideo = (exitVideoId: string, timestamp: number) => {
+    setIsFlowMode(false);
+    if (exitVideoId !== video.id) {
+      onVideoClick(exitVideoId);
+    }
+  };
+
+  const handleBackToFlow = (nodeId: string) => {
+    setLastFlowNodeId(nodeId);
+    setIsFlowMode(false);
+  };
+
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <div className="sticky top-0 z-40 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
@@ -193,16 +231,47 @@ export default function VideoPlayerPage({
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-4">
-            <VideoPlayer
-              videoUrl={localVideo.videoUrl || ''}
-              thumbnailUrl={localVideo.thumbnailUrl}
-              title={localVideo.title}
-            />
+            {isFlowMode && (flowInfo || initialFlowId) ? (
+              <div className="aspect-video w-full">
+                <FlowPlayer
+                  flowId={initialFlowId || flowInfo!.id}
+                  onExitToFullVideo={handleExitToFullVideo}
+                  onBackToLongVideo={lastFlowNodeId ? handleBackToFlow : undefined}
+                  userId={user?.id || null}
+                />
+              </div>
+            ) : (
+              <VideoPlayer
+                videoUrl={localVideo.videoUrl || ''}
+                thumbnailUrl={localVideo.thumbnailUrl}
+                title={localVideo.title}
+              />
+            )}
 
             <AdUnit slot="video-top" format="horizontal" responsive />
 
             <div className="space-y-4">
               <h1 className="text-2xl font-bold">{localVideo.title}</h1>
+
+              {flowInfo && !isFlowMode && (
+                <button
+                  onClick={handleToggleFlowMode}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-lg transition-colors font-semibold"
+                >
+                  <Zap className="w-5 h-5" />
+                  <span>Experience FLOW Mode ({flowInfo.total_nodes} interactive clips)</span>
+                </button>
+              )}
+
+              {isFlowMode && (
+                <button
+                  onClick={handleToggleFlowMode}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors font-semibold"
+                >
+                  <ArrowLeft className="w-5 h-5" />
+                  <span>Exit FLOW Mode</span>
+                </button>
+              )}
 
               <VideoActions
                 likeCount={localVideo.likeCount}
