@@ -75,8 +75,9 @@ import BlogPage from './pages/BlogPage';
 import BlogArticlePage from './pages/BlogArticlePage';
 import AdvertiserDashboardPage from './pages/AdvertiserDashboardPage';
 import CreateAdCampaignPage from './pages/CreateAdCampaignPage';
+import AdPaymentPage from './pages/AdPaymentPage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral' | 'channel' | 'blog' | 'blog-article' | 'advertiser-dashboard' | 'create-ad-campaign';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral' | 'channel' | 'blog' | 'blog-article' | 'advertiser-dashboard' | 'create-ad-campaign' | 'ad-payment';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -233,6 +234,7 @@ function AppContent() {
         'ad-campaign': 'ad-campaign',
         'advertiser-dashboard': 'advertiser-dashboard',
         'create-ad-campaign': 'create-ad-campaign',
+        'ad-payment': 'ad-payment',
         'premium-offers': 'premium-offers',
         'community-premium-pricing': 'community-premium-pricing',
         'appearance-settings': 'appearance-settings',
@@ -741,6 +743,10 @@ function AppContent() {
 
         {currentPage === 'create-ad-campaign' && (
           <CreateAdCampaignPage />
+        )}
+
+        {currentPage === 'ad-payment' && (
+          <AdPaymentPage />
         )}
 
         {currentPage !== 'auth' && currentPage !== 'video' && currentPage !== 'watch' && (

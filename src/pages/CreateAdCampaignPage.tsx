@@ -106,8 +106,8 @@ export default function CreateAdCampaignPage() {
       bidStrategy
     });
 
-    // Rediriger vers le dashboard
-    window.location.hash = 'advertiser-dashboard';
+    // Rediriger vers le paiement
+    window.location.hash = 'ad-payment';
   };
 
   const canProceed = () => {
