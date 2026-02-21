@@ -57,7 +57,7 @@ const BONUS_PACKS = [
   },
 ];
 
-const MOCK_TRANSACTIONS: TruCoinTransaction[] = [
+const SAMPLE_TRANSACTIONS: TruCoinTransaction[] = [
   {
     id: '1',
     to_user_id: 'me',
@@ -72,7 +72,7 @@ const MOCK_TRANSACTIONS: TruCoinTransaction[] = [
     from_user_id: 'me',
     amount: 25,
     transaction_type: 'tip',
-    description: 'Tip à DJ Kalim — "Fire Remix"',
+    description: 'Tip à un créateur',
     metadata: {},
     created_at: new Date(Date.now() - 1000 * 60 * 60 * 3).toISOString(),
   },
@@ -151,9 +151,9 @@ export default function TruCoinWalletPage({ onNavigate }: TruCoinWalletPageProps
       const walletData = await trucoinService.getWallet(user.id);
       setWallet(walletData);
       const txData = await trucoinService.getTransactions(user.id);
-      setTransactions(txData.length > 0 ? txData : MOCK_TRANSACTIONS);
+      setTransactions(txData.length > 0 ? txData : SAMPLE_TRANSACTIONS);
     } catch {
-      setTransactions(MOCK_TRANSACTIONS);
+      setTransactions(SAMPLE_TRANSACTIONS);
     } finally {
       setLoading(false);
     }

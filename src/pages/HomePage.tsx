@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Music, Gamepad2, BookOpen, Theater, Heart, Brain, Code, Film, Trophy } from 'lucide-react';
 import AdUnit from '../components/AdUnit';
 import FreeTrialBanner from '../components/FreeTrialBanner';
+import TrendingSection from '../components/TrendingSection';
+import { videoService, VideoWithCreator } from '../services/videoService';
+import { universeService } from '../services/universeService';
 
 interface HomePageProps {
   onUniverseClick: (universeId: string) => void;
@@ -77,6 +80,24 @@ export default function HomePage({ onUniverseClick }: HomePageProps) {
   const [showBanner, setShowBanner] = useState(() => {
     return !sessionStorage.getItem('trialBannerDismissed');
   });
+  const [trendingVideos, setTrendingVideos] = useState<VideoWithCreator[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadTrendingVideos();
+  }, []);
+
+  const loadTrendingVideos = async () => {
+    try {
+      setLoading(true);
+      const videos = await videoService.getTrendingVideos(12);
+      setTrendingVideos(videos);
+    } catch (error) {
+      console.error('Error loading trending videos:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleCloseBanner = () => {
     sessionStorage.setItem('trialBannerDismissed', 'true');
@@ -153,6 +174,13 @@ export default function HomePage({ onUniverseClick }: HomePageProps) {
         </div>
         </div>
       </div>
+
+      {/* Trending Videos Section */}
+      {!loading && trendingVideos.length > 0 && (
+        <div className="container mx-auto px-6 py-16">
+          <TrendingSection videos={trendingVideos} />
+        </div>
+      )}
     </div>
   );
 }

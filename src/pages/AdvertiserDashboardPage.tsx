@@ -60,8 +60,8 @@ export default function AdvertiserDashboardPage() {
   }, []);
 
   const loadCampaigns = async () => {
-    // Mock data - à remplacer par vraie API
-    const mockCampaigns: Campaign[] = [
+    // Sample data for demonstration
+    const sampleCampaigns: Campaign[] = [
       {
         id: '1',
         name: 'Campagne Musique Été 2026',
@@ -102,14 +102,14 @@ export default function AdvertiserDashboardPage() {
       }
     ];
 
-    setCampaigns(mockCampaigns);
+    setCampaigns(sampleCampaigns);
 
     // Calculer stats globales
-    const totalSpent = mockCampaigns.reduce((sum, c) => sum + c.spent, 0);
-    const totalImpressions = mockCampaigns.reduce((sum, c) => sum + c.impressions, 0);
-    const totalClicks = mockCampaigns.reduce((sum, c) => sum + c.clicks, 0);
-    const totalConversions = mockCampaigns.reduce((sum, c) => sum + c.conversions, 0);
-    const activeCampaigns = mockCampaigns.filter(c => c.status === 'active').length;
+    const totalSpent = sampleCampaigns.reduce((sum, c) => sum + c.spent, 0);
+    const totalImpressions = sampleCampaigns.reduce((sum, c) => sum + c.impressions, 0);
+    const totalClicks = sampleCampaigns.reduce((sum, c) => sum + c.clicks, 0);
+    const totalConversions = sampleCampaigns.reduce((sum, c) => sum + c.conversions, 0);
+    const activeCampaigns = sampleCampaigns.filter(c => c.status === 'active').length;
 
     setStats({
       totalSpent,

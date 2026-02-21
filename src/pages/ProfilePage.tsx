@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
 import { ArrowLeft, Heart, Share2, Video as VideoIcon } from 'lucide-react';
 import { User, Video } from '../types';
-import { recommendedVideos } from '../data/mockData';
+import { videoService, VideoWithCreator } from '../services/videoService';
 
 interface ProfilePageProps {
   user: User;
@@ -10,7 +11,24 @@ interface ProfilePageProps {
 }
 
 export default function ProfilePage({ user, onBack, onVideoClick, onSupportClick }: ProfilePageProps) {
-  const userVideos = recommendedVideos.filter(v => v.userId === user.id);
+  const [userVideos, setUserVideos] = useState<VideoWithCreator[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadUserVideos();
+  }, [user.id]);
+
+  const loadUserVideos = async () => {
+    try {
+      setLoading(true);
+      const videos = await videoService.getVideosByCreator(user.id, 20);
+      setUserVideos(videos);
+    } catch (error) {
+      console.error('Error loading user videos:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const formatSubscribers = (count: number): string => {
     if (count >= 1000000) {
@@ -89,29 +107,40 @@ export default function ProfilePage({ user, onBack, onVideoClick, onSupportClick
         </div>
 
         <div className="grid grid-cols-2 gap-3 pb-8">
-          {userVideos.map((video) => (
-            <div
-              key={video.id}
-              onClick={() => onVideoClick(video)}
-              className="cursor-pointer group"
-            >
-              <div className="relative aspect-video rounded-lg overflow-hidden mb-2">
-                <img
-                  src={video.thumbnailUrl}
-                  alt={video.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                />
-                <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 px-2 py-1 rounded text-xs">
-                  {formatViews(video.viewCount)}
-                </div>
-              </div>
-              <h3 className="font-medium text-sm mb-1 line-clamp-2">{video.title}</h3>
-              <p className="text-xs text-gray-400">
-                <VideoIcon className="w-3 h-3 inline mr-1" />
-                {formatViews(video.viewCount)} views
-              </p>
+          {loading ? (
+            <div className="col-span-2 flex items-center justify-center py-12">
+              <div className="w-8 h-8 border-4 border-red-600 border-t-transparent rounded-full animate-spin" />
             </div>
-          ))}
+          ) : userVideos.length === 0 ? (
+            <div className="col-span-2 flex flex-col items-center justify-center py-12 text-gray-500">
+              <VideoIcon className="w-12 h-12 mb-3 opacity-50" />
+              <p className="text-sm">Aucune vidéo disponible</p>
+            </div>
+          ) : (
+            userVideos.map((video) => (
+              <div
+                key={video.id}
+                onClick={() => onVideoClick(video as any)}
+                className="cursor-pointer group"
+              >
+                <div className="relative aspect-video rounded-lg overflow-hidden mb-2">
+                  <img
+                    src={video.thumbnail_url || 'https://images.pexels.com/photos/1279813/pexels-photo-1279813.jpeg?auto=compress&cs=tinysrgb&w=400'}
+                    alt={video.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
+                  <div className="absolute bottom-2 right-2 bg-black bg-opacity-80 px-2 py-1 rounded text-xs">
+                    {formatViews(video.view_count || 0)}
+                  </div>
+                </div>
+                <h3 className="font-medium text-sm mb-1 line-clamp-2">{video.title}</h3>
+                <p className="text-xs text-gray-400">
+                  <VideoIcon className="w-3 h-3 inline mr-1" />
+                  {formatViews(video.view_count || 0)} views
+                </p>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

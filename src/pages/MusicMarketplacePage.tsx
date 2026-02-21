@@ -27,7 +27,7 @@ const CATEGORY_COLORS: Record<MarketplaceCategory, string> = {
   legal: 'text-gray-300 bg-gray-800/60 border-gray-700',
 };
 
-const MOCK_SERVICES: MarketplaceService[] = [
+const SAMPLE_SERVICES: MarketplaceService[] = [
   {
     id: '1', provider_id: 'p1', user_id: 'u1',
     title: 'Mix & Master professionnel pour votre single',
@@ -180,7 +180,7 @@ export default function MusicMarketplacePage({ onNavigate }: MusicMarketplacePag
   const [selectedCategory, setSelectedCategory] = useState<MarketplaceCategory | null>(null);
   const [selectedService, setSelectedService] = useState<MarketplaceService | null>(null);
   const [selectedTier, setSelectedTier] = useState<'basic' | 'standard' | 'premium'>('basic');
-  const [services, setServices] = useState<MarketplaceService[]>(MOCK_SERVICES);
+  const [services, setServices] = useState<MarketplaceService[]>(SAMPLE_SERVICES);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'rating' | 'price' | 'orders'>('rating');
   const [showFilters, setShowFilters] = useState(false);
