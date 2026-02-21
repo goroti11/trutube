@@ -120,7 +120,11 @@ function formatDate(dateStr: string): string {
   return `il y a ${days}j`;
 }
 
-export default function TruCoinWalletPage() {
+interface TruCoinWalletPageProps {
+  onNavigate: (page: string, data?: any) => void;
+}
+
+export default function TruCoinWalletPage({ onNavigate }: TruCoinWalletPageProps) {
   const { user } = useAuth();
   const [wallet, setWallet] = useState<TruCoinWallet | null>(null);
   const [transactions, setTransactions] = useState<TruCoinTransaction[]>([]);
@@ -256,7 +260,7 @@ export default function TruCoinWalletPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-950">
-        <Header />
+        <Header onNavigate={onNavigate} />
         <div className="flex justify-center items-center py-32 mt-16">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-red-500"></div>
         </div>
@@ -273,7 +277,7 @@ export default function TruCoinWalletPage() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
-      <Header />
+      <Header onNavigate={onNavigate} />
 
       <main className="max-w-6xl mx-auto px-4 py-8 mt-16">
 
