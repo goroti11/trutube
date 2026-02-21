@@ -11,6 +11,7 @@ import FlowPlayer from '../components/video/FlowPlayer';
 import VideoSettingsSheet from '../components/video/VideoSettingsSheet';
 import VideoMoreSheet from '../components/video/VideoMoreSheet';
 import RelatedVideos from '../components/video/RelatedVideos';
+import ReviewsList from '../components/reviews/ReviewsList';
 import { convertSupabaseVideosToTypeVideos } from '../utils/videoConverters';
 import type { FlowInfo } from '../types/flow';
 
@@ -396,8 +397,17 @@ export default function WatchPage({ videoId, onNavigate, initialFlowMode = false
                 </button>
               </div>
 
+              {/* Reviews Section */}
+              <div className="mt-8">
+                <ReviewsList
+                  targetId={video.id}
+                  reviewType="video"
+                  canRespond={user?.id === video.creator_id}
+                />
+              </div>
+
               {/* Comments Preview */}
-              <div className="p-4 bg-gray-900 rounded-xl">
+              <div className="p-4 bg-gray-900 rounded-xl mt-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold flex items-center gap-2">
                     <MessageCircle className="w-5 h-5" />

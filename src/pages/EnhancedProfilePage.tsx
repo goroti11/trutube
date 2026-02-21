@@ -12,6 +12,7 @@ import ProfileReviewsSection from '../components/profile/ProfileReviewsSection';
 import ProfileOptionsMenu from '../components/profile/ProfileOptionsMenu';
 import SupportCreatorModal from '../components/SupportCreatorModal';
 import SupportLeaderboardSection from '../components/SupportLeaderboardSection';
+import ReviewsList from '../components/reviews/ReviewsList';
 import VideoCard from '../components/VideoCard';
 import PremiumBadge from '../components/PremiumBadge';
 
@@ -472,9 +473,10 @@ export default function EnhancedProfilePage({ userId, onNavigate }: EnhancedProf
             )}
 
             {activeTab === 'reviews' && (
-              <ProfileReviewsSection
-                profileId={profileId}
-                isOwnProfile={isOwnProfile}
+              <ReviewsList
+                targetId={profileId}
+                reviewType="creator"
+                canRespond={isOwnProfile}
               />
             )}
 
