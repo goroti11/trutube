@@ -124,7 +124,7 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
       if (user) {
         try {
           await supabase
-            .from('user_profiles')
+            .from('profiles')
             .update({
               language_preference: language,
               updated_at: new Date().toISOString()
@@ -146,10 +146,10 @@ export const LanguageProvider = ({ children }: LanguageProviderProps) => {
       if (user) {
         try {
           const { data } = await supabase
-            .from('user_profiles')
+            .from('profiles')
             .select('language_preference')
             .eq('id', user.id)
-            .single();
+            .maybeSingle();
 
           if (data?.language_preference && data.language_preference !== language) {
             setLanguageState(data.language_preference as Language);
