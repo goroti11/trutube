@@ -203,7 +203,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
                     <h2 className="text-xl font-semibold text-white">Abonnement Premium</h2>
                   </div>
                   <PremiumBadge
-                    tier={premiumSubscription.tier as 'premium' | 'platine' | 'gold'}
+                    tier={premiumSubscription.tier as 'silver' | 'gold' | 'platinum'}
                     size="lg"
                     animated={true}
                   />

@@ -1,4 +1,4 @@
-import { Video as TypeVideo } from '../types';
+import { Video as TypeVideo, UserStatus } from '../types';
 import { VideoWithCreator } from '../services/videoService';
 
 export function convertSupabaseVideoToTypeVideo(supabaseVideo: VideoWithCreator): TypeVideo {
@@ -28,7 +28,7 @@ export function convertSupabaseVideoToTypeVideo(supabaseVideo: VideoWithCreator)
       displayName: supabaseVideo.creator.display_name,
       avatarUrl: supabaseVideo.creator.avatar_url || '/placeholder-avatar.jpg',
       bio: '',
-      userStatus: supabaseVideo.creator.user_status as any,
+      userStatus: supabaseVideo.creator.user_status as UserStatus,
       subscriberCount: 0,
       uploadFrequency: 0,
       createdAt: '',

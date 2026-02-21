@@ -88,7 +88,7 @@ export interface EarningsBreakdown {
 export interface PremiumSubscription {
   id: string;
   user_id: string;
-  tier: 'premium' | 'platine' | 'gold';
+  tier: 'silver' | 'gold' | 'platinum';
   price: number;
   status: 'active' | 'cancelled' | 'expired' | 'paused';
   started_at: string;
@@ -443,14 +443,14 @@ class PaymentService {
 
   async subscribeToPremium(
     userId: string,
-    tier: 'premium' | 'platine' | 'gold',
+    tier: 'silver' | 'gold' | 'platinum',
     paymentMethodId?: string
   ): Promise<PremiumSubscription | null> {
     try {
       const prices = {
-        premium: 9.99,
-        platine: 19.99,
-        gold: 29.99
+        silver: 9.99,
+        gold: 19.99,
+        platinum: 29.99
       };
 
       const price = prices[tier];
@@ -567,9 +567,9 @@ class PaymentService {
   ): Promise<PremiumSubscription | null> {
     try {
       const prices = {
-        premium: 9.99,
-        platine: 19.99,
-        gold: 29.99
+        silver: 9.99,
+        gold: 19.99,
+        platinum: 29.99
       };
 
       const price = prices[newTier];

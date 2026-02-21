@@ -108,7 +108,7 @@ export default function SubscriptionPage({ user, onBack }: SubscriptionPageProps
     setIsProcessing(true);
 
     try {
-      const tier = tierId as 'premium' | 'platine' | 'gold';
+      const tier = tierId as 'silver' | 'gold' | 'platinum';
 
       if (currentSubscription && currentSubscription.status === 'active') {
         const confirmed = confirm(

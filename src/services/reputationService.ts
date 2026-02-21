@@ -14,6 +14,14 @@ export interface UserReputation {
   created_at: string;
 }
 
+export interface BadgeRequirements {
+  min_reputation?: number;
+  min_posts?: number;
+  min_helpful?: number;
+  min_quality_score?: number;
+  [key: string]: any;
+}
+
 export interface BadgeType {
   id: string;
   name: string;
@@ -21,7 +29,7 @@ export interface BadgeType {
   category: 'founder' | 'creator' | 'expert' | 'moderator' | 'contributor' | 'verified';
   icon?: string;
   color?: string;
-  requirements: Record<string, any>;
+  requirements: BadgeRequirements;
   is_active: boolean;
   created_at: string;
 }
@@ -260,7 +268,7 @@ export const reputationService = {
     for (const badge of badges) {
       if (earnedBadgeIds.includes(badge.id)) continue;
 
-      const requirements = badge.requirements as any;
+      const requirements = badge.requirements;
       let eligible = true;
 
       if (requirements.min_reputation && reputation.reputation_score < requirements.min_reputation) {

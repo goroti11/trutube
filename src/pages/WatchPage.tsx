@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { ArrowLeft, ThumbsUp, ThumbsDown, Share2, Save, Scissors, Flag, MessageCircle, Zap } from 'lucide-react';
 import { usePlayerStore } from '../store/playerStore';
-import { videoService } from '../services/videoService';
+import { videoService, VideoWithCreator } from '../services/videoService';
 import { flowService } from '../services/flowService';
 import { useAuth } from '../contexts/AuthContext';
+import { supabase } from '../lib/supabase';
+import { Video } from '../types';
 import EnhancedVideoPlayer from '../components/video/EnhancedVideoPlayer';
 import FlowPlayer from '../components/video/FlowPlayer';
 import VideoSettingsSheet from '../components/video/VideoSettingsSheet';
@@ -21,8 +23,8 @@ interface WatchPageProps {
 
 export default function WatchPage({ videoId, onNavigate, initialFlowMode = false, initialFlowId }: WatchPageProps) {
   const { user } = useAuth();
-  const [video, setVideo] = useState<any>(null);
-  const [relatedVideos, setRelatedVideos] = useState<any[]>([]);
+  const [video, setVideo] = useState<Video | null>(null);
+  const [relatedVideos, setRelatedVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
   const [showMore, setShowMore] = useState(false);
@@ -87,15 +89,75 @@ export default function WatchPage({ videoId, onNavigate, initialFlowMode = false
   };
 
   const handleLike = async () => {
-    if (disliked) setDisliked(false);
-    setLiked(!liked);
-    // TODO: API call
+    if (!user || !video) return;
+
+    try {
+      if (liked) {
+        await supabase
+          .from('video_reactions')
+          .delete()
+          .eq('user_id', user.id)
+          .eq('video_id', video.id)
+          .eq('reaction_type', 'like');
+        setLiked(false);
+      } else {
+        if (disliked) {
+          await supabase
+            .from('video_reactions')
+            .delete()
+            .eq('user_id', user.id)
+            .eq('video_id', video.id)
+            .eq('reaction_type', 'dislike');
+          setDisliked(false);
+        }
+        await supabase
+          .from('video_reactions')
+          .insert({
+            user_id: user.id,
+            video_id: video.id,
+            reaction_type: 'like'
+          });
+        setLiked(true);
+      }
+    } catch (error) {
+      console.error('Error handling like:', error);
+    }
   };
 
   const handleDislike = async () => {
-    if (liked) setLiked(false);
-    setDisliked(!disliked);
-    // TODO: API call
+    if (!user || !video) return;
+
+    try {
+      if (disliked) {
+        await supabase
+          .from('video_reactions')
+          .delete()
+          .eq('user_id', user.id)
+          .eq('video_id', video.id)
+          .eq('reaction_type', 'dislike');
+        setDisliked(false);
+      } else {
+        if (liked) {
+          await supabase
+            .from('video_reactions')
+            .delete()
+            .eq('user_id', user.id)
+            .eq('video_id', video.id)
+            .eq('reaction_type', 'like');
+          setLiked(false);
+        }
+        await supabase
+          .from('video_reactions')
+          .insert({
+            user_id: user.id,
+            video_id: video.id,
+            reaction_type: 'dislike'
+          });
+        setDisliked(true);
+      }
+    } catch (error) {
+      console.error('Error handling dislike:', error);
+    }
   };
 
   const handleShare = () => {

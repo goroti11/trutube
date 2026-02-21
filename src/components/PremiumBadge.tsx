@@ -1,7 +1,7 @@
 import { Crown, Gem, Star } from 'lucide-react';
 
 interface PremiumBadgeProps {
-  tier: 'premium' | 'platine' | 'gold';
+  tier: 'silver' | 'gold' | 'platinum';
   size?: 'sm' | 'md' | 'lg';
   showLabel?: boolean;
   animated?: boolean;
@@ -14,19 +14,11 @@ export default function PremiumBadge({
   animated = true
 }: PremiumBadgeProps) {
   const badges = {
-    premium: {
+    silver: {
       icon: Star,
-      label: 'Premium',
-      gradient: 'from-blue-400 to-cyan-400',
-      bgGradient: 'from-blue-500/20 to-cyan-500/20',
-      borderColor: 'border-blue-400',
-      shadowColor: 'shadow-blue-500/30',
-    },
-    platine: {
-      icon: Gem,
-      label: 'Platine',
-      gradient: 'from-gray-300 to-gray-500',
-      bgGradient: 'from-gray-400/20 to-gray-600/20',
+      label: 'Silver',
+      gradient: 'from-gray-300 to-gray-400',
+      bgGradient: 'from-gray-400/20 to-gray-500/20',
       borderColor: 'border-gray-400',
       shadowColor: 'shadow-gray-400/30',
     },
@@ -37,6 +29,14 @@ export default function PremiumBadge({
       bgGradient: 'from-yellow-500/20 to-amber-500/20',
       borderColor: 'border-yellow-400',
       shadowColor: 'shadow-yellow-500/30',
+    },
+    platinum: {
+      icon: Gem,
+      label: 'Platinum',
+      gradient: 'from-blue-400 to-cyan-400',
+      bgGradient: 'from-blue-500/20 to-cyan-500/20',
+      borderColor: 'border-blue-400',
+      shadowColor: 'shadow-blue-500/30',
     },
   };
 
@@ -77,8 +77,8 @@ export default function PremiumBadge({
       <svg width="0" height="0">
         <defs>
           <linearGradient id={`gradient-${tier}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor={tier === 'premium' ? '#60a5fa' : tier === 'platine' ? '#d1d5db' : '#fbbf24'} />
-            <stop offset="100%" stopColor={tier === 'premium' ? '#22d3ee' : tier === 'platine' ? '#6b7280' : '#f59e0b'} />
+            <stop offset="0%" stopColor={tier === 'silver' ? '#d1d5db' : tier === 'gold' ? '#fbbf24' : '#60a5fa'} />
+            <stop offset="100%" stopColor={tier === 'silver' ? '#9ca3af' : tier === 'gold' ? '#f59e0b' : '#22d3ee'} />
           </linearGradient>
         </defs>
       </svg>
