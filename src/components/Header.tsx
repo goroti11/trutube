@@ -1,17 +1,15 @@
 import { useState } from 'react';
-import { Upload, LogIn, Compass, Settings, Sparkles, User, LogOut, ChevronDown, HelpCircle, Play, Users, Wallet, Crown, Shield, MoreVertical, Book, Briefcase, Info, MessageCircle, ArrowLeft } from 'lucide-react';
+import { Upload, LogIn, Compass, Settings, Sparkles, User, LogOut, ChevronDown, HelpCircle, Play, Users, Wallet, Crown, Shield, MoreVertical, Book, Briefcase, Info, MessageCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import Logo from './Logo';
+import NotificationCenter from './NotificationCenter';
 
 interface HeaderProps {
   onNavigate?: (page: string) => void;
   showNavigation?: boolean;
-  showBackButton?: boolean;
-  backButtonLabel?: string;
-  onBack?: () => void;
 }
 
-export default function Header({ onNavigate, showNavigation = true, showBackButton = false, backButtonLabel = 'Retour', onBack }: HeaderProps) {
+export default function Header({ onNavigate, showNavigation = true }: HeaderProps) {
   const { user, signOut } = useAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showMoreMenu, setShowMoreMenu] = useState(false);
@@ -38,36 +36,16 @@ export default function Header({ onNavigate, showNavigation = true, showBackButt
     return null;
   };
 
-  const handleBackClick = () => {
-    if (onBack) {
-      onBack();
-    } else {
-      window.history.back();
-    }
-  };
-
   return (
     <header className="bg-gray-950/80 backdrop-blur-xl border-b border-gray-800/50 sticky top-0 z-40">
       <div className="max-w-screen-2xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            {showBackButton && (
-              <button
-                onClick={handleBackClick}
-                className="flex items-center gap-2 px-3 py-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
-                aria-label={backButtonLabel}
-              >
-                <ArrowLeft className="w-5 h-5" />
-                <span className="text-sm font-medium hidden sm:inline">{backButtonLabel}</span>
-              </button>
-            )}
-            <button
-              onClick={() => onNavigate?.('home')}
-              className="hover:opacity-80 transition-opacity"
-            >
-              <Logo size="sm" showText={true} />
-            </button>
-          </div>
+          <button
+            onClick={() => onNavigate?.('home')}
+            className="hover:opacity-80 transition-opacity"
+          >
+            <Logo size="sm" showText={true} />
+          </button>
 
           <div className="flex items-center gap-3">
             {showNavigation && onNavigate && (
@@ -187,14 +165,17 @@ export default function Header({ onNavigate, showNavigation = true, showBackButt
             )}
 
             {user && (
-              <button
-                onClick={() => onNavigate?.('trucoin-wallet')}
-                className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 text-white rounded-lg font-bold transition-all shadow-md"
-                title="TruCoin Wallet"
-              >
-                <Wallet className="w-4 h-4" />
-                <span className="hidden md:inline text-sm">TruCoins</span>
-              </button>
+              <>
+                <NotificationCenter onNavigate={onNavigate} />
+                <button
+                  onClick={() => onNavigate?.('trucoin-wallet')}
+                  className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 text-white rounded-lg font-bold transition-all shadow-md"
+                  title="TruCoin Wallet"
+                >
+                  <Wallet className="w-4 h-4" />
+                  <span className="hidden md:inline text-sm">TruCoins</span>
+                </button>
+              </>
             )}
 
             <button

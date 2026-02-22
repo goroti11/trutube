@@ -5,7 +5,6 @@ import { videoUploadService, VideoUploadData, VideoUploadProgress } from '../ser
 import { universeService } from '../services/universeService';
 import { getUniverseDetail } from '../data/universeDetails';
 import UniverseDetailsPanel from '../components/upload/UniverseDetailsPanel';
-import PageWrapper from '../components/PageWrapper';
 
 interface VideoUploadPageProps {
   onNavigate: (page: string, data?: any) => void;

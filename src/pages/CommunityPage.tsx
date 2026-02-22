@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Users, Plus, TrendingUp, Clock, MessageSquare, UserPlus, UserMinus, Crown, Settings, Lock, ArrowLeft } from 'lucide-react';
+import { Users, Plus, TrendingUp, Clock, MessageSquare, UserPlus, UserMinus, Crown, Settings, Lock } from 'lucide-react';
 import { communityService, Community, CommunityPost } from '../services/communityService';
 import { profileService } from '../services/profileService';
 import { useAuth } from '../contexts/AuthContext';
@@ -10,10 +10,9 @@ import { supabase } from '../lib/supabase';
 
 interface CommunityPageProps {
   slug?: string;
-  onNavigate?: (page: string) => void;
 }
 
-export default function CommunityPage({ slug = 'music-afrobeat', onNavigate }: CommunityPageProps) {
+export default function CommunityPage({ slug = 'music-afrobeat' }: CommunityPageProps) {
   const { user } = useAuth();
   const [community, setCommunity] = useState<Community | null>(null);
   const [posts, setPosts] = useState<CommunityPost[]>([]);
@@ -107,7 +106,7 @@ export default function CommunityPage({ slug = 'music-afrobeat', onNavigate }: C
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header onNavigate={onNavigate} showBackButton={true} onBack={() => onNavigate?.('community')} />
+        <Header />
         <div className="flex justify-center items-center py-20 mt-16">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
@@ -121,7 +120,7 @@ export default function CommunityPage({ slug = 'music-afrobeat', onNavigate }: C
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header onNavigate={onNavigate} showBackButton={true} onBack={() => onNavigate?.('community')} />
+      <Header />
 
       <main className="max-w-7xl mx-auto px-4 py-8 mt-16">
         <div className="bg-white rounded-lg shadow-sm overflow-hidden mb-6">
