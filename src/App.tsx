@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import { Footer } from './components/Footer';
+import InstallPWA from './components/InstallPWA';
 import HomePage from './pages/HomePage';
 import UniverseViewPage from './pages/UniverseViewPage';
 import VideoPlayerPage from './pages/VideoPlayerPage';
@@ -767,6 +768,8 @@ function AppContent() {
             }}
           />
         )}
+
+        <InstallPWA />
     </div>
   );
 }

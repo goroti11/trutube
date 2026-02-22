@@ -1,0 +1,55 @@
+{
+  "name": "GOROTI - Plateforme Vidéo",
+  "short_name": "GOROTI",
+  "description": "Plateforme de partage vidéo organisée par univers - Musique, Gaming, Culture et plus",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#dc2626",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["video", "entertainment", "social"],
+  "shortcuts": [
+    {
+      "name": "Accueil",
+      "short_name": "Home",
+      "description": "Page d'accueil",
+      "url": "/",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Studio Créateur",
+      "short_name": "Studio",
+      "description": "Studio de création",
+      "url": "/studio",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshot2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}
