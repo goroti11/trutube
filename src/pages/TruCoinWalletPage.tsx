@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   Wallet, Plus, ArrowUpRight, ArrowDownLeft, Gift, Clock,
   CreditCard, Zap, Star, Shield, TrendingUp, Lock, CheckCircle,
-  ChevronRight, Package, Music, Users, ShoppingBag, RefreshCw
+  ChevronRight, Package, Music, Users, ShoppingBag, RefreshCw, ArrowLeft
 } from 'lucide-react';
 import { trucoinService, TruCoinWallet, TruCoinTransaction } from '../services/trucoinService';
 import { useAuth } from '../contexts/AuthContext';
@@ -260,7 +260,7 @@ export default function TruCoinWalletPage({ onNavigate }: TruCoinWalletPageProps
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-950">
-        <Header onNavigate={onNavigate} />
+        <Header onNavigate={onNavigate} showBackButton={true} onBack={() => onNavigate('home')} />
         <div className="flex justify-center items-center py-32 mt-16">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-red-500"></div>
         </div>
@@ -277,7 +277,7 @@ export default function TruCoinWalletPage({ onNavigate }: TruCoinWalletPageProps
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
-      <Header onNavigate={onNavigate} />
+      <Header onNavigate={onNavigate} showBackButton={true} onBack={() => onNavigate('home')} />
 
       <main className="max-w-6xl mx-auto px-4 py-8 mt-16">
 

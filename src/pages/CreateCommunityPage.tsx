@@ -7,7 +7,11 @@ import { supabase } from '../lib/supabase';
 
 type CommunityType = 'universe' | 'creator' | 'premium' | 'private';
 
-export default function CreateCommunityPage() {
+interface CreateCommunityPageProps {
+  onNavigate?: (page: string) => void;
+}
+
+export default function CreateCommunityPage({ onNavigate }: CreateCommunityPageProps = {}) {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
@@ -98,7 +102,7 @@ export default function CreateCommunityPage() {
   if (!user) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header />
+        <Header onNavigate={onNavigate} showBackButton={true} onBack={() => onNavigate?.('community')} />
         <main className="max-w-4xl mx-auto px-4 py-8 mt-16">
           <div className="bg-white rounded-xl shadow-sm p-12 text-center">
             <Lock className="w-16 h-16 text-gray-400 mx-auto mb-4" />
@@ -123,16 +127,16 @@ export default function CreateCommunityPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+      <Header onNavigate={onNavigate} showBackButton={true} onBack={() => onNavigate?.('community')} />
 
       <main className="max-w-4xl mx-auto px-4 py-8 mt-16">
-        <a
-          href="#community"
+        <button
+          onClick={() => onNavigate?.('community')}
           className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
           Retour aux communautés
-        </a>
+        </button>
 
         <div className="bg-white rounded-xl shadow-sm p-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">

@@ -8,6 +8,7 @@ import { useLanguage, Language } from '../contexts/LanguageContext';
 import { supabase } from '../lib/supabase';
 import Header from '../components/Header';
 import PremiumBadge from '../components/PremiumBadge';
+import PageWrapper from '../components/PageWrapper';
 import { paymentService, PremiumSubscription } from '../services/paymentService';
 
 interface SettingsPageProps {
@@ -165,7 +166,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
   if (loading) {
     return (
       <>
-        <Header onNavigate={onNavigate} showNavigation={true} />
+        <Header onNavigate={onNavigate} showNavigation={true} showBackButton={true} onBack={() => onNavigate('home')} />
         <div className="flex items-center justify-center min-h-[80vh]">
           <Loader2 className="w-8 h-8 text-cyan-500 animate-spin" />
         </div>
@@ -175,7 +176,7 @@ export const SettingsPage = ({ onNavigate }: SettingsPageProps) => {
 
   return (
     <>
-      <Header onNavigate={onNavigate} showNavigation={true} />
+      <Header onNavigate={onNavigate} showNavigation={true} showBackButton={true} onBack={() => onNavigate('home')} />
       <div className="min-h-screen bg-gray-950 py-12">
         <div className="max-w-4xl mx-auto px-6">
           <h1 className="text-3xl font-bold text-white mb-8">Paramètres</h1>

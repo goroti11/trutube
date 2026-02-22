@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, X, Sparkles, Zap, Crown, Shield, Star, TrendingUp, Users, Play } from 'lucide-react';
+import { Check, X, Sparkles, Zap, Crown, Shield, Star, TrendingUp, Users, Play, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -18,7 +18,11 @@ interface PremiumTier {
   popular?: boolean;
 }
 
-export default function PremiumPage() {
+interface PremiumPageProps {
+  onNavigate?: (page: string) => void;
+}
+
+export default function PremiumPage({ onNavigate }: PremiumPageProps = {}) {
   const { user } = useAuth();
   const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>('annual');
 
@@ -137,7 +141,7 @@ export default function PremiumPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+      <Header onNavigate={onNavigate} showBackButton={true} onBack={() => onNavigate?.('home')} />
 
       <main className="max-w-7xl mx-auto px-4 py-12 mt-16">
         <div className="text-center mb-16">
