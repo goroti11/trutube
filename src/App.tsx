@@ -77,8 +77,9 @@ import BlogArticlePage from './pages/BlogArticlePage';
 import AdvertiserDashboardPage from './pages/AdvertiserDashboardPage';
 import CreateAdCampaignPage from './pages/CreateAdCampaignPage';
 import AdPaymentPage from './pages/AdPaymentPage';
+import GamingHubPage from './pages/GamingHubPage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral' | 'channel' | 'blog' | 'blog-article' | 'advertiser-dashboard' | 'create-ad-campaign' | 'ad-payment';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral' | 'channel' | 'blog' | 'blog-article' | 'advertiser-dashboard' | 'create-ad-campaign' | 'ad-payment' | 'gaming-hub';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -748,6 +749,17 @@ function AppContent() {
 
         {currentPage === 'ad-payment' && (
           <AdPaymentPage />
+        )}
+
+        {currentPage === 'gaming-hub' && (
+          <GamingHubPage onNavigate={(page, data) => {
+            if (data) {
+              if (page === 'game-detail' && data.gameId) {
+                console.log('Navigate to game detail:', data.gameId);
+              }
+            }
+            setCurrentPage(page as Page);
+          }} />
         )}
 
         {currentPage !== 'auth' && currentPage !== 'video' && currentPage !== 'watch' && (
