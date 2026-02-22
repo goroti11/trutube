@@ -45,11 +45,15 @@ This guide contains security configurations that must be applied through the Sup
 
 The following security issues have been automatically fixed through database migrations:
 
-1. ✅ **Added Missing Foreign Key Index**
+1. ✅ **Fixed Mutable Search Path in Function**
+   - Fixed `update_review_updated_at` function with SECURITY DEFINER and fixed search_path
+   - Prevents potential SQL injection and privilege escalation
+
+2. ✅ **Added Missing Foreign Key Index**
    - Added index on `service_bookings.creator_id`
    - Improves query performance on foreign key lookups
 
-2. ✅ **Removed 92 Unused Indexes**
+3. ✅ **Removed 92 Unused Indexes**
    - Dropped all unused indexes across the database
    - Improves write performance and reduces storage overhead
    - Categories covered:
