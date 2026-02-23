@@ -3,9 +3,13 @@ import type { Notification, NotificationPreference } from '../types/database';
 
 export const notificationService = {
   async getNotifications(limit = 50, offset = 0): Promise<Notification[]> {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('Not authenticated');
+
     const { data, error } = await supabase
       .from('notifications')
       .select('*')
+      .eq('recipient_id', user.id)
       .order('created_at', { ascending: false })
       .range(offset, offset + limit - 1);
 
@@ -15,7 +19,6 @@ export const notificationService = {
 
   async getUnreadCount(): Promise<number> {
     const { data, error } = await supabase.rpc('rpc_get_unread_notification_count');
-
     if (error) throw error;
     return data || 0;
   },
@@ -24,39 +27,45 @@ export const notificationService = {
     const { error } = await supabase.rpc('rpc_mark_notification_read', {
       p_notification_id: notificationId,
     });
-
     if (error) throw error;
   },
 
   async markAllAsRead(): Promise<void> {
     const { error } = await supabase.rpc('rpc_mark_all_notifications_read');
-
     if (error) throw error;
   },
 
   async getPreferences(): Promise<NotificationPreference[]> {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error('Not authenticated');
+
     const { data, error } = await supabase
       .from('notification_preferences')
-      .select('*');
+      .select('*')
+      .eq('user_id', user.id);
 
     if (error) throw error;
     return data || [];
   },
 
-  async updatePreference(domain: string, enabled: boolean, pushEnabled?: boolean, emailEnabled?: boolean): Promise<void> {
+  async updatePreference(
+    domain: string,
+    enabled: boolean,
+    pushEnabled: boolean,
+    emailEnabled: boolean
+  ): Promise<void> {
     const { error } = await supabase.rpc('rpc_update_notification_preferences', {
       p_domain: domain,
       p_enabled: enabled,
-      p_push_enabled: pushEnabled ?? null,
-      p_email_enabled: emailEnabled ?? null,
+      p_push_enabled: pushEnabled,
+      p_email_enabled: emailEnabled,
     });
-
     if (error) throw error;
   },
 
   subscribeToNotifications(userId: string, callback: (notification: Notification) => void) {
     return supabase
-      .channel('notifications')
+      .channel(`notifications_${userId}`)
       .on(
         'postgres_changes',
         {

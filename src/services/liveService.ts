@@ -4,10 +4,8 @@ import type { LiveStream, LiveGift } from '../types/database';
 const FUNCTIONS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1`;
 
 export const liveService = {
-  async getLiveStreams(status?: 'scheduled' | 'live' | 'ended'): Promise<LiveStream[]> {
-    let query = supabase
-      .from('live_streams')
-      .select('*, profiles(username, avatar_url)');
+  async getLiveStreams(status?: string): Promise<LiveStream[]> {
+    let query = supabase.from('live_streams').select('*, profiles(username, avatar_url)');
 
     if (status) {
       query = query.eq('status', status);
@@ -22,7 +20,7 @@ export const liveService = {
   async getLiveStream(id: string): Promise<LiveStream | null> {
     const { data, error } = await supabase
       .from('live_streams')
-      .select('*, profiles(username, avatar_url), live_settings(*)')
+      .select('*, profiles(username, avatar_url)')
       .eq('id', id)
       .maybeSingle();
 
@@ -35,13 +33,13 @@ export const liveService = {
       .from('live_gifts')
       .select('*')
       .eq('is_active', true)
-      .order('price_trucoins');
+      .order('tier');
 
     if (error) throw error;
     return data || [];
   },
 
-  async sendGift(liveId: string, giftId: string): Promise<{ success: boolean; newBalance: number }> {
+  async sendGift(liveId: string, giftId: string): Promise<void> {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) throw new Error('Not authenticated');
 
@@ -61,26 +59,5 @@ export const liveService = {
       const error = await response.json();
       throw new Error(error.error || 'Failed to send gift');
     }
-
-    const result = await response.json();
-    return { success: result.success, newBalance: result.new_balance };
-  },
-
-  subscribeToLiveGifts(liveId: string, callback: (gift: unknown) => void) {
-    return supabase
-      .channel(`live_gifts_${liveId}`)
-      .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'live_gift_transactions',
-          filter: `live_id=eq.${liveId}`,
-        },
-        (payload) => {
-          callback(payload.new);
-        }
-      )
-      .subscribe();
   },
 };

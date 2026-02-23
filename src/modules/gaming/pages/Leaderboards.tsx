@@ -106,7 +106,7 @@ export function Leaderboards() {
                   </div>
                   <div>
                     <div className="font-semibold text-white">
-                      {entry.user_id || entry.team_id}
+                      Player {entry.user_id || entry.team_id}
                     </div>
                   </div>
                 </div>

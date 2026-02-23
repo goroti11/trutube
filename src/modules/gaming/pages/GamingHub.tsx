@@ -80,12 +80,6 @@ export function GamingHub() {
               {arenaFund.balance.toLocaleString()} TruCoins
             </p>
             <p className="text-gray-400 mt-2">Community prize pool</p>
-            <Link
-              to="/gaming/arena-fund"
-              className="inline-block mt-4 text-yellow-300 hover:underline"
-            >
-              Learn more →
-            </Link>
           </div>
         </div>
       )}
@@ -141,23 +135,17 @@ export function GamingHub() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Link
-          to="/gaming/live"
-          className="bg-gradient-to-br from-red-600 to-pink-600 rounded-xl p-8 text-center hover:scale-105 transition-transform"
-        >
+        <div className="bg-gradient-to-br from-red-600 to-pink-600 rounded-xl p-8 text-center hover:scale-105 transition-transform cursor-pointer">
           <div className="text-4xl mb-2">🎮</div>
           <h3 className="text-2xl font-bold text-white mb-2">Gaming Live</h3>
           <p className="text-red-100">Watch live gaming streams</p>
-        </Link>
+        </div>
 
-        <Link
-          to="/gaming/teams"
-          className="bg-gradient-to-br from-green-600 to-teal-600 rounded-xl p-8 text-center hover:scale-105 transition-transform"
-        >
+        <div className="bg-gradient-to-br from-green-600 to-teal-600 rounded-xl p-8 text-center hover:scale-105 transition-transform cursor-pointer">
           <div className="text-4xl mb-2">👥</div>
           <h3 className="text-2xl font-bold text-white mb-2">Teams</h3>
           <p className="text-green-100">Join or create a team</p>
-        </Link>
+        </div>
 
         <Link
           to="/gaming/leaderboards"

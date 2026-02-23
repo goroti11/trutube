@@ -1,37 +1,42 @@
 import { useEffect, useState } from 'react';
 import { legalService } from '../services/legalService';
 import type { LegalDocument } from '../types/database';
+import { useAuth } from './useAuth';
 
 export function useLegalCompliance(domain: string) {
-  const [accepted, setAccepted] = useState<boolean>(false);
+  const { user } = useAuth();
+  const [accepted, setAccepted] = useState(false);
   const [documents, setDocuments] = useState<LegalDocument[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    checkCompliance();
-  }, [domain]);
+    if (!user) {
+      setLoading(false);
+      return;
+    }
 
-  const checkCompliance = async () => {
+    loadCompliance();
+  }, [user, domain]);
+
+  const loadCompliance = async () => {
     try {
       setLoading(true);
-      const result = await legalService.checkAcceptance(domain);
+      const result = await legalService.checkCompliance(domain);
       setAccepted(result.accepted);
       setDocuments(result.documents);
-      setError(null);
-    } catch (err) {
-      setError(err as Error);
+    } catch (error) {
+      console.error('Failed to check compliance:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const acceptDocument = async (documentId: string, deviceFingerprint?: string) => {
+  const acceptDocument = async (documentId: string) => {
     try {
-      await legalService.acceptDocument(documentId, deviceFingerprint);
-      await checkCompliance();
-    } catch (err) {
-      throw err;
+      await legalService.acceptDocument(documentId);
+      await loadCompliance();
+    } catch (error) {
+      throw error;
     }
   };
 
@@ -39,8 +44,7 @@ export function useLegalCompliance(domain: string) {
     accepted,
     documents,
     loading,
-    error,
     acceptDocument,
-    refresh: checkCompliance,
+    refresh: loadCompliance,
   };
 }

@@ -175,7 +175,7 @@ export const gamingService = {
   },
 
   async getArenaFund(): Promise<ArenaFund | null> {
-    const { data, error } = await supabase
+    const { data, error} = await supabase
       .from('arena_fund')
       .select('*')
       .maybeSingle();
