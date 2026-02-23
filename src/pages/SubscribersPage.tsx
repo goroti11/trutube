@@ -1,6 +1,8 @@
-import { useState } from 'react';
-import { Users, Search, X, TrendingUp, Calendar, Crown, Star } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Users, Search, X, TrendingUp, Calendar, Crown, Star, Loader2 } from 'lucide-react';
 import Header from '../components/Header';
+import { subscriptionService, type Subscriber } from '../services/subscriptionService';
+import { useAuth } from '../contexts/AuthContext';
 
 interface SubscribersPageProps {
   onNavigate: (page: string) => void;
@@ -9,90 +11,53 @@ interface SubscribersPageProps {
 type SortType = 'recent' | 'oldest' | 'most-active';
 
 export default function SubscribersPage({ onNavigate }: SubscribersPageProps) {
+  const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<SortType>('recent');
   const [selectedTier, setSelectedTier] = useState<'all' | 'free' | 'premium'>('all');
 
-  // Mock subscribers data
-  const subscribers = [
-    {
-      id: '1',
-      username: 'marie_laurent',
-      displayName: 'Marie Laurent',
-      avatarUrl: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=100',
-      subscribedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
-      tier: 'premium' as const,
-      tierName: 'Gold Member',
-      activityScore: 95,
-      videosWatched: 127,
-      commentsCount: 45,
-      likesGiven: 234
-    },
-    {
-      id: '2',
-      username: 'thomas_dubois',
-      displayName: 'Thomas Dubois',
-      avatarUrl: 'https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&w=100',
-      subscribedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
-      tier: 'free' as const,
-      activityScore: 78,
-      videosWatched: 89,
-      commentsCount: 23,
-      likesGiven: 156
-    },
-    {
-      id: '3',
-      username: 'sophie_martin',
-      displayName: 'Sophie Martin',
-      avatarUrl: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=100',
-      subscribedAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
-      tier: 'premium' as const,
-      tierName: 'Platinum VIP',
-      activityScore: 98,
-      videosWatched: 245,
-      commentsCount: 89,
-      likesGiven: 567
-    },
-    {
-      id: '4',
-      username: 'lucas_bernard',
-      displayName: 'Lucas Bernard',
-      avatarUrl: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
-      subscribedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000),
-      tier: 'free' as const,
-      activityScore: 45,
-      videosWatched: 34,
-      commentsCount: 8,
-      likesGiven: 67
-    },
-    {
-      id: '5',
-      username: 'emma_petit',
-      displayName: 'Emma Petit',
-      avatarUrl: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=100',
-      subscribedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
-      tier: 'premium' as const,
-      tierName: 'Silver Supporter',
-      activityScore: 82,
-      videosWatched: 156,
-      commentsCount: 34,
-      likesGiven: 289
-    },
-    {
-      id: '6',
-      username: 'alex_rousseau',
-      displayName: 'Alex Rousseau',
-      avatarUrl: 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=100',
-      subscribedAt: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000),
-      tier: 'free' as const,
-      activityScore: 62,
-      videosWatched: 72,
-      commentsCount: 15,
-      likesGiven: 123
-    }
-  ];
+  const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [stats, setStats] = useState({ total: 0, premium: 0, free: 0, avgActivity: 0 });
 
-  const formatTimeAgo = (date: Date) => {
+  useEffect(() => {
+    const loadSubscribers = async () => {
+      if (!user?.id) {
+        setError('Utilisateur non connecté');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        setError(null);
+
+        const [subscribersList, subscriberStats] = await Promise.all([
+          subscriptionService.getChannelSubscribers(user.id, 100, 0),
+          subscriptionService.getSubscriberStats(user.id)
+        ]);
+
+        setSubscribers(subscribersList);
+
+        const avgActivity = subscribersList.length > 0
+          ? Math.round(subscribersList.reduce((acc, s) => acc + s.activity_score, 0) / subscribersList.length)
+          : 0;
+
+        setStats({ ...subscriberStats, avgActivity });
+      } catch (err) {
+        console.error('Error loading subscribers:', err);
+        setError('Erreur lors du chargement des abonnés');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadSubscribers();
+  }, [user]);
+
+  const formatTimeAgo = (dateString: string) => {
+    const date = new Date(dateString);
     const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
 
     if (seconds < 3600) return `Il y a ${Math.floor(seconds / 60)} min`;
@@ -118,7 +83,7 @@ export default function SubscribersPage({ onNavigate }: SubscribersPageProps) {
 
   const filteredSubscribers = subscribers
     .filter(sub => {
-      const matchesSearch = sub.displayName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      const matchesSearch = sub.display_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                            sub.username.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesTier = selectedTier === 'all' ||
                          (selectedTier === 'premium' && sub.tier === 'premium') ||
@@ -126,18 +91,41 @@ export default function SubscribersPage({ onNavigate }: SubscribersPageProps) {
       return matchesSearch && matchesTier;
     })
     .sort((a, b) => {
-      if (sortBy === 'recent') return b.subscribedAt.getTime() - a.subscribedAt.getTime();
-      if (sortBy === 'oldest') return a.subscribedAt.getTime() - b.subscribedAt.getTime();
-      if (sortBy === 'most-active') return b.activityScore - a.activityScore;
+      if (sortBy === 'recent') return new Date(b.subscribed_at).getTime() - new Date(a.subscribed_at).getTime();
+      if (sortBy === 'oldest') return new Date(a.subscribed_at).getTime() - new Date(b.subscribed_at).getTime();
+      if (sortBy === 'most-active') return b.activity_score - a.activity_score;
       return 0;
     });
 
-  const stats = {
-    total: subscribers.length,
-    premium: subscribers.filter(s => s.tier === 'premium').length,
-    free: subscribers.filter(s => s.tier === 'free').length,
-    avgActivity: Math.round(subscribers.reduce((acc, s) => acc + s.activityScore, 0) / subscribers.length)
-  };
+  if (loading) {
+    return (
+      <>
+        <Header onNavigate={onNavigate} showNavigation={true} />
+        <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+          <Loader2 className="w-12 h-12 text-red-600 animate-spin" />
+        </div>
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <Header onNavigate={onNavigate} showNavigation={true} />
+        <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
+          <div className="text-center">
+            <p className="text-xl text-white mb-4">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-6 py-2 bg-red-600 text-white rounded-lg"
+            >
+              Réessayer
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -250,8 +238,8 @@ export default function SubscribersPage({ onNavigate }: SubscribersPageProps) {
                   <div className="flex items-center gap-4">
                     {/* Avatar */}
                     <img
-                      src={subscriber.avatarUrl}
-                      alt={subscriber.displayName}
+                      src={subscriber.avatar_url}
+                      alt={subscriber.display_name}
                       className="w-16 h-16 rounded-full object-cover flex-shrink-0"
                     />
 
@@ -259,9 +247,9 @@ export default function SubscribersPage({ onNavigate }: SubscribersPageProps) {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <h3 className="font-semibold text-base truncate">
-                          {subscriber.displayName}
+                          {subscriber.display_name}
                         </h3>
-                        {getTierBadge(subscriber.tier, subscriber.tierName)}
+                        {getTierBadge(subscriber.tier, subscriber.tier_name)}
                       </div>
                       <p className="text-sm text-gray-400 mb-2">@{subscriber.username}</p>
 
@@ -269,14 +257,14 @@ export default function SubscribersPage({ onNavigate }: SubscribersPageProps) {
                       <div className="flex items-center gap-4 text-xs text-gray-400">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
-                          {formatTimeAgo(subscriber.subscribedAt)}
+                          {formatTimeAgo(subscriber.subscribed_at)}
                         </span>
                         <span className="flex items-center gap-1">
                           <Star className="w-3 h-3" />
-                          {subscriber.activityScore}% actif
+                          {subscriber.activity_score}% actif
                         </span>
-                        <span>{subscriber.videosWatched} vidéos vues</span>
-                        <span>{subscriber.commentsCount} commentaires</span>
+                        <span>{subscriber.videos_watched} vidéos vues</span>
+                        <span>{subscriber.comments_count} commentaires</span>
                       </div>
                     </div>
 
@@ -301,12 +289,12 @@ export default function SubscribersPage({ onNavigate }: SubscribersPageProps) {
                             strokeWidth="6"
                             fill="transparent"
                             strokeDasharray={`${2 * Math.PI * 32}`}
-                            strokeDashoffset={`${2 * Math.PI * 32 * (1 - subscriber.activityScore / 100)}`}
-                            className={subscriber.activityScore >= 80 ? 'text-green-500' : subscriber.activityScore >= 50 ? 'text-yellow-500' : 'text-red-500'}
+                            strokeDashoffset={`${2 * Math.PI * 32 * (1 - subscriber.activity_score / 100)}`}
+                            className={subscriber.activity_score >= 80 ? 'text-green-500' : subscriber.activity_score >= 50 ? 'text-yellow-500' : 'text-red-500'}
                           />
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-lg font-bold">{subscriber.activityScore}%</span>
+                          <span className="text-lg font-bold">{subscriber.activity_score}%</span>
                         </div>
                       </div>
                     </div>

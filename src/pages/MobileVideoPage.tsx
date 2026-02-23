@@ -7,10 +7,13 @@ import VideoOptionsSheet from '../components/mobile/VideoOptionsSheet';
 import VideoActions from '../components/mobile/VideoActions';
 import CommentsPreview from '../components/mobile/CommentsPreview';
 import MiniPlayer from '../components/mobile/MiniPlayer';
-import { ChevronRight, Zap, ArrowLeft } from 'lucide-react';
+import { ChevronRight, Zap, ArrowLeft, Loader2 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { flowService } from '../services/flowService';
+import { videoService } from '../services/videoService';
+import { commentService } from '../services/commentService';
 import type { FlowInfo } from '../types/flow';
+import type { Video, Comment } from '../types';
 
 interface MobileVideoPageProps {
   videoId?: string;
@@ -32,6 +35,58 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
   const [isFlowMode, setIsFlowMode] = useState(initialFlowMode);
   const [lastFlowNodeId, setLastFlowNodeId] = useState<string | null>(null);
 
+  const [videoData, setVideoData] = useState<Video | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [relatedVideos, setRelatedVideos] = useState<Video[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadVideoData = async () => {
+      if (!videoId) {
+        setError('ID de vidéo manquant');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        setError(null);
+
+        const [video, videoComments, related] = await Promise.all([
+          videoService.getVideoById(videoId),
+          commentService.getVideoComments(videoId, 3),
+          videoService.getRelatedVideos(videoId, 3)
+        ]);
+
+        if (!video) {
+          setError('Vidéo non trouvée');
+          return;
+        }
+
+        setVideoData(video);
+        setComments(videoComments);
+        setRelatedVideos(related);
+
+        if (user) {
+          const [likeStatus, saveStatus] = await Promise.all([
+            videoService.checkIfLiked(videoId, user.id),
+            videoService.checkIfSaved(videoId, user.id)
+          ]);
+          setIsLiked(likeStatus);
+          setIsSaved(saveStatus);
+        }
+      } catch (err) {
+        console.error('Error loading video:', err);
+        setError('Erreur lors du chargement de la vidéo');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadVideoData();
+  }, [videoId, user]);
+
   useEffect(() => {
     if (user && videoId) {
       flowService.checkFlowForVideo(videoId).then(setFlowInfo);
@@ -43,47 +98,6 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
       setIsFlowMode(true);
     }
   }, [initialFlowId]);
-
-  const videoData = {
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    title: 'Comment créer une application mobile moderne avec React',
-    creator: 'TechCreator',
-    creatorAvatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=225&fit=crop',
-    views: 125000,
-    uploadDate: 'il y a 2 jours',
-    description: 'Dans ce tutoriel complet, nous allons voir comment créer une application mobile moderne avec React Native. Nous aborderons tous les aspects essentiels du développement mobile.',
-    likes: 8500,
-    dislikes: 123,
-    commentCount: 456,
-  };
-
-  const mockComments = [
-    {
-      id: '1',
-      author: 'Jean Dupont',
-      authorAvatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop',
-      content: 'Excellent tutoriel ! Très bien expliqué, merci pour ce contenu de qualité.',
-      likes: 245,
-      timeAgo: 'il y a 1 jour'
-    },
-    {
-      id: '2',
-      author: 'Marie Martin',
-      authorAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
-      content: "J'ai réussi à suivre toutes les étapes sans problème. Parfait pour les débutants.",
-      likes: 189,
-      timeAgo: 'il y a 18h'
-    },
-    {
-      id: '3',
-      author: 'Thomas Bernard',
-      authorAvatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop',
-      content: 'Est-ce que vous pourriez faire une suite sur les animations ?',
-      likes: 67,
-      timeAgo: 'il y a 12h'
-    }
-  ];
 
   const handleToggleFlowMode = () => {
     setIsFlowMode(!isFlowMode);
@@ -97,6 +111,63 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
     setLastFlowNodeId(nodeId);
     setIsFlowMode(false);
   };
+
+  const handleLike = async () => {
+    if (!user || !videoId) return;
+    try {
+      if (isLiked) {
+        await videoService.unlikeVideo(videoId, user.id);
+      } else {
+        await videoService.likeVideo(videoId, user.id);
+        if (isDisliked) setIsDisliked(false);
+      }
+      setIsLiked(!isLiked);
+    } catch (err) {
+      console.error('Error liking video:', err);
+    }
+  };
+
+  const handleSave = async () => {
+    if (!user || !videoId) return;
+    try {
+      if (isSaved) {
+        await videoService.unsaveVideo(videoId, user.id);
+      } else {
+        await videoService.saveVideo(videoId, user.id);
+      }
+      setIsSaved(!isSaved);
+    } catch (err) {
+      console.error('Error saving video:', err);
+    }
+  };
+
+  if (loading) {
+    return (
+      <MobileLayout activeTab={activeTab} onTabChange={setActiveTab}>
+        <div className="min-h-screen bg-[#0B0B0D] flex items-center justify-center">
+          <Loader2 className="w-12 h-12 text-[#D8A0B6] animate-spin" />
+        </div>
+      </MobileLayout>
+    );
+  }
+
+  if (error || !videoData) {
+    return (
+      <MobileLayout activeTab={activeTab} onTabChange={setActiveTab}>
+        <div className="min-h-screen bg-[#0B0B0D] flex items-center justify-center p-4">
+          <div className="text-center">
+            <p className="text-xl text-white mb-4">{error || 'Vidéo introuvable'}</p>
+            <button
+              onClick={() => window.history.back()}
+              className="px-6 py-2 bg-[#D8A0B6] text-white rounded-lg"
+            >
+              Retour
+            </button>
+          </div>
+        </div>
+      </MobileLayout>
+    );
+  }
 
   return (
     <MobileLayout activeTab={activeTab} onTabChange={setActiveTab}>
@@ -114,7 +185,7 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
               </div>
             ) : (
               <MobileVideoPlayer
-                videoUrl={videoData.videoUrl}
+                videoUrl={videoData.video_url}
                 title={videoData.title}
                 onMinimize={() => setIsMinimized(true)}
                 onQualityClick={() => setShowQualitySheet(true)}
@@ -130,7 +201,7 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
             <div className="flex items-center gap-2 text-sm text-gray-400">
               <span>{videoData.views.toLocaleString()} vues</span>
               <span>•</span>
-              <span>{videoData.uploadDate}</span>
+              <span>{new Date(videoData.created_at).toLocaleDateString('fr-FR')}</span>
             </div>
           </div>
 
@@ -157,18 +228,20 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img
-                src={videoData.creatorAvatar}
-                alt={videoData.creator}
+                src={videoData.channel?.avatar_url || '/default-avatar.png'}
+                alt={videoData.channel?.name || 'Creator'}
                 className="w-12 h-12 rounded-full"
               />
               <div>
-                <h3 className="text-white font-medium">{videoData.creator}</h3>
-                <p className="text-sm text-gray-400">1.2M abonnés</p>
+                <h3 className="text-white font-medium">{videoData.channel?.name || 'Unknown'}</h3>
+                <p className="text-sm text-gray-400">{videoData.channel?.subscriber_count?.toLocaleString() || 0} abonnés</p>
               </div>
             </div>
-            <button className="px-6 py-2 bg-[#D8A0B6] hover:bg-[#C890A6] rounded-full text-white font-medium transition-colors">
-              S'abonner
-            </button>
+            {user && videoData.channel_id !== user.id && (
+              <button className="px-6 py-2 bg-[#D8A0B6] hover:bg-[#C890A6] rounded-full text-white font-medium transition-colors">
+                S'abonner
+              </button>
+            )}
           </div>
 
           <VideoActions
@@ -177,10 +250,10 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
             isLiked={isLiked}
             isDisliked={isDisliked}
             isSaved={isSaved}
-            onLike={() => setIsLiked(!isLiked)}
+            onLike={handleLike}
             onDislike={() => setIsDisliked(!isDisliked)}
             onShare={() => console.log('Share')}
-            onSave={() => setIsSaved(!isSaved)}
+            onSave={handleSave}
             onReport={() => console.log('Report')}
           />
 
@@ -193,35 +266,50 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
           </div>
 
           <CommentsPreview
-            comments={mockComments}
-            commentCount={videoData.commentCount}
+            comments={comments.map(c => ({
+              id: c.id,
+              author: c.user?.display_name || c.user?.username || 'Anonymous',
+              authorAvatar: c.user?.avatar_url || '/default-avatar.png',
+              content: c.content,
+              likes: c.likes,
+              timeAgo: new Date(c.created_at).toLocaleDateString('fr-FR')
+            }))}
+            commentCount={videoData.comment_count || 0}
             onViewAll={() => console.log('View all comments')}
           />
 
           <div className="space-y-3">
             <h3 className="text-white font-semibold">Vidéos suggérées</h3>
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="flex gap-3">
-                <div className="w-40 aspect-video bg-gray-800 rounded-lg flex-shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-white text-sm font-medium line-clamp-2 mb-1">
-                    Titre de la vidéo suggérée {i}
-                  </h4>
-                  <p className="text-xs text-gray-400">Nom de la chaîne</p>
-                  <p className="text-xs text-gray-400">100K vues • il y a 1 jour</p>
+            {relatedVideos.length === 0 ? (
+              <p className="text-gray-400 text-sm">Aucune vidéo suggérée</p>
+            ) : (
+              relatedVideos.map((video) => (
+                <div key={video.id} className="flex gap-3">
+                  <div className="w-40 aspect-video bg-gray-800 rounded-lg flex-shrink-0 overflow-hidden">
+                    {video.thumbnail_url && (
+                      <img src={video.thumbnail_url} alt={video.title} className="w-full h-full object-cover" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-white text-sm font-medium line-clamp-2 mb-1">
+                      {video.title}
+                    </h4>
+                    <p className="text-xs text-gray-400">{video.channel?.name}</p>
+                    <p className="text-xs text-gray-400">{video.views.toLocaleString()} vues</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>
 
       {isMinimized && (
         <MiniPlayer
-          videoUrl={videoData.videoUrl}
+          videoUrl={videoData.video_url}
           title={videoData.title}
-          creator={videoData.creator}
-          thumbnailUrl={videoData.thumbnailUrl}
+          creator={videoData.channel?.name || 'Unknown'}
+          thumbnailUrl={videoData.thumbnail_url || ''}
           isPlaying={isPlaying}
           onTogglePlay={() => setIsPlaying(!isPlaying)}
           onClose={() => setIsMinimized(false)}

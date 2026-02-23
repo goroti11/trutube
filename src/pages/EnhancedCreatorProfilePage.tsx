@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   ArrowLeft,
   Heart,
@@ -16,41 +16,85 @@ import {
   Camera,
   Image as ImageIcon,
   Grid3x3,
-  PlaySquare
+  PlaySquare,
+  Loader2
 } from 'lucide-react';
 import Header from '../components/Header';
+import { profileService } from '../services/profileService';
+import { channelService } from '../services/channelService';
+import { useAuth } from '../contexts/AuthContext';
 
 interface EnhancedCreatorProfilePageProps {
   onNavigate: (page: string) => void;
+  creatorId?: string;
 }
 
 type TabType = 'videos' | 'shorts' | 'live' | 'playlists' | 'posts' | 'releases' | 'about';
 
-export default function EnhancedCreatorProfilePage({ onNavigate }: EnhancedCreatorProfilePageProps) {
+export default function EnhancedCreatorProfilePage({ onNavigate, creatorId }: EnhancedCreatorProfilePageProps) {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<TabType>('videos');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [showEditBanner, setShowEditBanner] = useState(false);
 
-  // Mock data - replace with real data from props/API
-  const creator = {
-    id: '1',
-    username: 'alexbeats',
-    displayName: 'Alex Beats',
-    avatarUrl: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=150',
-    bannerUrl: 'https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=1920',
-    bio: 'Music producer and beat maker. Creating authentic content for music lovers worldwide. 🎵',
-    subscriberCount: 84000,
-    videoCount: 247,
-    totalViews: 12400000,
-    isVerified: true,
-    joinedDate: '2020-03-15',
-    links: [
-      { name: 'Instagram', url: 'https://instagram.com/alexbeats' },
-      { name: 'Twitter', url: 'https://twitter.com/alexbeats' },
-      { name: 'Website', url: 'https://alexbeats.com' }
-    ]
-  };
+  const [creator, setCreator] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadCreator = async () => {
+      if (!creatorId) {
+        setError('ID créateur manquant');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        setError(null);
+
+        const [profile, channels] = await Promise.all([
+          profileService.getProfile(creatorId),
+          channelService.getUserChannels(creatorId)
+        ]);
+
+        if (!profile) {
+          setError('Créateur non trouvé');
+          return;
+        }
+
+        const primaryChannel = channels[0];
+
+        setCreator({
+          id: profile.id,
+          username: profile.username,
+          displayName: profile.display_name,
+          avatarUrl: profile.avatar_url,
+          bannerUrl: primaryChannel?.banner_url || profile.banner_url,
+          bio: profile.bio,
+          subscriberCount: primaryChannel?.subscriber_count || 0,
+          videoCount: primaryChannel?.video_count || 0,
+          totalViews: primaryChannel?.total_views || 0,
+          isVerified: profile.is_verified,
+          joinedDate: profile.created_at,
+          links: []
+        });
+
+        if (user) {
+          const subscription = await channelService.checkSubscription(primaryChannel?.id, user.id);
+          setIsSubscribed(!!subscription);
+        }
+      } catch (err) {
+        console.error('Error loading creator:', err);
+        setError('Erreur lors du chargement du profil');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCreator();
+  }, [creatorId, user]);
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
@@ -74,6 +118,36 @@ export default function EnhancedCreatorProfilePage({ onNavigate }: EnhancedCreat
       setNotificationsEnabled(false);
     }
   };
+
+  if (loading) {
+    return (
+      <>
+        <Header onNavigate={onNavigate} showNavigation={true} />
+        <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+          <Loader2 className="w-12 h-12 text-red-600 animate-spin" />
+        </div>
+      </>
+    );
+  }
+
+  if (error || !creator) {
+    return (
+      <>
+        <Header onNavigate={onNavigate} showNavigation={true} />
+        <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
+          <div className="text-center">
+            <p className="text-xl text-white mb-4">{error || 'Créateur introuvable'}</p>
+            <button
+              onClick={() => onNavigate('/')}
+              className="px-6 py-2 bg-red-600 text-white rounded-lg"
+            >
+              Retour à l'accueil
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>

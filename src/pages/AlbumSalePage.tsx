@@ -41,74 +41,40 @@ export default function AlbumSalePage({ releaseId, onNavigate }: AlbumSalePagePr
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
   const [error, setError] = useState('');
 
-  const MOCK_RELEASE: MusicSaleRelease = {
-    id: 'demo-release-1',
-    creator_id: 'creator-1',
-    title: 'Lumières de Minuit',
-    artist_name: 'Kaïros',
-    label_name: 'IndieBeat Records',
-    isrc: 'FR-ABC-24-00001',
-    release_type: 'album',
-    genre: 'R&B / Soul',
-    cover_art_url: 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=800',
-    description: 'Un voyage sonore entre l\'âme et la nuit. 12 titres inédits enregistrés entre Paris et Los Angeles, produits par les meilleurs producteurs de la scène indépendante.',
-    rights_owned: true,
-    rights_declaration_signed_at: new Date().toISOString(),
-    territories_allowed: ['worldwide'],
-    credits: [
-      { name: 'Kaïros', role: 'Artiste principal' },
-      { name: 'NightBeat', role: 'Producteur' },
-      { name: 'Lisa M.', role: 'Auteur' },
-    ],
-    price_standard: 12.99,
-    price_promo: 9.99,
-    promo_starts_at: new Date().toISOString(),
-    promo_ends_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-    currency: 'EUR',
-    sale_type: 'lifetime',
-    access_duration_days: null,
-    is_bundle: false,
-    bundle_items: [],
-    phase: 'exclusive',
-    exclusive_starts_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-    exclusive_ends_at: new Date(Date.now() + 28 * 24 * 60 * 60 * 1000).toISOString(),
-    public_release_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-    preorder_enabled: false,
-    preorder_price: null,
-    preorder_starts_at: null,
-    preorder_ends_at: null,
-    is_limited_edition: true,
-    limited_edition_total: 1000,
-    limited_edition_sold: 347,
-    total_sales: 347,
-    total_revenue: 3468.53,
-    platform_commission_rate: 0.15,
-    video_id: null,
-    preview_url: '',
-    distribution_level: 'independent',
-    label_mandate_verified: false,
-    is_active: true,
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  };
-
   useEffect(() => {
     loadRelease();
-  }, [releaseId]);
+  }, [releaseId, user]);
 
   async function loadRelease() {
+    if (!releaseId) {
+      setError('ID de sortie manquant');
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
-    if (releaseId) {
+    setError('');
+
+    try {
       const r = await musicSalesService.getRelease(releaseId);
-      setRelease(r || MOCK_RELEASE);
-      if (r && user) {
+      if (!r) {
+        setError('Sortie non trouvée');
+        setLoading(false);
+        return;
+      }
+
+      setRelease(r);
+
+      if (user) {
         const purchase = await musicSalesService.getUserPurchase(releaseId, user.id);
         setUserPurchase(purchase);
       }
-    } else {
-      setRelease(MOCK_RELEASE);
+    } catch (err) {
+      console.error('Error loading release:', err);
+      setError('Erreur lors du chargement de la sortie');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   async function handlePurchase() {
