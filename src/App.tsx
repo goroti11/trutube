@@ -1,783 +1,148 @@
-import { useState, useEffect, useRef } from 'react';
-import Header from './components/Header';
-import { Footer } from './components/Footer';
-import InstallPWA from './components/InstallPWA';
-import HomePage from './pages/HomePage';
-import UniverseViewPage from './pages/UniverseViewPage';
-import VideoPlayerPage from './pages/VideoPlayerPage';
-import ProfilePage from './pages/ProfilePage';
-import { UserProfilePage } from './pages/UserProfilePage';
-import SubscriptionPage from './pages/SubscriptionPage';
-import UniverseBrowsePage from './pages/UniverseBrowsePage';
-import CreatorSetupPage from './pages/CreatorSetupPage';
-import FeedPreferencesPage from './pages/FeedPreferencesPage';
-import { AuthPage } from './pages/AuthPage';
-import { SettingsPage } from './pages/SettingsPage';
-import { TermsPage } from './pages/TermsPage';
-import { PrivacyPage } from './pages/PrivacyPage';
-import { SupportPage } from './pages/SupportPage';
-import { AboutPage } from './pages/AboutPage';
-import AdCampaignPage from './pages/AdCampaignPage';
-import { HelpCenterPage } from './pages/HelpCenterPage';
-import { LegalPage } from './pages/LegalPage';
-import { LoadingScreen } from './components/LoadingScreen';
-import SplashScreen from './components/SplashScreen';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { Video } from './types';
-import MobileVideoPage from './pages/MobileVideoPage';
-import VideoUploadPage from './pages/VideoUploadPage';
-import CreatorDashboardV2Page from './pages/CreatorDashboardV2Page';
-import CreatorStudioPage from './pages/CreatorStudioPage';
-import WatchPage from './pages/WatchPage';
-import PartnerProgramPage from './pages/PartnerProgramPage';
-import CommunityListPage from './pages/CommunityListPage';
-import CommunityPage from './pages/CommunityPage';
-import CreatePostPage from './pages/CreatePostPage';
-import CreateCommunityPage from './pages/CreateCommunityPage';
-import CommunitySettingsPage from './pages/CommunitySettingsPage';
-import TruCoinWalletPage from './pages/TruCoinWalletPage';
-import PremiumPage from './pages/PremiumPage';
-import MyProfileTestPage from './pages/MyProfileTestPage';
-import GlobalMiniPlayer from './components/video/GlobalMiniPlayer';
-import { usePlayerStore } from './store/playerStore';
-import EnhancedCreatorProfilePage from './pages/EnhancedCreatorProfilePage';
-import WatchHistoryPage from './pages/WatchHistoryPage';
-import SubscribersPage from './pages/SubscribersPage';
-import PremiumOffersPage from './pages/PremiumOffersPage';
-import CommunityPremiumPricingPage from './pages/CommunityPremiumPricingPage';
-import AppearanceSettingsPage from './pages/AppearanceSettingsPage';
-import SecurityDashboardPage from './pages/SecurityDashboardPage';
-import LiveStreamingPage from './pages/LiveStreamingPage';
-import AlbumSalePage from './pages/AlbumSalePage';
-import MusicMarketplacePage from './pages/MusicMarketplacePage';
-import CreateReleasePage from './pages/CreateReleasePage';
-import LegalProfilePage from './pages/LegalProfilePage';
-import MyChannelsPage from './pages/MyChannelsPage';
-import ChannelEditPage from './pages/ChannelEditPage';
-import ChannelTeamPage from './pages/ChannelTeamPage';
-import ChannelAnalyticsPage from './pages/ChannelAnalyticsPage';
-import RevenueModelPage from './pages/RevenueModelPage';
-import ShortsSystemPage from './pages/ShortsSystemPage';
-import NativeSponsoringPage from './pages/NativeSponsoringPage';
-import CookieBanner from './components/CookieBanner';
-import NotificationManager from './components/NotificationManager';
-import EnterprisePage from './pages/EnterprisePage';
-import CareerPage from './pages/CareerPage';
-import PricingPage from './pages/PricingPage';
-import ResourcesPage from './pages/ResourcesPage';
-import OfficialCommunityPage from './pages/OfficialCommunityPage';
-import CopyrightPolicyPage from './pages/CopyrightPolicyPage';
-import FinancialTermsPage from './pages/FinancialTermsPage';
-import SavedVideosPage from './pages/SavedVideosPage';
-import ReferralPage from './pages/ReferralPage';
-import StatusPage from './pages/StatusPage';
-import ChannelPage from './pages/ChannelPage';
-import BlogPage from './pages/BlogPage';
-import BlogArticlePage from './pages/BlogArticlePage';
-import AdvertiserDashboardPage from './pages/AdvertiserDashboardPage';
-import CreateAdCampaignPage from './pages/CreateAdCampaignPage';
-import AdPaymentPage from './pages/AdPaymentPage';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { HomePage } from './pages/HomePage';
+import { LoginPage } from './pages/LoginPage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral' | 'channel' | 'blog' | 'blog-article' | 'advertiser-dashboard' | 'create-ad-campaign' | 'ad-payment';
-
-export const navigate = (page: string) => {
-  window.location.hash = page;
-};
-
-function AppContent() {
-  const { loading } = useAuth();
-  const [showSplash, setShowSplash] = useState(true);
-  const [currentPage, setCurrentPage] = useState<Page>('home');
-  const [selectedUniverse, setSelectedUniverse] = useState<string | null>(null);
-  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
-  const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [communitySlug, setCommunitySlug] = useState<string | null>(null);
-  const [postCommunitySlug, setPostCommunitySlug] = useState<string | null>(null);
-  const [settingsCommunitySlug, setSettingsCommunitySlug] = useState<string | null>(null);
-  const [channelEditId, setChannelEditId] = useState<string | null>(null);
-  const [channelTeamId, setChannelTeamId] = useState<string | null>(null);
-  const [channelAnalyticsId, setChannelAnalyticsId] = useState<string | null>(null);
-  const [blogArticleSlug, setBlogArticleSlug] = useState<string | null>(null);
-
-  const { setIsMiniPlayer, currentVideo } = usePlayerStore();
-
-  useEffect(() => {
-    const hasSeenSplash = sessionStorage.getItem('hasSeenSplash');
-    if (hasSeenSplash) {
-      setShowSplash(false);
-    }
-  }, []);
-
-  const handleSplashComplete = () => {
-    sessionStorage.setItem('hasSeenSplash', 'true');
-    setShowSplash(false);
-  };
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.slice(1);
-
-      if (hash === 'mobile') {
-        setCurrentPage('mobile-demo');
-        setShowSplash(false);
-        return;
-      }
-
-      if (hash.startsWith('community/')) {
-        const slug = hash.split('/')[1];
-        if (slug) {
-          setCommunitySlug(slug);
-          setCurrentPage('community-view');
-          setShowSplash(false);
-        }
-        return;
-      }
-
-      if (hash.startsWith('create-post/')) {
-        const slug = hash.split('/')[1];
-        if (slug) {
-          setPostCommunitySlug(slug);
-          setCurrentPage('create-post');
-          setShowSplash(false);
-        }
-        return;
-      }
-
-      if (hash === 'community') {
-        setCurrentPage('community');
-        setCommunitySlug(null);
-        setShowSplash(false);
-        return;
-      }
-
-      if (hash === 'create-community') {
-        setCurrentPage('create-community');
-        setShowSplash(false);
-        return;
-      }
-
-      if (hash === 'profile-test') {
-        setCurrentPage('profile-test');
-        setShowSplash(false);
-        return;
-      }
-
-      if (hash.startsWith('community-settings/')) {
-        const slug = hash.split('/')[1];
-        if (slug) {
-          setSettingsCommunitySlug(slug);
-          setCurrentPage('community-settings');
-          setShowSplash(false);
-        }
-        return;
-      }
-
-      if (hash.startsWith('channel-edit/')) {
-        const channelId = hash.split('/')[1];
-        if (channelId) {
-          setChannelEditId(channelId);
-          setCurrentPage('channel-edit');
-          setShowSplash(false);
-        }
-        return;
-      }
-
-      if (hash.startsWith('channel-team/')) {
-        const channelId = hash.split('/')[1];
-        if (channelId) {
-          setChannelTeamId(channelId);
-          setCurrentPage('channel-team');
-          setShowSplash(false);
-        }
-        return;
-      }
-
-      if (hash.startsWith('channel-analytics/')) {
-        const channelId = hash.split('/')[1];
-        if (channelId) {
-          setChannelAnalyticsId(channelId);
-          setCurrentPage('channel-analytics');
-          setShowSplash(false);
-        }
-        return;
-      }
-
-      if (hash.startsWith('channel/')) {
-        setCurrentPage('channel');
-        setShowSplash(false);
-        return;
-      }
-
-      if (hash.startsWith('blog/')) {
-        const slug = hash.split('/')[1];
-        if (slug) {
-          setBlogArticleSlug(slug);
-          setCurrentPage('blog-article');
-          setShowSplash(false);
-        }
-        return;
-      }
-
-      // Handle generic page routes
-      const pageMap: Record<string, Page> = {
-        'blog': 'blog',
-        'premium': 'premium',
-        'auth': 'auth',
-        'settings': 'settings',
-        'trucoin-wallet': 'trucoin-wallet',
-        'partner-program': 'partner-program',
-        'upload': 'upload',
-        'dashboard': 'dashboard',
-        'creator-dashboard': 'creator-dashboard',
-        'studio': 'studio',
-        'studio-v3': 'studio-v3',
-        'ad-campaign': 'ad-campaign',
-        'advertiser-dashboard': 'advertiser-dashboard',
-        'create-ad-campaign': 'create-ad-campaign',
-        'ad-payment': 'ad-payment',
-        'premium-offers': 'premium-offers',
-        'community-premium-pricing': 'community-premium-pricing',
-        'appearance-settings': 'appearance-settings',
-        'security-dashboard': 'security-dashboard',
-        'album-sale': 'album-sale',
-        'marketplace': 'marketplace',
-        'create-release': 'create-release',
-        'live-streaming': 'live-streaming',
-        'terms': 'terms',
-        'privacy': 'privacy',
-        'support': 'support',
-        'about': 'about',
-        'help': 'help',
-        'legal': 'legal',
-        'subscription': 'subscription',
-        'universes': 'universes',
-        'creator-setup': 'creator-setup',
-        'preferences': 'preferences',
-        'my-profile': 'my-profile',
-        'enhanced-profile': 'enhanced-profile',
-        'watch-history': 'watch-history',
-        'subscribers': 'subscribers',
-        'legal-profile': 'legal-profile',
-        'my-channels': 'my-channels',
-        'revenue-model': 'revenue-model',
-        'shorts-system': 'shorts-system',
-        'native-sponsoring': 'native-sponsoring',
-        'enterprise': 'enterprise',
-        'careers': 'careers',
-        'pricing': 'pricing',
-        'resources': 'resources',
-        'official-community': 'official-community',
-        'copyright-policy': 'copyright-policy',
-        'financial-terms': 'financial-terms',
-        'saved-videos': 'saved-videos',
-        'referral': 'referral',
-        'status': 'status',
-      };
-
-      if (hash in pageMap) {
-        setCurrentPage(pageMap[hash]);
-        setShowSplash(false);
-        return;
-      }
-
-      // Handle routes with parameters
-      if (hash.startsWith('universe/')) {
-        const universeId = hash.split('/')[1];
-        if (universeId) {
-          setSelectedUniverse(universeId);
-          setCurrentPage('universe');
-          setShowSplash(false);
-        }
-        return;
-      }
-
-      if (hash.startsWith('watch/')) {
-        const videoId = hash.split('/')[1];
-        if (videoId) {
-          setSelectedVideoId(videoId);
-          setCurrentPage('watch');
-          setShowSplash(false);
-        }
-        return;
-      }
-
-      if (hash.startsWith('profile/')) {
-        const username = hash.split('/')[1];
-        if (username) {
-          setCurrentPage('profile');
-          setShowSplash(false);
-        }
-        return;
-      }
-
-      // Default to home if no match
-      if (hash === '' || hash === 'home') {
-        setCurrentPage('home');
-        setShowSplash(false);
-      }
-    };
-
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
-
-  const [pageTransition, setPageTransition] = useState(false);
-  const prevPageRef = useRef(currentPage);
-
-  useEffect(() => {
-    if (prevPageRef.current !== currentPage) {
-      setPageTransition(true);
-      window.scrollTo({ top: 0 });
-      const timer = setTimeout(() => setPageTransition(false), 20);
-      prevPageRef.current = currentPage;
-      return () => clearTimeout(timer);
-    }
-  }, [currentPage]);
-
-  // Handle MiniPlayer when leaving watch page
-  useEffect(() => {
-    if (currentPage !== 'watch' && currentVideo && currentPage !== 'mobile-demo') {
-      setIsMiniPlayer(true);
-    } else if (currentPage === 'watch') {
-      setIsMiniPlayer(false);
-    }
-  }, [currentPage, currentVideo, setIsMiniPlayer]);
-
-
-  if (showSplash) {
-    return <SplashScreen onComplete={handleSplashComplete} />;
-  }
-
-  const handleUniverseClick = (universeId: string) => {
-    setSelectedUniverse(universeId);
-    setCurrentPage('universe');
-  };
-
-  const handleVideoClick = (video: Video) => {
-    setSelectedVideo(video);
-    setSelectedVideoId(video.id);
-    setCurrentPage('watch');
-  };
-
-
-  const handleSupportClick = (user: User) => {
-    setSelectedUser(user);
-    setCurrentPage('subscription');
-  };
-
-  const handleBackToHome = () => {
-    setCurrentPage('home');
-    setSelectedUniverse(null);
-    setSelectedVideo(null);
-    setSelectedUser(null);
-  };
-
-  const handleBackToUniverse = () => {
-    setCurrentPage('universe');
-    setSelectedVideo(null);
-  };
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { user, loading } = useAuth();
 
   if (loading) {
-    return <LoadingScreen />;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
+      </div>
+    );
   }
 
-  return (
-    <div className="min-h-screen bg-gray-950">
-      <div
-        className="transition-opacity duration-200 ease-in-out"
-        style={{ opacity: pageTransition ? 0 : 1 }}
-      >
-      {currentPage === 'auth' && <AuthPage />}
-
-      {currentPage === 'studio' && (
-        <CreatorStudioPage onNavigate={(page) => setCurrentPage(page as Page)} />
-      )}
-
-      {currentPage === 'live-streaming' && (
-        <LiveStreamingPage onNavigate={(page) => setCurrentPage(page as Page)} />
-      )}
-
-      {currentPage === 'partner-program' && <PartnerProgramPage />}
-
-        {currentPage === 'home' && (
-          <>
-            <Header
-              onNavigate={(page) => setCurrentPage(page as Page)}
-              showNavigation={false}
-            />
-            <HomePage onUniverseClick={handleUniverseClick} />
-          </>
-        )}
-
-        {currentPage === 'universe' && selectedUniverse && (
-          <>
-            <Header
-              onNavigate={(page) => setCurrentPage(page as Page)}
-              showNavigation={true}
-            />
-            <UniverseViewPage
-              universeId={selectedUniverse}
-              onBack={handleBackToHome}
-              onVideoClick={handleVideoClick}
-            />
-          </>
-        )}
-
-        {currentPage === 'watch' && selectedVideoId && (
-          <WatchPage
-            videoId={selectedVideoId}
-            onNavigate={(page, data) => {
-              if (page === 'watch' && data?.videoId) {
-                setSelectedVideoId(data.videoId);
-              } else if (page === 'profile' && data?.userId) {
-                setCurrentPage('my-profile');
-              } else {
-                setCurrentPage(page as Page);
-              }
-            }}
-          />
-        )}
-
-        {currentPage === 'video' && selectedVideo && (
-          <VideoPlayerPage
-            video={selectedVideo}
-            relatedVideos={[]}
-            onBack={selectedUniverse ? handleBackToUniverse : handleBackToHome}
-            onVideoClick={(videoId) => {
-              setSelectedVideoId(videoId);
-              setCurrentPage('watch');
-            }}
-            onNavigateHome={handleBackToHome}
-          />
-        )}
-
-        {currentPage === 'profile' && selectedUser && (
-          <ProfilePage
-            user={selectedUser}
-            onBack={handleBackToHome}
-            onVideoClick={handleVideoClick}
-            onSupportClick={() => handleSupportClick(selectedUser)}
-          />
-        )}
-
-        {currentPage === 'my-profile' && (
-          <UserProfilePage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'subscription' && selectedUser && (
-          <SubscriptionPage user={selectedUser} onBack={handleBackToHome} />
-        )}
-
-        {currentPage === 'universes' && <UniverseBrowsePage />}
-
-        {currentPage === 'creator-setup' && <CreatorSetupPage />}
-
-        {currentPage === 'preferences' && <FeedPreferencesPage />}
-
-        {currentPage === 'upload' && (
-          <VideoUploadPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {(currentPage === 'dashboard' || currentPage === 'creator-dashboard') && (
-          <CreatorDashboardV2Page onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'ad-campaign' && <AdCampaignPage />}
-
-        {currentPage === 'settings' && (
-          <SettingsPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'terms' && (
-          <TermsPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'privacy' && (
-          <PrivacyPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'support' && (
-          <SupportPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'about' && (
-          <AboutPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'help' && (
-          <HelpCenterPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'legal' && (
-          <LegalPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'blog' && (
-          <BlogPage onNavigate={(page, params) => {
-            if (page === 'blog-article' && params?.slug) {
-              setBlogArticleSlug(params.slug);
-              setCurrentPage('blog-article');
-            } else {
-              setCurrentPage(page as Page);
-            }
-          }} />
-        )}
-
-        {currentPage === 'blog-article' && blogArticleSlug && (
-          <BlogArticlePage
-            slug={blogArticleSlug}
-            onNavigate={(page, params) => {
-              if (page === 'blog-article' && params?.slug) {
-                setBlogArticleSlug(params.slug);
-              } else if (page === 'blog') {
-                setCurrentPage('blog');
-              } else {
-                setCurrentPage(page as Page);
-              }
-            }}
-          />
-        )}
-
-        {currentPage === 'community' && <CommunityListPage />}
-
-        {currentPage === 'community-view' && communitySlug && (
-          <CommunityPage slug={communitySlug} />
-        )}
-
-        {currentPage === 'create-post' && postCommunitySlug && (
-          <CreatePostPage slug={postCommunitySlug} />
-        )}
-
-        {currentPage === 'create-community' && <CreateCommunityPage />}
-
-        {currentPage === 'community-settings' && settingsCommunitySlug && (
-          <CommunitySettingsPage slug={settingsCommunitySlug} />
-        )}
-
-        {currentPage === 'trucoin-wallet' && <TruCoinWalletPage />}
-
-        {currentPage === 'premium' && <PremiumPage />}
-
-        {currentPage === 'profile-test' && <MyProfileTestPage />}
-
-        {currentPage === 'enhanced-profile' && (
-          <EnhancedCreatorProfilePage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'watch-history' && (
-          <WatchHistoryPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'subscribers' && (
-          <SubscribersPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'premium-offers' && (
-          <PremiumOffersPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'community-premium-pricing' && (
-          <CommunityPremiumPricingPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'appearance-settings' && (
-          <AppearanceSettingsPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'security-dashboard' && (
-          <SecurityDashboardPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'album-sale' && (
-          <AlbumSalePage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'marketplace' && (
-          <MusicMarketplacePage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'create-release' && (
-          <CreateReleasePage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'legal-profile' && (
-          <LegalProfilePage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'my-channels' && (
-          <MyChannelsPage onNavigate={(page) => {
-            if (page.startsWith('channel-edit/')) {
-              const id = page.split('/')[1];
-              setChannelEditId(id);
-              setCurrentPage('channel-edit');
-            } else if (page.startsWith('channel-team/')) {
-              const id = page.split('/')[1];
-              setChannelTeamId(id);
-              setCurrentPage('channel-team');
-            } else if (page.startsWith('channel-analytics/')) {
-              const id = page.split('/')[1];
-              setChannelAnalyticsId(id);
-              setCurrentPage('channel-analytics');
-            } else {
-              setCurrentPage(page as Page);
-            }
-          }} />
-        )}
-
-        {currentPage === 'channel-edit' && channelEditId && (
-          <ChannelEditPage
-            channelId={channelEditId}
-            onNavigate={(page) => {
-              if (page.startsWith('channel-edit/')) {
-                const id = page.split('/')[1];
-                setChannelEditId(id);
-              } else if (page.startsWith('channel-team/')) {
-                const id = page.split('/')[1];
-                setChannelTeamId(id);
-                setCurrentPage('channel-team');
-              } else if (page.startsWith('channel-analytics/')) {
-                const id = page.split('/')[1];
-                setChannelAnalyticsId(id);
-                setCurrentPage('channel-analytics');
-              } else {
-                setCurrentPage(page as Page);
-              }
-            }}
-          />
-        )}
-
-        {currentPage === 'channel-team' && channelTeamId && (
-          <ChannelTeamPage
-            channelId={channelTeamId}
-            onNavigate={(page) => {
-              if (page.startsWith('channel-edit/')) {
-                const id = page.split('/')[1];
-                setChannelEditId(id);
-                setCurrentPage('channel-edit');
-              } else {
-                setCurrentPage(page as Page);
-              }
-            }}
-          />
-        )}
-
-        {currentPage === 'channel-analytics' && channelAnalyticsId && (
-          <ChannelAnalyticsPage
-            channelId={channelAnalyticsId}
-            onNavigate={(page) => {
-              if (page.startsWith('channel-edit/')) {
-                const id = page.split('/')[1];
-                setChannelEditId(id);
-                setCurrentPage('channel-edit');
-              } else {
-                setCurrentPage(page as Page);
-              }
-            }}
-          />
-        )}
-
-        {currentPage === 'revenue-model' && (
-          <RevenueModelPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'shorts-system' && (
-          <ShortsSystemPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'native-sponsoring' && (
-          <NativeSponsoringPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'enterprise' && (
-          <EnterprisePage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'careers' && (
-          <CareerPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'pricing' && (
-          <PricingPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'resources' && (
-          <ResourcesPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'channel' && <ChannelPage />}
-
-        {currentPage === 'status' && (
-          <StatusPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'official-community' && (
-          <OfficialCommunityPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'copyright-policy' && (
-          <CopyrightPolicyPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'financial-terms' && (
-          <FinancialTermsPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'saved-videos' && (
-          <SavedVideosPage
-            onNavigate={(page) => setCurrentPage(page as Page)}
-            onVideoClick={(videoId) => {
-              setSelectedVideoId(videoId);
-              setCurrentPage('watch');
-            }}
-          />
-        )}
-
-        {currentPage === 'referral' && (
-          <ReferralPage onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
-
-        {currentPage === 'advertiser-dashboard' && (
-          <AdvertiserDashboardPage />
-        )}
-
-        {currentPage === 'create-ad-campaign' && (
-          <CreateAdCampaignPage />
-        )}
-
-        {currentPage === 'ad-payment' && (
-          <AdPaymentPage />
-        )}
-
-        {currentPage !== 'auth' && currentPage !== 'video' && currentPage !== 'watch' && (
-          <Footer onNavigate={(page) => setCurrentPage(page as Page)} />
-        )}
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
+  return <>{children}</>;
+}
+
+function PublicRoute({ children }: { children: React.ReactNode }) {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
       </div>
+    );
+  }
 
-        <CookieBanner />
-        <NotificationManager />
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
-        {currentVideo && currentPage !== 'watch' && currentPage !== 'mobile-demo' && (
-          <GlobalMiniPlayer
-            onNavigateToPlayer={() => {
-              if (currentVideo.id) {
-                setSelectedVideoId(currentVideo.id);
-                setCurrentPage('watch');
-              }
-            }}
-          />
-        )}
+  return <>{children}</>;
+}
 
-        <InstallPWA />
+function AppLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-1">{children}</main>
+      <Footer />
     </div>
   );
 }
 
-export default function App() {
+function App() {
   return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            path="/"
+            element={
+              <AppLayout>
+                <HomePage />
+              </AppLayout>
+            }
+          />
+
+          <Route
+            path="/legende"
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <div className="container section">
+                    <h1 className="text-4xl font-bold mb-4">LÉGENDE</h1>
+                    <p className="text-neutral-400">
+                      Le système LÉGENDE sera bientôt disponible ici.
+                    </p>
+                  </div>
+                </AppLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/gaming"
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <div className="container section">
+                    <h1 className="text-4xl font-bold mb-4">Gaming Division</h1>
+                    <p className="text-neutral-400">
+                      Les tournois et classements seront bientôt disponibles.
+                    </p>
+                  </div>
+                </AppLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/live"
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <div className="container section">
+                    <h1 className="text-4xl font-bold mb-4">Live Streaming</h1>
+                    <p className="text-neutral-400">
+                      La section live sera bientôt disponible.
+                    </p>
+                  </div>
+                </AppLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/music"
+            element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <div className="container section">
+                    <h1 className="text-4xl font-bold mb-4">Music</h1>
+                    <p className="text-neutral-400">
+                      La plateforme musicale sera bientôt disponible.
+                    </p>
+                  </div>
+                </AppLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
+
+export default App;
