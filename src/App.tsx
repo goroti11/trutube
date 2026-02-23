@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
 import { NotificationBell } from './components/NotificationBell';
 import { GamingLayout } from './modules/gaming/layouts/GamingLayout';
 import { GamingHub } from './modules/gaming/pages/GamingHub';
 import { Tournaments } from './modules/gaming/pages/Tournaments';
 import { Leaderboards } from './modules/gaming/pages/Leaderboards';
+import { LegendPage } from './pages/LegendPage';
+import { HallOfFamePage } from './pages/HallOfFamePage';
 
 function LoginPage() {
   const { signIn } = useAuth();
@@ -75,15 +77,23 @@ function HomePage() {
     <div className="min-h-screen bg-gray-900 text-white">
       <nav className="bg-gray-800 border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <h1 className="text-2xl font-bold">GOROTI</h1>
+          <Link to="/" className="text-2xl font-bold hover:text-yellow-400 transition-colors">
+            GOROTI
+          </Link>
           <div className="flex items-center gap-4">
-            <NotificationBell />
-            <a
-              href="/gaming"
+            <Link
+              to="/legende"
+              className="px-4 py-2 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-lg hover:from-yellow-500 hover:to-orange-500 transition-colors font-semibold"
+            >
+              🏛️ LÉGENDE
+            </Link>
+            <Link
+              to="/gaming"
               className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
             >
               Gaming Division
-            </a>
+            </Link>
+            <NotificationBell />
           </div>
         </div>
       </nav>
@@ -93,15 +103,25 @@ function HomePage() {
           <p className="text-xl text-gray-400 mb-8">
             Enterprise-grade streaming and gaming platform
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <Link
+              to="/legende"
+              className="bg-gradient-to-br from-yellow-600 to-orange-600 p-6 rounded-xl hover:scale-105 transition-transform"
+            >
+              <h3 className="text-xl font-bold mb-2">🏛️ LÉGENDE</h3>
+              <p className="text-yellow-100">Contenu exceptionnel</p>
+            </Link>
             <div className="bg-gray-800 p-6 rounded-xl">
               <h3 className="text-xl font-bold mb-2">Live Streaming</h3>
               <p className="text-gray-400">Stream and watch live content</p>
             </div>
-            <div className="bg-gray-800 p-6 rounded-xl">
+            <Link
+              to="/gaming"
+              className="bg-gray-800 p-6 rounded-xl hover:bg-gray-700 transition-colors"
+            >
               <h3 className="text-xl font-bold mb-2">Gaming Division</h3>
               <p className="text-gray-400">Compete in tournaments</p>
-            </div>
+            </Link>
             <div className="bg-gray-800 p-6 rounded-xl">
               <h3 className="text-xl font-bold mb-2">TruCoins</h3>
               <p className="text-gray-400">Platform virtual currency</p>
@@ -141,6 +161,22 @@ export default function App() {
           element={
             <ProtectedRoute>
               <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/legende"
+          element={
+            <ProtectedRoute>
+              <LegendPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/hall-of-fame"
+          element={
+            <ProtectedRoute>
+              <HallOfFamePage />
             </ProtectedRoute>
           }
         />
