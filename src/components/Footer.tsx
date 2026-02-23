@@ -1,119 +1,266 @@
-import { Link } from 'react-router-dom';
-import { Play, Twitter, Youtube, Twitch } from 'lucide-react';
+import { Play, Facebook, Twitter, Instagram, Youtube, Mail } from 'lucide-react';
 
-export function Footer() {
+interface FooterProps {
+  onNavigate: (page: string) => void;
+}
+
+export const Footer = ({ onNavigate }: FooterProps) => {
   return (
-    <footer className="bg-neutral-900 border-t border-neutral-800 mt-auto">
-      <div className="container py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-gray-900 border-t border-gray-800 mt-20">
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
-                <Play className="w-5 h-5 text-white" fill="white" />
+            <div className="flex items-center gap-2 mb-4">
+              <div className="bg-gradient-to-br from-cyan-500 to-cyan-600 p-2 rounded-lg">
+                <Play className="w-5 h-5 text-white fill-white" />
               </div>
-              <span className="text-xl font-bold text-gradient text-gradient-primary">
-                GOROTI
-              </span>
+              <span className="text-xl font-bold text-white">Goroti</span>
             </div>
-            <p className="text-neutral-400 text-sm">
-              La plateforme nouvelle génération pour le streaming, le gaming et la musique.
+            <p className="text-gray-400 text-sm mb-4">
+              La plateforme de partage vidéo qui valorise l'authenticité et récompense les vrais créateurs.
             </p>
-          </div>
-
-          <div>
-            <h3 className="font-bold text-white mb-4">Plateforme</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/legende" className="text-neutral-400 hover:text-white transition-colors">
-                  LÉGENDE
-                </Link>
-              </li>
-              <li>
-                <Link to="/gaming" className="text-neutral-400 hover:text-white transition-colors">
-                  Gaming
-                </Link>
-              </li>
-              <li>
-                <Link to="/live" className="text-neutral-400 hover:text-white transition-colors">
-                  Live Streaming
-                </Link>
-              </li>
-              <li>
-                <Link to="/music" className="text-neutral-400 hover:text-white transition-colors">
-                  Music
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-bold text-white mb-4">Communauté</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/about" className="text-neutral-400 hover:text-white transition-colors">
-                  À propos
-                </Link>
-              </li>
-              <li>
-                <Link to="/help" className="text-neutral-400 hover:text-white transition-colors">
-                  Aide
-                </Link>
-              </li>
-              <li>
-                <Link to="/careers" className="text-neutral-400 hover:text-white transition-colors">
-                  Carrières
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog" className="text-neutral-400 hover:text-white transition-colors">
-                  Blog
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-bold text-white mb-4">Suivez-nous</h3>
             <div className="flex gap-3">
               <a
-                href="#"
-                className="w-10 h-10 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center transition-colors"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
               >
-                <Twitter className="w-5 h-5 text-cyan-400" />
+                <Facebook className="w-5 h-5 text-gray-400" />
               </a>
               <a
-                href="#"
-                className="w-10 h-10 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center transition-colors"
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
               >
-                <Youtube className="w-5 h-5 text-red-500" />
+                <Twitter className="w-5 h-5 text-gray-400" />
               </a>
               <a
-                href="#"
-                className="w-10 h-10 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center transition-colors"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
               >
-                <Twitch className="w-5 h-5" style={{ color: '#9146FF' }} />
+                <Instagram className="w-5 h-5 text-gray-400" />
               </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+              >
+                <Youtube className="w-5 h-5 text-gray-400" />
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold mb-4">Plateforme</h3>
+            <ul className="space-y-2">
+              <li>
+                <button
+                  onClick={() => onNavigate('home')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Accueil
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('universes')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Explorer les univers
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('creator-setup')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Devenir créateur
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('preferences')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Préférences de feed
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold mb-4">Ressources</h3>
+            <ul className="space-y-2">
+              <li>
+                <button
+                  onClick={() => onNavigate('blog')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Blog
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('about')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  À propos
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('help')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Centre d'aide
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('support')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Support
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('careers')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Carrières
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('enterprise')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Entreprise
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('resources')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Ressources
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('terms')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Conditions d'utilisation
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('privacy')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Politique de confidentialité
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('legal')}
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
+                >
+                  Mentions légales
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold mb-4">Contact</h3>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="mailto:support@goroti.com"
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors flex items-center gap-2"
+                >
+                  <Mail className="w-4 h-4" />
+                  support@goroti.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:creators@goroti.com"
+                  className="text-gray-400 hover:text-cyan-400 text-sm transition-colors flex items-center gap-2"
+                >
+                  <Mail className="w-4 h-4" />
+                  creators@goroti.com
+                </a>
+              </li>
+            </ul>
+
+            <div className="mt-6">
+              <h4 className="text-white font-semibold mb-2 text-sm">Newsletter</h4>
+              <p className="text-gray-400 text-xs mb-2">
+                Restez informé des nouveautés
+              </p>
+              <div className="flex gap-2">
+                <input
+                  type="email"
+                  placeholder="Votre email"
+                  className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                />
+                <button className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg text-sm transition-colors">
+                  OK
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-neutral-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-neutral-500 text-sm">
-            © 2024 GOROTI. Tous droits réservés.
-          </p>
-          <div className="flex gap-6 text-sm text-neutral-500">
-            <Link to="/privacy" className="hover:text-white transition-colors">
-              Confidentialité
-            </Link>
-            <Link to="/terms" className="hover:text-white transition-colors">
-              Conditions
-            </Link>
-            <Link to="/cookies" className="hover:text-white transition-colors">
-              Cookies
-            </Link>
+        <div className="pt-8 border-t border-gray-800">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-400 text-sm">
+              © {new Date().getFullYear()} Goroti. Tous droits réservés.
+            </p>
+            <div className="flex flex-wrap gap-4 text-sm">
+              <button
+                onClick={() => onNavigate('terms')}
+                className="text-gray-400 hover:text-cyan-400 transition-colors"
+              >
+                CGU
+              </button>
+              <button
+                onClick={() => onNavigate('privacy')}
+                className="text-gray-400 hover:text-cyan-400 transition-colors"
+              >
+                Confidentialité
+              </button>
+              <button
+                onClick={() => onNavigate('legal')}
+                className="text-gray-400 hover:text-cyan-400 transition-colors"
+              >
+                Mentions légales
+              </button>
+              <button
+                onClick={() => onNavigate('help')}
+                className="text-gray-400 hover:text-cyan-400 transition-colors"
+              >
+                Aide
+              </button>
+              <button
+                onClick={() => onNavigate('support')}
+                className="text-gray-400 hover:text-cyan-400 transition-colors"
+              >
+                Support
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </footer>
   );
-}
+};
