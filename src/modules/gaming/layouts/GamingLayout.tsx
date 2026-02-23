@@ -1,78 +1,59 @@
-import { ReactNode } from 'react';
-import { Gamepad2, Trophy, Users, TrendingUp, Wallet, Home, Clock } from 'lucide-react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import { LegalAcceptanceGate } from '../../../components/LegalAcceptanceGate';
 
-interface GamingLayoutProps {
-  children: ReactNode;
-  activeTab?: string;
-  onNavigate: (page: string) => void;
-}
+export function GamingLayout() {
+  const location = useLocation();
 
-export function GamingLayout({ children, activeTab, onNavigate }: GamingLayoutProps) {
-  const tabs = [
-    { id: 'gaming-hub', label: 'Hub', icon: Home },
-    { id: 'gaming-tournaments', label: 'Tournaments', icon: Trophy },
-    { id: 'gaming-teams', label: 'Teams', icon: Users },
-    { id: 'gaming-leaderboards', label: 'Leaderboards', icon: TrendingUp },
-    { id: 'gaming-seasons', label: 'Seasons', icon: Clock },
-    { id: 'gaming-arena-fund', label: 'Arena Fund', icon: Wallet }
+  const navItems = [
+    { path: '/gaming', label: 'Hub', exact: true },
+    { path: '/gaming/live', label: 'Live' },
+    { path: '/gaming/tournaments', label: 'Tournaments' },
+    { path: '/gaming/teams', label: 'Teams' },
+    { path: '/gaming/leaderboards', label: 'Leaderboards' },
+    { path: '/gaming/seasons', label: 'Seasons' },
+    { path: '/gaming/arena-fund', label: 'Arena Fund' },
+    { path: '/gaming/studio', label: 'Studio' },
   ];
 
+  const isActive = (path: string, exact?: boolean) => {
+    if (exact) return location.pathname === path;
+    return location.pathname.startsWith(path);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-purple-950/30 to-gray-950">
-      {/* Gaming Header */}
-      <div className="bg-gray-900/80 backdrop-blur-md border-b border-purple-500/20 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between py-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg">
-                <Gamepad2 className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+    <LegalAcceptanceGate domain="gaming">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+        <nav className="bg-black bg-opacity-50 backdrop-blur-sm border-b border-blue-500 border-opacity-30">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex items-center justify-between h-16">
+              <div className="flex items-center gap-2">
+                <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                   GOROTI GAMING
-                </h1>
-                <p className="text-xs text-gray-400">Competitive Gaming Division</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                      isActive(item.path, item.exact)
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/50'
+                        : 'text-gray-300 hover:text-white hover:bg-white hover:bg-opacity-10'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </div>
             </div>
-
-            <button
-              onClick={() => onNavigate('home')}
-              className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg transition-colors text-sm"
-            >
-              Back to GOROTI
-            </button>
           </div>
+        </nav>
 
-          {/* Navigation Tabs */}
-          <div className="flex gap-1 overflow-x-auto pb-2 scrollbar-hide">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => onNavigate(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-t-lg font-medium text-sm whitespace-nowrap transition-all ${
-                    activeTab === tab.id
-                      ? 'bg-purple-600 text-white'
-                      : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        <main className="max-w-7xl mx-auto px-4 py-8">
+          <Outlet />
+        </main>
       </div>
-
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 py-6">
-        {children}
-      </div>
-
-      {/* Gaming Footer Accent */}
-      <div className="h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-    </div>
+    </LegalAcceptanceGate>
   );
 }
