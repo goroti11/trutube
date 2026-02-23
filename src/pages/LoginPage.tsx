@@ -1,151 +1,139 @@
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Play, Mail, Lock, AlertCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 export function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signIn, signUp } = useAuth();
+  const [error, setError] = useState('');
+  const { signIn } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setLoading(true);
-
     try {
-      if (isSignUp) {
-        await signUp(email, password);
-      } else {
-        await signIn(email, password);
-      }
+      setLoading(true);
+      setError('');
+      await signIn(email, password);
       navigate('/');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : 'Failed to sign in');
     } finally {
       setLoading(false);
     }
   };
 
-  const styles = {
-    page: {
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '1rem'
-    },
-    container: {
-      maxWidth: '28rem',
-      width: '100%'
-    },
-    header: {
-      textAlign: 'center' as const,
-      marginBottom: '2rem'
-    },
-    title: {
-      fontSize: '2.25rem',
-      fontWeight: 'bold',
-      marginBottom: '0.5rem'
-    },
-    label: {
-      display: 'block',
-      fontSize: '0.875rem',
-      fontWeight: 500,
-      color: '#cbd5e1',
-      marginBottom: '0.5rem'
-    },
-    footer: {
-      marginTop: '1.5rem',
-      textAlign: 'center' as const
-    },
-    link: {
-      color: '#10b981',
-      cursor: 'pointer',
-      textDecoration: 'none'
-    },
-    backLink: {
-      marginTop: '2rem',
-      textAlign: 'center' as const
-    }
-  };
-
   return (
-    <div style={styles.page}>
-      <div style={styles.container}>
-        <div style={styles.header}>
-          <h2 style={styles.title}>
-            {isSignUp ? 'Create Account' : 'Welcome Back'}
-          </h2>
-          <p style={{ color: '#94a3b8' }}>
-            {isSignUp ? 'Join the GOROTI community' : 'Sign in to your account'}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 p-4">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <div className="flex justify-center mb-4">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-xl shadow-cyan-500/20">
+              <Play className="w-8 h-8 text-white" fill="white" />
+            </div>
+          </div>
+          <h1 className="text-4xl font-bold mb-2 text-gradient text-gradient-primary">
+            Bienvenue sur GOROTI
+          </h1>
+          <p className="text-neutral-400">
+            Connectez-vous pour accéder à la plateforme
           </p>
         </div>
 
-        <div className="card">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {error && (
-              <div className="error">{error}</div>
-            )}
+        <div className="card p-8 animate-fade-in">
+          {error && (
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+              <p className="text-red-400 text-sm">{error}</p>
+            </div>
+          )}
 
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" style={styles.label}>
+              <label className="block text-neutral-300 mb-2 text-sm font-medium">
                 Email
               </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="input"
-                placeholder="you@example.com"
-              />
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="input pl-12"
+                  placeholder="votre@email.com"
+                  required
+                />
+              </div>
             </div>
 
             <div>
-              <label htmlFor="password" style={styles.label}>
-                Password
+              <label className="block text-neutral-300 mb-2 text-sm font-medium">
+                Mot de passe
               </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="input"
-                placeholder="••••••••"
-              />
+              <div className="relative">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="input pl-12"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between text-sm">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 rounded border-neutral-700 bg-neutral-800 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-0"
+                />
+                <span className="text-neutral-400">Se souvenir de moi</span>
+              </label>
+              <Link to="/forgot-password" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+                Mot de passe oublié ?
+              </Link>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="btn btn-primary"
-              style={{ width: '100%' }}
+              className="btn btn-primary w-full"
             >
-              {loading ? 'Loading...' : isSignUp ? 'Sign Up' : 'Sign In'}
+              {loading ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  <span>Connexion...</span>
+                </>
+              ) : (
+                'Se connecter'
+              )}
             </button>
           </form>
 
-          <div style={styles.footer}>
-            <span
-              onClick={() => setIsSignUp(!isSignUp)}
-              style={styles.link}
-            >
-              {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
-            </span>
+          <div className="mt-6 text-center">
+            <p className="text-neutral-400 text-sm">
+              Vous n'avez pas de compte ?{' '}
+              <Link to="/register" className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors">
+                Créer un compte
+              </Link>
+            </p>
           </div>
         </div>
 
-        <div style={styles.backLink}>
-          <a href="/" style={{ color: '#94a3b8', textDecoration: 'none' }}>
-            ← Back to home
-          </a>
-        </div>
+        <p className="text-center text-neutral-500 text-sm mt-6">
+          En vous connectant, vous acceptez nos{' '}
+          <Link to="/terms" className="text-neutral-400 hover:text-white transition-colors">
+            Conditions d'utilisation
+          </Link>{' '}
+          et notre{' '}
+          <Link to="/privacy" className="text-neutral-400 hover:text-white transition-colors">
+            Politique de confidentialité
+          </Link>
+        </p>
       </div>
     </div>
   );

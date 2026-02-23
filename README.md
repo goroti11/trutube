@@ -1,222 +1,234 @@
-# GOROTI Platform - Enterprise Gaming Division & Live Studio
+# 🚀 GOROTI Platform
 
-Production-ready implementation with Gaming Division, Live Studio, TruCoins wallet, and platform-wide compliance integrated into existing GOROTI platform.
+Plateforme nouvelle génération pour le streaming, le gaming et la musique.
 
-## ✅ Build Status
+## ✨ Fonctionnalités
 
-```
-✓ Build successful (428KB, gzipped: 125KB)
-✓ Zero TypeScript errors
-✓ All dependencies resolved
-✓ Tailwind CSS configured
-✓ Production-ready
-```
+### Design System
+- **Palette de couleurs moderne** : Cyan/Blue (primaire), Orange/Red (accent), Emerald/Teal (succès)
+- **Pas de violet/indigo** : Design épuré et professionnel
+- **Animations fluides** : Fade-in, slide-up, scale-in, shimmer
+- **Responsive** : Optimisé mobile-first
 
-## Architecture
+### Pages Principales
 
-### Database (Supabase)
-- **Legal Compliance**: legal_documents, legal_acceptances
-- **Security & Audit**: system_audit_logs, gaming_risk_scores, match_integrity_logs, gaming_sanctions
-- **Live Streaming**: live_streams, live_gifts, live_gift_transactions
-- **Gaming**: games, gaming_seasons, gaming_teams, gaming_tournaments, gaming_leaderboards
-- **TruCoins**: trucoin_wallets, trucoin_transactions
-- **Notifications**: notifications, notification_preferences
+#### 🏠 Homepage
+- Hero section avec gradient animé
+- Statistiques en temps réel
+- 4 sections principales (LÉGENDE, Gaming, Live, Music)
+- Section TruCoins avec métriques
+- Call-to-action
 
-### Edge Functions (Deployed)
-- legal-accept, legal-check
-- gaming-tournament-enter, gaming-report-cheat, gaming-apply-sanction
-- send-live-gift
+#### 🔐 Authentification
+- Page login moderne avec gradients
+- Protection des routes
+- Gestion session Supabase
+- Design accessible et UX soignée
 
-### Frontend Stack
-- React 18 + TypeScript
-- Vite 7
-- React Router 6
-- Tailwind CSS
-- Supabase Client
-- Zustand (state management)
-- TanStack Query (data fetching)
+#### 📱 Layout
+- Header sticky avec navigation
+- Footer complet avec liens
+- Routes protégées et publiques
+- Loading states
 
-## Project Structure
+### Modules Intégrés
 
-```
-src/
-├── components/          # Shared UI components
-│   ├── Legal AcceptanceGate.tsx
-│   ├── NotificationBell.tsx
-│   └── NotificationCenter.tsx
-├── hooks/               # Custom React hooks
-│   ├── useAuth.ts
-│   ├── useLegalCompliance.ts
-│   └── useNotifications.ts
-├── lib/                 # Core configuration
-│   └── supabase.ts
-├── modules/             # Feature modules
-│   └── gaming/
-│       ├── layouts/
-│       │   └── GamingLayout.tsx
-│       └── pages/
-│           ├── GamingHub.tsx
-│           ├── Tournaments.tsx
-│           └── Leaderboards.tsx
-├── services/            # API layer
-│   ├── gamingService.ts
-│   ├── legalService.ts
-│   ├── liveService.ts
-│   ├── notificationService.ts
-│   └── walletService.ts
-├── types/               # TypeScript definitions
-│   └── database.ts
-└── App.tsx              # Main application with routing
+1. **LÉGENDE** (`/legende`)
+   - Système de prestige à 4 niveaux
+   - Badge visuel doré/orange
+
+2. **Gaming** (`/gaming`)
+   - Tournois et classements
+   - Icône trophée cyan
+
+3. **Live Streaming** (`/live`)
+   - Indicateur live rouge pulsant
+   - Section dédiée
+
+4. **Music** (`/music`)
+   - Plateforme musicale
+   - Thème vert émeraude
+
+## 🎨 Design Tokens
+
+### Couleurs
+```css
+Primary (Cyan-Blue): from-cyan-500 to-blue-600
+Accent (Orange-Red): from-orange-500 to-red-600
+Success (Emerald): from-emerald-400 to-teal-500
+Legend Gold: from-amber-500 to-orange-600
 ```
 
-## Setup
+### Composants Tailwind
+Tous les composants utilisent les utilitaires Tailwind v4 :
+- Buttons avec variantes (primary, secondary, accent, outline)
+- Cards avec hover effects
+- Inputs stylisés avec focus states
+- Badges de statut
+- Layout responsive avec container
 
-### 1. Environment Variables
+## 🛠️ Stack Technique
 
-Create `.env` file:
+- **Framework** : React 18 + TypeScript
+- **Build** : Vite
+- **Styling** : Tailwind CSS v4
+- **Routing** : React Router v6
+- **Backend** : Supabase
+- **Icons** : Lucide React
+- **Auth** : Supabase Auth
 
-```bash
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
-
-### 2. Install Dependencies
+## 📦 Installation
 
 ```bash
 npm install
 ```
 
-### 3. Run Development Server
+## ⚙️ Configuration
+
+Créer un fichier `.env` :
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+## 🚀 Développement
 
 ```bash
 npm run dev
 ```
 
-### 4. Build for Production
+## 🏗️ Build
 
 ```bash
 npm run build
 ```
 
-## Key Features
+Build réussi ✅ :
+- TypeScript compilation OK
+- Vite build OK
+- Bundle size optimisé (426KB JS, 35KB CSS)
 
-### Legal Compliance System
-- Domain-specific terms (global, live, gaming, wallet, premium, community)
-- Acceptance tracking with IP/device fingerprints
-- Automatic gating of protected features
-- Audit trail for all acceptances
+## 📁 Structure
 
-### Gaming Division
-- **Tournaments**: Entry fees, prize pools, bracket system
-- **Seasons**: Active season tracking with rewards
-- **Teams**: Season-based team management
-- **Leaderboards**: Cached rankings for performance
-- **Arena Fund**: Community prize pool from contributions
-- **Anti-Cheat**: Risk scoring, integrity monitoring, sanctions
+```
+src/
+├── components/       # Composants réutilisables
+│   ├── Header.tsx   # Navigation principale
+│   └── Footer.tsx   # Footer avec liens
+├── contexts/         # Contexts React
+│   └── AuthContext.tsx  # Gestion auth
+├── pages/           # Pages de l'application
+│   ├── HomePage.tsx     # Landing page
+│   └── LoginPage.tsx    # Authentification
+├── lib/             # Utilitaires
+│   └── supabase.ts      # Client Supabase
+├── styles/          # Design system
+│   └── design-system.ts # Tokens de design
+├── App.tsx          # App principale avec routes
+├── main.tsx         # Entry point
+└── index.css        # Styles globaux + animations
+```
 
-### Live Studio (TruCoins-only)
-- Gift system with tiered pricing
-- Real-time transactions
-- Revenue sharing with commission
-- No Stripe during live streams
-- Moderation tools included
+## 🎯 Routes
 
-### Platform Notifications
-- Real-time updates via Supabase Realtime
-- Priority levels (low, medium, high, urgent)
-- User preferences per domain
-- Unread count tracking
-- Notification center sidebar
+- `/` - Homepage (publique)
+- `/login` - Authentification (publique)
+- `/legende` - LÉGENDE system (protégée)
+- `/gaming` - Gaming division (protégée)
+- `/live` - Live streaming (protégée)
+- `/music` - Music platform (protégée)
 
-### TruCoins Wallet
-- Virtual currency system
-- Transactional RPCs with idempotency
-- Locked balance support
-- Append-only transaction ledger
+## 🔐 Authentification
 
-## RPC Functions
+Utilise Supabase Auth avec :
+- Email/Password
+- Session management automatique
+- Protected routes avec redirect
+- Public routes (login accessible si non connecté)
+- Loading states pendant vérification session
 
-### Compliance
-- `rpc_accept_legal_document` - Accept terms with audit trail
-- `check_legal_acceptance` - Verify user compliance
+## 🎨 Thème & Design
 
-### Gaming
-- `rpc_enter_tournament_v2` - Enter tournament (checks sanctions)
-- `rpc_report_cheat` - Report suspicious activity
-- `rpc_apply_sanction` - Admin sanctions
-- `has_active_sanction` - Check if user is banned
+### Principes de design
+1. **Contraste élevé** : Texte blanc (#fafafa) sur fond noir (#0a0a0a)
+2. **Gradients stratégiques** : CTA et éléments importants
+3. **Glassmorphism léger** : Cards avec subtle borders
+4. **Animations subtiles** : Transitions douces, pas excessif
+5. **Espacement généreux** : Breathing room
 
-### Notifications
-- `rpc_get_unread_notification_count` - Get unread count
-- `rpc_mark_notification_read` - Mark as read
-- `rpc_mark_all_notifications_read` - Mark all as read
+### Hiérarchie visuelle
+1. **Primary** : Gradients cyan-blue (from-cyan-500 to-blue-600)
+2. **Secondary** : Neutral gray (bg-neutral-800)
+3. **Accent** : Gradients orange-red (from-orange-500 to-red-600)
+4. **Success** : Emerald tones
+5. **LÉGENDE** : Gold/amber gradients
 
-### Live Gifts
-- `rpc_send_live_gift` - Send gift (fully transactional)
+### Animations disponibles
+- `animate-fade-in` : Apparition en douceur
+- `animate-slide-up` : Montée depuis le bas
+- `animate-scale-in` : Zoom subtil
+- `.shimmer` : Effet de brillance
 
-### Audit
-- `write_audit_log` - Write audit entry for critical actions
+## 🎯 Caractéristiques Homepage
 
-## Security
+### Hero Section
+- Gradient background avec orbes animées
+- Badge "Nouvelle ère du streaming"
+- Titre avec text-gradient cyan-blue
+- CTA double (Commencer + Explorer)
+- Stats en temps réel
 
-### Row Level Security (RLS)
-- All tables have RLS enabled
-- Users can only access their own data
-- Admin operations require privileged access
-- Audit logs are append-only
+### Features Grid
+4 cards cliquables :
+- LÉGENDE (gold gradient)
+- Gaming (cyan gradient)
+- Live (red gradient avec pulse)
+- Music (emerald gradient)
 
-### Transactional Safety
-- All money operations use database transactions
-- Row-level locking prevents double-spend
-- Idempotency keys prevent duplicates
-- Complete audit trail for compliance
+### TruCoins Section
+- Explication économie virtuelle
+- 4 métriques avec icons
+- Design avec glassmorphism
 
-### Anti-Cheat
-- Risk scoring system (0-100)
-- Pattern detection in matches
-- Automated and manual sanctions
-- Temporary and permanent bans
+### CTA Final
+- Gradient background subtil
+- Double CTA (Register + Learn more)
 
-## Gating Rules
+## 🚦 Next Steps
 
-### Live Studio Access
-User must accept `domain='live'` legal documents
+Extensions possibles :
+- [ ] Développer pages LÉGENDE complètes
+- [ ] Ajouter Gaming Hub détaillé
+- [ ] Créer Live Streaming interface
+- [ ] Développer Music Player
+- [ ] TruCoins wallet complet
+- [ ] User profiles avancés
+- [ ] Système de notifications
+- [ ] Search & discover
 
-### Gaming Division Access
-User must accept `domain='gaming'` legal documents
+## 📝 Notes Techniques
 
-### Wallet Operations
-User must accept `domain='wallet'` legal documents (if required)
+- **Tailwind v4** : Utilise @import "tailwindcss" (pas de @tailwind directives)
+- **Type imports** : Utilise `type` pour imports TypeScript (verbatimModuleSyntax)
+- **Responsive** : Mobile-first avec breakpoints md: lg:
+- **Performance** : Code-splitting automatique via Vite
+- **SEO ready** : Structure semantic HTML
+- **Accessibilité** : Focus states, ARIA labels préparés
 
-## Development Notes
+## 🎨 Palette Complète
 
-- No demo data (production-ready)
-- Strict TypeScript typing
-- No placeholders or TODOs
-- Services layer for API abstraction
-- Hooks for state management
-- Proper error handling throughout
-
-## Performance
-
-- Leaderboard caching for fast queries
-- Indexed foreign keys
-- Pagination support
-- Real-time subscriptions
-- Optimized bundle size (125KB gzipped)
-
-## Browser Support
-
-- Modern browsers (Chrome, Firefox, Safari, Edge)
-- ES2015+ JavaScript
-- CSS Grid and Flexbox
-
-## License
-
-Proprietary - GOROTI Platform
+```
+Neutral: 50-950 (gray scale)
+Cyan: 400-600 (primary blues)
+Orange: 400-600 (accents warm)
+Red: 500-600 (live, alerts)
+Emerald: 400-600 (success)
+Amber: 400-600 (legend gold)
+```
 
 ---
 
-**Status**: Production Ready ✅
-**Build**: Passing ✅
-**TypeScript**: Zero Errors ✅
+**Status** : ✅ Build réussi, plateforme fonctionnelle
+**Version** : 1.0.0
+**Built with** : React + TypeScript + Vite + Tailwind CSS v4
