@@ -1,186 +1,402 @@
 import { supabase } from '../lib/supabase';
-import type {
-  Game,
-  GamingSeason,
-  GamingTeam,
-  GamingTournament,
-  GamingLeaderboard,
-  GamingSanction,
-  ArenaFund,
-} from '../types/database';
 
-const FUNCTIONS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1`;
+export interface Game {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  cover_url?: string;
+  banner_url?: string;
+  category: string;
+  is_active: boolean;
+  is_premium: boolean;
+  total_streams: number;
+  total_viewers: number;
+  total_trucoins_generated: number;
+  tags?: string[];
+  platforms?: string[];
+  created_at: string;
+  updated_at: string;
+}
 
-export const gamingService = {
-  async getGames(): Promise<Game[]> {
-    const { data, error } = await supabase
-      .from('games')
-      .select('*')
-      .eq('is_active', true)
-      .order('name');
+export interface GameCategory {
+  id: string;
+  name: string;
+  slug: string;
+  icon?: string;
+  description?: string;
+  display_order: number;
+  is_active: boolean;
+}
 
-    if (error) throw error;
-    return data || [];
-  },
+export interface LiveGameSession {
+  id: string;
+  stream_id: string;
+  game_id: string;
+  streamer_id: string;
+  viewers_count: number;
+  peak_viewers: number;
+  trucoins_generated: number;
+  gifts_received: number;
+  interactions_count: number;
+  session_data: Record<string, any>;
+  started_at: string;
+  ended_at?: string;
+  game?: Game;
+  streamer?: {
+    id: string;
+    username: string;
+    avatar_url?: string;
+  };
+}
 
-  async getCurrentSeason(): Promise<GamingSeason | null> {
-    const { data, error } = await supabase
-      .from('gaming_seasons')
-      .select('*')
-      .eq('status', 'active')
-      .maybeSingle();
+export interface GameLeaderboard {
+  id: string;
+  game_id: string;
+  user_id: string;
+  score: number;
+  wins: number;
+  losses: number;
+  total_matches: number;
+  trucoins_earned: number;
+  trucoins_spent: number;
+  season: string;
+  rank?: number;
+  tier?: string;
+  stats: Record<string, any>;
+  user?: {
+    id: string;
+    username: string;
+    avatar_url?: string;
+  };
+}
 
-    if (error) throw error;
-    return data;
-  },
+export interface InternalGame {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  icon?: string;
+  game_type: 'quiz' | 'duel' | 'wheel' | 'boss' | 'prediction';
+  min_bet: number;
+  max_bet: number;
+  config: Record<string, any>;
+  is_active: boolean;
+}
 
-  async getSeasons(): Promise<GamingSeason[]> {
-    const { data, error } = await supabase
-      .from('gaming_seasons')
-      .select('*')
-      .order('start_date', { ascending: false });
+export interface InternalGameSession {
+  id: string;
+  game_id: string;
+  stream_id?: string;
+  host_id: string;
+  status: 'waiting' | 'active' | 'finished' | 'cancelled';
+  participants_count: number;
+  total_pot: number;
+  session_data: Record<string, any>;
+  winner_id?: string;
+  started_at?: string;
+  ended_at?: string;
+  game?: InternalGame;
+  host?: {
+    id: string;
+    username: string;
+    avatar_url?: string;
+  };
+  winner?: {
+    id: string;
+    username: string;
+    avatar_url?: string;
+  };
+}
 
-    if (error) throw error;
-    return data || [];
-  },
+export interface GameInteraction {
+  id: string;
+  session_id: string;
+  user_id: string;
+  interaction_type: string;
+  trucoins_amount: number;
+  effect_data: Record<string, any>;
+  created_at: string;
+}
 
-  async getTournaments(seasonId?: string): Promise<GamingTournament[]> {
-    let query = supabase
-      .from('gaming_tournaments')
-      .select('*, games(*)');
+class GamingService {
+  async getGames(options: {
+    category?: string;
+    search?: string;
+    premium_only?: boolean;
+    limit?: number;
+  } = {}): Promise<Game[]> {
+    try {
+      let query = supabase
+        .from('games')
+        .select('*')
+        .eq('is_active', true);
 
-    if (seasonId) {
-      query = query.eq('season_id', seasonId);
+      if (options.category) {
+        query = query.eq('category', options.category);
+      }
+
+      if (options.premium_only) {
+        query = query.eq('is_premium', true);
+      }
+
+      if (options.search) {
+        query = query.or(`name.ilike.%${options.search}%,description.ilike.%${options.search}%`);
+      }
+
+      if (options.limit) {
+        query = query.limit(options.limit);
+      }
+
+      query = query.order('total_viewers', { ascending: false });
+
+      const { data, error } = await query;
+
+      if (error) throw error;
+      return (data || []) as Game[];
+    } catch (error: any) {
+      console.error('Error fetching games:', error);
+      return [];
     }
+  }
 
-    const { data, error } = await query.order('start_date', { ascending: false });
+  async getGame(slugOrId: string): Promise<Game | null> {
+    try {
+      const { data, error } = await supabase
+        .from('games')
+        .select('*')
+        .or(`slug.eq.${slugOrId},id.eq.${slugOrId}`)
+        .maybeSingle();
 
-    if (error) throw error;
-    return data || [];
-  },
-
-  async getTournament(id: string): Promise<GamingTournament | null> {
-    const { data, error } = await supabase
-      .from('gaming_tournaments')
-      .select('*, games(*), gaming_seasons(*)')
-      .eq('id', id)
-      .maybeSingle();
-
-    if (error) throw error;
-    return data;
-  },
-
-  async enterTournament(tournamentId: string, teamId?: string): Promise<{ success: boolean; newBalance: number }> {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) throw new Error('Not authenticated');
-
-    const response = await fetch(`${FUNCTIONS_URL}/gaming-tournament-enter`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${session.access_token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        tournament_id: tournamentId,
-        team_id: teamId,
-      }),
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error || 'Failed to enter tournament');
+      if (error) throw error;
+      return data;
+    } catch (error: any) {
+      console.error('Error fetching game:', error);
+      return null;
     }
+  }
 
-    const result = await response.json();
-    return { success: result.success, newBalance: result.data.new_balance };
-  },
+  async getGameCategories(): Promise<GameCategory[]> {
+    try {
+      const { data, error } = await supabase
+        .from('game_categories')
+        .select('*')
+        .eq('is_active', true)
+        .order('display_order');
 
-  async getLeaderboard(gameId: string, seasonId?: string, limit = 100): Promise<GamingLeaderboard[]> {
-    let query = supabase
-      .from('gaming_leaderboards')
-      .select('*, profiles(username, avatar_url)')
-      .eq('game_id', gameId);
-
-    if (seasonId) {
-      query = query.eq('season_id', seasonId);
+      if (error) throw error;
+      return (data || []) as GameCategory[];
+    } catch (error: any) {
+      console.error('Error fetching game categories:', error);
+      return [];
     }
+  }
 
-    const { data, error } = await query
-      .order('score', { ascending: false })
-      .limit(limit);
+  async getActiveGameSessions(gameId?: string): Promise<LiveGameSession[]> {
+    try {
+      let query = supabase
+        .from('live_game_sessions')
+        .select(`
+          *,
+          game:games(*),
+          streamer:profiles!streamer_id(id, username, avatar_url)
+        `)
+        .is('ended_at', null);
 
-    if (error) throw error;
-    return data || [];
-  },
+      if (gameId) {
+        query = query.eq('game_id', gameId);
+      }
 
-  async getTeams(seasonId?: string): Promise<GamingTeam[]> {
-    let query = supabase
-      .from('gaming_teams')
-      .select('*, profiles!gaming_teams_captain_id_fkey(username, avatar_url)');
+      query = query.order('viewers_count', { ascending: false });
 
-    if (seasonId) {
-      query = query.eq('season_id', seasonId);
+      const { data, error } = await query;
+
+      if (error) throw error;
+      return (data || []) as LiveGameSession[];
+    } catch (error: any) {
+      console.error('Error fetching active game sessions:', error);
+      return [];
     }
+  }
 
-    const { data, error } = await query.order('name');
+  async getTopGamesByViewers(limit: number = 10): Promise<Game[]> {
+    try {
+      const { data, error } = await supabase
+        .from('games')
+        .select('*')
+        .eq('is_active', true)
+        .order('total_viewers', { ascending: false })
+        .limit(limit);
 
-    if (error) throw error;
-    return data || [];
-  },
-
-  async getTeam(id: string): Promise<GamingTeam | null> {
-    const { data, error } = await supabase
-      .from('gaming_teams')
-      .select('*, profiles!gaming_teams_captain_id_fkey(username, avatar_url), gaming_team_members(*, profiles(username, avatar_url))')
-      .eq('id', id)
-      .maybeSingle();
-
-    if (error) throw error;
-    return data;
-  },
-
-  async getUserSanctions(userId: string): Promise<GamingSanction[]> {
-    const { data, error } = await supabase
-      .from('gaming_sanctions')
-      .select('*')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-    return data || [];
-  },
-
-  async reportCheat(matchId: string, reportedUserId: string, pattern: string, details?: Record<string, unknown>): Promise<void> {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) throw new Error('Not authenticated');
-
-    const response = await fetch(`${FUNCTIONS_URL}/gaming-report-cheat`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${session.access_token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        match_id: matchId,
-        reported_user_id: reportedUserId,
-        pattern,
-        details,
-      }),
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error || 'Failed to report cheat');
+      if (error) throw error;
+      return (data || []) as Game[];
+    } catch (error: any) {
+      console.error('Error fetching top games:', error);
+      return [];
     }
-  },
+  }
 
-  async getArenaFund(): Promise<ArenaFund | null> {
-    const { data, error} = await supabase
-      .from('arena_fund')
-      .select('*')
-      .maybeSingle();
+  async getGameLeaderboard(
+    gameId: string,
+    season: string = 'season_1',
+    limit: number = 100
+  ): Promise<GameLeaderboard[]> {
+    try {
+      const { data, error } = await supabase
+        .from('game_leaderboard')
+        .select(`
+          *,
+          user:profiles!user_id(id, username, avatar_url)
+        `)
+        .eq('game_id', gameId)
+        .eq('season', season)
+        .order('score', { ascending: false })
+        .limit(limit);
 
-    if (error) throw error;
-    return data;
-  },
-};
+      if (error) throw error;
+      return (data || []) as GameLeaderboard[];
+    } catch (error: any) {
+      console.error('Error fetching game leaderboard:', error);
+      return [];
+    }
+  }
+
+  async getInternalGames(): Promise<InternalGame[]> {
+    try {
+      const { data, error } = await supabase
+        .from('goroti_internal_games')
+        .select('*')
+        .eq('is_active', true)
+        .order('name');
+
+      if (error) throw error;
+      return (data || []) as InternalGame[];
+    } catch (error: any) {
+      console.error('Error fetching internal games:', error);
+      return [];
+    }
+  }
+
+  async createGameInteraction(
+    sessionId: string,
+    interactionType: string,
+    trucoinsAmount: number,
+    effectData: Record<string, any> = {}
+  ): Promise<boolean> {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return false;
+
+      const { error } = await supabase
+        .from('game_interactions')
+        .insert({
+          session_id: sessionId,
+          user_id: user.id,
+          interaction_type: interactionType,
+          trucoins_amount: trucoinsAmount,
+          effect_data: effectData
+        });
+
+      if (error) throw error;
+      return true;
+    } catch (error: any) {
+      console.error('Error creating game interaction:', error);
+      return false;
+    }
+  }
+
+  async getSessionInteractions(
+    sessionId: string,
+    limit: number = 50
+  ): Promise<GameInteraction[]> {
+    try {
+      const { data, error } = await supabase
+        .from('game_interactions')
+        .select('*')
+        .eq('session_id', sessionId)
+        .order('created_at', { ascending: false })
+        .limit(limit);
+
+      if (error) throw error;
+      return (data || []) as GameInteraction[];
+    } catch (error: any) {
+      console.error('Error fetching session interactions:', error);
+      return [];
+    }
+  }
+
+  async getGameStats(gameId: string): Promise<{
+    total_sessions: number;
+    total_viewers: number;
+    total_trucoins: number;
+    active_streams: number;
+  }> {
+    try {
+      const game = await this.getGame(gameId);
+      if (!game) {
+        return { total_sessions: 0, total_viewers: 0, total_trucoins: 0, active_streams: 0 };
+      }
+
+      const activeSessions = await this.getActiveGameSessions(gameId);
+
+      return {
+        total_sessions: game.total_streams,
+        total_viewers: game.total_viewers,
+        total_trucoins: game.total_trucoins_generated,
+        active_streams: activeSessions.length
+      };
+    } catch (error: any) {
+      console.error('Error fetching game stats:', error);
+      return { total_sessions: 0, total_viewers: 0, total_trucoins: 0, active_streams: 0 };
+    }
+  }
+
+  subscribeToGameSessions(gameId: string, callback: (session: LiveGameSession) => void) {
+    const channel = supabase
+      .channel(`game-sessions:${gameId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'live_game_sessions',
+          filter: `game_id=eq.${gameId}`
+        },
+        (payload) => {
+          if (payload.eventType === 'INSERT' || payload.eventType === 'UPDATE') {
+            callback(payload.new as LiveGameSession);
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      channel.unsubscribe();
+    };
+  }
+
+  subscribeToGameInteractions(sessionId: string, callback: (interaction: GameInteraction) => void) {
+    const channel = supabase
+      .channel(`game-interactions:${sessionId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'game_interactions',
+          filter: `session_id=eq.${sessionId}`
+        },
+        (payload) => {
+          callback(payload.new as GameInteraction);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      channel.unsubscribe();
+    };
+  }
+}
+
+export const gamingService = new GamingService();
+export default gamingService;
