@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Gamepad2, Trophy, Users, Zap, TrendingUp, Calendar, DollarSign } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Gamepad2, Trophy, Users, Zap, TrendingUp, Calendar, DollarSign, Play, Crown, Filter, Target } from 'lucide-react';
 import { gamingService, type Game, type GamingSeason, type GamingTournament } from '../../services/gamingService';
+import { liveGamingService, type GamingCategory } from '../../services/liveGamingService';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function GamingHubPage() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [games, setGames] = useState<Game[]>([]);
+  const [categories, setCategories] = useState<GamingCategory[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [currentSeason, setCurrentSeason] = useState<GamingSeason | null>(null);
   const [tournaments, setTournaments] = useState<GamingTournament[]>([]);
   const [liveSessions, setLiveSessions] = useState<any[]>([]);
@@ -13,26 +18,36 @@ export default function GamingHubPage() {
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [selectedCategory]);
 
   const loadData = async () => {
     try {
-      const [gamesData, seasonData, tournamentsData, liveData] = await Promise.all([
-        gamingService.getActiveGames(),
+      const [gamesData, categoriesData, seasonData, tournamentsData, liveData] = await Promise.all([
+        selectedCategory === 'all'
+          ? gamingService.getActiveGames()
+          : liveGamingService.getGamesByCategory(selectedCategory, 20),
+        liveGamingService.getGamingCategories(),
         gamingService.getCurrentSeason(),
         gamingService.getTournaments('registration'),
-        gamingService.getActiveLiveSessions()
+        liveGamingService.getActiveGamingSessions()
       ]);
 
       setGames(gamesData);
+      setCategories(categoriesData);
       setCurrentSeason(seasonData);
       setTournaments(tournamentsData.slice(0, 6));
-      setLiveSessions(liveData.slice(0, 6));
+      setLiveSessions(liveData.slice(0, 12));
     } catch (error) {
       console.error('Failed to load gaming hub data:', error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const formatNumber = (num: number) => {
+    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
+    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
+    return num.toString();
   };
 
   if (loading) {
@@ -81,6 +96,73 @@ export default function GamingHubPage() {
             </div>
           </div>
         )}
+
+        {/* Gaming Stats */}
+        <div className="grid grid-cols-4 gap-4 mb-8">
+          <div className="bg-black/40 rounded-xl p-4 border border-gray-800">
+            <div className="flex items-center space-x-2 mb-2">
+              <Play className="w-5 h-5 text-red-500" />
+              <span className="text-gray-400 text-sm">Live Now</span>
+            </div>
+            <p className="text-2xl font-bold text-white">{liveSessions.length}</p>
+          </div>
+          <div className="bg-black/40 rounded-xl p-4 border border-gray-800">
+            <div className="flex items-center space-x-2 mb-2">
+              <Users className="w-5 h-5 text-blue-500" />
+              <span className="text-gray-400 text-sm">Viewers</span>
+            </div>
+            <p className="text-2xl font-bold text-white">
+              {formatNumber(liveSessions.reduce((acc, s) => acc + (s.viewer_count || 0), 0))}
+            </p>
+          </div>
+          <div className="bg-black/40 rounded-xl p-4 border border-gray-800">
+            <div className="flex items-center space-x-2 mb-2">
+              <Trophy className="w-5 h-5 text-yellow-500" />
+              <span className="text-gray-400 text-sm">Tournaments</span>
+            </div>
+            <p className="text-2xl font-bold text-white">{tournaments.length}</p>
+          </div>
+          <div className="bg-black/40 rounded-xl p-4 border border-gray-800">
+            <div className="flex items-center space-x-2 mb-2">
+              <Gamepad2 className="w-5 h-5 text-cyan-500" />
+              <span className="text-gray-400 text-sm">Games</span>
+            </div>
+            <p className="text-2xl font-bold text-white">{games.length}</p>
+          </div>
+        </div>
+
+        {/* Categories Filter */}
+        <div className="mb-8">
+          <div className="flex items-center space-x-2 mb-4">
+            <Filter className="w-5 h-5 text-cyan-400" />
+            <h2 className="text-xl font-bold">Game Categories</h2>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setSelectedCategory('all')}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                selectedCategory === 'all'
+                  ? 'bg-cyan-600 text-white'
+                  : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700 hover:text-white'
+              }`}
+            >
+              All Games
+            </button>
+            {categories.map(category => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.slug)}
+                className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  selectedCategory === category.slug
+                    ? 'bg-cyan-600 text-white'
+                    : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700 hover:text-white'
+                }`}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
           <a
@@ -165,18 +247,28 @@ export default function GamingHubPage() {
               {liveSessions.map((session) => (
                 <div
                   key={session.id}
-                  className="block bg-gray-800/50 border border-gray-700 rounded-lg p-4 hover:border-cyan-500 transition-colors backdrop-blur-sm"
+                  onClick={() => navigate(`/gaming/live/${session.id}`)}
+                  className="block bg-gray-800/50 border border-gray-700 rounded-lg p-4 hover:border-cyan-500 transition-colors backdrop-blur-sm cursor-pointer"
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-start space-x-3">
-                      <img
-                        src={session.profiles?.avatar_url || '/default-avatar.png'}
-                        alt={session.profiles?.username}
-                        className="w-10 h-10 rounded-full"
-                      />
+                      {session.streamer?.avatar_url ? (
+                        <img
+                          src={session.streamer.avatar_url}
+                          alt={session.streamer.username}
+                          className="w-10 h-10 rounded-full"
+                        />
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center">
+                          <Users className="w-5 h-5 text-white" />
+                        </div>
+                      )}
                       <div>
-                        <h3 className="font-bold">{session.title}</h3>
-                        <p className="text-sm text-gray-400">@{session.profiles?.username}</p>
+                        <div className="flex items-center space-x-1">
+                          <h3 className="font-bold">{session.streamer?.username}</h3>
+                          {session.streamer?.is_verified && <Crown className="w-4 h-4 text-cyan-400" />}
+                        </div>
+                        <p className="text-sm text-gray-400">{session.game?.name}</p>
                       </div>
                     </div>
                     <span className="flex items-center space-x-1 text-xs px-2 py-1 bg-red-500/20 text-red-400 rounded-full border border-red-500/30">
@@ -185,8 +277,13 @@ export default function GamingHubPage() {
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-sm text-gray-400">
-                    <span>{session.games?.name}</span>
                     <span className="capitalize">{session.mode}</span>
+                    {session.is_ranked && (
+                      <span className="flex items-center space-x-1 text-yellow-400">
+                        <Trophy className="w-4 h-4" />
+                        <span>Ranked</span>
+                      </span>
+                    )}
                   </div>
                 </div>
               ))}
