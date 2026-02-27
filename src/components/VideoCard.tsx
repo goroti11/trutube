@@ -1,5 +1,6 @@
 import { Clock, Heart, MessageCircle, Crown, TrendingUp } from 'lucide-react';
 import { Video } from '../types';
+import GlobalBadge from './video/GlobalBadge';
 
 interface VideoCardProps {
   video: Video;
@@ -8,9 +9,11 @@ interface VideoCardProps {
   legendLevel?: number;
   legendScore?: number;
   isLegendPromoted?: boolean;
+  availableLanguages?: string[];
+  showGlobalBadge?: boolean;
 }
 
-export default function VideoCard({ video, onClick, universeColor = 'cyan', legendLevel, legendScore, isLegendPromoted }: VideoCardProps) {
+export default function VideoCard({ video, onClick, universeColor = 'cyan', legendLevel, legendScore, isLegendPromoted, availableLanguages, showGlobalBadge }: VideoCardProps) {
   const formatDuration = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -65,6 +68,12 @@ export default function VideoCard({ video, onClick, universeColor = 'cyan', lege
             <div className="absolute top-2 right-2 bg-gradient-to-r from-cyan-600 to-blue-600 px-2 py-1 rounded-lg shadow-lg flex items-center gap-1">
               <TrendingUp className="w-3 h-3 text-white" />
               <span className="text-white text-xs font-bold">Promoted</span>
+            </div>
+          )}
+
+          {showGlobalBadge && availableLanguages && availableLanguages.length > 0 && (
+            <div className="absolute top-2 right-2">
+              <GlobalBadge languageCount={availableLanguages.length} size="sm" />
             </div>
           )}
 
