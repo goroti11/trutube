@@ -40,6 +40,7 @@ import MyProfileTestPage from './pages/MyProfileTestPage';
 import GlobalMiniPlayer from './components/video/GlobalMiniPlayer';
 import { usePlayerStore } from './store/playerStore';
 import EnhancedCreatorProfilePage from './pages/EnhancedCreatorProfilePage';
+import DatabaseTestPage from './pages/DatabaseTestPage';
 import WatchHistoryPage from './pages/WatchHistoryPage';
 import SubscribersPage from './pages/SubscribersPage';
 import PremiumOffersPage from './pages/PremiumOffersPage';
@@ -408,6 +409,7 @@ function AppContent() {
         style={{ opacity: pageTransition ? 0 : 1 }}
       >
       {currentPage === 'auth' && <AuthPage />}
+      {currentPage === 'database-test' && <DatabaseTestPage />}
 
       {currentPage === 'studio' && (
         <CreatorStudioPage onNavigate={(page) => setCurrentPage(page as Page)} />
