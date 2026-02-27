@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Music, Gamepad2, BookOpen, Theater, Heart, Brain, Code, Film, Trophy } from 'lucide-react';
+import { Music, Gamepad2, BookOpen, Theater, Heart, Brain, Code, Film, Trophy, Crown, Sparkles } from 'lucide-react';
 import AdUnit from '../components/AdUnit';
 import FreeTrialBanner from '../components/FreeTrialBanner';
 import TrendingSection from '../components/TrendingSection';
+import VideoCard from '../components/VideoCard';
 import { videoService, VideoWithCreator } from '../services/videoService';
 import { universeService } from '../services/universeService';
+import { legendFeedService, LegendFeedItem } from '../services/legendFeedService';
+import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface HomePageProps {
   onUniverseClick: (universeId: string) => void;
@@ -77,23 +81,32 @@ const universes = [
 ];
 
 export default function HomePage({ onUniverseClick }: HomePageProps) {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [showBanner, setShowBanner] = useState(() => {
     return !sessionStorage.getItem('trialBannerDismissed');
   });
   const [trendingVideos, setTrendingVideos] = useState<VideoWithCreator[]>([]);
+  const [legendVideos, setLegendVideos] = useState<LegendFeedItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadTrendingVideos();
-  }, []);
+    loadContent();
+  }, [user]);
 
-  const loadTrendingVideos = async () => {
+  const loadContent = async () => {
     try {
       setLoading(true);
-      const videos = await videoService.getTrendingVideos(12);
+
+      const [videos, legendContent] = await Promise.all([
+        videoService.getTrendingVideos(12),
+        user ? legendFeedService.getLegendFeedRecommendations(user.id, undefined, 6) : Promise.resolve([])
+      ]);
+
       setTrendingVideos(videos);
+      setLegendVideos(legendContent);
     } catch (error) {
-      console.error('Error loading trending videos:', error);
+      console.error('Error loading content:', error);
     } finally {
       setLoading(false);
     }
@@ -174,6 +187,55 @@ export default function HomePage({ onUniverseClick }: HomePageProps) {
         </div>
         </div>
       </div>
+
+      {/* Legend Promoted Content Section */}
+      {!loading && legendVideos.length > 0 && (
+        <div className="container mx-auto px-6 py-12 border-t border-gray-800">
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-2">
+              <Crown className="w-8 h-8 text-yellow-500" />
+              <h2 className="text-3xl font-black">
+                Legend Content
+              </h2>
+              <Sparkles className="w-6 h-6 text-yellow-400 animate-pulse" />
+            </div>
+            <p className="text-gray-400">
+              Community-validated content boosted by performance, engagement, and economic impact
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {legendVideos.map((item) => (
+              <VideoCard
+                key={item.entity_id}
+                video={{
+                  id: item.entity_id,
+                  title: item.video_title,
+                  thumbnailUrl: item.video_thumbnail,
+                  duration: 0,
+                  viewCount: item.view_count,
+                  likeCount: item.like_count,
+                  commentCount: 0,
+                  shareCount: 0,
+                  createdAt: item.created_at,
+                  user: {
+                    id: '',
+                    displayName: item.creator_name,
+                    avatarUrl: ''
+                  }
+                }}
+                legendLevel={item.legend_level}
+                legendScore={item.legend_score}
+                isLegendPromoted={item.is_legend_promoted}
+                onClick={(video) => {
+                  legendFeedService.trackLegendImpression('video', video.id, true);
+                  navigate(`/watch/${video.id}`);
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Trending Videos Section */}
       {!loading && trendingVideos.length > 0 && (
