@@ -66,7 +66,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                 </button>
                 <button
                   onClick={() => onNavigate('gaming-hub')}
-                  className="flex items-center gap-2 px-3 py-2 text-purple-400 hover:text-purple-300 hover:bg-purple-900/20 rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 text-red-400 hover:text-red-300 hover:bg-red-900/20 rounded-lg transition-colors"
                   title="Gaming"
                 >
                   <Gamepad2 className="w-5 h-5" />
@@ -204,7 +204,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
             {user && (
               <button
                 onClick={() => onNavigate?.('upload')}
-                className="flex items-center gap-2 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-bold transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold transition-colors"
               >
                 <Upload className="w-4 h-4" />
                 <span className="hidden sm:inline">Upload</span>
@@ -224,7 +224,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                       className="w-6 h-6 rounded-full"
                     />
                   ) : (
-                    <div className="w-6 h-6 rounded-full bg-cyan-600 flex items-center justify-center">
+                    <div className="w-6 h-6 rounded-full bg-red-600 flex items-center justify-center">
                       <User className="w-4 h-4" />
                     </div>
                   )}

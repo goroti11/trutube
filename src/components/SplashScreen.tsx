@@ -6,64 +6,52 @@ interface SplashScreenProps {
   minDisplayTime?: number;
 }
 
-export default function SplashScreen({ onComplete, minDisplayTime = 3500 }: SplashScreenProps) {
+export default function SplashScreen({ onComplete, minDisplayTime = 3000 }: SplashScreenProps) {
   const [fadeOut, setFadeOut] = useState(false);
-  const [showTagline, setShowTagline] = useState(false);
 
   useEffect(() => {
-    const taglineTimer = setTimeout(() => {
-      setShowTagline(true);
-    }, 1800);
-
     const timer = setTimeout(() => {
       setFadeOut(true);
-      setTimeout(onComplete, 700);
+      setTimeout(onComplete, 600);
     }, minDisplayTime);
 
-    return () => {
-      clearTimeout(taglineTimer);
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, [onComplete, minDisplayTime]);
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 transition-opacity duration-700 ${
+      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-gray-950 transition-opacity duration-600 ${
         fadeOut ? 'opacity-0' : 'opacity-100'
       }`}
     >
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1000ms' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-600/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '500ms' }} />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[120px]"
+          style={{ background: 'radial-gradient(circle, rgba(220,38,38,0.08) 0%, transparent 70%)' }}
+        />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full blur-[80px] goroti-core-pulse"
+          style={{ background: 'radial-gradient(circle, rgba(220,38,38,0.05) 0%, transparent 70%)' }}
+        />
       </div>
 
-      <div className="relative flex flex-col items-center gap-8">
+      <div className="relative">
         <AnimatedLogo size="xxl" />
-
-        <div
-          className={`transition-all duration-700 ${
-            showTagline ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-          }`}
-        >
-          <div className="text-center space-y-2">
-            <p className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-red-400">
-              Votre plateforme vidéo authentique
-            </p>
-            <p className="text-sm md:text-base text-gray-400 font-medium">
-              Créez, partagez, monétisez en toute transparence
-            </p>
-          </div>
-        </div>
       </div>
 
       <div className="absolute bottom-12 left-0 right-0 flex flex-col items-center gap-4">
-        <div className="flex gap-2">
-          <div className="w-2.5 h-2.5 bg-cyan-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-          <div className="w-2.5 h-2.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-          <div className="w-2.5 h-2.5 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+        <div className="flex gap-1.5">
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              className="w-1.5 h-1.5 rounded-full bg-red-600"
+              style={{
+                animation: 'goroti-loading 1.2s ease-in-out infinite',
+                animationDelay: `${i * 200}ms`
+              }}
+            />
+          ))}
         </div>
-        <p className="text-xs text-gray-500 font-medium tracking-wider">CHARGEMENT...</p>
       </div>
     </div>
   );
