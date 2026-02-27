@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DollarSign, TrendingUp, History, Info } from 'lucide-react';
 import { gamingService, type ArenaFund } from '../../services/gamingService';
 

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Trophy, Calendar, Users, DollarSign } from 'lucide-react';
-import { gamingService, type GamingTournament } from '../../services/gamingService';
+import { gamingService } from '../../services/gamingService';
 
 export default function TournamentsPage() {
   const [tournaments, setTournaments] = useState<any[]>([]);

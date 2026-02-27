@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
 import {
   Play, Pause, Volume2, VolumeX, Maximize, Settings,

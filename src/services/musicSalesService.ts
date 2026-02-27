@@ -273,14 +273,6 @@ export const musicSalesService = {
     const release = await this.getRelease(releaseId);
     if (!release) return null;
 
-    const now = new Date();
-    const isPromo =
-      release.price_promo !== null &&
-      release.promo_ends_at !== null &&
-      new Date(release.promo_ends_at) > now &&
-      (release.promo_starts_at === null || new Date(release.promo_starts_at) <= now);
-
-    const _price = isPromo && release.price_promo ? release.price_promo : release.price_standard;
     const totalPaid = options.card_amount + options.trucoin_amount;
 
     const isFounder = release.phase === 'exclusive';
@@ -361,7 +353,7 @@ export const musicSalesService = {
       .insert({
         release_id: releaseId,
         buyer_id: buyerId,
-        preorder_price: price,
+        preorder_price: _price,
         currency: release.currency,
         payment_method: options.payment_method,
         status: 'active',

@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
 import {
-  DollarSign,
   TrendingUp,
   Link2,
   ShoppingBag,
   Briefcase,
   Music,
   GraduationCap,
-  Calendar,
   ArrowLeft,
   ExternalLink,
-  Package,
-  Users,
   BarChart3,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';

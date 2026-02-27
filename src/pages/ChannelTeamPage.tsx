@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
-  ArrowLeft, UserPlus, Trash2, Shield, BarChart2,
+  ArrowLeft, UserPlus, Trash2,
   Edit2, CheckCircle, AlertCircle, User
 } from 'lucide-react';
 import {

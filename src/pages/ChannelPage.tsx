@@ -199,7 +199,7 @@ export default function ChannelPage() {
                 <h2 className="text-xl font-bold text-white mb-4">Shorts récents</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
                   {shorts.slice(0, 6).map(short => (
-                    <VideoCard key={short.id} video={short} compact />
+                    <VideoCard key={short.id} video={short} />
                   ))}
                 </div>
               </div>
@@ -282,7 +282,7 @@ export default function ChannelPage() {
               : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'
             }>
               {(activeTab === 'videos' ? videos : shorts).map(video => (
-                <VideoCard key={video.id} video={video} compact={activeTab === 'shorts'} />
+                <VideoCard key={video.id} video={video} />
               ))}
             </div>
           </div>

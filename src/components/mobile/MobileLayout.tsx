@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Home, Play, Plus, Users, User } from 'lucide-react';
 
 interface MobileLayoutProps {

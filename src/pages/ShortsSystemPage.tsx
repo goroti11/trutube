@@ -3,7 +3,7 @@ import {
   Zap, Video, ShoppingBag, Play, ArrowRight, Target, BarChart3,
   Clock, Scissors, Upload, Cpu, Eye, TrendingUp, ShieldCheck,
   Lock, CheckCircle, ChevronDown, ChevronUp, MousePointerClick,
-  Repeat, Music, DollarSign, Layers, AlertTriangle
+  Music, DollarSign, Layers, AlertTriangle
 } from 'lucide-react';
 import Header from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -301,7 +301,7 @@ export default function ShortsSystemPage({ onNavigate }: Props) {
                     </div>
                     <p className="text-xs text-gray-500 mb-2">{sig.desc}</p>
                     <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                      <div className={`h-full ${sig.bar} rounded-full transition-all`} style={{ width: `${sig.weight}%` }} />
+                      <div className={`h-full ${sig.color} rounded-full transition-all`} style={{ width: `${sig.weight}%` }} />
                     </div>
                   </div>
                 ))}

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Trophy, TrendingUp, Crown, Star, Zap } from 'lucide-react';
-import { legendService, type CreatorTruScore } from '../services/legendService';
+import { legendService } from '../services/legendService';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function LegendsRankingPage() {
-  const { t } = useLanguage();
+  useLanguage();
   const [globalRankings, setGlobalRankings] = useState<any[]>([]);
   const [legendHolders, setLegendHolders] = useState<any[]>([]);
   const [view, setView] = useState<'global' | 'legends'>('global');

@@ -3,8 +3,8 @@ import Header from '../components/Header';
 import { Footer } from '../components/Footer';
 import {
   DollarSign, CreditCard, RefreshCw, AlertTriangle, Shield,
-  CheckCircle, ChevronDown, ChevronUp, ArrowRight, Clock,
-  Wallet, Scale, FileText, Info
+  ChevronDown, ChevronUp, ArrowRight, Clock,
+  Wallet, Scale, Info
 } from 'lucide-react';
 
 interface Props {

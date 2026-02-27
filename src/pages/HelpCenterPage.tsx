@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Search, ChevronDown, ChevronUp, MessageCircle, Mail, Phone, BookOpen, Video, Shield, Wallet, Users, Settings } from 'lucide-react';
+import { Search, ChevronDown, ChevronUp, MessageCircle, Mail, Phone, BookOpen, Video, Wallet, Users, Settings } from 'lucide-react';
 import Header from '../components/Header';
 import { Footer } from '../components/Footer';
 

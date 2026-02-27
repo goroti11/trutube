@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import {
   ArrowLeft, Edit, Star, Users, Video, Eye, Share2,
-  MapPin, Calendar, Link2, ExternalLink, Bell, BellOff, Check, Heart, Play
+  Calendar, Link2, ExternalLink, Bell, BellOff, Check, Heart, Play
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { profileEnhancedService, EnhancedProfile, SocialLink } from '../services/profileEnhancedService';
 import { videoService } from '../services/videoService';
 import { channelService, CreatorChannel } from '../services/channelService';
 import ShareProfileModal from '../components/profile/ShareProfileModal';
-import ProfileReviewsSection from '../components/profile/ProfileReviewsSection';
 import ProfileOptionsMenu from '../components/profile/ProfileOptionsMenu';
 import SupportCreatorModal from '../components/SupportCreatorModal';
 import SupportLeaderboardSection from '../components/SupportLeaderboardSection';
@@ -67,7 +66,7 @@ export default function EnhancedProfilePage({ userId, onNavigate }: EnhancedProf
     setIsSubscribed(!isSubscribed);
   };
 
-  const getPlatformIcon = (platform: string) => {
+  const getPlatformIcon = (_platform: string) => {
     return <Link2 className="w-4 h-4" />;
   };
 
@@ -156,7 +155,7 @@ export default function EnhancedProfilePage({ userId, onNavigate }: EnhancedProf
                   <div className="flex items-center gap-3 mb-2">
                     <h2 className="text-3xl font-bold">{profile.display_name}</h2>
                     {profile.is_premium && (
-                      <PremiumBadge tier="premium" size="md" />
+                      <PremiumBadge tier="gold" size="md" />
                     )}
                   </div>
                   <p className="text-gray-400 mb-2">@{profile.username}</p>

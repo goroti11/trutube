@@ -3,14 +3,11 @@ import {
   ArrowLeft, Database, Download, Trash2, Archive,
   FileText, AlertTriangle, Shield, HardDrive
 } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
-
 interface DataManagementPageProps {
   onNavigate: (page: string) => void;
 }
 
 export default function DataManagementPage({ onNavigate }: DataManagementPageProps) {
-  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
 
   const handleExportData = async () => {

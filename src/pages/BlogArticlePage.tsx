@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Clock, Eye, Calendar, Share2, Bookmark, Heart, Lightbulb, MessageCircle, ThumbsUp } from 'lucide-react';
+import { ArrowLeft, Clock, Eye, Calendar, Share2, Bookmark, Heart, Lightbulb, ThumbsUp } from 'lucide-react';
 import { blogService, BlogArticle, BlogComment } from '../services/blogService';
 import { useAuth } from '../contexts/AuthContext';
 import BlogRelatedArticles from '../components/blog/BlogRelatedArticles';

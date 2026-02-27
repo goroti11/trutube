@@ -183,10 +183,11 @@ class LiveGamingService {
 
     if (error) throw error;
 
-    await supabase
-      .from('games')
-      .update({ total_streams: supabase.raw('total_streams + 1') })
-      .eq('id', gameId);
+    await supabase.rpc('increment_field', {
+      table_name: 'games',
+      field_name: 'total_streams',
+      row_id: gameId
+    });
 
     return data;
   }
@@ -224,7 +225,7 @@ class LiveGamingService {
     return data || [];
   }
 
-  async getGamingEffects(gameId?: string): Promise<GameEffect[]> {
+  async getGamingEffects(_gameId?: string): Promise<GameEffect[]> {
     const { data, error } = await supabase
       .from('gaming_effect_library')
       .select('*')
@@ -293,11 +294,17 @@ class LiveGamingService {
   }
 
   async updateGameStats(gameId: string, viewersDelta: number, trucoinsDelta: number) {
+    const { data: currentGame } = await supabase
+      .from('games')
+      .select('total_viewers, trucoins_generated')
+      .eq('id', gameId)
+      .single();
+
     const { error } = await supabase
       .from('games')
       .update({
-        total_viewers: supabase.raw(`total_viewers + ${viewersDelta}`),
-        trucoins_generated: supabase.raw(`trucoins_generated + ${trucoinsDelta}`)
+        total_viewers: (currentGame?.total_viewers || 0) + viewersDelta,
+        trucoins_generated: (currentGame?.trucoins_generated || 0) + trucoinsDelta
       })
       .eq('id', gameId);
 

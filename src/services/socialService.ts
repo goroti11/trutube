@@ -120,7 +120,7 @@ class SocialService {
     return data;
   }
 
-  async getIntelligentFeed(userId: string, limit = 20, offset = 0): Promise<SocialPost[]> {
+  async getIntelligentFeed(userId: string, limit = 20, _offset = 0): Promise<SocialPost[]> {
     const posts: SocialPost[] = [];
 
     const layerALimit = Math.floor(limit * 0.6);

@@ -78,7 +78,7 @@ const subscriptionTiers: SubscriptionTier[] = [
   }
 ];
 
-export default function SubscriptionPage({ user, onBack }: SubscriptionPageProps) {
+export default function SubscriptionPage({ user: _user, onBack }: SubscriptionPageProps) {
   const { user: authUser } = useAuth();
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);

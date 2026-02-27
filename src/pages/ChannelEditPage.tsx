@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import {
-  ArrowLeft, Save, CheckCircle, Globe, Lock, Camera, Link,
+  ArrowLeft, Save, CheckCircle, Globe, Lock, Camera,
   Instagram, Twitter, Youtube, Music, AlertCircle, Trash2, Eye,
-  Hash, Bell, BellOff, GripVertical, Plus, ListVideo,
-  BarChart2, UserPlus, Settings, Zap
+  Bell, BellOff, GripVertical, Plus, ListVideo,
+  BarChart2, UserPlus, Zap
 } from 'lucide-react';
 import {
   channelService, CreatorChannel, ChannelPlaylist, PlaylistType,
-  CHANNEL_SECTIONS, COLLABORATOR_ROLES
+  CHANNEL_SECTIONS
 } from '../services/channelService';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
@@ -221,8 +221,6 @@ export default function ChannelEditPage({ channelId, onNavigate }: Props) {
     );
   }
 
-  const getSectionLabel = (id: string) => CHANNEL_SECTIONS.find(s => s.id === id)?.label ?? id;
-
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <Header />
@@ -334,7 +332,7 @@ export default function ChannelEditPage({ channelId, onNavigate }: Props) {
                     <div key={key}>
                       <label className="block text-xs text-gray-400 mb-1.5">{label} <span className="text-gray-600">— {desc}</span></label>
                       <input
-                        value={(form as Record<string, string>)[key] || ''}
+                        value={(form as any)[key] || ''}
                         onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
                         placeholder="URL de la vidéo (https://...)"
                         className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-red-500"

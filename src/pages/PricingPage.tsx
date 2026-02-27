@@ -5,7 +5,7 @@ import {
   CheckCircle, Users, Tv, Store, Coins, CreditCard,
   DollarSign, Calculator, BarChart3, TrendingUp, Info,
   ChevronDown, ChevronUp, ArrowRight, Zap, Shield,
-  Wallet, Clock, AlertTriangle
+  Clock, AlertTriangle
 } from 'lucide-react';
 
 interface Props {
@@ -202,7 +202,7 @@ export default function PricingPage({ onNavigate }: Props) {
                     { action: 'Abonnement 5€/mois', creator: '4,25€', platform: '0,75€', pct: '85%' },
                     { action: 'Tip de 2€', creator: '1,80€', platform: '0,20€', pct: '90%' },
                     { action: 'Marketplace 50€', creator: '45,00€', platform: '5,00€', pct: '90%' },
-                  ].map(({ action, creator, platform, pct }) => (
+                  ].map(({ action, creator, platform: _platform, pct }) => (
                     <div key={action} className="flex items-center justify-between text-sm py-1.5 border-b border-gray-800 last:border-0">
                       <span className="text-gray-400">{action}</span>
                       <div className="flex items-center gap-3">

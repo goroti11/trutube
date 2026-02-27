@@ -240,7 +240,7 @@ export const notificationService = {
           callback(payload.new as Notification);
         }
       )
-      .subscribe((status, error) => {
+      .subscribe((_status, error) => {
         if (error && onError) {
           onError(error);
         }

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { ArrowLeft, Upload, Video, Eye, ThumbsUp, MessageCircle, Trash2, Edit, Play } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { videoUploadService } from '../services/videoUploadService';
-import { videoService } from '../services/videoService';
 
 interface CreatorDashboardV2PageProps {
   onNavigate: (page: string, data?: any) => void;

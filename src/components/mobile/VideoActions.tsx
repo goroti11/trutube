@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { ThumbsUp, ThumbsDown, Share2, Bookmark, Download, Flag } from 'lucide-react';
 
 interface VideoActionsProps {
   likes: number;

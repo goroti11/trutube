@@ -2,9 +2,8 @@ import { useState } from 'react';
 import Header from '../components/Header';
 import { Footer } from '../components/Footer';
 import {
-  ArrowLeft, ThumbsUp, ThumbsDown, Share2, Bookmark, Search,
-  ChevronRight, Clock, User, CheckCircle, AlertCircle, Info,
-  PlayCircle, FileText, Video, MessageSquare
+  ArrowLeft, ThumbsUp, ThumbsDown, Share2, Bookmark,
+  Clock, User, CheckCircle, AlertCircle, Info
 } from 'lucide-react';
 
 interface HelpArticlePageProps {
@@ -49,6 +48,7 @@ const articles: Record<string, Article> = {
       },
       {
         title: 'Étapes de création',
+        content: [],
         steps: [
           {
             title: 'Accéder à la page d\'inscription',
@@ -181,6 +181,7 @@ const articles: Record<string, Article> = {
       },
       {
         title: 'Processus d\'upload',
+        content: [],
         steps: [
           {
             title: 'Accéder au Studio Créateur',
@@ -283,6 +284,7 @@ const articles: Record<string, Article> = {
       },
       {
         title: 'Acheter des TruCoins',
+        content: [],
         steps: [
           {
             title: 'Accéder au wallet',
@@ -596,7 +598,7 @@ export default function HelpArticlePage({ onNavigate, articleId = 'create-accoun
               <div className="border-t border-gray-700 mt-6 pt-6">
                 <h3 className="text-sm font-semibold text-white mb-3">Articles connexes</h3>
                 <div className="space-y-2">
-                  {article.relatedArticles.slice(0, 3).map((id, index) => (
+                  {article.relatedArticles.slice(0, 3).map((_id, index) => (
                     <button
                       key={index}
                       className="w-full text-left px-3 py-2 text-sm text-gray-400 hover:text-cyan-400 hover:bg-gray-800/50 rounded transition-colors"

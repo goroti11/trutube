@@ -5,10 +5,10 @@ import {
   Building2, Globe, Shield, TrendingUp, Users, Code2,
   Lock, FileText, Award, ChevronDown, ChevronUp,
   Coins, BarChart3, Fingerprint, Scale, Newspaper,
-  Handshake, LineChart, Eye, Zap, CheckCircle, ExternalLink,
-  Layers, CreditCard, Server, Radio, Cpu, AlertTriangle,
-  Tag, Package, Music, Video, Map, Clock, Database,
-  BookOpen, Gavel, UserCheck, ArrowRight
+  Handshake, LineChart, Eye, CheckCircle, ExternalLink,
+  CreditCard, Radio, AlertTriangle,
+  Tag, Package, Music, Video, Map, Clock,
+  UserCheck, ArrowRight
 } from 'lucide-react';
 
 interface Props {
@@ -59,15 +59,6 @@ function AccordionItem({ title, children }: { title: string; children: React.Rea
           {children}
         </div>
       )}
-    </div>
-  );
-}
-
-function TableRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-center justify-between py-2.5 border-b border-gray-800 last:border-0 text-sm">
-      <span className="text-gray-400">{label}</span>
-      <span className="text-white font-medium">{value}</span>
     </div>
   );
 }

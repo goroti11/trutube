@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
-  ArrowLeft, Camera, Upload, X, Plus, Link2, Save,
+  ArrowLeft, Camera, X, Plus, Link2, Save,
   Twitter, Instagram, Youtube, ExternalLink, Copy, Check, Globe
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
@@ -92,7 +92,7 @@ export default function EditProfilePage({ onNavigate }: EditProfilePageProps) {
     }
   };
 
-  const handleImageUpload = async (type: 'avatar' | 'banner') => {
+  const handleImageUpload = async (_type: 'avatar' | 'banner') => {
     alert('Fonction d\'upload à implémenter avec Supabase Storage');
   };
 

@@ -3,8 +3,8 @@ import Header from '../components/Header';
 import { Footer } from '../components/Footer';
 import {
   Shield, FileText, AlertTriangle, Scale, Clock, Globe,
-  ChevronDown, ChevronUp, CheckCircle, ArrowRight, Fingerprint,
-  Music, Video, Image, ExternalLink, Mail
+  ChevronDown, ChevronUp, CheckCircle, Fingerprint,
+  Music, Video, Image, Mail
 } from 'lucide-react';
 
 interface Props {

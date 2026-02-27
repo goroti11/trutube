@@ -3,9 +3,9 @@ import {
   LayoutDashboard, Video, Radio, Users, DollarSign, BarChart3, MessageSquare,
   Settings, Handshake, Store, Layers, Upload, Play, TrendingUp, Eye,
   UserPlus, AlertCircle, Shield, Clock, Target, Award, CheckCircle,
-  Filter, Music, Package, Lock, Calendar, Globe, Tag, ArrowUpRight,
+  Filter, Music, Package, Lock, Calendar, Globe, Tag,
   ChevronRight, Zap, Star, BarChart2, ShoppingBag, CreditCard, ExternalLink,
-  ArrowLeft, ChevronDown, Bell, Home, MoreHorizontal, Sparkles, X, Menu, Megaphone,
+  Bell, Home, Sparkles, X, Menu, Megaphone,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import MonetizationDashboard from '../components/studio/MonetizationDashboard';
@@ -40,7 +40,6 @@ const NAV_ITEMS = [
 ];
 
 export default function CreatorStudioPage({ onNavigate }: CreatorStudioPageProps) {
-  const { user } = useAuth();
   const [section, setSection] = useState<StudioSection>('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -574,7 +573,7 @@ function ContentSection({ onNavigate }: { onNavigate: (p: string) => void }) {
 
 function LiveSection({ onNavigate }: { onNavigate: (p: string) => void }) {
   const { user } = useAuth();
-  const [liveStreams, setLiveStreams] = useState<LiveStream[]>([]);
+  const [, setLiveStreams] = useState<LiveStream[]>([]);
   const [stats, setStats] = useState({ totalLives: 0, averageViewers: 0, totalDuration: 0 });
 
   useEffect(() => {
@@ -807,7 +806,7 @@ function MonetizationSection() {
 
 /* ─────────────────── ADS MANAGER SECTION ─────────────────── */
 
-function AdsManagerSection({ onNavigate }: { onNavigate: (page: string) => void }) {
+function AdsManagerSection(_props: { onNavigate: (page: string) => void }) {
   return (
     <div className="p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto w-full">
       <PageHeader

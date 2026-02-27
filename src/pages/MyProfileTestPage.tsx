@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import Header from '../components/Header';
 import { Footer } from '../components/Footer';
-import { User, Mail, Calendar, CheckCircle, XCircle, Loader2 } from 'lucide-react';
+import { User, CheckCircle, XCircle, Loader2 } from 'lucide-react';
 
 export default function MyProfileTestPage() {
   const { user, loading: authLoading } = useAuth();

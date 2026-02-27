@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowLeft, Users, Shield, Settings as SettingsIcon, Ban, UserPlus, Crown, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Users, Shield, Settings as SettingsIcon, Ban, Crown, AlertTriangle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import { Footer } from '../components/Footer';

@@ -1,10 +1,12 @@
 import { Play, Facebook, Twitter, Instagram, Youtube, Mail } from 'lucide-react';
 
 interface FooterProps {
-  onNavigate: (page: string) => void;
+  onNavigate?: (page: string) => void;
 }
 
 export const Footer = ({ onNavigate }: FooterProps) => {
+  const handleNavigate = onNavigate || ((page: string) => { window.location.hash = page; });
+
   return (
     <footer className="bg-gray-900 border-t border-gray-800 mt-20">
       <div className="max-w-7xl mx-auto px-6 py-12">
@@ -60,7 +62,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
             <ul className="space-y-2">
               <li>
                 <button
-                  onClick={() => onNavigate('home')}
+                  onClick={() => handleNavigate('home')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Accueil
@@ -68,7 +70,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('universes')}
+                  onClick={() => handleNavigate('universes')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Explorer les univers
@@ -76,7 +78,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('creator-setup')}
+                  onClick={() => handleNavigate('creator-setup')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Devenir créateur
@@ -84,7 +86,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('preferences')}
+                  onClick={() => handleNavigate('preferences')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Préférences de feed
@@ -98,7 +100,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
             <ul className="space-y-2">
               <li>
                 <button
-                  onClick={() => onNavigate('blog')}
+                  onClick={() => handleNavigate('blog')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Blog
@@ -106,7 +108,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('about')}
+                  onClick={() => handleNavigate('about')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   À propos
@@ -114,7 +116,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('help')}
+                  onClick={() => handleNavigate('help')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Centre d'aide
@@ -122,7 +124,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('support')}
+                  onClick={() => handleNavigate('support')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Support
@@ -130,7 +132,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('careers')}
+                  onClick={() => handleNavigate('careers')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Carrières
@@ -138,7 +140,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('enterprise')}
+                  onClick={() => handleNavigate('enterprise')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Entreprise
@@ -146,7 +148,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('resources')}
+                  onClick={() => handleNavigate('resources')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Ressources
@@ -154,7 +156,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('terms')}
+                  onClick={() => handleNavigate('terms')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Conditions d'utilisation
@@ -162,7 +164,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('privacy')}
+                  onClick={() => handleNavigate('privacy')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Politique de confidentialité
@@ -170,7 +172,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('legal')}
+                  onClick={() => handleNavigate('legal')}
                   className="text-gray-400 hover:text-cyan-400 text-sm transition-colors"
                 >
                   Mentions légales
@@ -228,31 +230,31 @@ export const Footer = ({ onNavigate }: FooterProps) => {
             </p>
             <div className="flex flex-wrap gap-4 text-sm">
               <button
-                onClick={() => onNavigate('terms')}
+                onClick={() => handleNavigate('terms')}
                 className="text-gray-400 hover:text-cyan-400 transition-colors"
               >
                 CGU
               </button>
               <button
-                onClick={() => onNavigate('privacy')}
+                onClick={() => handleNavigate('privacy')}
                 className="text-gray-400 hover:text-cyan-400 transition-colors"
               >
                 Confidentialité
               </button>
               <button
-                onClick={() => onNavigate('legal')}
+                onClick={() => handleNavigate('legal')}
                 className="text-gray-400 hover:text-cyan-400 transition-colors"
               >
                 Mentions légales
               </button>
               <button
-                onClick={() => onNavigate('help')}
+                onClick={() => handleNavigate('help')}
                 className="text-gray-400 hover:text-cyan-400 transition-colors"
               >
                 Aide
               </button>
               <button
-                onClick={() => onNavigate('support')}
+                onClick={() => handleNavigate('support')}
                 className="text-gray-400 hover:text-cyan-400 transition-colors"
               >
                 Support

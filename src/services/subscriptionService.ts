@@ -86,11 +86,13 @@ export const subscriptionService = {
         (likesCount * 0.3)
       ));
 
+      const supporter = Array.isArray(sub.supporter) ? sub.supporter[0] : sub.supporter;
+
       return {
         id: sub.id,
-        username: sub.supporter?.username || 'unknown',
-        display_name: sub.supporter?.display_name || 'Unknown User',
-        avatar_url: sub.supporter?.avatar_url || '/default-avatar.png',
+        username: supporter?.username || 'unknown',
+        display_name: supporter?.display_name || 'Unknown User',
+        avatar_url: supporter?.avatar_url || '/default-avatar.png',
         subscribed_at: sub.created_at,
         tier: sub.tier === 'supporter' ? 'free' : 'premium',
         tier_name: sub.tier !== 'supporter' ? sub.tier : undefined,

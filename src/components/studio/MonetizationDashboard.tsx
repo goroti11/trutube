@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import {
   DollarSign,
   TrendingUp,
-  Eye,
   Users,
   CheckCircle,
   XCircle,
@@ -39,7 +38,7 @@ export default function MonetizationDashboard() {
   const [revenueSettings, setRevenueSettings] = useState<RevenueSettings[]>([]);
   const [revenueByType, setRevenueByType] = useState<Record<string, number>>({});
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
-  const [availableBalance, setAvailableBalance] = useState(0);
+  const [, setAvailableBalance] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -70,13 +69,7 @@ export default function MonetizationDashboard() {
     const acceptedTerms = await partnerProgramService.hasAcceptedLatestTerms(user.id);
     const balance = await partnerProgramService.getAvailableBalance(user.id);
 
-    if (Object.keys(revenueData).length === 0) {
-      await monetizationEligibilityService.createMockTransactions(user.id);
-      const updatedRevenue = await monetizationEligibilityService.getRevenueByType(user.id);
-      setRevenueByType(updatedRevenue);
-    } else {
-      setRevenueByType(revenueData);
-    }
+    setRevenueByType(revenueData);
 
     setStatus(monetizationStatus);
     setKycStatus(kyc);

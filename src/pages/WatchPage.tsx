@@ -6,13 +6,13 @@ import { flowService } from '../services/flowService';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Video } from '../types';
+import { convertSupabaseVideosToTypeVideos } from '../utils/videoConverters';
 import EnhancedVideoPlayer from '../components/video/EnhancedVideoPlayer';
 import FlowPlayer from '../components/video/FlowPlayer';
 import VideoSettingsSheet from '../components/video/VideoSettingsSheet';
 import VideoMoreSheet from '../components/video/VideoMoreSheet';
 import RelatedVideos from '../components/video/RelatedVideos';
 import ReviewsList from '../components/reviews/ReviewsList';
-import { convertSupabaseVideosToTypeVideos } from '../utils/videoConverters';
 import type { FlowInfo } from '../types/flow';
 
 interface WatchPageProps {
@@ -24,7 +24,7 @@ interface WatchPageProps {
 
 export default function WatchPage({ videoId, onNavigate, initialFlowMode = false, initialFlowId }: WatchPageProps) {
   const { user } = useAuth();
-  const [video, setVideo] = useState<Video | null>(null);
+  const [video, setVideo] = useState<VideoWithCreator | null>(null);
   const [relatedVideos, setRelatedVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
@@ -162,6 +162,7 @@ export default function WatchPage({ videoId, onNavigate, initialFlowMode = false
   };
 
   const handleShare = () => {
+    if (!video) return;
     if (navigator.share) {
       navigator.share({
         title: video.title,

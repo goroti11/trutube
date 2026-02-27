@@ -5,8 +5,8 @@ import {
   Briefcase, MapPin, Clock, DollarSign, Users, Heart,
   Code2, Brain, Shield, Package, Eye, Scale, ChevronDown,
   ChevronUp, Send, CheckCircle, Globe, Laptop, Coffee,
-  Layers, Zap, BookOpen, Music, MessageSquare, Star,
-  ArrowRight, UserCheck, BarChart3, Cpu
+  Zap, BookOpen, Star,
+  ArrowRight, Cpu
 } from 'lucide-react';
 
 interface Props {

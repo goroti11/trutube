@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   TrendingUp,
-  Users,
   Eye,
   MousePointerClick,
   DollarSign,
   Target,
   BarChart3,
-  PlayCircle,
   Calendar,
   Settings,
   Plus,
@@ -16,10 +14,8 @@ import {
   Clock,
   Pause,
   AlertCircle,
-  Download,
-  Filter
+  Download
 } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
 
 interface Campaign {
   id: string;
@@ -42,7 +38,6 @@ interface Campaign {
 }
 
 export default function AdvertiserDashboardPage() {
-  const { user } = useAuth();
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [stats, setStats] = useState({
     totalSpent: 0,

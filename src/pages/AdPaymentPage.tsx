@@ -6,7 +6,6 @@ import {
   Lock,
   ArrowLeft,
   Info,
-  AlertCircle,
   ShieldCheck
 } from 'lucide-react';
 

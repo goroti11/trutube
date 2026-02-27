@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Gamepad2, Trophy, Users, Zap, TrendingUp, Calendar, DollarSign, Play, Crown, Filter, Target } from 'lucide-react';
+import { Gamepad2, Trophy, Users, Zap, TrendingUp, Calendar, DollarSign, Play, Crown, Filter } from 'lucide-react';
 import { gamingService, type Game, type GamingSeason, type GamingTournament } from '../../services/gamingService';
-import { liveGamingService, type GamingCategory } from '../../services/liveGamingService';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { liveGamingService, type GamingCategory, type Game as LiveGame } from '../../services/liveGamingService';
 
 export default function GamingHubPage() {
-  const { t } = useLanguage();
   const navigate = useNavigate();
-  const [games, setGames] = useState<Game[]>([]);
+  const [games, setGames] = useState<(Game | LiveGame)[]>([]);
   const [categories, setCategories] = useState<GamingCategory[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [currentSeason, setCurrentSeason] = useState<GamingSeason | null>(null);

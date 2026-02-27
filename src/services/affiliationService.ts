@@ -157,7 +157,7 @@ export const affiliationService = {
     return data as AffiliateConversion;
   },
 
-  async getAffiliateStats(creatorId: string, period: 'day' | 'week' | 'month' | 'year' = 'month') {
+  async getAffiliateStats(creatorId: string, _period: 'day' | 'week' | 'month' | 'year' = 'month') {
     const { data: links } = await supabase
       .from('affiliate_links')
       .select('*')

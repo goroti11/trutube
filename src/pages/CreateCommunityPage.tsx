@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Upload, Globe, Users as UsersIcon, Lock, Crown, Image } from 'lucide-react';
+import { ArrowLeft, Globe, Users as UsersIcon, Lock, Crown, Image } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import { Footer } from '../components/Footer';

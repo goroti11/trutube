@@ -13,11 +13,7 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
   const [currentStream, setCurrentStream] = useState<LiveStream | null>(null);
   const [stats, setStats] = useState<LiveStreamStats | null>(null);
   const [isLive, setIsLive] = useState(false);
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  const [universes, setUniverses] = useState<any[]>([]);
-
   useEffect(() => {
-    loadUniverses();
     loadCurrentStream();
   }, [user]);
 
@@ -30,11 +26,6 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
       return () => clearInterval(interval);
     }
   }, [currentStream, isLive]);
-
-  const loadUniverses = async () => {
-    const data = await universeService.getAllUniverses();
-    setUniverses(data);
-  };
 
   const loadCurrentStream = async () => {
     if (!user) return;
@@ -230,8 +221,7 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
   );
 }
 
-function CreateLiveSection({ onNavigate }: { onNavigate: (page: string) => void }) {
-  const { user } = useAuth();
+function CreateLiveSection(_props: { onNavigate: (page: string) => void }) {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -378,7 +368,7 @@ function CreateLiveSection({ onNavigate }: { onNavigate: (page: string) => void 
   );
 }
 
-function PastLivesSection({ userId, onNavigate }: { userId: string; onNavigate: (page: string) => void }) {
+function PastLivesSection({ userId }: { userId: string; onNavigate: (page: string) => void }) {
   const [pastLives, setPastLives] = useState<LiveStream[]>([]);
 
   useEffect(() => {

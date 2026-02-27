@@ -212,10 +212,11 @@ class LiveStreamService {
         return { success: false, error: error.message };
       }
 
-      await supabase
-        .from('live_streams')
-        .update({ total_messages: supabase('total_messages + 1') })
-        .eq('id', streamId);
+      await supabase.rpc('increment_field', {
+        table_name: 'live_streams',
+        field_name: 'total_messages',
+        row_id: streamId
+      });
 
       return { success: true };
     } catch (error: any) {

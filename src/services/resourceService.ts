@@ -321,6 +321,6 @@ export const resourceService = {
       .eq('user_id', (await supabase.auth.getUser()).data.user?.id);
 
     if (error) throw error;
-    return data?.map(item => item.resource).filter(Boolean) || [];
+    return (data?.map(item => item.resource).filter(Boolean) || []) as unknown as Resource[];
   }
 };

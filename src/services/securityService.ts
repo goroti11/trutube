@@ -182,7 +182,7 @@ class SecurityService {
   /**
    * Chiffrer des données sensibles
    */
-  async encryptData(data: string, key?: string): Promise<string> {
+  async encryptData(data: string, _key?: string): Promise<string> {
     try {
       // Utilisation de Web Crypto API pour le chiffrement
       const encoder = new TextEncoder();
@@ -221,7 +221,7 @@ class SecurityService {
   /**
    * Déchiffrer des données
    */
-  async decryptData(encryptedData: string, key?: string): Promise<string> {
+  async decryptData(encryptedData: string, _key?: string): Promise<string> {
     try {
       // Convertir de base64
       const combined = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));

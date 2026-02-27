@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   Lock, Play, ShoppingCart, Clock, Star, Shield, Award, ChevronRight,
-  Music, Users, Globe, Tag, Check, AlertCircle, Zap, Heart, Download,
+  Music, Users, Globe, Tag, Check, AlertCircle, Zap, Heart,
   CreditCard, Coins, ChevronDown, ChevronUp, Share2, Gift
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';

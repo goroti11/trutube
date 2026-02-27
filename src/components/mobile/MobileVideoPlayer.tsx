@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   Play,
   Pause,
@@ -24,10 +24,8 @@ interface MobileVideoPlayerProps {
 
 export default function MobileVideoPlayer({
   videoUrl,
-  title,
   onMinimize,
   onQualityClick,
-  onSpeedClick,
   onSettingsClick
 }: MobileVideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);

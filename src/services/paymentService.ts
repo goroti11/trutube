@@ -444,7 +444,7 @@ class PaymentService {
   async subscribeToPremium(
     userId: string,
     tier: 'silver' | 'gold' | 'platinum',
-    paymentMethodId?: string
+    _paymentMethodId?: string
   ): Promise<PremiumSubscription | null> {
     try {
       const prices = {
@@ -563,7 +563,7 @@ class PaymentService {
 
   async upgradePremiumTier(
     userId: string,
-    newTier: 'premium' | 'platine' | 'gold'
+    newTier: 'silver' | 'gold' | 'platinum'
   ): Promise<PremiumSubscription | null> {
     try {
       const prices = {

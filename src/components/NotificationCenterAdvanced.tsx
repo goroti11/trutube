@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Bell, Check, CheckCheck, Settings, Filter, Trash2, Heart, MessageCircle, Gift, DollarSign, Trophy, ShoppingBag, AlertTriangle, Sparkles, Crown } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Bell, CheckCheck, Settings, Heart, MessageCircle, Gift, DollarSign, Trophy, ShoppingBag, AlertTriangle, Crown } from 'lucide-react';
 import { notificationSystemService, type Notification } from '../services/notificationSystemService';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -16,8 +16,14 @@ export default function NotificationCenterAdvanced() {
     if (user) {
       loadNotifications();
       loadCounts();
-      const unsubscribe = subscribeToNotifications();
-      return () => unsubscribe();
+      const result = subscribeToNotifications();
+      return () => {
+        if (result && typeof (result as any).then === 'function') {
+          (result as Promise<() => void>).then(fn => fn());
+        } else if (typeof result === 'function') {
+          (result as () => void)();
+        }
+      };
     }
   }, [user]);
 
@@ -78,16 +84,6 @@ export default function NotificationCenterAdvanced() {
       setUnreadCount(0);
     } catch (error) {
       console.error('Failed to mark all as read:', error);
-    }
-  };
-
-  const handleMarkAllAsSeen = async () => {
-    try {
-      await notificationSystemService.markAllAsSeen();
-      setNotifications(prev => prev.map(n => ({ ...n, is_seen: true })));
-      setUnseenCount(0);
-    } catch (error) {
-      console.error('Failed to mark all as seen:', error);
     }
   };
 

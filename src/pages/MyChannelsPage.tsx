@@ -3,7 +3,7 @@ import {
   Plus, Settings, Globe, Lock, Users, Video, Eye,
   ChevronRight, Shield, AlertCircle, CheckCircle,
   MoreVertical, Trash2, Edit2, Star, ArrowLeft, Zap,
-  BarChart2, Radio, ListVideo, UserPlus, ChevronLeft
+  BarChart2, UserPlus, ChevronLeft
 } from 'lucide-react';
 import {
   channelService, CreatorChannel, LegalProfile,

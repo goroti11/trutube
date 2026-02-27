@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Users, Shield, Plus } from 'lucide-react';
 import { gamingService, type GamingTeam } from '../../services/gamingService';
 import { useAuth } from '../../contexts/AuthContext';
@@ -7,7 +7,7 @@ export default function TeamsPage() {
   const { user } = useAuth();
   const [teams, setTeams] = useState<GamingTeam[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [, setShowCreateModal] = useState(false);
 
   useEffect(() => {
     loadTeams();

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import {
   Music, Star, Heart, ShoppingBag, Briefcase, Repeat,
   ArrowRight, TrendingUp, Users, Zap, Shield, CheckCircle,
-  ChevronDown, ChevronUp, DollarSign, Eye, EyeOff, BarChart3,
-  Video, Package, Mic, Layers
+  ChevronDown, ChevronUp, Eye, BarChart3,
+  Video, Mic, Layers
 } from 'lucide-react';
 import Header from '../components/Header';
 import { Footer } from '../components/Footer';

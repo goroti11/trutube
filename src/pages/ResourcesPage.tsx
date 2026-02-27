@@ -3,10 +3,10 @@ import Header from '../components/Header';
 import { Footer } from '../components/Footer';
 import {
   Book, Video, FileText, Users, TrendingUp, Shield, PlayCircle, DollarSign,
-  Scale, Cog, Wallet, AlertCircle, HelpCircle, Search, ChevronRight,
-  BookOpen, ShoppingBag, Music, Globe, MessageSquare, Newspaper, Activity,
-  CheckCircle, Code, Settings, ChevronDown, Sparkles, Upload, BarChart,
-  Eye, Lock, CreditCard, Package, MessageCircle, UserCheck
+  Scale, Wallet, AlertCircle, HelpCircle, Search, ChevronRight,
+  ShoppingBag, Music, Globe, MessageSquare, Activity,
+  CheckCircle, Code, Settings, ChevronDown, Sparkles,
+  Eye, Package, UserCheck
 } from 'lucide-react';
 
 interface ResourcesPageProps {
@@ -3727,7 +3727,7 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
                 </div>
               )}
 
-              {typeof value === 'object' && !Array.isArray(value) && (
+              {typeof value === 'object' && value !== null && !Array.isArray(value) && (
                 <div className="bg-gray-900 p-4 rounded-lg space-y-3">
                   {Object.entries(value).map(([subKey, subValue]) => (
                     <div key={subKey} className="space-y-2">
@@ -3930,7 +3930,7 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
                 { service: 'Système de paiements', status: 'operational' },
                 { service: 'Retraits créateurs', status: 'operational' },
                 { service: 'Marketplace', status: 'operational' },
-              ].map(({ service, status }) => (
+              ].map(({ service, status: _status }) => (
                 <div key={service} className="flex items-center justify-between py-2 border-b border-gray-800 last:border-0">
                   <span className="text-gray-300">{service}</span>
                   <span className="flex items-center gap-2 text-green-400 text-sm">

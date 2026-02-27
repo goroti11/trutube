@@ -115,7 +115,7 @@ export default function CreateReleasePage({ onNavigate }: CreateReleasePageProps
     if (release && splits.length > 0) {
       const totalSplits = splits.reduce((sum, s) => sum + s.percentage, 0);
       if (Math.abs(totalSplits - 100) < 0.01) {
-        await musicSalesService.setRoyaltySplits(release.id, splits);
+        await musicSalesService.setRoyaltySplits(release.id, splits.map(s => ({ ...s, recipient_user_id: null })));
       }
     }
 

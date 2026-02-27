@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Zap, Trophy, Target, Gift, DollarSign, Crown, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Zap, Target, DollarSign, Crown, Sparkles } from 'lucide-react';
 import { liveGamingService, type GameEffect } from '../../services/liveGamingService';
 
 interface InteractiveGamingOverlayProps {
@@ -9,7 +9,7 @@ interface InteractiveGamingOverlayProps {
   userId?: string;
 }
 
-export default function InteractiveGamingOverlay({ sessionId, gameId, streamerId, userId }: InteractiveGamingOverlayProps) {
+export default function InteractiveGamingOverlay({ sessionId, gameId, userId }: InteractiveGamingOverlayProps) {
   const [effects, setEffects] = useState<GameEffect[]>([]);
   const [activeEffect, setActiveEffect] = useState<GameEffect | null>(null);
   const [showEffectUI, setShowEffectUI] = useState(false);

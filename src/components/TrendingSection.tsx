@@ -4,15 +4,15 @@ import VideoCard from './VideoCard';
 import { useRef } from 'react';
 
 interface TrendingSectionProps {
-  title: string;
-  videos: Video[];
+  title?: string;
+  videos: any[];
   onVideoClick?: (video: Video) => void;
   showSeeAll?: boolean;
   variant?: 'default' | 'small';
 }
 
 export default function TrendingSection({
-  title,
+  title = 'Trending',
   videos,
   onVideoClick,
   showSeeAll = true,

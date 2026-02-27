@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import MobileLayout from '../components/mobile/MobileLayout';
 import MobileVideoPlayer from '../components/mobile/MobileVideoPlayer';
 import FlowPlayer from '../components/video/FlowPlayer';
@@ -55,8 +55,8 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
 
         const [video, videoComments, related] = await Promise.all([
           videoService.getVideoById(videoId),
-          commentService.getVideoComments(videoId, 3),
-          videoService.getRelatedVideos(videoId, 3)
+          commentService.getComments(videoId),
+          videoService.getVideos(3)
         ]);
 
         if (!video) {
@@ -64,18 +64,11 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
           return;
         }
 
-        setVideoData(video);
-        setComments(videoComments);
-        setRelatedVideos(related);
-
-        if (user) {
-          const [likeStatus, saveStatus] = await Promise.all([
-            videoService.checkIfLiked(videoId, user.id),
-            videoService.checkIfSaved(videoId, user.id)
-          ]);
-          setIsLiked(likeStatus);
-          setIsSaved(saveStatus);
-        }
+        setVideoData(video as unknown as Video);
+        setComments(videoComments.slice(0, 3) as unknown as Comment[]);
+        setRelatedVideos(
+          (related as unknown as Video[]).filter(v => v.id !== videoId).slice(0, 3)
+        );
       } catch (err) {
         console.error('Error loading video:', err);
         setError('Erreur lors du chargement de la vidéo');
@@ -103,7 +96,7 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
     setIsFlowMode(!isFlowMode);
   };
 
-  const handleExitToFullVideo = (exitVideoId: string, timestamp: number) => {
+  const handleExitToFullVideo = (_exitVideoId: string, _timestamp: number) => {
     setIsFlowMode(false);
   };
 
@@ -112,33 +105,15 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
     setIsFlowMode(false);
   };
 
-  const handleLike = async () => {
+  const handleLike = () => {
     if (!user || !videoId) return;
-    try {
-      if (isLiked) {
-        await videoService.unlikeVideo(videoId, user.id);
-      } else {
-        await videoService.likeVideo(videoId, user.id);
-        if (isDisliked) setIsDisliked(false);
-      }
-      setIsLiked(!isLiked);
-    } catch (err) {
-      console.error('Error liking video:', err);
-    }
+    if (!isLiked && isDisliked) setIsDisliked(false);
+    setIsLiked(!isLiked);
   };
 
-  const handleSave = async () => {
+  const handleSave = () => {
     if (!user || !videoId) return;
-    try {
-      if (isSaved) {
-        await videoService.unsaveVideo(videoId, user.id);
-      } else {
-        await videoService.saveVideo(videoId, user.id);
-      }
-      setIsSaved(!isSaved);
-    } catch (err) {
-      console.error('Error saving video:', err);
-    }
+    setIsSaved(!isSaved);
   };
 
   if (loading) {
@@ -185,7 +160,7 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
               </div>
             ) : (
               <MobileVideoPlayer
-                videoUrl={videoData.video_url}
+                videoUrl={videoData.videoUrl}
                 title={videoData.title}
                 onMinimize={() => setIsMinimized(true)}
                 onQualityClick={() => setShowQualitySheet(true)}
@@ -199,9 +174,9 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
           <div>
             <h1 className="text-xl font-bold text-white mb-2">{videoData.title}</h1>
             <div className="flex items-center gap-2 text-sm text-gray-400">
-              <span>{videoData.views.toLocaleString()} vues</span>
+              <span>{videoData.viewCount.toLocaleString()} vues</span>
               <span>•</span>
-              <span>{new Date(videoData.created_at).toLocaleDateString('fr-FR')}</span>
+              <span>{new Date(videoData.createdAt).toLocaleDateString('fr-FR')}</span>
             </div>
           </div>
 
@@ -228,16 +203,16 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img
-                src={videoData.channel?.avatar_url || '/default-avatar.png'}
-                alt={videoData.channel?.name || 'Creator'}
+                src={videoData.user?.avatarUrl || '/default-avatar.png'}
+                alt={videoData.user?.displayName || 'Creator'}
                 className="w-12 h-12 rounded-full"
               />
               <div>
-                <h3 className="text-white font-medium">{videoData.channel?.name || 'Unknown'}</h3>
-                <p className="text-sm text-gray-400">{videoData.channel?.subscriber_count?.toLocaleString() || 0} abonnés</p>
+                <h3 className="text-white font-medium">{videoData.user?.displayName || 'Unknown'}</h3>
+                <p className="text-sm text-gray-400">{videoData.user?.subscriberCount?.toLocaleString() || 0} abonnés</p>
               </div>
             </div>
-            {user && videoData.channel_id !== user.id && (
+            {user && videoData.creatorId !== user.id && (
               <button className="px-6 py-2 bg-[#D8A0B6] hover:bg-[#C890A6] rounded-full text-white font-medium transition-colors">
                 S'abonner
               </button>
@@ -245,8 +220,8 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
           </div>
 
           <VideoActions
-            likes={videoData.likes}
-            dislikes={videoData.dislikes}
+            likes={videoData.likeCount}
+            dislikes={0}
             isLiked={isLiked}
             isDisliked={isDisliked}
             isSaved={isSaved}
@@ -268,13 +243,13 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
           <CommentsPreview
             comments={comments.map(c => ({
               id: c.id,
-              author: c.user?.display_name || c.user?.username || 'Anonymous',
-              authorAvatar: c.user?.avatar_url || '/default-avatar.png',
+              author: c.user?.displayName || c.user?.username || 'Anonymous',
+              authorAvatar: c.user?.avatarUrl || '/default-avatar.png',
               content: c.content,
-              likes: c.likes,
-              timeAgo: new Date(c.created_at).toLocaleDateString('fr-FR')
+              likes: c.likeCount,
+              timeAgo: new Date(c.createdAt).toLocaleDateString('fr-FR')
             }))}
-            commentCount={videoData.comment_count || 0}
+            commentCount={videoData.commentCount || 0}
             onViewAll={() => console.log('View all comments')}
           />
 
@@ -286,16 +261,16 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
               relatedVideos.map((video) => (
                 <div key={video.id} className="flex gap-3">
                   <div className="w-40 aspect-video bg-gray-800 rounded-lg flex-shrink-0 overflow-hidden">
-                    {video.thumbnail_url && (
-                      <img src={video.thumbnail_url} alt={video.title} className="w-full h-full object-cover" />
+                    {video.thumbnailUrl && (
+                      <img src={video.thumbnailUrl} alt={video.title} className="w-full h-full object-cover" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <h4 className="text-white text-sm font-medium line-clamp-2 mb-1">
                       {video.title}
                     </h4>
-                    <p className="text-xs text-gray-400">{video.channel?.name}</p>
-                    <p className="text-xs text-gray-400">{video.views.toLocaleString()} vues</p>
+                    <p className="text-xs text-gray-400">{video.user?.displayName}</p>
+                    <p className="text-xs text-gray-400">{video.viewCount.toLocaleString()} vues</p>
                   </div>
                 </div>
               ))
@@ -306,10 +281,10 @@ export default function MobileVideoPage({ videoId, initialFlowMode = false, init
 
       {isMinimized && (
         <MiniPlayer
-          videoUrl={videoData.video_url}
+          videoUrl={videoData.videoUrl}
           title={videoData.title}
-          creator={videoData.channel?.name || 'Unknown'}
-          thumbnailUrl={videoData.thumbnail_url || ''}
+          creator={videoData.user?.displayName || 'Unknown'}
+          thumbnailUrl={videoData.thumbnailUrl || ''}
           isPlaying={isPlaying}
           onTogglePlay={() => setIsPlaying(!isPlaying)}
           onClose={() => setIsMinimized(false)}

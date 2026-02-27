@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Gamepad2, Shield, TrendingUp, DollarSign, AlertCircle, Video, Settings,
-  Trophy, Target, Zap, Radio, MonitorPlay, Smartphone, Tv, Crown, Sparkles
+  Trophy, Target, Zap, Radio, MonitorPlay, Smartphone, Tv, Sparkles
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { gamingService, type Game } from '../../services/gamingService';
 import { liveGamingService } from '../../services/liveGamingService';
-import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function GamingStudioPage() {
-  const { t } = useLanguage();
   const navigate = useNavigate();
   const { user } = useAuth();
   const [games, setGames] = useState<Game[]>([]);

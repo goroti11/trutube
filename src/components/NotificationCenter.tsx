@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Bell, X, Settings, Check, Trash2, Filter } from 'lucide-react';
+import { Bell, X, Settings, Check, Trash2 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { unifiedNotificationService, Notification } from '../services/unifiedNotificationService';
 import { formatDistanceToNow } from '../utils/dateUtils';

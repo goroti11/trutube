@@ -5,10 +5,8 @@ import FreeTrialBanner from '../components/FreeTrialBanner';
 import TrendingSection from '../components/TrendingSection';
 import VideoCard from '../components/VideoCard';
 import { videoService, VideoWithCreator } from '../services/videoService';
-import { universeService } from '../services/universeService';
 import { legendFeedService, LegendFeedItem } from '../services/legendFeedService';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 interface HomePageProps {
   onUniverseClick: (universeId: string) => void;
@@ -82,7 +80,6 @@ const universes = [
 
 export default function HomePage({ onUniverseClick }: HomePageProps) {
   const { user } = useAuth();
-  const navigate = useNavigate();
   const [showBanner, setShowBanner] = useState(() => {
     return !sessionStorage.getItem('trialBannerDismissed');
   });
@@ -210,18 +207,30 @@ export default function HomePage({ onUniverseClick }: HomePageProps) {
                 key={item.entity_id}
                 video={{
                   id: item.entity_id,
+                  userId: '',
+                  creatorId: '',
                   title: item.video_title,
+                  description: '',
                   thumbnailUrl: item.video_thumbnail,
+                  videoUrl: '',
                   duration: 0,
+                  isShort: false,
+                  isPremium: false,
                   viewCount: item.view_count,
                   likeCount: item.like_count,
                   commentCount: 0,
-                  shareCount: 0,
+                  avgWatchTime: 0,
                   createdAt: item.created_at,
                   user: {
                     id: '',
                     displayName: item.creator_name,
-                    avatarUrl: ''
+                    avatarUrl: '',
+                    bio: '',
+                    userStatus: 'viewer' as const,
+                    subscriberCount: 0,
+                    uploadFrequency: 0,
+                    createdAt: item.created_at,
+                    updatedAt: item.created_at
                   }
                 }}
                 legendLevel={item.legend_level}
@@ -229,7 +238,7 @@ export default function HomePage({ onUniverseClick }: HomePageProps) {
                 isLegendPromoted={item.is_legend_promoted}
                 onClick={(video) => {
                   legendFeedService.trackLegendImpression('video', video.id, true);
-                  navigate(`/watch/${video.id}`);
+                  window.location.hash = 'watch/' + video.id;
                 }}
               />
             ))}

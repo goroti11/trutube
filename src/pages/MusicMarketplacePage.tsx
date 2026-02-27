@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
-  Search, Filter, Star, Clock, Award, CheckCircle, Briefcase, Music,
+  Search, Star, Clock, Award, CheckCircle, Briefcase, Music,
   Video, Palette, TrendingUp, Scale, ChevronRight, Users, Zap,
   SlidersHorizontal, ArrowRight, Shield, MessageCircle, Package, X
 } from 'lucide-react';
-import { marketplaceService, MarketplaceCategory, MarketplaceService, ProviderProfile, CATEGORY_LABELS, CATEGORY_SUBCATEGORIES } from '../services/marketplaceService';
+import { MarketplaceCategory, MarketplaceService, CATEGORY_LABELS, CATEGORY_SUBCATEGORIES } from '../services/marketplaceService';
 import { useAuth } from '../contexts/AuthContext';
 
 interface MusicMarketplacePageProps {
@@ -41,20 +41,19 @@ const SAMPLE_SERVICES: MarketplaceService[] = [
     cover_image_url: 'https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg?w=400',
     gallery_images: [], sample_work_url: '',
     requirements: 'Stems séparés en 24bit/48kHz',
-    total_orders: 124, total_revenue: 18500, average_rating: 4.9, total_reviews: 87,
-    is_featured: true, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+    total_orders: 124, average_rating: 4.9, total_reviews: 87,
+    is_featured: true, is_active: true, created_at: new Date().toISOString(),
     provider: {
       id: 'p1', user_id: 'u1', display_name: 'Studio Noir', tagline: 'Mix & Master Paris',
       bio: '', avatar_url: 'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?w=100',
       portfolio_images: [], portfolio_urls: [],
       primary_category: 'music_production', secondary_categories: [], specializations: ['hip-hop', 'r&b', 'pop'],
       languages: ['fr', 'en'], experience_years: 8, expertise_level: 'expert',
-      is_verified: true, verified_at: null, is_pro: true, pro_subscription_ends_at: null,
-      identity_verified: true, identity_verified_at: null,
-      total_orders: 124, completed_orders: 119, cancelled_orders: 2, average_rating: 4.9, total_reviews: 87,
+      is_verified: true, is_pro: true,
+      total_orders: 124, completed_orders: 119, average_rating: 4.9, total_reviews: 87,
       total_revenue: 18500, response_rate: 98, on_time_delivery_rate: 97,
-      is_available: true, away_until: null, max_active_orders: 5, is_active: true,
-      created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+      is_available: true, is_active: true,
+      created_at: new Date().toISOString(),
     }
   },
   {
@@ -70,20 +69,19 @@ const SAMPLE_SERVICES: MarketplaceService[] = [
     cover_image_url: 'https://images.pexels.com/photos/1983037/pexels-photo-1983037.jpeg?w=400',
     gallery_images: [], sample_work_url: '',
     requirements: 'Fichiers bruts + brief artistique',
-    total_orders: 56, total_revenue: 22400, average_rating: 4.8, total_reviews: 41,
-    is_featured: true, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+    total_orders: 56, average_rating: 4.8, total_reviews: 41,
+    is_featured: true, is_active: true, created_at: new Date().toISOString(),
     provider: {
       id: 'p2', user_id: 'u2', display_name: 'Visuals by Noa', tagline: 'Réalisatrice & Monteuse',
       bio: '', avatar_url: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?w=100',
       portfolio_images: [], portfolio_urls: [],
       primary_category: 'video', secondary_categories: [], specializations: ['clip', 'live', 'docu'],
       languages: ['fr'], experience_years: 5, expertise_level: 'expert',
-      is_verified: true, verified_at: null, is_pro: true, pro_subscription_ends_at: null,
-      identity_verified: true, identity_verified_at: null,
-      total_orders: 56, completed_orders: 54, cancelled_orders: 0, average_rating: 4.8, total_reviews: 41,
+      is_verified: true, is_pro: true,
+      total_orders: 56, completed_orders: 54, average_rating: 4.8, total_reviews: 41,
       total_revenue: 22400, response_rate: 99, on_time_delivery_rate: 96,
-      is_available: true, away_until: null, max_active_orders: 3, is_active: true,
-      created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+      is_available: true, is_active: true,
+      created_at: new Date().toISOString(),
     }
   },
   {
@@ -99,20 +97,19 @@ const SAMPLE_SERVICES: MarketplaceService[] = [
     cover_image_url: 'https://images.pexels.com/photos/1762851/pexels-photo-1762851.jpeg?w=400',
     gallery_images: [], sample_work_url: '',
     requirements: 'Moodboard + références',
-    total_orders: 89, total_revenue: 28900, average_rating: 5.0, total_reviews: 67,
-    is_featured: false, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+    total_orders: 89, average_rating: 5.0, total_reviews: 67,
+    is_featured: false, is_active: true, created_at: new Date().toISOString(),
     provider: {
       id: 'p3', user_id: 'u3', display_name: 'Aya Design', tagline: 'Graphic Design Artiste',
       bio: '', avatar_url: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?w=100',
       portfolio_images: [], portfolio_urls: [],
       primary_category: 'branding', secondary_categories: [], specializations: ['hip-hop', 'electronic', 'pop'],
       languages: ['fr', 'en'], experience_years: 6, expertise_level: 'pro',
-      is_verified: true, verified_at: null, is_pro: true, pro_subscription_ends_at: null,
-      identity_verified: true, identity_verified_at: null,
-      total_orders: 89, completed_orders: 88, cancelled_orders: 0, average_rating: 5.0, total_reviews: 67,
+      is_verified: true, is_pro: true,
+      total_orders: 89, completed_orders: 88, average_rating: 5.0, total_reviews: 67,
       total_revenue: 28900, response_rate: 100, on_time_delivery_rate: 99,
-      is_available: true, away_until: null, max_active_orders: 4, is_active: true,
-      created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+      is_available: true, is_active: true,
+      created_at: new Date().toISOString(),
     }
   },
   {
@@ -128,20 +125,19 @@ const SAMPLE_SERVICES: MarketplaceService[] = [
     cover_image_url: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?w=400',
     gallery_images: [], sample_work_url: '',
     requirements: 'Brief artistique + date de sortie',
-    total_orders: 34, total_revenue: 19600, average_rating: 4.7, total_reviews: 28,
-    is_featured: false, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+    total_orders: 34, average_rating: 4.7, total_reviews: 28,
+    is_featured: false, is_active: true, created_at: new Date().toISOString(),
     provider: {
       id: 'p4', user_id: 'u4', display_name: 'LaunchPad Agency', tagline: 'Marketing Musical',
       bio: '', avatar_url: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?w=100',
       portfolio_images: [], portfolio_urls: [],
       primary_category: 'marketing', secondary_categories: [], specializations: ['digital', 'presse', 'ads'],
       languages: ['fr', 'en'], experience_years: 7, expertise_level: 'pro',
-      is_verified: true, verified_at: null, is_pro: false, pro_subscription_ends_at: null,
-      identity_verified: true, identity_verified_at: null,
-      total_orders: 34, completed_orders: 32, cancelled_orders: 1, average_rating: 4.7, total_reviews: 28,
+      is_verified: true, is_pro: false,
+      total_orders: 34, completed_orders: 32, average_rating: 4.7, total_reviews: 28,
       total_revenue: 19600, response_rate: 95, on_time_delivery_rate: 94,
-      is_available: true, away_until: null, max_active_orders: 3, is_active: true,
-      created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+      is_available: true, is_active: true,
+      created_at: new Date().toISOString(),
     }
   },
   {
@@ -157,30 +153,29 @@ const SAMPLE_SERVICES: MarketplaceService[] = [
     cover_image_url: 'https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?w=400',
     gallery_images: [], sample_work_url: '',
     requirements: 'Situation artistique + objectifs',
-    total_orders: 45, total_revenue: 17550, average_rating: 4.8, total_reviews: 39,
-    is_featured: false, is_active: true, created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+    total_orders: 45, average_rating: 4.8, total_reviews: 39,
+    is_featured: false, is_active: true, created_at: new Date().toISOString(),
     provider: {
       id: 'p5', user_id: 'u5', display_name: 'Maître Delon', tagline: 'Avocat Droit Musical',
       bio: '', avatar_url: 'https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?w=100',
       portfolio_images: [], portfolio_urls: [],
       primary_category: 'legal', secondary_categories: [], specializations: ['droits', 'contrats', 'sacem'],
       languages: ['fr'], experience_years: 12, expertise_level: 'pro',
-      is_verified: true, verified_at: null, is_pro: true, pro_subscription_ends_at: null,
-      identity_verified: true, identity_verified_at: null,
-      total_orders: 45, completed_orders: 44, cancelled_orders: 0, average_rating: 4.8, total_reviews: 39,
+      is_verified: true, is_pro: true,
+      total_orders: 45, completed_orders: 44, average_rating: 4.8, total_reviews: 39,
       total_revenue: 17550, response_rate: 97, on_time_delivery_rate: 98,
-      is_available: true, away_until: null, max_active_orders: 5, is_active: true,
-      created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+      is_available: true, is_active: true,
+      created_at: new Date().toISOString(),
     }
   },
 ];
 
-export default function MusicMarketplacePage({ onNavigate }: MusicMarketplacePageProps) {
+export default function MusicMarketplacePage(_props: MusicMarketplacePageProps) {
   const { user } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState<MarketplaceCategory | null>(null);
   const [selectedService, setSelectedService] = useState<MarketplaceService | null>(null);
   const [selectedTier, setSelectedTier] = useState<'basic' | 'standard' | 'premium'>('basic');
-  const [services, setServices] = useState<MarketplaceService[]>(SAMPLE_SERVICES);
+  const [services] = useState<MarketplaceService[]>(SAMPLE_SERVICES);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'rating' | 'price' | 'orders'>('rating');
   const [showFilters, setShowFilters] = useState(false);
@@ -239,8 +234,8 @@ export default function MusicMarketplacePage({ onNavigate }: MusicMarketplacePag
     const p = selectedService.provider;
     const tierPrice = getTierPrice(selectedService, selectedTier);
     const tierDays = getTierDays(selectedService, selectedTier);
-    const tierRevisions = getTierRevisions(selectedService, selectedTier);
-    const tierIncludes = getTierIncludes(selectedService, selectedTier);
+    getTierRevisions(selectedService, selectedTier);
+    getTierIncludes(selectedService, selectedTier);
 
     return (
       <div className="min-h-screen bg-gray-950 text-white">

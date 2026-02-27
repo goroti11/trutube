@@ -1,7 +1,7 @@
 import {
   Target, Heart, Shield, Users, TrendingUp, Globe, Eye,
   Award, Zap, Lock, Play, BarChart3, DollarSign, Code2,
-  Layers, CheckCircle, ArrowRight, TrendingDown, AlertTriangle
+  Layers, CheckCircle, ArrowRight, AlertTriangle
 } from 'lucide-react';
 import Header from '../components/Header';
 import { Footer } from '../components/Footer';

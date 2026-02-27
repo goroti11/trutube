@@ -67,10 +67,6 @@ export default function SubscribersPage({ onNavigate }: SubscribersPageProps) {
     return `Il y a ${Math.floor(seconds / 2592000)} mois`;
   };
 
-  const _getTierColor = (tier: 'free' | 'premium') => {
-    return tier === 'premium' ? 'text-yellow-400' : 'text-gray-400';
-  };
-
   const getTierBadge = (tier: 'free' | 'premium', tierName?: string) => {
     if (tier === 'free') return null;
     return (

@@ -166,7 +166,7 @@ export default function StatusPage({ onNavigate }: StatusPageProps) {
 
   const allOperational = services.every(s => s.status === 'operational');
   const someDown = services.some(s => s.status === 'down');
-  const _someDegraded = services.some(s => s.status === 'degraded');
+
 
   return (
     <div className="min-h-screen bg-gray-950">

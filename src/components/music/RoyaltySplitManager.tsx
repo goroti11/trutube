@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Plus, Trash2, AlertCircle, Check, Users, Percent } from 'lucide-react';
-import { RoyaltySplit, RoyaltyRole } from '../../services/musicSalesService';
+import { RoyaltyRole } from '../../services/musicSalesService';
 
 const ROLE_LABELS: Record<RoyaltyRole, string> = {
   main_artist: 'Artiste principal',

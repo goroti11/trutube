@@ -4,7 +4,7 @@ import { Footer } from '../components/Footer';
 import {
   ArrowLeft, Clock, Eye, Bookmark, Share2, ThumbsUp, ThumbsDown,
   CheckCircle, AlertCircle, Lightbulb, FileText, Video, Download,
-  ExternalLink, ChevronRight, User, Calendar
+  ExternalLink, ChevronRight, Calendar
 } from 'lucide-react';
 import { resourceService, Resource } from '../services/resourceService';
 
@@ -435,7 +435,7 @@ export default function ResourceArticlePage({ onNavigate, resourceSlug }: Resour
   const [resource, setResource] = useState<Resource | null>(null);
   const [loading, setLoading] = useState(true);
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const [showShareModal, setShowShareModal] = useState(false);
+  const [_showShareModal, setShowShareModal] = useState(false);
 
   const slug = resourceSlug || 'quick-start-guide';
   const content = articleContent[slug];

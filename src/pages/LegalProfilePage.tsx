@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import {
-  Shield, User, MapPin, CreditCard, FileText, CheckCircle,
+  Shield, User, MapPin, CreditCard, CheckCircle,
   AlertCircle, Clock, Lock, ChevronRight, Save, Eye, EyeOff,
-  Building, Globe, Phone, Mail, ArrowLeft
+  Globe, Phone, ArrowLeft
 } from 'lucide-react';
 import { channelService, LegalProfile, KycStatus } from '../services/channelService';
 import { useAuth } from '../contexts/AuthContext';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TrendingUp, Trophy, Medal, Award } from 'lucide-react';
 import { gamingService, type LeaderboardEntry, type Game, type GamingSeason } from '../../services/gamingService';
 
@@ -144,16 +144,16 @@ export default function LeaderboardsPage() {
                       <td className="px-6 py-4">
                         <div className="flex items-center space-x-3">
                           <img
-                            src={entry.profiles?.avatar_url || entry.gaming_teams?.logo_url || '/default-avatar.png'}
+                            src={(entry as any).profiles?.avatar_url || (entry as any).gaming_teams?.logo_url || '/default-avatar.png'}
                             alt=""
                             className="w-10 h-10 rounded-full"
                           />
                           <div>
                             <p className="font-semibold">
-                              {entry.profiles?.username || entry.gaming_teams?.name || 'Unknown'}
+                              {(entry as any).profiles?.username || (entry as any).gaming_teams?.name || 'Unknown'}
                             </p>
-                            {entry.gaming_teams && (
-                              <p className="text-xs text-gray-500">{entry.gaming_teams.tag}</p>
+                            {(entry as any).gaming_teams && (
+                              <p className="text-xs text-gray-500">{(entry as any).gaming_teams.tag}</p>
                             )}
                           </div>
                         </div>

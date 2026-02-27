@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { X, Crown, Check, Sparkles, Zap, TrendingUp, Shield } from 'lucide-react';
 
 interface FreeTrialBannerProps {

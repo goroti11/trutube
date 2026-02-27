@@ -23,8 +23,7 @@ import { LegalPage } from './pages/LegalPage';
 import { LoadingScreen } from './components/LoadingScreen';
 import SplashScreen from './components/SplashScreen';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { Video } from './types';
-import MobileVideoPage from './pages/MobileVideoPage';
+import { Video, User } from './types';
 import VideoUploadPage from './pages/VideoUploadPage';
 import CreatorDashboardV2Page from './pages/CreatorDashboardV2Page';
 import CreatorStudioPage from './pages/CreatorStudioPage';
@@ -574,7 +573,7 @@ function AppContent() {
           <CommunitySettingsPage slug={settingsCommunitySlug} />
         )}
 
-        {currentPage === 'trucoin-wallet' && <TruCoinWalletPage />}
+        {currentPage === 'trucoin-wallet' && <TruCoinWalletPage onNavigate={(page) => setCurrentPage(page as Page)} />}
 
         {currentPage === 'premium' && <PremiumPage />}
 

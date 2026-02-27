@@ -1,4 +1,3 @@
-import React from 'react';
 import { Crown, Star, Gem, Sparkles } from 'lucide-react';
 
 interface LegendBadgeProps {

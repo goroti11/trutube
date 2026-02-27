@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Users, Plus, TrendingUp, Clock, MessageSquare, UserPlus, UserMinus, Crown, Settings, Lock } from 'lucide-react';
+import { Users, Plus, TrendingUp, Clock, MessageSquare, UserPlus, UserMinus, Crown, Settings } from 'lucide-react';
 import { communityService, Community, CommunityPost } from '../services/communityService';
 import { profileService } from '../services/profileService';
 import { useAuth } from '../contexts/AuthContext';

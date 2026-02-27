@@ -196,7 +196,7 @@ export default function VideoPlayerPage({
     setIsFlowMode(!isFlowMode);
   };
 
-  const handleExitToFullVideo = (exitVideoId: string, timestamp: number) => {
+  const handleExitToFullVideo = (exitVideoId: string, _timestamp: number) => {
     setIsFlowMode(false);
     if (exitVideoId !== video.id) {
       onVideoClick(exitVideoId);
@@ -276,9 +276,11 @@ export default function VideoPlayerPage({
               <VideoActions
                 likeCount={localVideo.likeCount}
                 dislikeCount={(localVideo as any).dislikeCount || 0}
+                commentCount={localVideo.commentCount}
                 isLiked={isLiked}
                 isDisliked={isDisliked}
                 isSaved={isSaved}
+                isSubscribed={isSubscribed}
                 onLike={handleLike}
                 onDislike={handleDislike}
                 onShare={handleShare}
@@ -288,6 +290,7 @@ export default function VideoPlayerPage({
                 onCreateClip={handleCreateClip}
                 onAddToPlaylist={handleAddToPlaylist}
                 onRemix={handleRemix}
+                onSubscribe={handleSubscribe}
               />
 
               {localVideo.user && (
@@ -307,6 +310,9 @@ export default function VideoPlayerPage({
                 description={localVideo.description || 'Aucune description disponible.'}
                 viewCount={localVideo.viewCount}
                 uploadDate={localVideo.createdAt}
+                likes={localVideo.likeCount}
+                dislikes={(localVideo as any).dislikeCount || 0}
+                comments={localVideo.commentCount}
                 hashtags={(localVideo as any).hashtags || []}
                 transcript={(localVideo as any).transcript || ''}
               />

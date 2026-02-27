@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TrendingUp, Trophy, BarChart3, Calendar, Crown } from 'lucide-react';
 import { legendService, type CreatorTruScore, type LegendRankingHistory } from '../../services/legendService';
 import { useAuth } from '../../contexts/AuthContext';

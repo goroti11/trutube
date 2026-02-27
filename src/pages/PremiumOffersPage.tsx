@@ -21,7 +21,7 @@ interface PremiumOffersPageProps {
 }
 
 export default function PremiumOffersPage({ onNavigate }: PremiumOffersPageProps) {
-  const { user } = useAuth();
+  useAuth();
   const [tiers, setTiers] = useState<PremiumTier[]>([]);
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
   const [loading, setLoading] = useState(true);

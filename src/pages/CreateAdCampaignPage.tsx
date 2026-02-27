@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import {
-  Target,
-  Calendar,
-  DollarSign,
   Users,
-  Globe,
   Image as ImageIcon,
   Video,
   ArrowRight,
   ArrowLeft,
   CheckCircle,
-  AlertCircle,
   Info
 } from 'lucide-react';
 
@@ -29,12 +24,12 @@ export default function CreateAdCampaignPage() {
   // Step 2: Targeting
   const [selectedUniverses, setSelectedUniverses] = useState<string[]>([]);
   const [ageRange, setAgeRange] = useState({ min: 18, max: 65 });
-  const [countries, setCountries] = useState<string[]>(['FR']);
+  const [countries] = useState<string[]>(['FR']);
   const [interests, setInterests] = useState<string[]>([]);
 
   // Step 3: Ad Format & Creative
   const [adFormat, setAdFormat] = useState<AdFormat>('preroll');
-  const [adFile, setAdFile] = useState<File | null>(null);
+  const [_adFile, _setAdFile] = useState<File | null>(null);
   const [destinationUrl, setDestinationUrl] = useState('');
 
   // Step 4: Budget & Schedule

@@ -7,14 +7,12 @@ import {
   Radio,
   List,
   MessageSquare,
-  Clock,
   Users,
   Bell,
   BellOff,
   MoreVertical,
   Play,
   Camera,
-  Image as ImageIcon,
   Grid3x3,
   PlaySquare,
   Loader2
@@ -56,7 +54,7 @@ export default function EnhancedCreatorProfilePage({ onNavigate, creatorId }: En
 
         const [profile, channels] = await Promise.all([
           profileService.getProfile(creatorId),
-          channelService.getUserChannels(creatorId)
+          channelService.getMyChannels(creatorId)
         ]);
 
         if (!profile) {
@@ -68,22 +66,22 @@ export default function EnhancedCreatorProfilePage({ onNavigate, creatorId }: En
 
         setCreator({
           id: profile.id,
-          username: profile.username,
+          username: profile.display_name,
           displayName: profile.display_name,
           avatarUrl: profile.avatar_url,
-          bannerUrl: primaryChannel?.banner_url || profile.banner_url,
+          bannerUrl: primaryChannel?.banner_url || profile.avatar_url,
           bio: profile.bio,
           subscriberCount: primaryChannel?.subscriber_count || 0,
           videoCount: primaryChannel?.video_count || 0,
           totalViews: primaryChannel?.total_views || 0,
-          isVerified: profile.is_verified,
+          isVerified: profile.user_status === 'creator' || profile.user_status === 'pro' || profile.user_status === 'elite',
           joinedDate: profile.created_at,
           links: []
         });
 
-        if (user) {
-          const subscription = await channelService.checkSubscription(primaryChannel?.id, user.id);
-          setIsSubscribed(!!subscription);
+        if (user && primaryChannel?.id) {
+          const channel = await channelService.getChannel(primaryChannel.id);
+          setIsSubscribed(!!channel);
         }
       } catch (err) {
         console.error('Error loading creator:', err);

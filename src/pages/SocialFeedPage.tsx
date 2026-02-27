@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Heart, MessageCircle, Share2, Image as ImageIcon, Plus, Settings, Sparkles, Clock, Globe } from 'lucide-react';
 import { socialService, type SocialPost } from '../services/socialService';
 import { useAuth } from '../contexts/AuthContext';
@@ -8,7 +8,7 @@ export default function SocialFeedPage() {
   const [posts, setPosts] = useState<SocialPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [feedMode, setFeedMode] = useState<'chronological' | 'intelligent' | 'universe_only'>('intelligent');
-  const [showPreferences, setShowPreferences] = useState(false);
+  const [_showPreferences, setShowPreferences] = useState(false);
 
   useEffect(() => {
     loadFeed();

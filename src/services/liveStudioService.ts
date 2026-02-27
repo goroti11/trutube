@@ -296,7 +296,7 @@ export const liveStudioService = {
     return data;
   },
 
-  async getLeaderboard(streamId: string, category: string, limit: number = 10) {
+  async getLeaderboard(streamId: string, _category: string, limit: number = 10) {
     const { data, error } = await supabase
       .from('live_leaderboard_entries')
       .select(`
