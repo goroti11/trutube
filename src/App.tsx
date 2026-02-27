@@ -83,8 +83,9 @@ import TournamentsPage from './pages/gaming/TournamentsPage';
 import LeaderboardsPage from './pages/gaming/LeaderboardsPage';
 import TeamsPage from './pages/gaming/TeamsPage';
 import ArenaFundPage from './pages/gaming/ArenaFundPage';
+import LegendsRankingPage from './pages/LegendsRankingPage';
 
-type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral' | 'channel' | 'blog' | 'blog-article' | 'advertiser-dashboard' | 'create-ad-campaign' | 'ad-payment' | 'gaming-hub' | 'gaming-studio' | 'gaming-tournaments' | 'gaming-leaderboards' | 'gaming-teams' | 'gaming-arena-fund';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral' | 'channel' | 'blog' | 'blog-article' | 'advertiser-dashboard' | 'create-ad-campaign' | 'ad-payment' | 'gaming-hub' | 'gaming-studio' | 'gaming-tournaments' | 'gaming-leaderboards' | 'gaming-teams' | 'gaming-arena-fund' | 'legends-ranking';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -257,6 +258,8 @@ function AppContent() {
         'gaming-leaderboards': 'gaming-leaderboards',
         'gaming-teams': 'gaming-teams',
         'gaming-arena-fund': 'gaming-arena-fund',
+        'legends-ranking': 'legends-ranking',
+        'legends': 'legends-ranking',
         'terms': 'terms',
         'privacy': 'privacy',
         'support': 'support',
@@ -774,6 +777,8 @@ function AppContent() {
         {currentPage === 'gaming-teams' && <TeamsPage />}
 
         {currentPage === 'gaming-arena-fund' && <ArenaFundPage />}
+
+        {currentPage === 'legends-ranking' && <LegendsRankingPage />}
 
         {currentPage !== 'auth' && currentPage !== 'video' && currentPage !== 'watch' && (
           <Footer onNavigate={(page) => setCurrentPage(page as Page)} />

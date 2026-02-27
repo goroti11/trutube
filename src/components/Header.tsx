@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Upload, LogIn, Compass, Settings, Sparkles, User, LogOut, ChevronDown, HelpCircle, Play, Users, Wallet, Crown, Shield, MoreVertical, Book, Briefcase, Info, MessageCircle, Gamepad2 } from 'lucide-react';
+import { Upload, LogIn, Compass, Settings, Sparkles, User, LogOut, ChevronDown, HelpCircle, Play, Users, Wallet, Crown, Shield, MoreVertical, Book, Briefcase, Info, MessageCircle, Gamepad2, Trophy } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import Logo from './Logo';
 import NotificationCenter from './NotificationCenter';
@@ -70,6 +70,13 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                   title="Gaming"
                 >
                   <Gamepad2 className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => onNavigate('legends-ranking')}
+                  className="flex items-center gap-2 px-3 py-2 text-yellow-400 hover:text-yellow-300 hover:bg-yellow-900/20 rounded-lg transition-colors"
+                  title="Legends"
+                >
+                  <Trophy className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => onNavigate('preferences')}
