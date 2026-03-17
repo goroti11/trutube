@@ -1,3 +1,4 @@
+import { legendCanonicalService } from './legendCanonicalService';
 import { supabase } from '../lib/supabase';
 
 export interface LegendBadge {
@@ -81,6 +82,9 @@ class LegendService {
   }
 
   async getVideoBadges(videoId: string) {
+    const legend = await legendCanonicalService.getLegendByEntity('video', videoId);
+    if (!legend) return [];
+
     const { data, error } = await supabase
       .from('video_legend_awards')
       .select(`
@@ -123,85 +127,16 @@ class LegendService {
     return data as CreatorTruScore[];
   }
 
-  async calculateCreatorTruScore(userId: string, universeId?: string) {
-    const { data, error } = await supabase.rpc('calculate_creator_tru_score', {
-      p_user_id: userId,
-      p_universe_id: universeId
-    });
-
-    if (error) throw error;
-    return data;
+  async getCurrentLegendHolders(type?: 'universe_legend' | 'global_legend') {
+    return legendCanonicalService.getCurrentHolders(type);
   }
 
-  async getLegendVideos(limit = 20) {
-    const { data, error } = await supabase
-      .from('video_legend_awards')
-      .select(`
-        video_id,
-        badge_id,
-        videos!inner (
-          *,
-          creator:profiles!videos_creator_id_fkey(
-            display_name,
-            avatar_url,
-            user_status,
-            subscriber_count
-          )
-        ),
-        legend_badges!inner (
-          name,
-          badge_type,
-          level,
-          color
-        )
-      `)
-      .eq('is_active', true)
-      .eq('videos.is_masked', false)
-      .order('awarded_at', { ascending: false })
-      .limit(limit);
-
-    if (error) {
-      console.error('Error fetching legend videos:', error);
-      return [];
-    }
-
-    return (data || []).map((item: any) => {
-      const video = item.videos;
-      const badge = item.legend_badges;
-
-      let legendTier = 'bronze';
-      if (badge.badge_type === 'legend') {
-        if (badge.level >= 5) legendTier = 'diamond';
-        else if (badge.level >= 4) legendTier = 'platinum';
-        else if (badge.level >= 3) legendTier = 'gold';
-        else if (badge.level >= 2) legendTier = 'silver';
-      }
-
-      return {
-        ...video,
-        legend_tier: legendTier,
-      };
-    });
+  async getCreatorRankingHistory(userId: string, limit = 12) {
+    return legendCanonicalService.getRankingHistory(userId, limit);
   }
 
   async getGlobalLeaderboard(limit = 50) {
-    const { data, error } = await supabase
-      .from('creator_tru_scores')
-      .select(`
-        *,
-        profiles:user_id (
-          id,
-          username,
-          full_name,
-          avatar_url
-        )
-      `)
-      .is('universe_id', null)
-      .order('rank_weekly_global', { ascending: true })
-      .limit(limit);
-
-    if (error) throw error;
-    return data;
+    return legendCanonicalService.getGlobalLeaderboard(limit);
   }
 
   async getUniverseLeaderboard(universeId: string, limit = 50) {
@@ -224,104 +159,47 @@ class LegendService {
     return data;
   }
 
-  async getCurrentLegendHolders(type?: 'universe_legend' | 'global_legend') {
-    let query = supabase
-      .from('legend_active_holders')
+  async getLegendVideos(limit = 20) {
+    const legends = await legendCanonicalService.getActiveLegends('video', limit);
+
+    const videoIds = legends.map(l => l.entity_id);
+    if (videoIds.length === 0) return [];
+
+    const { data, error } = await supabase
+      .from('videos')
       .select(`
         *,
-        profiles:user_id (
-          id,
-          username,
-          full_name,
-          avatar_url
-        ),
-        universes:universe_id (
-          id,
-          name,
-          icon
+        creator:profiles!videos_creator_id_fkey(
+          display_name,
+          avatar_url,
+          user_status,
+          subscriber_count
         )
       `)
-      .eq('is_current', true)
-      .order('level', { ascending: false });
+      .in('id', videoIds)
+      .eq('is_masked', false);
 
-    if (type) {
-      query = query.eq('holder_type', type);
+    if (error) {
+      console.error('Error fetching legend videos:', error);
+      return [];
     }
 
-    const { data, error } = await query;
-
-    if (error) throw error;
-    return data;
-  }
-
-  async getCreatorRankingHistory(userId: string, limit = 12) {
-    const { data, error } = await supabase
-      .from('legend_rankings_history')
-      .select('*')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false })
-      .limit(limit);
-
-    if (error) throw error;
-    return data as LegendRankingHistory[];
-  }
-
-  async getTrendingVideos(universeId?: string, period: '24h' | '7d' = '24h', limit = 20) {
-    let query = supabase
-      .from('video_legend_awards')
-      .select(`
-        *,
-        videos:video_id (
-          id,
-          title,
-          thumbnail_url,
-          view_count,
-          uploader_id,
-          profiles:uploader_id (
-            username,
-            avatar_url
-          )
-        ),
-        legend_badges (*)
-      `)
-      .eq('is_active', true)
-      .eq('period', period)
-      .in('badge_id', (await this.getAllBadges())
-        .filter(b => b.badge_type === 'trending')
-        .map(b => b.id))
-      .order('awarded_at', { ascending: false })
-      .limit(limit);
-
-    if (universeId) {
-      query = query.eq('universe_id', universeId);
-    }
-
-    const { data, error } = await query;
-
-    if (error) throw error;
-    return data;
+    return (data || []).map((video: any) => {
+      const legend = legends.find(l => l.entity_id === video.id);
+      return {
+        ...video,
+        legend_tier: this.getLegendTierFromLevel(legend?.legend_level || 1),
+        legend_level: legend?.legend_level || 1
+      };
+    });
   }
 
   getBadgeLevelName(level: number): string {
-    switch (level) {
-      case 1: return 'Rising';
-      case 2: return 'Breakout';
-      case 3: return 'Power';
-      case 4: return 'Elite';
-      case 5: return 'Legend Active';
-      default: return 'Unknown';
-    }
+    return legendCanonicalService.getLevelName(level as 1 | 2 | 3 | 4);
   }
 
   getBadgeLevelColor(level: number): string {
-    switch (level) {
-      case 1: return 'text-orange-400 border-orange-500/30 bg-orange-500/10';
-      case 2: return 'text-gray-300 border-gray-400/30 bg-gray-400/10';
-      case 3: return 'text-yellow-400 border-yellow-500/30 bg-yellow-500/10';
-      case 4: return 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10';
-      case 5: return 'text-purple-400 border-purple-500/30 bg-purple-500/10';
-      default: return 'text-gray-400 border-gray-500/30 bg-gray-500/10';
-    }
+    return legendCanonicalService.getLevelColor(level as 1 | 2 | 3 | 4);
   }
 
   getTrendIcon(trend: 'up' | 'down' | 'stable'): string {
@@ -339,6 +217,16 @@ class LegendService {
       case 'down': return 'text-red-400';
       case 'stable': return 'text-gray-400';
       default: return 'text-gray-400';
+    }
+  }
+
+  private getLegendTierFromLevel(level: number): string {
+    switch (level) {
+      case 1: return 'bronze';
+      case 2: return 'silver';
+      case 3: return 'gold';
+      case 4: return 'platinum';
+      default: return 'bronze';
     }
   }
 }
