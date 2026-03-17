@@ -133,6 +133,57 @@ class LegendService {
     return data;
   }
 
+  async getLegendVideos(limit = 20) {
+    const { data, error } = await supabase
+      .from('video_legend_awards')
+      .select(`
+        video_id,
+        badge_id,
+        videos!inner (
+          *,
+          creator:profiles!videos_creator_id_fkey(
+            display_name,
+            avatar_url,
+            user_status,
+            subscriber_count
+          )
+        ),
+        legend_badges!inner (
+          name,
+          badge_type,
+          level,
+          color
+        )
+      `)
+      .eq('is_active', true)
+      .eq('videos.is_masked', false)
+      .order('awarded_at', { ascending: false })
+      .limit(limit);
+
+    if (error) {
+      console.error('Error fetching legend videos:', error);
+      return [];
+    }
+
+    return (data || []).map((item: any) => {
+      const video = item.videos;
+      const badge = item.legend_badges;
+
+      let legendTier = 'bronze';
+      if (badge.badge_type === 'legend') {
+        if (badge.level >= 5) legendTier = 'diamond';
+        else if (badge.level >= 4) legendTier = 'platinum';
+        else if (badge.level >= 3) legendTier = 'gold';
+        else if (badge.level >= 2) legendTier = 'silver';
+      }
+
+      return {
+        ...video,
+        legend_tier: legendTier,
+      };
+    });
+  }
+
   async getGlobalLeaderboard(limit = 50) {
     const { data, error } = await supabase
       .from('creator_tru_scores')

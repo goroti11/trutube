@@ -4,13 +4,17 @@ import {
   TrendingUp, Rocket, Globe, Lightbulb, Radio, Video, Zap, Trophy,
   Calendar, Star, Crown, Flame, Music, Gamepad2, BookOpen, Theater,
   Heart, Brain, Code, Film, Users, ShoppingBag, Baby, Newspaper,
-  Utensils, Plane, Shirt, Microscope, FileText, Play, ArrowRight
+  Utensils, Plane, Shirt, Microscope, FileText, Play, ArrowRight,
+  Languages, Eye, ThumbsUp, Clock
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { videoService, VideoWithCreator } from '../services/videoService';
 import { universeService } from '../services/universeService';
 import { profileService } from '../services/profileService';
+import { legendService } from '../services/legendService';
 import VideoCard from '../components/VideoCard';
+import LegendBadge from '../components/video/LegendBadge';
+import GlobalBadge from '../components/video/GlobalBadge';
 
 interface Creator {
   id: string;
@@ -111,6 +115,8 @@ export default function ExplorePage() {
   const [liveVideos, setLiveVideos] = useState<VideoWithCreator[]>([]);
   const [recommendedVideos, setRecommendedVideos] = useState<VideoWithCreator[]>([]);
   const [featuredCreators, setFeaturedCreators] = useState<Creator[]>([]);
+  const [globalVideos, setGlobalVideos] = useState<VideoWithCreator[]>([]);
+  const [legendVideos, setLegendVideos] = useState<VideoWithCreator[]>([]);
 
   useEffect(() => {
     loadExploreContent();
@@ -120,17 +126,21 @@ export default function ExplorePage() {
     try {
       setLoading(true);
 
-      const [trending, universesData, live, recommended] = await Promise.all([
+      const [trending, universesData, live, recommended, global, legend] = await Promise.all([
         videoService.getTrendingVideos(8),
         universeService.getAllUniverses(),
         videoService.getLiveVideos(4),
         user ? videoService.getRecommendedVideos(user.id, 8) : videoService.getTrendingVideos(8),
+        videoService.getGlobalModeVideos(8),
+        legendService.getLegendVideos(8),
       ]);
 
       setTrendingVideos(trending);
       setUniverses(universesData);
       setLiveVideos(live);
       setRecommendedVideos(recommended);
+      setGlobalVideos(global);
+      setLegendVideos(legend);
 
     } catch (error) {
       console.error('Error loading explore content:', error);
@@ -277,6 +287,103 @@ export default function ExplorePage() {
             ))}
           </div>
         </section>
+
+        {globalVideos.length > 0 && (
+          <section className="bg-gradient-to-br from-blue-950/30 to-cyan-950/30 rounded-2xl p-8 border border-blue-800/30">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+                  <Languages className="w-6 h-6" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-black">Global Mode</h2>
+                  <p className="text-sm text-gray-400 mt-1">Contenus disponibles en plusieurs langues</p>
+                </div>
+              </div>
+              <button
+                onClick={() => navigate('/global-mode-settings')}
+                className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
+              >
+                Voir tout
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {globalVideos.map((video) => (
+                <div key={video.id} className="relative">
+                  <VideoCard video={video} />
+                  <div className="absolute top-2 right-2">
+                    <GlobalBadge size="sm" />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 flex items-center justify-center gap-4 text-sm text-gray-400">
+              <div className="flex items-center gap-2">
+                <Languages className="w-4 h-4 text-blue-400" />
+                <span>Doublage automatique IA</span>
+              </div>
+              <div className="w-px h-4 bg-gray-700" />
+              <div className="flex items-center gap-2">
+                <Globe className="w-4 h-4 text-cyan-400" />
+                <span>Portée internationale</span>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {legendVideos.length > 0 && (
+          <section className="bg-gradient-to-br from-yellow-950/30 to-orange-950/30 rounded-2xl p-8 border border-yellow-800/30">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full flex items-center justify-center">
+                  <Crown className="w-6 h-6" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-black">Legend</h2>
+                  <p className="text-sm text-gray-400 mt-1">Contenus d'exception avec millions de vues</p>
+                </div>
+              </div>
+              <button
+                onClick={() => navigate('/legends-ranking')}
+                className="flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors"
+              >
+                Voir tout
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {legendVideos.map((video) => (
+                <div key={video.id} className="relative">
+                  <VideoCard video={video} />
+                  <div className="absolute top-2 left-2">
+                    <LegendBadge tier={video.legend_tier || 'bronze'} size="sm" />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 flex items-center justify-center gap-4 text-sm text-gray-400">
+              <div className="flex items-center gap-2">
+                <Eye className="w-4 h-4 text-yellow-400" />
+                <span>Millions de vues</span>
+              </div>
+              <div className="w-px h-4 bg-gray-700" />
+              <div className="flex items-center gap-2">
+                <ThumbsUp className="w-4 h-4 text-orange-400" />
+                <span>Fort engagement</span>
+              </div>
+              <div className="w-px h-4 bg-gray-700" />
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-yellow-400" />
+                <span>Qualité éprouvée</span>
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-gray-800">
           <div className="flex items-center justify-between mb-6">
