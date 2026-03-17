@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Gamepad2, Trophy, Users, Zap, TrendingUp, Calendar, DollarSign, Play, Crown, Filter } from 'lucide-react';
 import { gamingService, type Game, type GamingSeason, type GamingTournament } from '../../services/gamingService';
-import { gamingLiveService, type Game as LiveGame } from '../../services/gamingLiveService';
+import { liveGamingService, type GamingCategory, type Game as LiveGame } from '../../services/liveGamingService';
 
 export default function GamingHubPage() {
   const navigate = useNavigate();
@@ -23,11 +23,11 @@ export default function GamingHubPage() {
       const [gamesData, categoriesData, seasonData, tournamentsData, liveData] = await Promise.all([
         selectedCategory === 'all'
           ? gamingService.getActiveGames()
-          : gamingLiveService.getGamesByCategory(selectedCategory, 20),
-        gamingLiveService.getGamingCategories(),
+          : liveGamingService.getGamesByCategory(selectedCategory, 20),
+        liveGamingService.getGamingCategories(),
         gamingService.getCurrentSeason(),
         gamingService.getTournaments('registration'),
-        gamingLiveService.getActiveGamingSessions()
+        liveGamingService.getActiveGamingSessions()
       ]);
 
       setGames(gamesData);

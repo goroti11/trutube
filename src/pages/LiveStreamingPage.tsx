@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Radio, Users, Clock, Eye, DollarSign, MessageSquare, PlayCircle, StopCircle, Settings, Globe } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { liveService, LiveStream, LiveStreamStats } from '../services/liveService';
+import { liveStreamService, LiveStream, LiveStreamStats } from '../services/liveStreamService';
 import { universeService } from '../services/universeService';
 
 interface LiveStreamingPageProps {
@@ -29,8 +29,8 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
 
   const loadCurrentStream = async () => {
     if (!user) return;
-    const streams = await liveService.getCreatorLiveStreams(user.id);
-    const activeStream = streams.find(s => s.stream_status === 'live');
+    const streams = await liveStreamService.getCreatorLiveStreams(user.id);
+    const activeStream = streams.find(s => s.status === 'live');
     if (activeStream) {
       setCurrentStream(activeStream);
       setIsLive(true);
@@ -40,7 +40,7 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
 
   const updateStats = async () => {
     if (!currentStream) return;
-    const newStats = await liveService.getStreamStats(currentStream.id);
+    const newStats = await liveStreamService.getStreamStats(currentStream.id);
     if (newStats) {
       setStats(newStats);
     }
@@ -48,13 +48,10 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
 
   const handleStartStream = async () => {
     if (!currentStream) return;
-    try {
-      await liveService.startLiveStream(currentStream.id);
+    const result = await liveStreamService.startLiveStream(currentStream.id);
+    if (result.success) {
       setIsLive(true);
-      setCurrentStream({ ...currentStream, stream_status: 'live', started_at: new Date().toISOString() });
-    } catch (error) {
-      console.error('Error starting stream:', error);
-      alert('Erreur lors du démarrage du live');
+      setCurrentStream({ ...currentStream, status: 'live', started_at: new Date().toISOString() });
     }
   };
 
@@ -62,13 +59,10 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
     if (!currentStream) return;
     if (!confirm('Êtes-vous sûr de vouloir terminer ce live?')) return;
 
-    try {
-      await liveService.endLiveStream(currentStream.id);
+    const result = await liveStreamService.endLiveStream(currentStream.id);
+    if (result.success) {
       setIsLive(false);
-      setCurrentStream({ ...currentStream, stream_status: 'ended', ended_at: new Date().toISOString() });
-    } catch (error) {
-      console.error('Error ending stream:', error);
-      alert('Erreur lors de la fin du live');
+      setCurrentStream({ ...currentStream, status: 'ended', ended_at: new Date().toISOString() });
     }
   };
 
@@ -102,7 +96,7 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
-        {!currentStream || currentStream.stream_status === 'ended' ? (
+        {!currentStream || currentStream.status === 'ended' ? (
           <CreateLiveSection onNavigate={onNavigate} />
         ) : (
           <>
@@ -116,25 +110,25 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
                 <StatCard
                   icon={Users}
                   label="Spectateurs actuels"
-                  value={stats.viewer_count.toString()}
+                  value={stats.currentViewers.toString()}
                   color="text-blue-400"
                 />
                 <StatCard
                   icon={Eye}
                   label="Pic de spectateurs"
-                  value={stats.peak_viewers.toString()}
+                  value={stats.peakViewers.toString()}
                   color="text-green-400"
                 />
                 <StatCard
                   icon={Users}
                   label="Spectateurs totaux"
-                  value={stats.total_viewers.toString()}
+                  value={stats.totalViewers.toString()}
                   color="text-cyan-400"
                 />
                 <StatCard
-                  icon={MessageSquare}
-                  label="Messages"
-                  value={stats.total_messages.toString()}
+                  icon={Users}
+                  label="Moyenne spectateurs"
+                  value={Math.round(stats.averageViewers).toString()}
                   color="text-purple-400"
                 />
               </div>
@@ -145,19 +139,19 @@ export default function LiveStreamingPage({ onNavigate }: LiveStreamingPageProps
                 <StatCard
                   icon={Clock}
                   label="Durée du live"
-                  value={liveService.formatDuration(stats.duration_seconds)}
+                  value={liveStreamService.formatDuration(stats.duration)}
                   color="text-yellow-400"
                 />
                 <StatCard
-                  icon={DollarSign}
-                  label="Cadeaux reçus"
-                  value={stats.total_gifts.toLocaleString()}
+                  icon={MessageSquare}
+                  label="Messages"
+                  value={stats.totalMessages.toString()}
                   color="text-pink-400"
                 />
                 <StatCard
                   icon={DollarSign}
-                  label="TruCoins reçus"
-                  value={stats.total_trucoins.toLocaleString()}
+                  label="Tips reçus"
+                  value={`€${stats.totalTips.toFixed(2)}`}
                   color="text-green-400"
                 />
               </div>
@@ -268,19 +262,19 @@ function CreateLiveSection(_props: { onNavigate: (page: string) => void }) {
 
     setIsCreating(true);
 
-    try {
-      await liveService.createLiveStream({
-        title: formData.title,
-        description: formData.description,
-        universe_id: formData.universe_id || undefined,
-        sub_universe_id: formData.sub_universe_id || undefined
-      });
+    const result = await liveStreamService.createLiveStream({
+      title: formData.title,
+      description: formData.description,
+      universe_id: formData.universe_id || undefined,
+      sub_universe_id: formData.sub_universe_id || undefined
+    });
+
+    setIsCreating(false);
+
+    if (result.success) {
       window.location.reload();
-    } catch (error: any) {
-      console.error('Error creating stream:', error);
-      alert(error.message || 'Erreur lors de la création');
-    } finally {
-      setIsCreating(false);
+    } else {
+      alert(result.error || 'Erreur lors de la création');
     }
   };
 
@@ -382,8 +376,8 @@ function PastLivesSection({ userId }: { userId: string; onNavigate: (page: strin
   }, [userId]);
 
   const loadPastLives = async () => {
-    const streams = await liveService.getCreatorLiveStreams(userId);
-    const ended = streams.filter(s => s.stream_status === 'ended');
+    const streams = await liveStreamService.getCreatorLiveStreams(userId);
+    const ended = streams.filter(s => s.status === 'ended');
     setPastLives(ended);
   };
 
@@ -410,19 +404,19 @@ function PastLiveCard({ stream }: { stream: LiveStream }) {
       <div className="grid grid-cols-2 gap-4 text-sm">
         <div>
           <div className="text-gray-400">Spectateurs</div>
-          <div className="font-bold">{stream.viewer_count}</div>
+          <div className="font-bold">{stream.total_viewers}</div>
+        </div>
+        <div>
+          <div className="text-gray-400">Durée</div>
+          <div className="font-bold">{liveStreamService.formatDuration(stream.duration_seconds)}</div>
         </div>
         <div>
           <div className="text-gray-400">Pic</div>
           <div className="font-bold">{stream.peak_viewers}</div>
         </div>
         <div>
-          <div className="text-gray-400">Cadeaux</div>
-          <div className="font-bold">{stream.total_gifts_received}</div>
-        </div>
-        <div>
-          <div className="text-gray-400">TruCoins</div>
-          <div className="font-bold">{stream.total_trucoins_earned.toLocaleString()}</div>
+          <div className="text-gray-400">Messages</div>
+          <div className="font-bold">{stream.total_messages}</div>
         </div>
       </div>
 

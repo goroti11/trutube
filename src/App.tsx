@@ -86,13 +86,8 @@ import TeamsPage from './pages/gaming/TeamsPage';
 import ArenaFundPage from './pages/gaming/ArenaFundPage';
 import LegendsRankingPage from './pages/LegendsRankingPage';
 import GlobalModeSettingsPage from './pages/GlobalModeSettingsPage';
-import ExplorePage from './pages/ExplorePage';
-import MarketplacePage from './pages/MarketplacePage';
-import MarketplaceServiceDetailPage from './pages/MarketplaceServiceDetailPage';
-import MarketplaceOrdersPage from './pages/MarketplaceOrdersPage';
-import MarketplaceOrderDetailPage from './pages/MarketplaceOrderDetailPage';
 
-type Page = 'home' | 'explore' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'marketplace-service' | 'marketplace-orders' | 'marketplace-order' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'database-status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral' | 'channel' | 'blog' | 'blog-article' | 'advertiser-dashboard' | 'create-ad-campaign' | 'ad-payment' | 'gaming-hub' | 'gaming-studio' | 'gaming-tournaments' | 'gaming-leaderboards' | 'gaming-teams' | 'gaming-arena-fund' | 'legends-ranking' | 'global-mode-settings';
+type Page = 'home' | 'universe' | 'video' | 'watch' | 'profile' | 'my-profile' | 'subscription' | 'universes' | 'creator-setup' | 'preferences' | 'auth' | 'upload' | 'dashboard' | 'creator-dashboard' | 'studio' | 'studio-v3' | 'ad-campaign' | 'settings' | 'terms' | 'privacy' | 'support' | 'about' | 'help' | 'legal' | 'mobile-demo' | 'partner-program' | 'community' | 'community-view' | 'create-post' | 'trucoin-wallet' | 'premium' | 'premium-offers' | 'community-premium-pricing' | 'appearance-settings' | 'create-community' | 'community-settings' | 'profile-test' | 'enhanced-profile' | 'watch-history' | 'subscribers' | 'security-dashboard' | 'live-streaming' | 'album-sale' | 'marketplace' | 'create-release' | 'legal-profile' | 'my-channels' | 'channel-edit' | 'channel-team' | 'channel-analytics' | 'revenue-model' | 'shorts-system' | 'native-sponsoring' | 'enterprise' | 'careers' | 'pricing' | 'resources' | 'status' | 'database-status' | 'official-community' | 'copyright-policy' | 'financial-terms' | 'saved-videos' | 'referral' | 'channel' | 'blog' | 'blog-article' | 'advertiser-dashboard' | 'create-ad-campaign' | 'ad-payment' | 'gaming-hub' | 'gaming-studio' | 'gaming-tournaments' | 'gaming-leaderboards' | 'gaming-teams' | 'gaming-arena-fund' | 'legends-ranking' | 'global-mode-settings';
 
 export const navigate = (page: string) => {
   window.location.hash = page;
@@ -233,32 +228,8 @@ function AppContent() {
         return;
       }
 
-      if (hash.startsWith('marketplace/services/')) {
-        setCurrentPage('marketplace-service');
-        setShowSplash(false);
-        return;
-      }
-
-      if (hash.startsWith('marketplace/orders/')) {
-        const parts = hash.split('/');
-        if (parts[2]) {
-          setCurrentPage('marketplace-order');
-        } else {
-          setCurrentPage('marketplace-orders');
-        }
-        setShowSplash(false);
-        return;
-      }
-
-      if (hash === 'marketplace/orders') {
-        setCurrentPage('marketplace-orders');
-        setShowSplash(false);
-        return;
-      }
-
       // Handle generic page routes
       const pageMap: Record<string, Page> = {
-        'explore': 'explore',
         'blog': 'blog',
         'premium': 'premium',
         'auth': 'auth',
@@ -457,16 +428,6 @@ function AppContent() {
               showNavigation={false}
             />
             <HomePage onUniverseClick={handleUniverseClick} />
-          </>
-        )}
-
-        {currentPage === 'explore' && (
-          <>
-            <Header
-              onNavigate={(page) => setCurrentPage(page as Page)}
-              showNavigation={true}
-            />
-            <ExplorePage />
           </>
         )}
 
@@ -827,14 +788,6 @@ function AppContent() {
         {currentPage === 'legends-ranking' && <LegendsRankingPage />}
 
         {currentPage === 'global-mode-settings' && <GlobalModeSettingsPage onNavigate={handleNavigate} />}
-
-        {currentPage === 'marketplace' && <MarketplacePage />}
-
-        {currentPage === 'marketplace-service' && <MarketplaceServiceDetailPage />}
-
-        {currentPage === 'marketplace-orders' && <MarketplaceOrdersPage />}
-
-        {currentPage === 'marketplace-order' && <MarketplaceOrderDetailPage />}
 
         {currentPage !== 'auth' && currentPage !== 'video' && currentPage !== 'watch' && (
           <Footer onNavigate={(page) => setCurrentPage(page as Page)} />

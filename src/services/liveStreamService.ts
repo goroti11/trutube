@@ -1,5 +1,4 @@
-import { liveService } from './liveService';
-import type { LiveStream as CanonicalLiveStream, LiveViewer, LiveMessage, LiveStreamStats as CanonicalLiveStreamStats } from './liveService';
+import { supabase } from '../lib/supabase';
 
 export interface LiveStream {
   id: string;

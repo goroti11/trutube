@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { gamingService, type Game } from '../../services/gamingService';
-import { gamingLiveService } from '../../services/gamingLiveService';
+import { liveGamingService } from '../../services/liveGamingService';
 
 export default function GamingStudioPage() {
   const navigate = useNavigate();
@@ -66,22 +66,20 @@ export default function GamingStudioPage() {
     setError('');
 
     try {
-      const result = await gamingLiveService.createGamingLiveStream({
-        game_id: selectedGame,
+      const session = await liveGamingService.startGamingSession(
+        user.id,
+        selectedGame,
         title,
-        mode,
-        is_ranked: isRanked,
-        anti_cheat_enabled: antiCheatEnabled,
-        trucoin_bonus_enabled: trucoinBonusEnabled
-      });
+        {
+          mode,
+          isRanked,
+          trucoinBonusEnabled
+        }
+      );
 
-      setCurrentSession({
-        id: result.gaming_session_id,
-        live_stream_id: result.live_stream_id
-      });
+      setCurrentSession(session);
       setIsLive(true);
-
-      navigate(`/watch?v=${result.live_stream_id}`);
+      navigate(`/gaming/live/${session.id}`);
     } catch (error: any) {
       setError(error.message || 'Failed to start gaming session');
       console.error('Failed to start session:', error);
@@ -91,10 +89,10 @@ export default function GamingStudioPage() {
   };
 
   const handleEndSession = async () => {
-    if (!currentSession?.live_stream_id) return;
+    if (!currentSession) return;
 
     try {
-      await gamingLiveService.endGamingLiveStream(currentSession.live_stream_id);
+      await liveGamingService.endGamingSession(currentSession.id);
       setIsLive(false);
       setCurrentSession(null);
     } catch (error) {

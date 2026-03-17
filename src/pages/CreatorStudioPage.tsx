@@ -573,14 +573,12 @@ function ContentSection({ onNavigate }: { onNavigate: (p: string) => void }) {
 
 function LiveSection({ onNavigate }: { onNavigate: (p: string) => void }) {
   const { user } = useAuth();
-  const [liveStreams, setLiveStreams] = useState<LiveStream[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [, setLiveStreams] = useState<LiveStream[]>([]);
   const [stats, setStats] = useState({ totalLives: 0, averageViewers: 0, totalDuration: 0 });
 
   useEffect(() => {
     if (!user) return;
-    setLoading(true);
-        liveStreamService.getCreatorLiveStreams(user.id).then(streams => {
+    liveStreamService.getCreatorLiveStreams(user.id).then(streams => {
       setLiveStreams(streams);
       const ended = streams.filter(s => s.status === 'ended');
       setStats({
@@ -588,7 +586,6 @@ function LiveSection({ onNavigate }: { onNavigate: (p: string) => void }) {
         averageViewers: ended.length ? Math.round(ended.reduce((a, s) => a + s.average_viewers, 0) / ended.length) : 0,
         totalDuration: streams.reduce((a, s) => a + s.duration_seconds, 0),
       });
-      setLoading(false);
     });
   }, [user]);
 
@@ -685,56 +682,28 @@ function LiveSection({ onNavigate }: { onNavigate: (p: string) => void }) {
         <CardHeader>
           <p className="font-bold text-white text-sm">Lives précédents</p>
         </CardHeader>
-        {loading ? (
-          <div className="p-8 text-center">
-            <div className="inline-block w-8 h-8 border-2 border-white/10 border-t-red-600 rounded-full animate-spin" />
-          </div>
-        ) : liveStreams.filter(s => s.status === 'ended').length === 0 ? (
-          <div className="p-8 text-center">
-            <div className="w-16 h-16 bg-red-950/40 border border-red-800/40 rounded-2xl flex items-center justify-center mx-auto mb-3">
-              <Radio className="w-8 h-8 text-red-400" />
-            </div>
-            <p className="text-white font-medium mb-1">Aucun live diffusé</p>
-            <p className="text-gray-500 text-sm mb-4">Commencez votre premier live pour engager votre communauté</p>
-            <button
-              onClick={() => onNavigate('live-streaming')}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl text-sm font-semibold transition-colors"
-            >
-              <Radio className="w-4 h-4" /> Démarrer mon premier live
-            </button>
-          </div>
-        ) : (
-          <div className="divide-y divide-white/5">
-            {liveStreams.filter(s => s.status === 'ended').map((stream) => {
-              const duration = stream.duration_seconds;
-              const hours = Math.floor(duration / 3600);
-              const minutes = Math.floor((duration % 3600) / 60);
-              const durationStr = hours > 0 ? `${hours}h ${minutes}min` : `${minutes}min`;
-              const createdDate = new Date(stream.created_at);
-              const now = new Date();
-              const diffMs = now.getTime() - createdDate.getTime();
-              const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-              const dateStr = diffDays === 0 ? "Aujourd'hui" : diffDays === 1 ? 'Hier' : diffDays < 7 ? `Il y a ${diffDays} jours` : diffDays < 30 ? `Il y a ${Math.floor(diffDays / 7)} semaine${Math.floor(diffDays / 7) > 1 ? 's' : ''}` : `Il y a ${Math.floor(diffDays / 30)} mois`;
-              
-              return (
-                <div key={stream.id} className="p-4 flex items-center gap-4 hover:bg-white/2 transition-colors">
-                  <div className="w-10 h-10 bg-red-950/40 border border-red-800/40 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Radio className="w-4 h-4 text-red-400" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-white font-medium text-sm truncate">{stream.title}</p>
-                    <div className="flex items-center gap-3 mt-0.5 text-xs text-gray-500">
-                      <span>{stream.total_viewers.toLocaleString()} spectateurs</span>
-                      <span>{durationStr}</span>
-                      <span>{dateStr}</span>
-                    </div>
-                  </div>
-                  <span className="text-emerald-400 font-bold text-sm flex-shrink-0">€{(stream.total_tips / 100).toFixed(2)}</span>
+        <div className="divide-y divide-white/5">
+          {[
+            { title: 'Session Q&A — Spécial 10K abonnés', viewers: 1845, duration: '2h 15min', date: 'Il y a 3 jours', revenue: '€47.50' },
+            { title: 'Création musicale en direct', viewers: 923, duration: '1h 42min', date: 'Il y a 1 semaine', revenue: '€23.80' },
+            { title: 'Tutoriel production avancée', viewers: 1234, duration: '3h 05min', date: 'Il y a 2 semaines', revenue: '€61.20' },
+          ].map((l, i) => (
+            <div key={i} className="p-4 flex items-center gap-4 hover:bg-white/2 transition-colors">
+              <div className="w-10 h-10 bg-red-950/40 border border-red-800/40 rounded-xl flex items-center justify-center flex-shrink-0">
+                <Radio className="w-4 h-4 text-red-400" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-white font-medium text-sm truncate">{l.title}</p>
+                <div className="flex items-center gap-3 mt-0.5 text-xs text-gray-500">
+                  <span>{l.viewers.toLocaleString()} spectateurs</span>
+                  <span>{l.duration}</span>
+                  <span>{l.date}</span>
                 </div>
-              );
-            })}
-          </div>
-        )}
+              </div>
+              <span className="text-emerald-400 font-bold text-sm flex-shrink-0">{l.revenue}</span>
+            </div>
+          ))}
+        </div>
       </Card>
     </div>
   );

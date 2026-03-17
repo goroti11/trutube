@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Zap, Target, DollarSign, Crown, Sparkles } from 'lucide-react';
-import { gamingLiveService, type GameEffect } from '../../services/gamingLiveService';
+import { liveGamingService, type GameEffect } from '../../services/liveGamingService';
 
 interface InteractiveGamingOverlayProps {
   sessionId: string;
@@ -23,7 +23,7 @@ export default function InteractiveGamingOverlay({ sessionId, gameId, userId }: 
 
   const loadEffects = async () => {
     try {
-      const data = await gamingLiveService.getGamingEffects(gameId);
+      const data = await liveGamingService.getGamingEffects(gameId);
       setEffects(data);
     } catch (error) {
       console.error('Failed to load effects:', error);
@@ -31,7 +31,7 @@ export default function InteractiveGamingOverlay({ sessionId, gameId, userId }: 
   };
 
   const subscribeToEffects = () => {
-    return gamingLiveService.subscribeToGameSession(sessionId, (event) => {
+    return liveGamingService.subscribeToGameSession(sessionId, (event) => {
       if (event.new?.interaction_type && event.new?.effect_data) {
         triggerVisualEffect(event.new.effect_data);
       }
@@ -47,7 +47,7 @@ export default function InteractiveGamingOverlay({ sessionId, gameId, userId }: 
     if (!userId || userTruCoins < (effect.trigger_trucoin_amount || 0)) return;
 
     try {
-      await gamingLiveService.triggerGamingEffect(
+      await liveGamingService.triggerGamingEffect(
         sessionId,
         effect.id,
         userId,

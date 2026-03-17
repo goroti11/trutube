@@ -53,7 +53,6 @@ const colorMap: Record<string, string> = {
   'game': 'from-green-600 to-green-800',
   'gaming': 'from-green-600 to-green-800',
   'learn': 'from-yellow-600 to-yellow-800',
-  'know': 'from-amber-600 to-amber-800',
   'culture': 'from-purple-600 to-purple-800',
   'life': 'from-rose-600 to-rose-800',
   'mind': 'from-indigo-600 to-indigo-800',
@@ -96,22 +95,16 @@ export default function HomePage({ onUniverseClick }: HomePageProps) {
         universeService.getAllUniverses()
       ]);
 
-      const mappedUniverses = universesData.map(u => {
-        const slug = u.slug || u.id;
-        return {
-          id: u.id,
-          slug: slug,
-          name: u.name,
-          description: u.description || '',
-          color_primary: u.color_primary,
-          color_secondary: u.color_secondary,
-          icon: iconMap[slug] || BookOpen,
-          color: colorMap[slug] || 'from-gray-600 to-gray-800',
-        };
-      });
-
-      console.log('🌍 Total universes loaded:', mappedUniverses.length);
-      console.log('🌍 Universes:', mappedUniverses.map(u => u.name).join(', '));
+      const mappedUniverses = universesData.map(u => ({
+        id: u.slug,
+        slug: u.slug,
+        name: u.name,
+        description: u.description || '',
+        color_primary: u.color_primary,
+        color_secondary: u.color_secondary,
+        icon: iconMap[u.slug] || BookOpen,
+        color: colorMap[u.slug] || 'from-gray-600 to-gray-800',
+      }));
 
       setTrendingVideos(videos);
       setLegendVideos(legendContent);
@@ -150,11 +143,6 @@ export default function HomePage({ onUniverseClick }: HomePageProps) {
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Pas de chaos. Pas de scroll infini. Juste le contenu que tu veux, dans l'univers que tu choisis.
           </p>
-          {!loading && universes.length > 0 && (
-            <p className="text-sm text-gray-500 mt-4">
-              {universes.length} univers disponibles
-            </p>
-          )}
         </div>
 
         {loading ? (
@@ -162,13 +150,13 @@ export default function HomePage({ onUniverseClick }: HomePageProps) {
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {universes.map((universe) => {
               const Icon = universe.icon;
               return (
                 <button
                   key={universe.id}
-                  onClick={() => onUniverseClick(universe.slug)}
+                  onClick={() => onUniverseClick(universe.id)}
                   className="group relative overflow-hidden rounded-2xl border-2 border-gray-800 hover:border-gray-700 transition-all duration-300 hover:scale-105"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${universe.color} opacity-10 group-hover:opacity-20 transition-opacity`} />

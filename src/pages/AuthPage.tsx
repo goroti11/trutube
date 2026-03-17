@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { supabase } from '../lib/supabase';
 import { Mail, Lock, User, Eye, EyeOff, Loader2, AlertCircle } from 'lucide-react';
 
 export const AuthPage = () => {
-  const { t } = useTranslation();
   const [isLogin, setIsLogin] = useState(true);
   const [showResetPassword, setShowResetPassword] = useState(false);
   const [email, setEmail] = useState('');
@@ -25,17 +23,9 @@ export const AuthPage = () => {
       'Password should be at least 6 characters': 'Le mot de passe doit contenir au moins 6 caractères',
       'Unable to validate email address': 'Email invalide',
       'Signup requires a valid password': 'Mot de passe requis',
-      'duplicate key value violates unique constraint': 'Ce nom d\'utilisateur est déjà pris',
-      'User already exists': 'Cet email est déjà utilisé',
     };
 
-    for (const [key, value] of Object.entries(errorMap)) {
-      if (errorMessage.includes(key)) {
-        return value;
-      }
-    }
-
-    return errorMessage;
+    return errorMap[errorMessage] || errorMessage;
   };
 
   const handleEmailAuth = async (e: React.FormEvent) => {
@@ -45,19 +35,19 @@ export const AuthPage = () => {
     setMessage('');
 
     if (!email.trim()) {
-      setError(t('auth.email_required'));
+      setError('Veuillez entrer votre email');
       setLoading(false);
       return;
     }
 
     if (!password.trim()) {
-      setError(t('auth.password_required'));
+      setError('Veuillez entrer votre mot de passe');
       setLoading(false);
       return;
     }
 
     if (!isLogin && password.length < 6) {
-      setError(t('auth.password_min_length'));
+      setError('Le mot de passe doit contenir au moins 6 caractères');
       setLoading(false);
       return;
     }
@@ -72,12 +62,12 @@ export const AuthPage = () => {
         window.location.href = '/';
       } else {
         if (!username.trim()) {
-          setError(t('auth.username_required'));
+          setError('Veuillez entrer un nom d\'utilisateur');
           setLoading(false);
           return;
         }
 
-        const { data, error } = await supabase.auth.signUp({
+        const { error } = await supabase.auth.signUp({
           email: email.trim(),
           password,
           options: {
@@ -87,20 +77,14 @@ export const AuthPage = () => {
             },
           },
         });
-
         if (error) throw error;
-
-        if (data?.user) {
-          setMessage('Compte créé avec succès! Redirection en cours...');
-          setTimeout(() => {
-            window.location.href = '/';
-          }, 1500);
-        } else {
-          throw new Error('Erreur lors de la création du compte');
-        }
+        setMessage('Compte créé avec succès! Redirection...');
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1500);
       }
     } catch (err: any) {
-      setError(translateError(err.message) || t('errors.generic_error'));
+      setError(translateError(err.message) || 'Une erreur est survenue');
     } finally {
       setLoading(false);
     }
