@@ -14,7 +14,16 @@
     "creator_studio": "Estudio de Creador",
     "saved_videos": "Guardados",
     "watch_history": "Historial",
-    "subscriptions": "Suscripciones"
+    "subscriptions": "Suscripciones",
+    "universe": "Universo",
+    "browse_universes": "Explorar Universos",
+    "blog": "Blog",
+    "resources": "Recursos",
+    "help": "Centro de Ayuda",
+    "about": "Acerca de",
+    "careers": "Carreras",
+    "enterprise": "Empresa",
+    "support": "Soporte"
   },
   "auth": {
     "sign_in": "Iniciar sesión",
@@ -22,12 +31,21 @@
     "sign_out": "Cerrar sesión",
     "email": "Correo electrónico",
     "password": "Contraseña",
+    "username": "Nombre de usuario",
+    "full_name": "Nombre completo",
     "forgot_password": "¿Olvidaste tu contraseña?",
+    "reset_password": "Restablecer contraseña",
     "create_account": "Crear cuenta",
     "already_have_account": "¿Ya tienes una cuenta?",
     "dont_have_account": "¿No tienes una cuenta?",
     "welcome_back": "Bienvenido de nuevo",
-    "join_goroti": "Únete a Goroti"
+    "join_goroti": "Únete a Goroti",
+    "email_required": "Por favor ingresa tu correo",
+    "password_required": "Por favor ingresa tu contraseña",
+    "username_required": "Por favor ingresa un nombre de usuario",
+    "password_min_length": "La contraseña debe tener al menos 6 caracteres",
+    "invalid_credentials": "Correo o contraseña incorrectos",
+    "account_created": "¡Cuenta creada exitosamente!"
   },
   "video": {
     "watch": "Ver",
@@ -35,18 +53,26 @@
     "like": "Me gusta",
     "dislike": "No me gusta",
     "save": "Guardar",
+    "saved": "Guardado",
     "report": "Reportar",
     "download": "Descargar",
     "views": "vistas",
+    "view": "vista",
     "uploaded": "Subido",
+    "published": "Publicado",
     "description": "Descripción",
     "comments": "Comentarios",
+    "comment": "Comentario",
+    "add_comment": "Añadir un comentario",
     "related_videos": "Videos relacionados",
     "autoplay": "Reproducción automática",
     "quality": "Calidad",
     "speed": "Velocidad",
     "subtitles": "Subtítulos",
-    "audio_track": "Pista de audio"
+    "audio_track": "Pista de audio",
+    "fullscreen": "Pantalla completa",
+    "no_videos": "No se encontraron videos",
+    "loading_video": "Cargando video..."
   },
   "studio": {
     "upload_video": "Subir video",
@@ -54,8 +80,6 @@
     "analytics": "Analíticas",
     "comments": "Comentarios",
     "monetization": "Monetización",
-    "customization": "Personalización",
-    "video_details": "Detalles del video",
     "title": "Título",
     "description": "Descripción",
     "thumbnail": "Miniatura",
@@ -66,50 +90,47 @@
     "publish": "Publicar",
     "save_draft": "Guardar borrador",
     "channel": "Canal",
-    "create_channel": "Crear canal"
+    "create_channel": "Crear canal",
+    "subscribers": "Suscriptores",
+    "videos": "Videos",
+    "dashboard": "Panel",
+    "content": "Contenido"
   },
   "live": {
     "go_live": "Transmitir en vivo",
     "end_stream": "Finalizar transmisión",
     "viewers": "Espectadores",
     "chat": "Chat",
-    "stream_key": "Clave de transmisión",
-    "stream_url": "URL de transmisión",
+    "send_message": "Enviar mensaje",
     "live_now": "En vivo ahora",
-    "starting_soon": "Comenzando pronto",
-    "ended": "Finalizado"
+    "offline": "Desconectado",
+    "gifts": "Regalos"
   },
   "gaming": {
+    "gaming_hub": "Centro Gaming",
     "tournaments": "Torneos",
     "teams": "Equipos",
     "leaderboards": "Clasificaciones",
-    "arena_fund": "Fondo Arena",
     "join_tournament": "Unirse al torneo",
     "create_team": "Crear equipo",
-    "my_teams": "Mis equipos",
     "prize_pool": "Premio acumulado",
-    "participants": "Participantes"
+    "score": "Puntuación",
+    "rank": "Rango"
   },
   "legend": {
     "legend_status": "Estado de Leyenda",
-    "legend_level": "Nivel de Leyenda",
-    "legend_score": "Puntuación de Leyenda",
     "candidates": "Candidatos",
     "vote": "Votar",
     "rankings": "Clasificaciones",
-    "active_holders": "Poseedores activos",
     "become_legend": "Convertirse en Leyenda"
   },
   "marketplace": {
+    "marketplace": "Mercado",
     "browse": "Explorar",
     "my_orders": "Mis pedidos",
     "sell_service": "Vender servicio",
-    "categories": "Categorías",
     "price": "Precio",
-    "delivery": "Entrega",
-    "reviews": "Reseñas",
-    "order_now": "Ordenar ahora",
-    "add_to_cart": "Añadir al carrito"
+    "order_now": "Ordenar ahora"
   },
   "community": {
     "communities": "Comunidades",
@@ -117,19 +138,15 @@
     "join": "Unirse",
     "members": "Miembros",
     "posts": "Publicaciones",
-    "create_post": "Crear publicación",
-    "my_communities": "Mis comunidades"
+    "create_post": "Crear publicación"
   },
   "settings": {
+    "settings": "Configuración",
     "account": "Cuenta",
     "profile": "Perfil",
     "privacy": "Privacidad",
     "notifications": "Notificaciones",
-    "appearance": "Apariencia",
     "language": "Idioma",
-    "security": "Seguridad",
-    "billing": "Facturación",
-    "preferences": "Preferencias",
     "save_changes": "Guardar cambios",
     "cancel": "Cancelar"
   },
@@ -141,45 +158,41 @@
     "filter": "Filtrar",
     "sort": "Ordenar",
     "more": "Más",
-    "less": "Menos",
-    "show_more": "Mostrar más",
-    "show_less": "Mostrar menos",
     "edit": "Editar",
     "delete": "Eliminar",
     "confirm": "Confirmar",
     "close": "Cerrar",
     "back": "Atrás",
     "next": "Siguiente",
-    "previous": "Anterior",
     "submit": "Enviar",
     "upload": "Subir",
     "download": "Descargar",
     "share": "Compartir",
     "copy": "Copiar",
     "copied": "¡Copiado!",
-    "select_all": "Seleccionar todo",
-    "clear_all": "Limpiar todo",
-    "no_results": "No se encontraron resultados",
-    "try_again": "Intentar de nuevo"
+    "save": "Guardar",
+    "yes": "Sí",
+    "no": "No"
   },
   "notifications": {
+    "notifications": "Notificaciones",
     "new_subscriber": "Nuevo suscriptor",
     "new_comment": "Nuevo comentario",
-    "new_like": "Nuevo me gusta",
-    "new_video": "Nuevo video de",
-    "live_started": "está en vivo",
     "mark_all_read": "Marcar todo como leído",
     "no_notifications": "No hay notificaciones"
   },
   "premium": {
+    "premium": "Premium",
     "get_premium": "Obtener Premium",
     "subscribe": "Suscribirse",
-    "features": "Características Premium",
     "ad_free": "Sin anuncios",
-    "offline_downloads": "Descargas sin conexión",
-    "exclusive_content": "Contenido exclusivo",
     "monthly": "Mensual",
-    "yearly": "Anual",
-    "save": "Ahorrar"
+    "yearly": "Anual"
+  },
+  "errors": {
+    "generic_error": "Algo salió mal",
+    "network_error": "Error de red",
+    "not_found": "No encontrado",
+    "required_field": "Este campo es requerido"
   }
 }

@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { supabase } from '../lib/supabase';
 import { Mail, Lock, User, Eye, EyeOff, Loader2, AlertCircle } from 'lucide-react';
 
 export const AuthPage = () => {
+  const { t } = useTranslation();
   const [isLogin, setIsLogin] = useState(true);
   const [showResetPassword, setShowResetPassword] = useState(false);
   const [email, setEmail] = useState('');
@@ -16,13 +18,13 @@ export const AuthPage = () => {
 
   const translateError = (errorMessage: string): string => {
     const errorMap: { [key: string]: string } = {
-      'Invalid login credentials': 'Email ou mot de passe incorrect',
-      'User already registered': 'Cet email est déjà utilisé',
-      'Email not confirmed': 'Veuillez confirmer votre email',
-      'Invalid email': 'Email invalide',
-      'Password should be at least 6 characters': 'Le mot de passe doit contenir au moins 6 caractères',
-      'Unable to validate email address': 'Email invalide',
-      'Signup requires a valid password': 'Mot de passe requis',
+      'Invalid login credentials': t('auth.invalid_credentials'),
+      'User already registered': t('errors.generic_error'),
+      'Email not confirmed': t('errors.generic_error'),
+      'Invalid email': t('errors.invalid_email'),
+      'Password should be at least 6 characters': t('auth.password_min_length'),
+      'Unable to validate email address': t('errors.invalid_email'),
+      'Signup requires a valid password': t('auth.password_required'),
     };
 
     return errorMap[errorMessage] || errorMessage;
@@ -35,19 +37,19 @@ export const AuthPage = () => {
     setMessage('');
 
     if (!email.trim()) {
-      setError('Veuillez entrer votre email');
+      setError(t('auth.email_required'));
       setLoading(false);
       return;
     }
 
     if (!password.trim()) {
-      setError('Veuillez entrer votre mot de passe');
+      setError(t('auth.password_required'));
       setLoading(false);
       return;
     }
 
     if (!isLogin && password.length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractères');
+      setError(t('auth.password_min_length'));
       setLoading(false);
       return;
     }
@@ -62,7 +64,7 @@ export const AuthPage = () => {
         window.location.href = '/';
       } else {
         if (!username.trim()) {
-          setError('Veuillez entrer un nom d\'utilisateur');
+          setError(t('auth.username_required'));
           setLoading(false);
           return;
         }
@@ -78,13 +80,13 @@ export const AuthPage = () => {
           },
         });
         if (error) throw error;
-        setMessage('Compte créé avec succès! Redirection...');
+        setMessage(t('auth.account_created'));
         setTimeout(() => {
           window.location.href = '/';
         }, 1500);
       }
     } catch (err: any) {
-      setError(translateError(err.message) || 'Une erreur est survenue');
+      setError(translateError(err.message) || t('errors.generic_error'));
     } finally {
       setLoading(false);
     }
