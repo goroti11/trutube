@@ -18,16 +18,24 @@ export const AuthPage = () => {
 
   const translateError = (errorMessage: string): string => {
     const errorMap: { [key: string]: string } = {
-      'Invalid login credentials': t('auth.invalid_credentials'),
-      'User already registered': t('errors.generic_error'),
-      'Email not confirmed': t('errors.generic_error'),
-      'Invalid email': t('errors.invalid_email'),
-      'Password should be at least 6 characters': t('auth.password_min_length'),
-      'Unable to validate email address': t('errors.invalid_email'),
-      'Signup requires a valid password': t('auth.password_required'),
+      'Invalid login credentials': 'Email ou mot de passe incorrect',
+      'User already registered': 'Cet email est déjà utilisé',
+      'Email not confirmed': 'Veuillez confirmer votre email',
+      'Invalid email': 'Email invalide',
+      'Password should be at least 6 characters': 'Le mot de passe doit contenir au moins 6 caractères',
+      'Unable to validate email address': 'Email invalide',
+      'Signup requires a valid password': 'Mot de passe requis',
+      'duplicate key value violates unique constraint': 'Ce nom d\'utilisateur est déjà pris',
+      'User already exists': 'Cet email est déjà utilisé',
     };
 
-    return errorMap[errorMessage] || errorMessage;
+    for (const [key, value] of Object.entries(errorMap)) {
+      if (errorMessage.includes(key)) {
+        return value;
+      }
+    }
+
+    return errorMessage;
   };
 
   const handleEmailAuth = async (e: React.FormEvent) => {
@@ -69,7 +77,8 @@ export const AuthPage = () => {
           return;
         }
 
-        const { error } = await supabase.auth.signUp({
+        console.log('📝 Tentative de création de compte...');
+        const { data, error } = await supabase.auth.signUp({
           email: email.trim(),
           password,
           options: {
@@ -79,11 +88,22 @@ export const AuthPage = () => {
             },
           },
         });
-        if (error) throw error;
-        setMessage(t('auth.account_created'));
-        setTimeout(() => {
-          window.location.href = '/';
-        }, 1500);
+
+        if (error) {
+          console.error('❌ Erreur création compte:', error);
+          throw error;
+        }
+
+        if (data?.user) {
+          console.log('✅ Compte créé avec succès:', data.user.id);
+          setMessage('Compte créé avec succès! Redirection en cours...');
+
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1500);
+        } else {
+          throw new Error('Erreur lors de la création du compte');
+        }
       }
     } catch (err: any) {
       setError(translateError(err.message) || t('errors.generic_error'));
