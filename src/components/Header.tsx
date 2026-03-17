@@ -51,9 +51,9 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
             {showNavigation && onNavigate && (
               <>
                 <button
-                  onClick={() => onNavigate('universes')}
+                  onClick={() => onNavigate('explore')}
                   className="flex items-center gap-2 px-3 py-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
-                  title="Explore Universes"
+                  title="Explorer"
                 >
                   <Compass className="w-5 h-5" />
                 </button>
