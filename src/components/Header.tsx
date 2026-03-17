@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Upload, LogIn, Compass, Settings, Sparkles, User, LogOut, ChevronDown, HelpCircle, Play, Users, Wallet, Crown, Shield, MoreVertical, Book, Briefcase, Info, MessageCircle, Gamepad2, Trophy } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import Logo from './Logo';
 import NotificationCenter from './NotificationCenter';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface HeaderProps {
   onNavigate?: (page: string) => void;
@@ -10,6 +12,7 @@ interface HeaderProps {
 }
 
 export default function Header({ onNavigate, showNavigation = true }: HeaderProps) {
+  const { t } = useTranslation();
   const { user, signOut } = useAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showMoreMenu, setShowMoreMenu] = useState(false);
@@ -26,7 +29,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
     if (user?.email) {
       return user.email.split('@')[0];
     }
-    return 'Utilisateur';
+    return 'User';
   };
 
   const getUserAvatar = () => {
@@ -53,7 +56,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                 <button
                   onClick={() => onNavigate('explore')}
                   className="flex items-center gap-2 px-3 py-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
-                  title="Explorer"
+                  title={t('navigation.explore')}
                 >
                   <Compass className="w-5 h-5" />
                 </button>
@@ -67,14 +70,14 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                 <button
                   onClick={() => onNavigate('gaming-hub')}
                   className="flex items-center gap-2 px-3 py-2 text-red-400 hover:text-red-300 hover:bg-red-900/20 rounded-lg transition-colors"
-                  title="Gaming"
+                  title={t('navigation.gaming')}
                 >
                   <Gamepad2 className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => onNavigate('legends-ranking')}
                   className="flex items-center gap-2 px-3 py-2 text-yellow-400 hover:text-yellow-300 hover:bg-yellow-900/20 rounded-lg transition-colors"
-                  title="Legends"
+                  title={t('navigation.legend')}
                 >
                   <Trophy className="w-5 h-5" />
                 </button>
@@ -88,7 +91,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                 <button
                   onClick={() => onNavigate('creator-setup')}
                   className="flex items-center gap-2 px-3 py-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
-                  title="Creator Setup"
+                  title={t('navigation.creator_studio')}
                 >
                   <Sparkles className="w-5 h-5" />
                 </button>
@@ -97,7 +100,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                   <button
                     onClick={() => setShowMoreMenu(!showMoreMenu)}
                     className="flex items-center gap-2 px-3 py-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
-                    title="Plus de pages"
+                    title={t('common.more')}
                   >
                     <MoreVertical className="w-5 h-5" />
                   </button>
@@ -118,7 +121,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                             className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
                           >
                             <Info className="w-4 h-4" />
-                            À propos
+                            About
                           </button>
                           <button
                             onClick={() => {
@@ -128,7 +131,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                             className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
                           >
                             <Book className="w-4 h-4" />
-                            Ressources
+                            Resources
                           </button>
                           <button
                             onClick={() => {
@@ -138,7 +141,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                             className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
                           >
                             <Briefcase className="w-4 h-4" />
-                            Carrières
+                            Careers
                           </button>
                           <button
                             onClick={() => {
@@ -148,7 +151,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                             className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
                           >
                             <Briefcase className="w-4 h-4" />
-                            Entreprise
+                            Enterprise
                           </button>
                           <button
                             onClick={() => {
@@ -158,7 +161,7 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                             className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
                           >
                             <HelpCircle className="w-4 h-4" />
-                            Centre d'aide
+                            Help Center
                           </button>
                           <button
                             onClick={() => {
@@ -177,6 +180,8 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                 </div>
               </>
             )}
+
+            <LanguageSwitcher />
 
             {user && (
               <>
@@ -197,39 +202,28 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
               className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white rounded-lg font-bold transition-all shadow-lg"
               title="Goroti Premium"
             >
-              <Crown className="w-4 h-4" />
-              <span className="hidden sm:inline">Premium</span>
+              <Crown className="w-5 h-5" />
+              <span className="hidden md:inline">{t('navigation.premium')}</span>
             </button>
-
-            {user && (
-              <button
-                onClick={() => onNavigate?.('upload')}
-                className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold transition-colors"
-              >
-                <Upload className="w-4 h-4" />
-                <span className="hidden sm:inline">Upload</span>
-              </button>
-            )}
 
             {user ? (
               <div className="relative">
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors border border-gray-700"
+                  className="flex items-center gap-2 px-3 py-2 hover:bg-gray-800 rounded-lg transition-colors"
                 >
                   {getUserAvatar() ? (
                     <img
                       src={getUserAvatar()!}
-                      alt="Avatar"
-                      className="w-6 h-6 rounded-full"
+                      alt={getUserDisplayName()}
+                      className="w-8 h-8 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="w-6 h-6 rounded-full bg-red-600 flex items-center justify-center">
-                      <User className="w-4 h-4" />
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                      <User className="w-5 h-5 text-white" />
                     </div>
                   )}
-                  <span className="hidden sm:inline text-sm">{getUserDisplayName()}</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4 text-gray-400" />
                 </button>
 
                 {showUserMenu && (
@@ -240,59 +234,29 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                     />
                     <div className="absolute right-0 mt-2 w-56 bg-gray-800 border border-gray-700 rounded-lg shadow-xl z-50">
                       <div className="p-3 border-b border-gray-700">
-                        <p className="text-sm text-white font-medium">{getUserDisplayName()}</p>
-                        <p className="text-xs text-gray-400 mt-1">{user.email}</p>
+                        <p className="font-medium text-white">{getUserDisplayName()}</p>
+                        <p className="text-sm text-gray-400">{user.email}</p>
                       </div>
                       <div className="py-2">
                         <button
                           onClick={() => {
-                            onNavigate?.('my-profile');
+                            onNavigate?.('my-profile-test');
                             setShowUserMenu(false);
                           }}
                           className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
                         >
                           <User className="w-4 h-4" />
-                          Mon profil
+                          {t('settings.profile')}
                         </button>
                         <button
                           onClick={() => {
-                            onNavigate?.('trucoin-wallet');
-                            setShowUserMenu(false);
-                          }}
-                          className="w-full text-left px-4 py-2 text-sm text-yellow-400 hover:bg-gray-700 flex items-center gap-2 font-semibold"
-                        >
-                          <Wallet className="w-4 h-4" />
-                          TruCoin Wallet
-                        </button>
-                        <button
-                          onClick={() => {
-                            onNavigate?.('dashboard');
+                            onNavigate?.('creator-studio');
                             setShowUserMenu(false);
                           }}
                           className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
                         >
-                          <Sparkles className="w-4 h-4" />
-                          Dashboard créateur
-                        </button>
-                        <button
-                          onClick={() => {
-                            onNavigate?.('studio');
-                            setShowUserMenu(false);
-                          }}
-                          className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2 font-semibold"
-                        >
                           <Play className="w-4 h-4" />
-                          Goroti Studio
-                        </button>
-                        <button
-                          onClick={() => {
-                            onNavigate?.('premium-offers');
-                            setShowUserMenu(false);
-                          }}
-                          className="w-full text-left px-4 py-2 text-sm text-orange-400 hover:bg-gray-700 flex items-center gap-2 font-semibold"
-                        >
-                          <Crown className="w-4 h-4" />
-                          Gérer Premium
+                          {t('navigation.creator_studio')}
                         </button>
                         <button
                           onClick={() => {
@@ -302,46 +266,14 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
                           className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
                         >
                           <Settings className="w-4 h-4" />
-                          Paramètres
+                          {t('navigation.settings')}
                         </button>
-                        <button
-                          onClick={() => {
-                            onNavigate?.('security-dashboard');
-                            setShowUserMenu(false);
-                          }}
-                          className="w-full text-left px-4 py-2 text-sm text-green-400 hover:bg-gray-700 flex items-center gap-2"
-                        >
-                          <Shield className="w-4 h-4" />
-                          Sécurité
-                        </button>
-                        <button
-                          onClick={() => {
-                            onNavigate?.('preferences');
-                            setShowUserMenu(false);
-                          }}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
-                        >
-                          <Settings className="w-4 h-4" />
-                          Préférences de feed
-                        </button>
-                        <button
-                          onClick={() => {
-                            onNavigate?.('help');
-                            setShowUserMenu(false);
-                          }}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 flex items-center gap-2"
-                        >
-                          <HelpCircle className="w-4 h-4" />
-                          Centre d'aide
-                        </button>
-                      </div>
-                      <div className="border-t border-gray-700 py-2">
                         <button
                           onClick={handleSignOut}
                           className="w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-700 flex items-center gap-2"
                         >
                           <LogOut className="w-4 h-4" />
-                          Se déconnecter
+                          {t('auth.sign_out')}
                         </button>
                       </div>
                     </div>
@@ -351,10 +283,10 @@ export default function Header({ onNavigate, showNavigation = true }: HeaderProp
             ) : (
               <button
                 onClick={() => onNavigate?.('auth')}
-                className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-bold transition-colors border border-gray-700"
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
               >
                 <LogIn className="w-4 h-4" />
-                <span className="hidden sm:inline">Connexion</span>
+                <span>{t('auth.sign_in')}</span>
               </button>
             )}
           </div>
