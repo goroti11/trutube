@@ -31,6 +31,17 @@ const colorMap: Record<string, { primary: string; secondary: string }> = {
   'lean': { primary: '#10b981', secondary: '#059669' },
   'movie': { primary: '#8b5cf6', secondary: '#7c3aed' },
   'sport': { primary: '#f97316', secondary: '#ea580c' },
+  'food': { primary: '#FF6B6B', secondary: '#EE5A52' },
+  'travel': { primary: '#4ECDC4', secondary: '#3DB8B0' },
+  'fashion': { primary: '#E91E63', secondary: '#D81B60' },
+  'science': { primary: '#9C27B0', secondary: '#8E24AA' },
+  'documentary': { primary: '#795548', secondary: '#6D4C41' },
+  'marketplace': { primary: '#FF9800', secondary: '#F57C00' },
+  'kids': { primary: '#FFC107', secondary: '#FFB300' },
+  'news': { primary: '#F44336', secondary: '#E53935' },
+  'community': { primary: '#00BCD4', secondary: '#00ACC1' },
+  'tech': { primary: '#2196F3', secondary: '#1E88E5' },
+  'learn': { primary: '#FFD700', secondary: '#FFC700' },
 };
 
 const descriptionMap: Record<string, string> = {
@@ -43,6 +54,17 @@ const descriptionMap: Record<string, string> = {
   'lean': 'Tech, code et innovation',
   'movie': 'Films, séries et critiques',
   'sport': 'Sports, fitness et compétitions',
+  'food': 'Cuisine, recettes et aventures culinaires',
+  'travel': 'Voyages, aventures et exploration',
+  'fashion': 'Mode, beauté et tendances',
+  'science': 'Découvertes scientifiques et innovation',
+  'documentary': 'Documentaires et histoire',
+  'marketplace': 'E-commerce et entrepreneuriat',
+  'kids': 'Contenu familial et éducatif',
+  'news': 'Actualités et affaires courantes',
+  'community': 'Contenus communautaires',
+  'tech': 'Technologie et innovation digitale',
+  'learn': 'Formations et tutoriels',
 };
 
 export const universeService = {

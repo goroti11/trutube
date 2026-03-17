@@ -53,6 +53,7 @@ const colorMap: Record<string, string> = {
   'game': 'from-green-600 to-green-800',
   'gaming': 'from-green-600 to-green-800',
   'learn': 'from-yellow-600 to-yellow-800',
+  'know': 'from-amber-600 to-amber-800',
   'culture': 'from-purple-600 to-purple-800',
   'life': 'from-rose-600 to-rose-800',
   'mind': 'from-indigo-600 to-indigo-800',
@@ -150,7 +151,7 @@ export default function HomePage({ onUniverseClick }: HomePageProps) {
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {universes.map((universe) => {
               const Icon = universe.icon;
               return (
