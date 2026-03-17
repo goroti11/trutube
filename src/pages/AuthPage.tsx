@@ -77,7 +77,6 @@ export const AuthPage = () => {
           return;
         }
 
-        console.log('📝 Tentative de création de compte...');
         const { data, error } = await supabase.auth.signUp({
           email: email.trim(),
           password,
@@ -89,15 +88,10 @@ export const AuthPage = () => {
           },
         });
 
-        if (error) {
-          console.error('❌ Erreur création compte:', error);
-          throw error;
-        }
+        if (error) throw error;
 
         if (data?.user) {
-          console.log('✅ Compte créé avec succès:', data.user.id);
           setMessage('Compte créé avec succès! Redirection en cours...');
-
           setTimeout(() => {
             window.location.href = '/';
           }, 1500);
