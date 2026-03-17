@@ -369,4 +369,4 @@ class LiveGamingService {
   }
 }
 
-export const gamingLiveService = new LiveGamingService();
+export const liveGamingService = new LiveGamingService();
